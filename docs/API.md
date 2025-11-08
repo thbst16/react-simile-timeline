@@ -25,7 +25,7 @@ Complete API reference for all components, hooks, and utilities.
 Main timeline component for rendering events across time.
 
 ```tsx
-import { Timeline } from 'simile-timeline-react';
+import { Timeline } from 'react-simile-timeline';
 
 <Timeline
   data={eventData}
@@ -68,7 +68,7 @@ import { Timeline } from 'simile-timeline-react';
 Individual timeline band component.
 
 ```tsx
-import { Band } from 'simile-timeline-react';
+import { Band } from 'react-simile-timeline';
 
 <Band
   id="band-1"
@@ -100,7 +100,7 @@ import { Band } from 'simile-timeline-react';
 Info bubble for displaying event details.
 
 ```tsx
-import { EventBubble } from 'simile-timeline-react';
+import { EventBubble } from 'react-simile-timeline';
 
 <EventBubble
   event={selectedEvent}
@@ -134,7 +134,7 @@ import { EventBubble } from 'simile-timeline-react';
 Keyboard navigation for timeline.
 
 ```tsx
-import { useKeyboardNav } from 'simile-timeline-react';
+import { useKeyboardNav } from 'react-simile-timeline';
 
 const keyboard = useKeyboardNav({
   onNavigate: (direction) => scroll(direction),
@@ -170,7 +170,7 @@ keyboard.registerShortcut({
 Mouse and touch scrolling.
 
 ```tsx
-import { useTimelineScroll } from 'simile-timeline-react';
+import { useTimelineScroll } from 'react-simile-timeline';
 
 const scroll = useTimelineScroll({
   containerRef,
@@ -196,7 +196,7 @@ const scroll = useTimelineScroll({
 Pan and zoom interactions.
 
 ```tsx
-import { usePanZoom } from 'simile-timeline-react';
+import { usePanZoom } from 'react-simile-timeline';
 
 const panZoom = usePanZoom({
   zoom: 1,
@@ -224,7 +224,7 @@ const panZoom = usePanZoom({
 Synchronize multiple timeline bands.
 
 ```tsx
-import { useBandSync } from 'simile-timeline-react';
+import { useBandSync } from 'react-simile-timeline';
 
 const sync = useBandSync({
   bands: [
@@ -245,7 +245,7 @@ sync.notifyScroll('detail', 100);
 Filter and search events.
 
 ```tsx
-import { useEventFilter } from 'simile-timeline-react';
+import { useEventFilter } from 'react-simile-timeline';
 
 const filter = useEventFilter({
   events: allEvents,
@@ -271,7 +271,7 @@ filter.setFilters({
 Smooth animations with easing.
 
 ```tsx
-import { useAnimatedTransition, easings } from 'simile-timeline-react';
+import { useAnimatedTransition, easings } from 'react-simile-timeline';
 
 const animation = useAnimatedTransition({
   from: 0,
@@ -300,7 +300,7 @@ animation.start();
 Render only visible events.
 
 ```tsx
-import { useVirtualization } from 'simile-timeline-react';
+import { useVirtualization } from 'react-simile-timeline';
 
 const virtualization = useVirtualization({
   events: allEvents,
@@ -329,7 +329,7 @@ console.log(virtualization.stats.memorySaved); // e.g., "920KB"
 High-performance Canvas rendering.
 
 ```tsx
-import { useCanvasRenderer } from 'simile-timeline-react';
+import { useCanvasRenderer } from 'react-simile-timeline';
 
 const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -358,7 +358,7 @@ const event = renderer.getEventAtPoint(mouseX, mouseY);
 Automatically switch between DOM and Canvas.
 
 ```tsx
-import { useAdaptiveRenderer } from 'simile-timeline-react';
+import { useAdaptiveRenderer } from 'react-simile-timeline';
 
 const adaptive = useAdaptiveRenderer({
   eventCount: events.length,
@@ -380,7 +380,7 @@ if (adaptive.method === 'canvas') {
 Variable time resolution.
 
 ```tsx
-import { useHotZones } from 'simile-timeline-react';
+import { useHotZones } from 'react-simile-timeline';
 
 const hotZones = useHotZones({
   initialZones: [
@@ -413,7 +413,7 @@ const mag = hotZones.getMagnificationAt(new Date('2020-07-15')); // 3
 Access timeline theme.
 
 ```tsx
-import { useTheme } from 'simile-timeline-react';
+import { useTheme } from 'react-simile-timeline';
 
 const { theme, mode, setMode, setTheme } = useTheme();
 
@@ -431,7 +431,7 @@ setMode('dark');
 Convenience hook for colors.
 
 ```tsx
-import { useThemeColors } from 'simile-timeline-react';
+import { useThemeColors } from 'react-simile-timeline';
 
 const colors = useThemeColors();
 
@@ -445,7 +445,7 @@ const colors = useThemeColors();
 Toggle between light/dark.
 
 ```tsx
-import { useThemeToggle } from 'simile-timeline-react';
+import { useThemeToggle } from 'react-simile-timeline';
 
 const { isDark, toggle } = useThemeToggle();
 
@@ -463,7 +463,7 @@ const { isDark, toggle } = useThemeToggle();
 WCAG 2.1 AA compliance.
 
 ```tsx
-import { useAccessibility } from 'simile-timeline-react';
+import { useAccessibility } from 'react-simile-timeline';
 
 const a11y = useAccessibility({
   theme,
@@ -490,7 +490,7 @@ console.log('Compliance:', audit.complianceLevel);
 Responsive design support.
 
 ```tsx
-import { useResponsive } from 'simile-timeline-react';
+import { useResponsive } from 'react-simile-timeline';
 
 const responsive = useResponsive({
   breakpoints: { mobile: 640, tablet: 1024 },
@@ -582,7 +582,7 @@ interface TimelineTheme {
 ### Date Utilities
 
 ```typescript
-import { parseDate, formatDate, addInterval } from 'simile-timeline-react/utils';
+import { parseDate, formatDate, addInterval } from 'react-simile-timeline/utils';
 
 // Parse various date formats
 const date = parseDate('2006-06-28T00:00:00Z');
@@ -602,7 +602,7 @@ import {
   getContrastRatio,
   meetsWCAGAA,
   announceToScreenReader
-} from 'simile-timeline-react/utils';
+} from 'react-simile-timeline/utils';
 
 // Check contrast
 const ratio = getContrastRatio('#000', '#fff'); // 21
@@ -619,7 +619,7 @@ import {
   searchEvents,
   filterByDateRange,
   sortByRelevance
-} from 'simile-timeline-react/utils';
+} from 'react-simile-timeline/utils';
 
 const results = searchEvents(events, 'Kennedy');
 const filtered = filterByDateRange(events, startDate, endDate);
@@ -633,7 +633,7 @@ const sorted = sortByRelevance(results, 'Kennedy');
 ### Basic Timeline
 
 ```tsx
-import { Timeline, ThemeProvider } from 'simile-timeline-react';
+import { Timeline, ThemeProvider } from 'react-simile-timeline';
 
 function App() {
   return (
@@ -689,7 +689,7 @@ import {
   useKeyboardNav,
   useEventFilter,
   useResponsive
-} from 'simile-timeline-react';
+} from 'react-simile-timeline';
 
 function AdvancedTimeline() {
   const responsive = useResponsive();

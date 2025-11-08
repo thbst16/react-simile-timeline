@@ -46,7 +46,7 @@ This guide details the performance characteristics of Simile Timeline React and 
 Virtualization automatically activates when you have 100+ events:
 
 ```tsx
-import { useAutoVirtualization } from 'simile-timeline-react';
+import { useAutoVirtualization } from 'react-simile-timeline';
 
 function MyTimeline({ events }) {
   // Automatically virtualizes at 100+ events
@@ -75,7 +75,7 @@ function MyTimeline({ events }) {
 Canvas rendering automatically activates at 1000+ events:
 
 ```tsx
-import { useAdaptiveRenderer } from 'simile-timeline-react';
+import { useAdaptiveRenderer } from 'react-simile-timeline';
 
 function MyBand({ events }) {
   const { method, reason } = useAdaptiveRenderer({
@@ -102,7 +102,7 @@ function MyBand({ events }) {
 Use hot zones to provide variable time resolution:
 
 ```tsx
-import { useHotZones } from 'simile-timeline-react';
+import { useHotZones } from 'react-simile-timeline';
 
 const hotZones = useHotZones({
   initialZones: [
@@ -126,7 +126,7 @@ const hotZones = useHotZones({
 Scroll handlers are automatically debounced to 16ms (60fps):
 
 ```tsx
-import { useTimelineScroll } from 'simile-timeline-react';
+import { useTimelineScroll } from 'react-simile-timeline';
 
 const scroll = useTimelineScroll({
   containerRef,
@@ -147,7 +147,7 @@ Event layout is automatically memoized:
 
 ```tsx
 import { useMemo } from 'react';
-import { LayoutEngine } from 'simile-timeline-react';
+import { LayoutEngine } from 'react-simile-timeline';
 
 const layout = useMemo(
   () => layoutEngine.layout(events, ether, viewport),
@@ -165,7 +165,7 @@ const layout = useMemo(
 Automatically adjusts rendering based on device:
 
 ```tsx
-import { useResponsive } from 'simile-timeline-react';
+import { useResponsive } from 'react-simile-timeline';
 
 const responsive = useResponsive();
 
@@ -211,7 +211,7 @@ const responsive = useResponsive();
 Use the built-in stats from hooks:
 
 ```tsx
-import { useVirtualization, useCanvasRenderer } from 'simile-timeline-react';
+import { useVirtualization, useCanvasRenderer } from 'react-simile-timeline';
 
 function MyTimeline({ events }) {
   const { stats: virtStats } = useVirtualization({...});

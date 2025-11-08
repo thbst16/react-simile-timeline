@@ -25,7 +25,7 @@ Comprehensive examples for using Simile Timeline React.
 ### Minimal Timeline
 
 ```tsx
-import { Timeline } from 'simile-timeline-react';
+import { Timeline } from 'react-simile-timeline';
 
 function App() {
   const events = {
@@ -64,7 +64,7 @@ function App() {
 ### With Theme Provider
 
 ```tsx
-import { Timeline, ThemeProvider } from 'simile-timeline-react';
+import { Timeline, ThemeProvider } from 'react-simile-timeline';
 
 function App() {
   return (
@@ -92,7 +92,7 @@ function App() {
 ### Load from URL
 
 ```tsx
-import { Timeline } from 'simile-timeline-react';
+import { Timeline } from 'react-simile-timeline';
 
 function App() {
   return (
@@ -111,7 +111,7 @@ function App() {
 
 ```tsx
 import { useState, useEffect } from 'react';
-import { Timeline } from 'simile-timeline-react';
+import { Timeline } from 'react-simile-timeline';
 
 function App() {
   const [events, setEvents] = useState(null);
@@ -149,7 +149,7 @@ function App() {
 
 ```tsx
 import { useState, useEffect } from 'react';
-import { Timeline } from 'simile-timeline-react';
+import { Timeline } from 'react-simile-timeline';
 
 function App() {
   const [events, setEvents] = useState({ events: [] });
@@ -258,7 +258,7 @@ function App() {
 
 ```tsx
 import { useState } from 'react';
-import { Timeline } from 'simile-timeline-react';
+import { Timeline } from 'react-simile-timeline';
 
 function App() {
   const [selectedEvent, setSelectedEvent] = useState(null);
@@ -291,7 +291,7 @@ function App() {
 
 ```tsx
 import { useState } from 'react';
-import { Timeline } from 'simile-timeline-react';
+import { Timeline } from 'react-simile-timeline';
 
 function App() {
   const [hoveredEvent, setHoveredEvent] = useState(null);
@@ -339,7 +339,7 @@ function App() {
 ### Dark Mode Toggle
 
 ```tsx
-import { Timeline, ThemeProvider, useThemeToggle } from 'simile-timeline-react';
+import { Timeline, ThemeProvider, useThemeToggle } from 'react-simile-timeline';
 
 function TimelineWithToggle() {
   const { isDark, toggle } = useThemeToggle();
@@ -366,7 +366,7 @@ function App() {
 ### Custom Theme
 
 ```tsx
-import { Timeline, ThemeProvider } from 'simile-timeline-react';
+import { Timeline, ThemeProvider } from 'react-simile-timeline';
 
 const customTheme = {
   name: 'ocean',
@@ -414,7 +414,7 @@ function App() {
 ### Basic Keyboard Support
 
 ```tsx
-import { Timeline, useKeyboardNav } from 'simile-timeline-react';
+import { Timeline, useKeyboardNav } from 'react-simile-timeline';
 
 function App() {
   const keyboard = useKeyboardNav({
@@ -443,7 +443,7 @@ function App() {
 ### Custom Keyboard Shortcuts
 
 ```tsx
-import { Timeline, useKeyboardNav } from 'simile-timeline-react';
+import { Timeline, useKeyboardNav } from 'react-simile-timeline';
 
 function App() {
   const keyboard = useKeyboardNav({
@@ -476,7 +476,7 @@ function App() {
 ### Mobile-Optimized Timeline
 
 ```tsx
-import { Timeline, useResponsive } from 'simile-timeline-react';
+import { Timeline, useResponsive } from 'react-simile-timeline';
 
 function App() {
   const responsive = useResponsive();
@@ -508,7 +508,7 @@ function App() {
 
 ```tsx
 import { useState } from 'react';
-import { Timeline, useEventFilter } from 'simile-timeline-react';
+import { Timeline, useEventFilter } from 'react-simile-timeline';
 
 function App() {
   const filter = useEventFilter({
@@ -541,7 +541,7 @@ function App() {
 ### Filter by Date Range
 
 ```tsx
-import { Timeline, useEventFilter } from 'simile-timeline-react';
+import { Timeline, useEventFilter } from 'react-simile-timeline';
 
 function App() {
   const filter = useEventFilter({
@@ -611,7 +611,7 @@ filter.setFilters({
 ### Basic Hot Zone
 
 ```tsx
-import { Timeline, useHotZones } from 'simile-timeline-react';
+import { Timeline, useHotZones } from 'react-simile-timeline';
 
 function App() {
   const hotZones = useHotZones({
@@ -645,7 +645,7 @@ function App() {
 ### Dynamic Hot Zones
 
 ```tsx
-import { Timeline, useHotZones } from 'simile-timeline-react';
+import { Timeline, useHotZones } from 'react-simile-timeline';
 
 function App() {
   const hotZones = useHotZones({
@@ -703,7 +703,7 @@ import {
   Timeline,
   useAutoVirtualization,
   useAdaptiveRenderer,
-} from 'simile-timeline-react';
+} from 'react-simile-timeline';
 
 function App() {
   const { visibleEvents, stats } = useAutoVirtualization({
@@ -745,7 +745,7 @@ function App() {
 ### Full Accessibility Support
 
 ```tsx
-import { Timeline, useAccessibility } from 'simile-timeline-react';
+import { Timeline, useAccessibility } from 'react-simile-timeline';
 
 function App() {
   const containerRef = useRef(null);
@@ -793,7 +793,7 @@ function App() {
 ### Fully Responsive Timeline
 
 ```tsx
-import { Timeline, useResponsive } from 'simile-timeline-react';
+import { Timeline, useResponsive } from 'react-simile-timeline';
 
 function App() {
   const responsive = useResponsive();
@@ -833,7 +833,7 @@ import {
   useResponsive,
   useAccessibility,
   useHotZones,
-} from 'simile-timeline-react';
+} from 'react-simile-timeline';
 
 function AdvancedTimeline({ events }) {
   const responsive = useResponsive();
@@ -907,7 +907,7 @@ function AdvancedTimeline({ events }) {
 
 ```tsx
 // app/timeline/page.tsx (Next.js App Router)
-import { Timeline, ThemeProvider } from 'simile-timeline-react';
+import { Timeline, ThemeProvider } from 'react-simile-timeline';
 
 export default async function TimelinePage() {
   // Fetch data on server
@@ -936,7 +936,7 @@ export default async function TimelinePage() {
 ### Custom Event Painter
 
 ```tsx
-import { Band, OriginalPainter, CompactPainter } from 'simile-timeline-react';
+import { Band, OriginalPainter, CompactPainter } from 'react-simile-timeline';
 
 function CustomBand({ events, config }) {
   // Use different painters based on zoom level

@@ -25,9 +25,9 @@ This guide helps you migrate from the original MIT Simile Timeline (JavaScript) 
 
 ### React Version
 ```bash
-npm install simile-timeline-react
+npm install react-simile-timeline
 # or
-yarn add simile-timeline-react
+yarn add react-simile-timeline
 ```
 
 ## Basic Usage
@@ -71,7 +71,7 @@ Timeline.loadJSON("events.json", function(json, url) {
 ### React Version
 
 ```tsx
-import { Timeline, ThemeProvider } from 'simile-timeline-react';
+import { Timeline, ThemeProvider } from 'react-simile-timeline';
 
 function App() {
   return (
@@ -290,7 +290,7 @@ bandInfos[0].decorators = [
 
 **After:**
 ```tsx
-import { useHotZones } from 'simile-timeline-react';
+import { useHotZones } from 'react-simile-timeline';
 
 const hotZones = useHotZones({
   initialZones: [{
@@ -307,7 +307,7 @@ const hotZones = useHotZones({
 ### 1. Theming
 
 ```tsx
-import { ThemeProvider } from 'simile-timeline-react';
+import { ThemeProvider } from 'react-simile-timeline';
 
 <ThemeProvider defaultMode="dark">
   <Timeline {...props} />
@@ -317,7 +317,7 @@ import { ThemeProvider } from 'simile-timeline-react';
 ### 2. Keyboard Navigation
 
 ```tsx
-import { useKeyboardNav } from 'simile-timeline-react';
+import { useKeyboardNav } from 'react-simile-timeline';
 
 const keyboard = useKeyboardNav({
   onNavigate: (dir) => scroll(dir),
@@ -338,7 +338,7 @@ Built-in support for:
 Automatic virtualization for large datasets:
 
 ```tsx
-import { useVirtualization } from 'simile-timeline-react';
+import { useVirtualization } from 'react-simile-timeline';
 
 const { visibleEvents } = useVirtualization({
   events: allEvents,
@@ -355,7 +355,7 @@ const { visibleEvents } = useVirtualization({
 Automatic Canvas fallback for >1000 events:
 
 ```tsx
-import { useAdaptiveRenderer } from 'simile-timeline-react';
+import { useAdaptiveRenderer } from 'react-simile-timeline';
 
 const { method } = useAdaptiveRenderer({
   eventCount: events.length,
@@ -376,7 +376,7 @@ WCAG 2.1 AA compliant:
 ### 7. Responsive Design
 
 ```tsx
-import { useResponsive } from 'simile-timeline-react';
+import { useResponsive } from 'react-simile-timeline';
 
 const responsive = useResponsive();
 
