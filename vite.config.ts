@@ -21,9 +21,9 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
-      name: 'SimileTimelineReact',
+      name: 'ReactSimileTimeline',
       formats: ['es', 'umd'],
-      fileName: (format) => `simile-timeline-react.${format === 'es' ? 'js' : 'umd.cjs'}`,
+      fileName: (format) => `react-simile-timeline.${format === 'es' ? 'js' : 'umd.cjs'}`,
     },
     rollupOptions: {
       external: ['react', 'react-dom'],

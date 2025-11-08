@@ -1,15 +1,15 @@
 {
-  "name": "simile-timeline-react",
-  "version": "0.1.0",
-  "description": "Modern React port of MIT's Simile Timeline widget",
+  "name": "react-simile-timeline",
+  "version": "0.1.0-alpha.0",
+  "description": "Modern React port of MIT's Simile Timeline widget with full TypeScript support, accessibility, and touch gestures",
   "type": "module",
-  "main": "./dist/simile-timeline-react.umd.cjs",
-  "module": "./dist/simile-timeline-react.js",
+  "main": "./dist/react-simile-timeline.umd.cjs",
+  "module": "./dist/react-simile-timeline.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/simile-timeline-react.js",
-      "require": "./dist/simile-timeline-react.umd.cjs",
+      "import": "./dist/react-simile-timeline.js",
+      "require": "./dist/react-simile-timeline.umd.cjs",
       "types": "./dist/index.d.ts"
     },
     "./styles": "./dist/style.css"
@@ -76,16 +76,16 @@
     "touch-enabled",
     "responsive"
   ],
-  "author": "Simile Timeline React Contributors",
+  "author": "Thomas Beck <thomas@beckshome.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/simile-timeline-react"
+    "url": "https://github.com/thbst16/react-simile-timeline.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/simile-timeline-react/issues"
+    "url": "https://github.com/thbst16/react-simile-timeline/issues"
   },
-  "homepage": "https://github.com/yourusername/simile-timeline-react#readme",
+  "homepage": "https://github.com/thbst16/react-simile-timeline#readme",
   "engines": {
     "node": ">=16.0.0"
   },
