@@ -1,0 +1,46 @@
+{
+  "dateTimeFormat": "iso8601",
+  "events": [
+    {
+      "start": "2006-06-28T00:00:00Z",
+      "title": "Valid Event",
+      "description": "This event is completely valid",
+      "id": "valid-1",
+      "color": "#4CAF50"
+    },
+    {
+      "title": "Missing Start Date",
+      "description": "This event is missing required 'start' property",
+      "id": "invalid-1",
+      "color": "#F44336"
+    },
+    {
+      "start": "2006-06-28T00:00:00Z",
+      "description": "This event is missing required 'title' property",
+      "id": "invalid-2"
+    },
+    {
+      "start": "2006-12-31T00:00:00Z",
+      "end": "2006-01-01T00:00:00Z",
+      "title": "End Before Start",
+      "description": "This event has end date before start date",
+      "id": "invalid-3",
+      "color": "#FF9800"
+    },
+    {
+      "start": "2006-06-28T00:00:00Z",
+      "title": "Duration Without End",
+      "description": "Marked as duration but missing end date",
+      "isDuration": true,
+      "id": "invalid-4"
+    },
+    {
+      "start": "2006-06-28T00:00:00Z",
+      "title": "Valid with Warnings",
+      "description": "Valid event but with suspicious color and URL",
+      "id": "warning-1",
+      "color": "not-a-valid-color",
+      "link": "this is not a url"
+    }
+  ]
+}

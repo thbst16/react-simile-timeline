@@ -1,0 +1,151 @@
+{
+  "dateTimeFormat": "iso8601",
+  "events": [
+    {
+      "start": "1917-05-29T00:00:00Z",
+      "title": "JFK Born",
+      "description": "John Fitzgerald Kennedy born in Brookline, Massachusetts",
+      "id": "jfk-birth",
+      "color": "#4CAF50"
+    },
+    {
+      "start": "1940-09-01T00:00:00Z",
+      "end": "1945-09-02T00:00:00Z",
+      "title": "World War II",
+      "description": "Kennedy serves in the U.S. Navy during World War II",
+      "isDuration": true,
+      "id": "ww2",
+      "color": "#F44336"
+    },
+    {
+      "start": "1943-08-02T00:00:00Z",
+      "title": "PT-109 Incident",
+      "description": "Kennedy's PT boat rammed by Japanese destroyer; his heroic actions save crew",
+      "id": "pt109",
+      "color": "#FF9800"
+    },
+    {
+      "start": "1946-11-05T00:00:00Z",
+      "title": "Elected to Congress",
+      "description": "Kennedy elected to U.S. House of Representatives",
+      "id": "congress",
+      "color": "#2196F3"
+    },
+    {
+      "start": "1952-11-04T00:00:00Z",
+      "title": "Elected to Senate",
+      "description": "Kennedy elected U.S. Senator from Massachusetts",
+      "id": "senate",
+      "color": "#2196F3"
+    },
+    {
+      "start": "1953-09-12T00:00:00Z",
+      "title": "Marries Jackie",
+      "description": "Marries Jacqueline Bouvier in Newport, Rhode Island",
+      "id": "marriage",
+      "color": "#E91E63"
+    },
+    {
+      "start": "1957-05-06T00:00:00Z",
+      "title": "Pulitzer Prize",
+      "description": "Wins Pulitzer Prize for 'Profiles in Courage'",
+      "id": "pulitzer",
+      "color": "#9C27B0"
+    },
+    {
+      "start": "1960-01-02T00:00:00Z",
+      "end": "1960-11-08T00:00:00Z",
+      "title": "Presidential Campaign",
+      "description": "Kennedy campaigns for President against Richard Nixon",
+      "isDuration": true,
+      "id": "campaign",
+      "color": "#3F51B5"
+    },
+    {
+      "start": "1960-09-26T00:00:00Z",
+      "title": "First TV Debate",
+      "description": "First televised presidential debate against Nixon",
+      "id": "debate",
+      "color": "#FF5722"
+    },
+    {
+      "start": "1960-11-08T00:00:00Z",
+      "title": "Elected President",
+      "description": "Narrowly defeats Nixon to become 35th President",
+      "id": "election",
+      "color": "#4CAF50"
+    },
+    {
+      "start": "1961-01-20T00:00:00Z",
+      "title": "Inauguration",
+      "description": "Inaugurated as President; 'Ask not what your country can do for you'",
+      "id": "inauguration",
+      "color": "#FFD700"
+    },
+    {
+      "start": "1961-03-01T00:00:00Z",
+      "title": "Peace Corps Created",
+      "description": "Establishes the Peace Corps by executive order",
+      "id": "peacecorps",
+      "color": "#00BCD4"
+    },
+    {
+      "start": "1961-04-17T00:00:00Z",
+      "title": "Bay of Pigs",
+      "description": "Failed invasion of Cuba at Bay of Pigs",
+      "id": "bayofpigs",
+      "color": "#F44336"
+    },
+    {
+      "start": "1961-05-25T00:00:00Z",
+      "title": "Moon Speech",
+      "description": "Commits U.S. to landing man on moon before end of decade",
+      "id": "moonspeech",
+      "color": "#9C27B0"
+    },
+    {
+      "start": "1962-02-20T00:00:00Z",
+      "title": "Glenn Orbits Earth",
+      "description": "John Glenn becomes first American to orbit Earth",
+      "id": "glenn",
+      "color": "#673AB7"
+    },
+    {
+      "start": "1962-10-16T00:00:00Z",
+      "end": "1962-10-28T00:00:00Z",
+      "title": "Cuban Missile Crisis",
+      "description": "13-day confrontation with Soviet Union over missiles in Cuba",
+      "isDuration": true,
+      "id": "cuban-crisis",
+      "color": "#F44336"
+    },
+    {
+      "start": "1963-06-11T00:00:00Z",
+      "title": "Civil Rights Address",
+      "description": "Delivers major civil rights address to the nation",
+      "id": "civilrights",
+      "color": "#4CAF50"
+    },
+    {
+      "start": "1963-06-26T00:00:00Z",
+      "title": "Berlin Speech",
+      "description": "Delivers 'Ich bin ein Berliner' speech in West Berlin",
+      "id": "berlin",
+      "color": "#2196F3"
+    },
+    {
+      "start": "1963-08-28T00:00:00Z",
+      "title": "March on Washington",
+      "description": "Supports March on Washington where MLK gives 'I Have a Dream' speech",
+      "id": "march",
+      "color": "#9C27B0"
+    },
+    {
+      "start": "1963-11-22T00:00:00Z",
+      "title": "Assassination",
+      "description": "Assassinated in Dallas, Texas",
+      "id": "assassination",
+      "color": "#000000"
+    }
+  ]
+}

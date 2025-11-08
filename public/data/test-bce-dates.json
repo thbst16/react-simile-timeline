@@ -1,0 +1,42 @@
+{
+  "dateTimeFormat": "auto",
+  "events": [
+    {
+      "start": "-500",
+      "title": "500 BCE - Golden Age of Athens",
+      "description": "Classical period of ancient Greece (negative year format)",
+      "id": "bce-1",
+      "color": "#FFD700"
+    },
+    {
+      "start": "500 BC",
+      "title": "500 BC - Same Era",
+      "description": "Alternative BCE format with 'BC' suffix",
+      "id": "bce-2",
+      "color": "#FF6B6B"
+    },
+    {
+      "start": "776 BCE",
+      "title": "776 BCE - First Olympics",
+      "description": "First recorded Olympic Games using 'BCE' suffix",
+      "id": "bce-3",
+      "color": "#4ECDC4"
+    },
+    {
+      "start": "-3000",
+      "end": "-2000",
+      "title": "3000-2000 BCE - Bronze Age",
+      "description": "Early Bronze Age period (duration event)",
+      "isDuration": true,
+      "id": "bce-duration",
+      "color": "#95E1D3"
+    },
+    {
+      "start": "2006-06-28T00:00:00Z",
+      "title": "Modern Reference Point",
+      "description": "Modern date for comparison",
+      "id": "modern-1",
+      "color": "#2196F3"
+    }
+  ]
+}

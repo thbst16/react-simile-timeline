@@ -1,0 +1,42 @@
+{
+  "dateTimeFormat": "auto",
+  "events": [
+    {
+      "start": "2006-06-28T00:00:00Z",
+      "title": "ISO-8601 Date",
+      "description": "Event using standard ISO-8601 format",
+      "id": "iso-1",
+      "color": "#2196F3"
+    },
+    {
+      "start": "June 28, 2006",
+      "title": "Gregorian String",
+      "description": "Event using Gregorian date string",
+      "id": "greg-1",
+      "color": "#4CAF50"
+    },
+    {
+      "start": "Jun 15 2006 14:30:00 GMT",
+      "title": "Alternative Format",
+      "description": "Event with time component",
+      "id": "alt-1",
+      "color": "#FF9800"
+    },
+    {
+      "start": "1234567890000",
+      "title": "Unix Timestamp",
+      "description": "Event using millisecond timestamp",
+      "id": "unix-1",
+      "color": "#9C27B0"
+    },
+    {
+      "start": "2006-01-01T00:00:00Z",
+      "end": "2006-12-31T23:59:59Z",
+      "title": "Duration Event",
+      "description": "Event spanning entire year 2006",
+      "isDuration": true,
+      "id": "duration-1",
+      "color": "#F44336"
+    }
+  ]
+}
