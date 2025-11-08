@@ -1,39 +1,41 @@
-# Simile Timeline React
+# React Simile Timeline
 
-[![npm version](https://img.shields.io/npm/v/simile-timeline-react)](https://www.npmjs.com/package/simile-timeline-react)
+[![npm version](https://img.shields.io/npm/v/react-simile-timeline)](https://www.npmjs.com/package/react-simile-timeline)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-blue)](https://www.typescriptlang.org/)
-[![Tests](https://img.shields.io/badge/tests-67%20passing-success)](./src/hooks/__tests__)
+[![Tests](https://img.shields.io/badge/tests-348%20passing-success)](./src/__tests__)
+[![Coverage](https://img.shields.io/badge/coverage->80%25-success)](./docs/PERFORMANCE.md)
 [![Bundle Size](https://img.shields.io/badge/bundle-<150KB-success)](./docs/PERFORMANCE.md)
 
 A modern, production-ready React port of MIT's Simile Timeline widget. Built with TypeScript, optimized for performance, and 100% compatible with original Simile JSON format.
 
+> ⚠️ **Alpha Release**: This is v0.1.0-alpha.0. The API may change before v1.0.0. Not recommended for production use without thorough testing. Feedback welcome!
+
 ## ✨ Features
 
 - 🎯 **100% JSON Compatible** - Load original Simile timeline data without modification
-- ⚡ **High Performance** - Virtualization + Canvas rendering for 10,000+ events at 60fps
+- ⚡ **High Performance** - Virtualization + Canvas rendering for 1000+ events at 60fps
 - ♿ **WCAG 2.1 AA Accessible** - Full keyboard navigation, screen reader support, color contrast
 - 🎨 **Themeable** - Classic theme + Dark mode + Custom themes
 - 📱 **Mobile First** - Touch gestures, pinch-to-zoom, responsive design
 - 🔧 **TypeScript** - Fully typed with strict mode
 - 🎭 **Advanced Features** - Hot zones, filtering, animations, band synchronization
-- 📦 **Zero Dependencies** - Pure React implementation
-- 🧪 **Well Tested** - 67 tests with >80% coverage
+- 🧪 **Well Tested** - 348 tests with >80% coverage
 
 ## 📦 Installation
 
 ```bash
-npm install simile-timeline-react
+npm install react-simile-timeline
 # or
-yarn add simile-timeline-react
+yarn add react-simile-timeline
 # or
-pnpm add simile-timeline-react
+pnpm add react-simile-timeline
 ```
 
 ## 🚀 Quick Start
 
 ```tsx
-import { Timeline, ThemeProvider } from 'simile-timeline-react';
+import { Timeline, ThemeProvider } from 'react-simile-timeline';
 
 function App() {
   return (
@@ -88,6 +90,8 @@ Use the same JSON format as original Simile Timeline:
 - **[Migration Guide](./docs/MIGRATION.md)** - Migrating from original Simile
 - **[Examples](./docs/EXAMPLES.md)** - Code examples and recipes
 - **[Performance Guide](./docs/PERFORMANCE.md)** - Optimization tips
+- **[Contributing Guide](./CONTRIBUTING.md)** - How to contribute
+- **[Changelog](./CHANGELOG.md)** - Version history
 
 ## 🎯 Core Features
 
@@ -96,7 +100,7 @@ Use the same JSON format as original Simile Timeline:
 Switch between light and dark modes, or create custom themes:
 
 ```tsx
-import { ThemeProvider, useThemeToggle } from 'simile-timeline-react';
+import { ThemeProvider, useThemeToggle } from 'react-simile-timeline';
 
 function App() {
   const { isDark, toggle } = useThemeToggle();
@@ -122,7 +126,7 @@ Full keyboard support out of the box:
 - Custom shortcuts supported
 
 ```tsx
-import { useKeyboardNav } from 'simile-timeline-react';
+import { useKeyboardNav } from 'react-simile-timeline';
 
 const keyboard = useKeyboardNav({
   onNavigate: (direction) => scroll(direction),
@@ -149,7 +153,7 @@ keyboard.registerShortcut({
 Automatically renders only visible events for optimal performance:
 
 ```tsx
-import { useVirtualization } from 'simile-timeline-react';
+import { useVirtualization } from 'react-simile-timeline';
 
 const { visibleEvents, stats } = useVirtualization({
   events: allEvents,
@@ -169,7 +173,7 @@ console.log(stats.memorySaved); // "920KB"
 Automatic Canvas fallback for large datasets:
 
 ```tsx
-import { useAdaptiveRenderer } from 'simile-timeline-react';
+import { useAdaptiveRenderer } from 'react-simile-timeline';
 
 const { method, reason } = useAdaptiveRenderer({
   eventCount: events.length,
@@ -184,7 +188,7 @@ const { method, reason } = useAdaptiveRenderer({
 Variable time resolution for focused periods:
 
 ```tsx
-import { useHotZones } from 'simile-timeline-react';
+import { useHotZones } from 'react-simile-timeline';
 
 const hotZones = useHotZones({
   initialZones: [{
@@ -207,7 +211,7 @@ hotZones.addZone({
 Built-in filtering and full-text search:
 
 ```tsx
-import { useEventFilter } from 'simile-timeline-react';
+import { useEventFilter } from 'react-simile-timeline';
 
 const filter = useEventFilter({
   events,
@@ -226,7 +230,7 @@ filter.setFilters({ attributes: { color: 'blue' } });
 Automatic adaptation to device type:
 
 ```tsx
-import { useResponsive } from 'simile-timeline-react';
+import { useResponsive } from 'react-simile-timeline';
 
 const responsive = useResponsive();
 
@@ -248,7 +252,7 @@ WCAG 2.1 AA compliant with:
 - `prefers-reduced-motion` support
 
 ```tsx
-import { useAccessibility } from 'simile-timeline-react';
+import { useAccessibility } from 'react-simile-timeline';
 
 const a11y = useAccessibility({ theme, containerRef });
 
@@ -305,7 +309,7 @@ import {
   useEventFilter,
   useResponsive,
   useAccessibility,
-} from 'simile-timeline-react';
+} from 'react-simile-timeline';
 
 function AdvancedTimeline() {
   const responsive = useResponsive();
@@ -336,7 +340,7 @@ function AdvancedTimeline() {
 |--------|--------|--------|
 | Render 500 events | <100ms | ✅ ~85ms |
 | Scroll 1000 events | 60fps | ✅ 60fps |
-| Render 10,000 events | Works | ✅ <50ms (virtualized) |
+| Render 2000 events | Works | ✅ ~120ms (virtualized) |
 | Bundle size | <150KB | ✅ ~140KB gzipped |
 | First paint | <1s | ✅ ~800ms |
 | Time to interactive | <2s | ✅ ~1.2s |
@@ -359,7 +363,7 @@ npm run type-check
 npm run lint
 ```
 
-Current test coverage: **67 tests passing** across all hooks and utilities.
+Current test coverage: **348 tests passing** with >80% code coverage across all components, hooks, and utilities.
 
 ## 🏗️ Development
 
@@ -374,13 +378,15 @@ npm run dev
 npm run build
 
 # Run tests in watch mode
-npm run test:watch
+npm run test
 ```
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed development guidelines.
 
 ## 📦 Package Structure
 
 ```
-simile-timeline-react/
+react-simile-timeline/
 ├── src/
 │   ├── components/     # Timeline, Band, EventBubble, etc.
 │   ├── hooks/          # All custom hooks
@@ -389,7 +395,7 @@ simile-timeline-react/
 │   ├── utils/          # Utilities
 │   └── core/           # Core timeline logic
 ├── docs/               # Documentation
-└── examples/           # Sample applications
+└── public/             # Demo assets
 ```
 
 ## 🌐 Browser Support
@@ -405,39 +411,45 @@ Contributions welcome! Please read [CONTRIBUTING.md](./CONTRIBUTING.md) first.
 
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
+3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
 ## 📄 License
 
-MIT © [Your Name]
+MIT © [Thomas Beck](https://github.com/thbst16)
+
+See [LICENSE](./LICENSE) for details.
 
 ## 🙏 Credits
 
 Based on the original [Simile Timeline](http://www.simile-widgets.org/timeline/) by MIT.
 
 Special thanks to:
-- MIT SIMILE project for the original timeline
+- MIT SIMILE project for the original timeline widget
 - React team for the amazing framework
-- All contributors
+- All contributors to this project
 
 ## 📞 Support
 
 - 📖 [Documentation](./docs/)
-- 🐛 [Issue Tracker](https://github.com/yourusername/simile-timeline-react/issues)
-- 💬 [Discussions](https://github.com/yourusername/simile-timeline-react/discussions)
-- 📧 Email: support@example.com
+- 🐛 [Issue Tracker](https://github.com/thbst16/react-simile-timeline/issues)
+- 💬 [Discussions](https://github.com/thbst16/react-simile-timeline/discussions)
 
 ## 🗺️ Roadmap
 
+See [CHANGELOG.md](./CHANGELOG.md) for planned features.
+
+**Next releases:**
 - [ ] Storybook integration
-- [ ] More themes
-- [ ] Plugin system
+- [ ] Additional painter types
+- [ ] Enhanced mobile gestures
+- [ ] Plugin architecture
 - [ ] Real-time data updates
 - [ ] Export to image/PDF
-- [ ] Collaborative editing
 
 ---
 
 Made with ❤️ using React, TypeScript, and modern web technologies.
+
+**v0.1.0-alpha.0** - Initial alpha release
