@@ -8,6 +8,7 @@ pnpm-lock.yaml
 dist/
 build/
 *.local
+*.tgz
 
 # Environment files
 .env
