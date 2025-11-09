@@ -39,7 +39,7 @@ import {
  */
 function Sprint4DemoInner(): JSX.Element {
   // Access theme
-  const { theme, mode, setMode } = useTheme();
+  const { mode, setMode } = useTheme();
   const [events, setEvents] = useState<TimelineEvent[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

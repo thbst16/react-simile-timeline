@@ -5,7 +5,7 @@
  * Sprint 7: Performance Testing
  */
 
-import type { TimelineEvent } from '../types/events';
+import type { TimelineEvent, EventData } from '../types/events';
 
 export interface GenerateDatasetOptions {
   /** Number of events to generate */
@@ -98,19 +98,20 @@ export function generateLargeDataset(options: GenerateDatasetOptions): TimelineE
         isDuration: true,
         title: `${category} Event ${i + 1}`,
         description: `This is a duration event in the ${category} category. Event ID: ${i + 1}`,
-        color,
-        category,
+        ...(color && { color }),
+        ...(category && { category }),
       };
     } else {
       // Instant event
+      const icon = category ? getIconForCategory(category) : undefined;
       event = {
         id: `event-${i}`,
         start: eventStart.toISOString(),
         title: `${category} Event ${i + 1}`,
         description: `This is an instant event in the ${category} category. Event ID: ${i + 1}`,
-        color,
-        category,
-        icon: getIconForCategory(category),
+        ...(color && { color }),
+        ...(category && { category }),
+        ...(icon && { icon }),
       };
     }
 
@@ -146,22 +147,12 @@ function getIconForCategory(category: string): string | undefined {
 /**
  * Generate dataset and convert to Simile JSON format
  */
-export function generateSimileJSON(options: GenerateDatasetOptions): object {
+export function generateSimileJSON(options: GenerateDatasetOptions): EventData {
   const events = generateLargeDataset(options);
 
   return {
     dateTimeFormat: 'iso8601',
-    events: events.map(event => ({
-      id: event.id,
-      start: event.start,
-      end: event.end,
-      isDuration: event.isDuration,
-      title: event.title,
-      description: event.description,
-      color: event.color,
-      icon: event.icon,
-      category: event.category,
-    })),
+    events: events as TimelineEvent[],
   };
 }
 

@@ -124,7 +124,7 @@ export function BandV3({
   });
 
   // Performance monitoring
-  const perfMonitor = usePerformanceMonitor({
+  usePerformanceMonitor({
     targetFps: 60,
     enabled: true,
     onPerformanceDrop: (metrics) => {

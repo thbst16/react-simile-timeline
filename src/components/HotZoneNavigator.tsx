@@ -7,7 +7,7 @@
  * Sprint 7: Complete Sprint 5 Features
  */
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import type { HotZone } from '../types/hotzone';
 import { useTimelineStore } from '../store/timelineStore';
 
@@ -53,16 +53,16 @@ export interface HotZoneNavigatorProps {
 /**
  * Format date for display
  */
-function formatZoneDate(dateStr: string): string {
+function formatZoneDate(dateStr: string | Date): string {
   try {
-    const date = new Date(dateStr);
+    const date = dateStr instanceof Date ? dateStr : new Date(dateStr);
     return date.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'short',
       day: 'numeric',
     });
   } catch {
-    return dateStr;
+    return String(dateStr);
   }
 }
 

@@ -46,7 +46,7 @@ function Sprint5PerformanceDemoInner(): JSX.Element {
   // UI Controls
   const [showPerformance, setShowPerformance] = useState(true);
   const [showHotZones, setShowHotZones] = useState(false);
-  const [performanceCompact, setPerformanceCompact] = useState(false);
+  const [performanceCompact] = useState(false);
   const [datasetSize, setDatasetSize] = useState<100 | 500 | 1000 | 2000>(1000);
 
   const { centerDate, setCenterDate, setDateBounds } = useTimelineStore();
@@ -108,12 +108,12 @@ function Sprint5PerformanceDemoInner(): JSX.Element {
   const overviewEtherRef = useRef(new LinearEther('YEAR', 30));
   const contextEtherRef = useRef(new LinearEther('MONTH', 80));
 
-  const timelineScroll = useTimelineScroll({ scrollSpeed: 0.5, smoothing: 0.9 });
-  const panZoom = usePanZoom({
+  const timelineScroll = useTimelineScroll({ friction: 0.9 });
+  usePanZoom({
     minZoom: 0.1,
     maxZoom: 10,
-    zoomSpeed: 0.1,
-    enableTouch: true,
+    zoomStep: 0.1,
+    enablePinchZoom: true,
     onPan: (delta) => {
       const newDate = detailEtherRef.current.pixelToDate(-delta, centerDate);
       setCenterDate(newDate);
@@ -121,10 +121,12 @@ function Sprint5PerformanceDemoInner(): JSX.Element {
   });
 
   useKeyboardNav({
-    enableArrowKeys: true,
-    enableZoomKeys: true,
-    onLeft: () => setCenterDate(detailEtherRef.current.pixelToDate(-100, centerDate)),
-    onRight: () => setCenterDate(detailEtherRef.current.pixelToDate(100, centerDate)),
+    enabled: true,
+    panStep: 100,
+    onPan: (direction, amount) => {
+      const delta = direction === 'left' ? -amount : amount;
+      setCenterDate(detailEtherRef.current.pixelToDate(delta, centerDate));
+    },
     onEscape: () => setSelectedEvent(null),
   });
 

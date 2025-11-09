@@ -7,7 +7,6 @@
  * Sprint 7: Complete Sprint 5 Features
  */
 
-import React from 'react';
 import { usePerformanceMonitor } from '../hooks/usePerformanceMonitor';
 import type { UsePerformanceMonitorOptions } from '../hooks/usePerformanceMonitor';
 
