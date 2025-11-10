@@ -1,11 +1,12 @@
 # React Simile Timeline
 
 [![npm version](https://img.shields.io/npm/v/react-simile-timeline)](https://www.npmjs.com/package/react-simile-timeline)
+[![npm downloads](https://img.shields.io/npm/dm/react-simile-timeline)](https://www.npmjs.com/package/react-simile-timeline)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-blue)](https://www.typescriptlang.org/)
-[![Tests](https://img.shields.io/badge/tests-348%20passing-success)](./src/__tests__)
+[![Tests](https://img.shields.io/badge/tests-361%20passing-success)](./src/__tests__)
 [![Coverage](https://img.shields.io/badge/coverage->80%25-success)](./docs/PERFORMANCE.md)
-[![Bundle Size](https://img.shields.io/badge/bundle-<150KB-success)](./docs/PERFORMANCE.md)
+[![Bundle Size](https://img.shields.io/badge/bundle-40KB%20gzipped-success)](./docs/PERFORMANCE.md)
 [![Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://react-simile-timeline.vercel.app/)
 
 A modern, production-ready React port of MIT's Simile Timeline widget. Built with TypeScript, optimized for performance, and 100% compatible with original Simile JSON format.
