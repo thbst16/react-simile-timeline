@@ -172,7 +172,8 @@ function Sprint5PerformanceDemoInner(): JSX.Element {
               React SIMILE Timeline
             </h1>
             <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-              {displayEvents.length.toLocaleString()} events • Virtualization • Adaptive Rendering • 60fps
+              {displayEvents.length.toLocaleString()} events • Virtualization • Adaptive Rendering •
+              60fps
             </p>
           </div>
 
