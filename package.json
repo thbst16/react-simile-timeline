@@ -20,7 +20,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --project tsconfig.build.json && vite build",
+    "build:demo": "vite build --config vite.config.demo.ts",
     "preview": "vite preview",
+    "preview:demo": "vite preview --outDir dist-demo",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "type-check": "tsc --project tsconfig.build.json --noEmit",
     "test": "vitest",
