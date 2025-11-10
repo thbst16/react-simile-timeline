@@ -1,0 +1,13 @@
+# Build configuration files
+vite.config.ts
+vite.config.demo.ts
+
+# Build outputs
+dist/
+dist-demo/
+
+# Dependencies
+node_modules/
+
+# Coverage
+coverage/
