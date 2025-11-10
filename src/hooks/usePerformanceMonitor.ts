@@ -227,13 +227,16 @@ export function usePerformanceMonitor(
   /**
    * Calculate performance rating
    */
-  const calculateRating = useCallback((fps: number): PerformanceMetrics['rating'] => {
-    const ratio = fps / targetFps;
-    if (ratio >= 0.95) return 'excellent';
-    if (ratio >= 0.75) return 'good';
-    if (ratio >= 0.5) return 'fair';
-    return 'poor';
-  }, [targetFps]);
+  const calculateRating = useCallback(
+    (fps: number): PerformanceMetrics['rating'] => {
+      const ratio = fps / targetFps;
+      if (ratio >= 0.95) return 'excellent';
+      if (ratio >= 0.75) return 'good';
+      if (ratio >= 0.5) return 'fair';
+      return 'poor';
+    },
+    [targetFps]
+  );
 
   /**
    * Update metrics periodically
@@ -242,21 +245,26 @@ export function usePerformanceMonitor(
     if (!enabled) return;
 
     const intervalId = setInterval(() => {
-      const fps = framesInSecondRef.current.length > 0
-        ? framesInSecondRef.current[framesInSecondRef.current.length - 1] || 0
-        : 0;
+      const fps =
+        framesInSecondRef.current.length > 0
+          ? framesInSecondRef.current[framesInSecondRef.current.length - 1] || 0
+          : 0;
 
-      const avgFps = framesInSecondRef.current.length > 0
-        ? framesInSecondRef.current.reduce((sum, f) => sum + f, 0) / framesInSecondRef.current.length
-        : 0;
+      const avgFps =
+        framesInSecondRef.current.length > 0
+          ? framesInSecondRef.current.reduce((sum, f) => sum + f, 0) /
+            framesInSecondRef.current.length
+          : 0;
 
-      const renderTime = renderTimesRef.current.length > 0
-        ? renderTimesRef.current[renderTimesRef.current.length - 1] || 0
-        : 0;
+      const renderTime =
+        renderTimesRef.current.length > 0
+          ? renderTimesRef.current[renderTimesRef.current.length - 1] || 0
+          : 0;
 
-      const avgRenderTime = renderTimesRef.current.length > 0
-        ? renderTimesRef.current.reduce((sum, t) => sum + t, 0) / renderTimesRef.current.length
-        : 0;
+      const avgRenderTime =
+        renderTimesRef.current.length > 0
+          ? renderTimesRef.current.reduce((sum, t) => sum + t, 0) / renderTimesRef.current.length
+          : 0;
 
       const newMetrics: PerformanceMetrics = {
         fps: Math.round(fps),

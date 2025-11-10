@@ -41,15 +41,8 @@ export interface UseTimelineScrollResult {
  *   onScroll: (delta) => console.log('Scrolled:', delta)
  * });
  */
-export function useTimelineScroll(
-  options: UseTimelineScrollOptions = {}
-): UseTimelineScrollResult {
-  const {
-    enableMouseDrag = true,
-    enableTouch = true,
-    onScroll,
-    friction = 0.95,
-  } = options;
+export function useTimelineScroll(options: UseTimelineScrollOptions = {}): UseTimelineScrollResult {
+  const { enableMouseDrag = true, enableTouch = true, onScroll, friction = 0.95 } = options;
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isScrolling, setIsScrolling] = useState(false);
@@ -226,16 +219,22 @@ export function useTimelineScroll(
     handleTouchEnd,
   ]);
 
-  const scrollBy = useCallback((pixels: number) => {
-    debouncedOnScroll(pixels);
-  }, [debouncedOnScroll]);
+  const scrollBy = useCallback(
+    (pixels: number) => {
+      debouncedOnScroll(pixels);
+    },
+    [debouncedOnScroll]
+  );
 
-  const scrollTo = useCallback((position: number) => {
-    // Calculate delta from current position
-    // This would need to be coordinated with the timeline's current position
-    // For now, we'll emit the position directly
-    onScroll?.(position);
-  }, [onScroll]);
+  const scrollTo = useCallback(
+    (position: number) => {
+      // Calculate delta from current position
+      // This would need to be coordinated with the timeline's current position
+      // For now, we'll emit the position directly
+      onScroll?.(position);
+    },
+    [onScroll]
+  );
 
   return {
     scrollRef,

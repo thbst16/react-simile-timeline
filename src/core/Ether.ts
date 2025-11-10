@@ -256,7 +256,7 @@ export class HotZoneEther implements Ether {
         const zonePixelWidth = this.baseEther.getPixelWidth(zone.startDate, zone.endDate);
         const magnifiedWidth = zonePixelWidth * zone.magnify;
 
-        pixel = basePixel + (magnifiedWidth * normalizedOffset);
+        pixel = basePixel + magnifiedWidth * normalizedOffset;
         break;
       }
 

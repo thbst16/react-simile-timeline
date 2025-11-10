@@ -9,15 +9,8 @@
  */
 
 import type { Ether } from '../core/Ether';
-import type {
-  Decorator,
-  PointDecorator,
-  SpanDecorator,
-} from '../types/decorators';
-import {
-  DEFAULT_POINT_DECORATOR_STYLE,
-  DEFAULT_SPAN_DECORATOR_STYLE,
-} from '../types/decorators';
+import type { Decorator, PointDecorator, SpanDecorator } from '../types/decorators';
+import { DEFAULT_POINT_DECORATOR_STYLE, DEFAULT_SPAN_DECORATOR_STYLE } from '../types/decorators';
 
 export interface DecoratorLayerProps {
   /** Decorators to render */
@@ -41,11 +34,7 @@ export interface DecoratorLayerProps {
  *
  * Renders decorators behind events (lower z-index)
  */
-export function DecoratorLayer({
-  decorators,
-  ether,
-  viewport,
-}: DecoratorLayerProps): JSX.Element {
+export function DecoratorLayer({ decorators, ether, viewport }: DecoratorLayerProps): JSX.Element {
   // Filter visible decorators
   const visibleDecorators = decorators.filter((decorator) => {
     try {
@@ -55,9 +44,7 @@ export function DecoratorLayer({
       } else {
         const startDate = new Date(decorator.startDate);
         const endDate = new Date(decorator.endDate);
-        return (
-          startDate <= viewport.maxVisibleDate && endDate >= viewport.minVisibleDate
-        );
+        return startDate <= viewport.maxVisibleDate && endDate >= viewport.minVisibleDate;
       }
     } catch {
       return false;
@@ -77,7 +64,14 @@ export function DecoratorLayer({
     >
       <defs>
         {/* Pattern for subtle texture on spans (optional) */}
-        <pattern id="decorator-pattern" x="0" y="0" width="4" height="4" patternUnits="userSpaceOnUse">
+        <pattern
+          id="decorator-pattern"
+          x="0"
+          y="0"
+          width="4"
+          height="4"
+          patternUnits="userSpaceOnUse"
+        >
           <circle cx="2" cy="2" r="0.5" fill="currentColor" opacity="0.1" />
         </pattern>
       </defs>
@@ -221,14 +215,7 @@ function SpanDecoratorElement({
     return (
       <g className={decorator.className || 'span-decorator'}>
         {/* Background rectangle */}
-        <rect
-          x={x}
-          y={0}
-          width={width}
-          height={viewport.height}
-          fill={color}
-          opacity={opacity}
-        />
+        <rect x={x} y={0} width={width} height={viewport.height} fill={color} opacity={opacity} />
 
         {/* Label (if provided) - centered in span */}
         {decorator.label && width > 100 && (

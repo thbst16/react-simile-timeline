@@ -16,11 +16,7 @@ import {
 } from '../utils/accessibility';
 import type { TimelineEvent } from '../types/events';
 import type { TimelineTheme } from '../types/theme';
-import type {
-  AccessibilityAudit,
-  AccessibilityIssue,
-  ContrastCheck,
-} from '../utils/accessibility';
+import type { AccessibilityAudit, AccessibilityIssue, ContrastCheck } from '../utils/accessibility';
 
 /**
  * Accessibility Options
@@ -108,7 +104,11 @@ export interface UseAccessibilityResult {
   /**
    * Check color contrast
    */
-  checkContrast: (foreground: string, background: string, isLargeText?: boolean) => {
+  checkContrast: (
+    foreground: string,
+    background: string,
+    isLargeText?: boolean
+  ) => {
     ratio: number;
     passes: boolean;
   };
@@ -131,9 +131,7 @@ export interface UseAccessibilityResult {
  * const audit = a11y.runAudit();
  * console.log('Accessibility issues:', audit.issues);
  */
-export function useAccessibility(
-  options: UseAccessibilityOptions
-): UseAccessibilityResult {
+export function useAccessibility(options: UseAccessibilityOptions): UseAccessibilityResult {
   const {
     theme,
     enableAnnouncements = true,
@@ -147,10 +145,10 @@ export function useAccessibility(
   const lastAnnouncementRef = useRef<string>('');
 
   // Detect prefers-reduced-motion
-  const prefersReducedMotion = reduceMotion || (
-    typeof window !== 'undefined' &&
-    window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  );
+  const prefersReducedMotion =
+    reduceMotion ||
+    (typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 
   /**
    * Announce message (with deduplication)

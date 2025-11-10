@@ -55,7 +55,9 @@ export function validateEvent(event: TimelineEvent, index?: number): ValidationR
       const start = new Date(event.start);
       const end = new Date(event.end);
       if (end < start) {
-        errors.push(`${eventLabel} has 'end' date (${event.end}) before 'start' date (${event.start})`);
+        errors.push(
+          `${eventLabel} has 'end' date (${event.end}) before 'start' date (${event.start})`
+        );
       }
     } catch {
       // Date parsing errors will be caught by date parser
@@ -140,9 +142,7 @@ export function validateDataset(data: EventData): DatasetValidationResult {
   const invalidEvents = results.filter((r) => !r.valid).length;
 
   // Check for duplicate IDs
-  const ids = data.events
-    .filter((e) => e.id)
-    .map((e) => e.id as string);
+  const ids = data.events.filter((e) => e.id).map((e) => e.id as string);
   const duplicateIds = ids.filter((id, index) => ids.indexOf(id) !== index);
   if (duplicateIds.length > 0) {
     datasetErrors.push(
@@ -181,9 +181,28 @@ function isValidColor(color: string): boolean {
 
   // Named colors (basic check)
   const namedColors = [
-    'red', 'blue', 'green', 'yellow', 'orange', 'purple', 'pink', 'brown',
-    'black', 'white', 'gray', 'grey', 'cyan', 'magenta', 'lime', 'navy',
-    'teal', 'aqua', 'maroon', 'olive', 'silver', 'fuchsia',
+    'red',
+    'blue',
+    'green',
+    'yellow',
+    'orange',
+    'purple',
+    'pink',
+    'brown',
+    'black',
+    'white',
+    'gray',
+    'grey',
+    'cyan',
+    'magenta',
+    'lime',
+    'navy',
+    'teal',
+    'aqua',
+    'maroon',
+    'olive',
+    'silver',
+    'fuchsia',
   ];
   if (namedColors.includes(color.toLowerCase())) {
     return true;

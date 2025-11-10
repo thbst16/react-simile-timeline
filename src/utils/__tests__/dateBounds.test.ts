@@ -177,8 +177,7 @@ describe('dateBounds', () => {
       };
 
       const center = getDefaultCenterDate(bounds);
-      const expectedMidpoint =
-        (bounds.minDate.getTime() + bounds.maxDate.getTime()) / 2;
+      const expectedMidpoint = (bounds.minDate.getTime() + bounds.maxDate.getTime()) / 2;
 
       expect(center.getTime()).toBe(expectedMidpoint);
     });

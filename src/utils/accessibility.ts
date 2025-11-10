@@ -80,11 +80,7 @@ export function getContrastRatio(color1: string, color2: string): number {
  * @param isLargeText - Whether text is large (18pt+ or 14pt+ bold)
  * @returns Whether the combination passes WCAG AA
  */
-export function meetsWCAGAA(
-  foreground: string,
-  background: string,
-  isLargeText = false
-): boolean {
+export function meetsWCAGAA(foreground: string, background: string, isLargeText = false): boolean {
   const ratio = getContrastRatio(foreground, background);
   const requiredRatio = isLargeText ? 3 : 4.5;
   return ratio >= requiredRatio;
@@ -264,7 +260,10 @@ export function createAriaLabel(
  * Creates a live region announcement for screen readers.
  * Use sparingly to avoid overwhelming users.
  */
-export function announceToScreenReader(message: string, priority: 'polite' | 'assertive' = 'polite'): void {
+export function announceToScreenReader(
+  message: string,
+  priority: 'polite' | 'assertive' = 'polite'
+): void {
   if (typeof document === 'undefined') return;
 
   // Create or find live region
@@ -298,12 +297,15 @@ export function announceToScreenReader(message: string, priority: 'polite' | 'as
 /**
  * Get keyboard shortcut description
  */
-export function getKeyboardShortcutDescription(key: string, modifiers?: {
-  ctrl?: boolean;
-  shift?: boolean;
-  alt?: boolean;
-  meta?: boolean;
-}): string {
+export function getKeyboardShortcutDescription(
+  key: string,
+  modifiers?: {
+    ctrl?: boolean;
+    shift?: boolean;
+    alt?: boolean;
+    meta?: boolean;
+  }
+): string {
   const parts: string[] = [];
 
   if (modifiers?.ctrl) parts.push('Ctrl');
@@ -336,7 +338,10 @@ export function isFocusable(element: HTMLElement): boolean {
 /**
  * Ensure focus is visible with proper styling
  */
-export function ensureFocusVisible(element: HTMLElement, theme: { colors: { ui: { primary: string } } }): void {
+export function ensureFocusVisible(
+  element: HTMLElement,
+  theme: { colors: { ui: { primary: string } } }
+): void {
   element.style.outline = `2px solid ${theme.colors.ui.primary}`;
   element.style.outlineOffset = '2px';
 }

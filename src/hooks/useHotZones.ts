@@ -92,12 +92,7 @@ export interface UseHotZonesResult extends HotZoneState {
  * console.log(calc.magnification); // 2
  */
 export function useHotZones(options: UseHotZonesOptions = {}): UseHotZonesResult {
-  const {
-    initialZones = [],
-    baseMagnification = 1,
-    onZonesChange,
-    onActiveZonesChange,
-  } = options;
+  const { initialZones = [], baseMagnification = 1, onZonesChange, onActiveZonesChange } = options;
 
   const [zones, setZones] = useState<HotZone[]>(initialZones);
   const [activeZones, setActiveZones] = useState<HotZone[]>([]);

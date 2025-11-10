@@ -61,12 +61,15 @@ export function Timeline(props: TimelineProps): JSX.Element {
     setDragStart(e.clientX);
   }, []);
 
-  const handleMouseMove = useCallback((e: React.MouseEvent): void => {
-    if (!isDragging) return;
-    const delta = e.clientX - dragStart;
-    setPanOffset((prev) => prev + delta);
-    setDragStart(e.clientX);
-  }, [isDragging, dragStart]);
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent): void => {
+      if (!isDragging) return;
+      const delta = e.clientX - dragStart;
+      setPanOffset((prev) => prev + delta);
+      setDragStart(e.clientX);
+    },
+    [isDragging, dragStart]
+  );
 
   const handleMouseUp = useCallback((): void => {
     setIsDragging(false);

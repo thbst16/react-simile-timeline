@@ -220,9 +220,7 @@ export function useVirtualization(options: UseVirtualizationOptions): UseVirtual
 
     // Rough estimate: each event ~1KB in memory
     const savedKB = skipped * 1;
-    const memorySaved = savedKB > 1024
-      ? `${(savedKB / 1024).toFixed(1)}MB`
-      : `${savedKB}KB`;
+    const memorySaved = savedKB > 1024 ? `${(savedKB / 1024).toFixed(1)}MB` : `${savedKB}KB`;
 
     return {
       renderPercentage: Math.round(percentage * 10) / 10,
@@ -247,7 +245,8 @@ export function useVirtualization(options: UseVirtualizationOptions): UseVirtual
  *
  * This variant automatically tracks the viewport bounds from a scroll container.
  */
-export interface UseAutoVirtualizationOptions extends Omit<UseVirtualizationOptions, 'viewportStart' | 'viewportEnd'> {
+export interface UseAutoVirtualizationOptions
+  extends Omit<UseVirtualizationOptions, 'viewportStart' | 'viewportEnd'> {
   /**
    * Scroll container element
    */
@@ -260,7 +259,9 @@ export interface UseAutoVirtualizationOptions extends Omit<UseVirtualizationOpti
   updateInterval?: number;
 }
 
-export function useAutoVirtualization(options: UseAutoVirtualizationOptions): UseVirtualizationResult {
+export function useAutoVirtualization(
+  options: UseAutoVirtualizationOptions
+): UseVirtualizationResult {
   const { containerRef, updateInterval = 100, ...baseOptions } = options;
 
   const [viewport, setViewport] = useState({ start: 0, end: 1000 });

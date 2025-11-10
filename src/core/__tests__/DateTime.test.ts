@@ -3,13 +3,7 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import {
-  parseDate,
-  formatDate,
-  addInterval,
-  isBCEDate,
-  getIntervalDescription,
-} from '../DateTime';
+import { parseDate, formatDate, addInterval, isBCEDate, getIntervalDescription } from '../DateTime';
 
 describe('DateTime', () => {
   describe('parseDate', () => {

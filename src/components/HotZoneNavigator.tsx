@@ -153,9 +153,7 @@ export function HotZoneNavigator({
     return (
       <>
         {/* Left Edge */}
-        <div
-          className={`fixed left-4 top-1/2 -translate-y-1/2 z-40 ${className}`}
-        >
+        <div className={`fixed left-4 top-1/2 -translate-y-1/2 z-40 ${className}`}>
           <div className="flex flex-col gap-2">
             {zones.slice(0, Math.ceil(zones.length / 2)).map((zone, index) => (
               <button
@@ -198,9 +196,7 @@ export function HotZoneNavigator({
         </div>
 
         {/* Right Edge */}
-        <div
-          className={`fixed right-4 top-1/2 -translate-y-1/2 z-40 ${className}`}
-        >
+        <div className={`fixed right-4 top-1/2 -translate-y-1/2 z-40 ${className}`}>
           <div className="flex flex-col gap-2">
             {zones.slice(Math.ceil(zones.length / 2)).map((zone, index) => {
               const actualIndex = index + Math.ceil(zones.length / 2);
@@ -249,14 +245,11 @@ export function HotZoneNavigator({
   }
 
   // Top/Bottom position (horizontal bar)
-  const positionClasses = position === 'top'
-    ? 'top-20 left-1/2 -translate-x-1/2'
-    : 'bottom-4 left-1/2 -translate-x-1/2';
+  const positionClasses =
+    position === 'top' ? 'top-20 left-1/2 -translate-x-1/2' : 'bottom-4 left-1/2 -translate-x-1/2';
 
   return (
-    <div
-      className={`fixed ${positionClasses} z-40 ${className}`}
-    >
+    <div className={`fixed ${positionClasses} z-40 ${className}`}>
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-300 dark:border-gray-700 p-2">
         <div className="flex gap-2">
           {zones.map((zone, index) => (

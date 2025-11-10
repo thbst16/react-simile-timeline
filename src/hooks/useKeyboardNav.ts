@@ -58,9 +58,7 @@ export interface UseKeyboardNavResult {
  *   panStep: 50
  * });
  */
-export function useKeyboardNav(
-  options: UseKeyboardNavOptions = {}
-): UseKeyboardNavResult {
+export function useKeyboardNav(options: UseKeyboardNavOptions = {}): UseKeyboardNavResult {
   const {
     enabled = true,
     shortcuts = [],
@@ -162,7 +160,7 @@ export function useKeyboardNav(
     ];
 
     // Register all shortcuts
-    defaultShortcuts.forEach(shortcut => {
+    defaultShortcuts.forEach((shortcut) => {
       const key = createShortcutKey(shortcut);
       shortcutsRef.current.set(key, shortcut);
     });
@@ -174,10 +172,7 @@ export function useKeyboardNav(
 
     const handleKeyDown = (event: KeyboardEvent): void => {
       // Don't capture if user is typing in an input
-      if (
-        event.target instanceof HTMLInputElement ||
-        event.target instanceof HTMLTextAreaElement
-      ) {
+      if (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) {
         return;
       }
 

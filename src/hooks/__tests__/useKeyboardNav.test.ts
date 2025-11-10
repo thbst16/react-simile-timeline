@@ -41,7 +41,11 @@ describe('useKeyboardNav', () => {
 
     // Simulate ArrowLeft
     act(() => {
-      const event = new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true, cancelable: true });
+      const event = new KeyboardEvent('keydown', {
+        key: 'ArrowLeft',
+        bubbles: true,
+        cancelable: true,
+      });
       window.dispatchEvent(event);
     });
 
@@ -49,7 +53,11 @@ describe('useKeyboardNav', () => {
 
     // Simulate ArrowRight
     act(() => {
-      const event = new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true, cancelable: true });
+      const event = new KeyboardEvent('keydown', {
+        key: 'ArrowRight',
+        bubbles: true,
+        cancelable: true,
+      });
       window.dispatchEvent(event);
     });
 
@@ -82,7 +90,11 @@ describe('useKeyboardNav', () => {
     renderHook(() => useKeyboardNav({ onEscape }));
 
     act(() => {
-      const event = new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true });
+      const event = new KeyboardEvent('keydown', {
+        key: 'Escape',
+        bubbles: true,
+        cancelable: true,
+      });
       window.dispatchEvent(event);
     });
 
@@ -117,7 +129,11 @@ describe('useKeyboardNav', () => {
     document.body.appendChild(input);
 
     act(() => {
-      const event = new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true, cancelable: true });
+      const event = new KeyboardEvent('keydown', {
+        key: 'ArrowLeft',
+        bubbles: true,
+        cancelable: true,
+      });
       Object.defineProperty(event, 'target', { value: input, enumerable: true });
       window.dispatchEvent(event);
     });
@@ -213,8 +229,8 @@ describe('useKeyboardNav', () => {
     const shortcuts = result.current.getShortcuts();
 
     expect(shortcuts.length).toBeGreaterThan(0);
-    expect(shortcuts.some(s => s.key === 'ArrowLeft')).toBe(true);
-    expect(shortcuts.some(s => s.key === '+')).toBe(true);
-    expect(shortcuts.some(s => s.key === 'Escape')).toBe(true);
+    expect(shortcuts.some((s) => s.key === 'ArrowLeft')).toBe(true);
+    expect(shortcuts.some((s) => s.key === '+')).toBe(true);
+    expect(shortcuts.some((s) => s.key === 'Escape')).toBe(true);
   });
 });

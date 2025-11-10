@@ -48,9 +48,7 @@ describe('EventSource', () => {
 
     it('should validate data on construction', () => {
       const invalidData: EventData = {
-        events: [
-          { title: 'Missing Start' } as TimelineEvent,
-        ],
+        events: [{ title: 'Missing Start' } as TimelineEvent],
       };
       const source = new EventSource(invalidData);
       expect(source.getCount()).toBe(0); // Invalid events not loaded

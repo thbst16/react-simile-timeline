@@ -94,12 +94,8 @@ export function Sprint2Demo(): JSX.Element {
     <div className="min-h-screen bg-gray-100">
       {/* Header */}
       <div className="bg-white border-b border-gray-200 p-4">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">
-          Sprint 2: Core Rendering Demo
-        </h1>
-        <p className="text-gray-600">
-          Single band timeline with time scale and event rendering
-        </p>
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">Sprint 2: Core Rendering Demo</h1>
+        <p className="text-gray-600">Single band timeline with time scale and event rendering</p>
       </div>
 
       {/* Controls */}
@@ -169,16 +165,12 @@ export function Sprint2Demo(): JSX.Element {
 
             {/* Ether Type */}
             <div>
-              <label className="block text-sm font-medium mb-2">
-                Ether Type: {etherType}
-              </label>
+              <label className="block text-sm font-medium mb-2">Ether Type: {etherType}</label>
               <div className="space-y-2">
                 <button
                   onClick={() => setEtherType('linear')}
                   className={`w-full px-3 py-1 rounded text-sm ${
-                    etherType === 'linear'
-                      ? 'bg-blue-500 text-white'
-                      : 'bg-gray-200 text-gray-700'
+                    etherType === 'linear' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'
                   }`}
                 >
                   Linear
@@ -196,9 +188,7 @@ export function Sprint2Demo(): JSX.Element {
                 <button
                   onClick={() => setEtherType('hotzone')}
                   className={`w-full px-3 py-1 rounded text-sm ${
-                    etherType === 'hotzone'
-                      ? 'bg-blue-500 text-white'
-                      : 'bg-gray-200 text-gray-700'
+                    etherType === 'hotzone' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'
                   }`}
                 >
                   Hot Zone (1960-63)
@@ -208,9 +198,7 @@ export function Sprint2Demo(): JSX.Element {
 
             {/* Zoom Control */}
             <div>
-              <label className="block text-sm font-medium mb-2">
-                Zoom: {zoom.toFixed(2)}x
-              </label>
+              <label className="block text-sm font-medium mb-2">Zoom: {zoom.toFixed(2)}x</label>
               <input
                 type="range"
                 min="0.25"
@@ -266,12 +254,8 @@ export function Sprint2Demo(): JSX.Element {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
             <div>
               <div className="text-gray-600">Load Time</div>
-              <div className="text-2xl font-bold">
-                {Math.round(renderTime)}ms
-              </div>
-              <div className="text-xs text-gray-500">
-                Target: &lt;50ms for 200 events
-              </div>
+              <div className="text-2xl font-bold">{Math.round(renderTime)}ms</div>
+              <div className="text-xs text-gray-500">Target: &lt;50ms for 200 events</div>
             </div>
             <div>
               <div className="text-gray-600">Total Events</div>
@@ -283,9 +267,7 @@ export function Sprint2Demo(): JSX.Element {
             </div>
             <div>
               <div className="text-gray-600">Center Date</div>
-              <div className="text-lg font-bold">
-                {centerDate.toLocaleDateString()}
-              </div>
+              <div className="text-lg font-bold">{centerDate.toLocaleDateString()}</div>
             </div>
           </div>
         </div>
@@ -306,8 +288,8 @@ export function Sprint2Demo(): JSX.Element {
             <li>✅ Dynamic interval unit selection</li>
           </ul>
           <div className="mt-3 text-sm">
-            <strong>Try it:</strong> Drag the timeline to pan, adjust zoom, change
-            interval units, and switch between different ether types!
+            <strong>Try it:</strong> Drag the timeline to pan, adjust zoom, change interval units,
+            and switch between different ether types!
           </div>
         </div>
       </div>

@@ -117,9 +117,7 @@ export function Sprint3Demo(): JSX.Element {
     <div className="h-screen flex flex-col bg-gray-50">
       {/* Header */}
       <div className="bg-white border-b border-gray-200 px-6 py-4">
-        <h1 className="text-2xl font-bold text-gray-900">
-          Sprint 3 Demo - Advanced Rendering
-        </h1>
+        <h1 className="text-2xl font-bold text-gray-900">Sprint 3 Demo - Advanced Rendering</h1>
         <p className="text-sm text-gray-600 mt-1">
           Multiple synchronized bands with different painter types
         </p>
@@ -196,17 +194,17 @@ export function Sprint3Demo(): JSX.Element {
 
       {/* Event Bubble Modal */}
       {selectedEvent && (
-        <EventBubble
-          event={selectedEvent}
-          onClose={() => setSelectedEvent(null)}
-        />
+        <EventBubble event={selectedEvent} onClose={() => setSelectedEvent(null)} />
       )}
 
       {/* Stats Footer */}
       <div className="bg-gray-100 border-t border-gray-200 px-6 py-2 text-xs text-gray-600">
         <div className="flex justify-between">
           <div>Total Events: {events.length}</div>
-          <div>Features: LayoutEngine ✓ | 3 Painters ✓ | Multi-Band Sync ✓ | Decorators ✓ | Event Bubbles ✓</div>
+          <div>
+            Features: LayoutEngine ✓ | 3 Painters ✓ | Multi-Band Sync ✓ | Decorators ✓ | Event
+            Bubbles ✓
+          </div>
           <div>Click any event to see details</div>
         </div>
       </div>

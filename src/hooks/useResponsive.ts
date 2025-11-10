@@ -287,10 +287,7 @@ export function useResponsive(options: UseResponsiveOptions = {}): UseResponsive
   );
 
   // Get recommendations
-  const recommendations = useMemo(
-    () => getRecommendations(device, isTouch),
-    [device, isTouch]
-  );
+  const recommendations = useMemo(() => getRecommendations(device, isTouch), [device, isTouch]);
 
   // Handle resize
   const handleResize = useCallback(() => {

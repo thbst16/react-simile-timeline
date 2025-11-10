@@ -72,9 +72,7 @@ describe('useBandSync', () => {
       { bandId: 'month', syncRatio: 0.5 },
     ];
 
-    const { result } = renderHook(() =>
-      useBandSync({ bands, onBandScroll })
-    );
+    const { result } = renderHook(() => useBandSync({ bands, onBandScroll }));
 
     act(() => {
       result.current.notifyScroll('detail', 100);
@@ -134,9 +132,7 @@ describe('useBandSync', () => {
       { bandId: 'overview', syncRatio: 0.1 },
     ];
 
-    const { result } = renderHook(() =>
-      useBandSync({ bands, onBandScroll })
-    );
+    const { result } = renderHook(() => useBandSync({ bands, onBandScroll }));
 
     // First scroll from detail band
     act(() => {
@@ -162,9 +158,7 @@ describe('useBandSync', () => {
       { bandId: 'month', syncRatio: 10 },
     ];
 
-    const { result } = renderHook(() =>
-      useBandSync({ bands, onBandScroll })
-    );
+    const { result } = renderHook(() => useBandSync({ bands, onBandScroll }));
 
     // Scroll the year band (middle ratio)
     act(() => {
@@ -183,14 +177,11 @@ describe('useBandSync', () => {
   });
 
   it('should update bands when props change', () => {
-    const { result, rerender } = renderHook(
-      ({ bands }) => useBandSync({ bands }),
-      {
-        initialProps: {
-          bands: [{ bandId: 'detail', syncRatio: 1 }],
-        },
-      }
-    );
+    const { result, rerender } = renderHook(({ bands }) => useBandSync({ bands }), {
+      initialProps: {
+        bands: [{ bandId: 'detail', syncRatio: 1 }],
+      },
+    });
 
     let delta = result.current.getSyncedDelta('detail', 100);
     expect(delta).toBe(100);

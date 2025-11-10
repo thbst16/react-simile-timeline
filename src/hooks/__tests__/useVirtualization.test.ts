@@ -55,10 +55,7 @@ describe('useVirtualization', () => {
   });
 
   it('returns all events when below threshold', () => {
-    const events = [
-      createEvent('1', 0, 100),
-      createEvent('2', 200, 300),
-    ];
+    const events = [createEvent('1', 0, 100), createEvent('2', 200, 300)];
 
     const { result } = renderHook(() =>
       useVirtualization({
@@ -77,10 +74,10 @@ describe('useVirtualization', () => {
 
   it('filters events outside viewport when virtualized', () => {
     const events = [
-      createEvent('1', 0, 100),      // Before viewport
-      createEvent('2', 500, 600),    // In viewport
-      createEvent('3', 700, 800),    // In viewport
-      createEvent('4', 1500, 1600),  // After viewport
+      createEvent('1', 0, 100), // Before viewport
+      createEvent('2', 500, 600), // In viewport
+      createEvent('3', 700, 800), // In viewport
+      createEvent('4', 1500, 1600), // After viewport
     ];
 
     const { result } = renderHook(() =>
@@ -103,10 +100,10 @@ describe('useVirtualization', () => {
 
   it('includes events in buffer zone', () => {
     const events = [
-      createEvent('1', 150, 250),    // In buffer (buffered start = 200)
-      createEvent('2', 500, 600),    // In viewport
-      createEvent('3', 1100, 1200),  // In buffer (buffered end = 1200)
-      createEvent('4', 1500, 1600),  // Outside buffer
+      createEvent('1', 150, 250), // In buffer (buffered start = 200)
+      createEvent('2', 500, 600), // In viewport
+      createEvent('3', 1100, 1200), // In buffer (buffered end = 1200)
+      createEvent('4', 1500, 1600), // Outside buffer
     ];
 
     const { result } = renderHook(() =>
@@ -122,7 +119,7 @@ describe('useVirtualization', () => {
     );
 
     expect(result.current.visibleEvents).toHaveLength(3);
-    expect(result.current.visibleEvents.map(e => e.id)).toEqual(['1', '2', '3']);
+    expect(result.current.visibleEvents.map((e) => e.id)).toEqual(['1', '2', '3']);
   });
 
   it('counts events before and after viewport', () => {
@@ -176,8 +173,8 @@ describe('useVirtualization', () => {
 
   it('handles events spanning viewport boundaries', () => {
     const events = [
-      createEvent('1', 300, 700),   // Spans viewport start
-      createEvent('2', 800, 1200),  // Spans viewport end
+      createEvent('1', 300, 700), // Spans viewport start
+      createEvent('2', 800, 1200), // Spans viewport end
     ];
 
     const { result } = renderHook(() =>
@@ -197,8 +194,8 @@ describe('useVirtualization', () => {
 
   it('handles point events (start === end)', () => {
     const events = [
-      createEvent('1', 500, 500),    // Point in viewport
-      createEvent('2', 1500, 1500),  // Point outside viewport
+      createEvent('1', 500, 500), // Point in viewport
+      createEvent('2', 1500, 1500), // Point outside viewport
     ];
 
     const { result } = renderHook(() =>
@@ -241,11 +238,11 @@ describe('useVirtualization', () => {
     );
 
     // Initially see events 1 and 2
-    expect(result.current.visibleEvents.map(e => e.id)).toEqual(['1', '2']);
+    expect(result.current.visibleEvents.map((e) => e.id)).toEqual(['1', '2']);
 
     // Change viewport to see events 2 and 3
     rerender({ viewportStart: 200, viewportEnd: 1200 });
-    expect(result.current.visibleEvents.map(e => e.id)).toEqual(['2', '3']);
+    expect(result.current.visibleEvents.map((e) => e.id)).toEqual(['2', '3']);
   });
 
   it('handles empty event list', () => {
@@ -265,9 +262,7 @@ describe('useVirtualization', () => {
   });
 
   it('handles large dataset efficiently', () => {
-    const events = Array.from({ length: 10000 }, (_, i) =>
-      createEvent(`${i}`, i * 10, i * 10 + 5)
-    );
+    const events = Array.from({ length: 10000 }, (_, i) => createEvent(`${i}`, i * 10, i * 10 + 5));
 
     const startTime = performance.now();
 

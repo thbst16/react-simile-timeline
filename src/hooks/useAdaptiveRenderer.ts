@@ -137,8 +137,7 @@ export function useAdaptiveRenderer(
       // Check if switched due to performance
       const avgFps =
         performanceHistory.length > 0
-          ? performanceHistory.reduce((sum, p) => sum + p.fps, 0) /
-            performanceHistory.length
+          ? performanceHistory.reduce((sum, p) => sum + p.fps, 0) / performanceHistory.length
           : 0;
 
       if (avgFps < targetFps) {
@@ -179,8 +178,7 @@ export function useAdaptiveRenderer(
 
     // Calculate average FPS from last 5 frames
     const recentHistory = performanceHistory.slice(-5);
-    const avgFps =
-      recentHistory.reduce((sum, p) => sum + p.fps, 0) / recentHistory.length;
+    const avgFps = recentHistory.reduce((sum, p) => sum + p.fps, 0) / recentHistory.length;
 
     // If DOM is struggling, switch to Canvas
     if (method === 'dom' && avgFps < targetFps && eventCount > 100) {
@@ -190,7 +188,15 @@ export function useAdaptiveRenderer(
         `Auto-switched due to low FPS: ${avgFps.toFixed(1)} < ${targetFps}`
       );
     }
-  }, [performanceHistory, enableAutoSwitch, method, targetFps, eventCount, forceMethod, onMethodChange]);
+  }, [
+    performanceHistory,
+    enableAutoSwitch,
+    method,
+    targetFps,
+    eventCount,
+    forceMethod,
+    onMethodChange,
+  ]);
 
   /**
    * Manually switch rendering method

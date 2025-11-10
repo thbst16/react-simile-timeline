@@ -107,15 +107,18 @@ export function ThemeProvider({
   }, [mode, customTheme, systemPrefersDark]);
 
   // Save mode to localStorage
-  const setMode = useCallback((newMode: ThemeMode) => {
-    setModeState(newMode);
+  const setMode = useCallback(
+    (newMode: ThemeMode) => {
+      setModeState(newMode);
 
-    try {
-      localStorage.setItem(storageKey, newMode);
-    } catch (error) {
-      console.warn('Failed to save theme mode to localStorage:', error);
-    }
-  }, [storageKey]);
+      try {
+        localStorage.setItem(storageKey, newMode);
+      } catch (error) {
+        console.warn('Failed to save theme mode to localStorage:', error);
+      }
+    },
+    [storageKey]
+  );
 
   // Set custom theme
   const setTheme = useCallback((theme: TimelineTheme) => {
@@ -130,11 +133,7 @@ export function ThemeProvider({
     availableThemes: themeList,
   };
 
-  return (
-    <ThemeContext.Provider value={value}>
-      {children}
-    </ThemeContext.Provider>
-  );
+  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
 }
 
 /**
@@ -192,10 +191,11 @@ export function useThemeTypography(): TimelineTheme['typography'] {
 export function useThemeToggle(): { isDark: boolean; toggle: () => void } {
   const { mode, setMode } = useTheme();
 
-  const isDark = mode === 'dark' || (mode === 'auto' &&
-    typeof window !== 'undefined' &&
-    window.matchMedia('(prefers-color-scheme: dark)').matches
-  );
+  const isDark =
+    mode === 'dark' ||
+    (mode === 'auto' &&
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches);
 
   const toggle = useCallback(() => {
     setMode(isDark ? 'light' : 'dark');

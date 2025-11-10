@@ -132,12 +132,8 @@ export function PerformanceOverlay({
           font-mono text-xs pointer-events-none select-none`}
       >
         <div className="flex items-center gap-3">
-          <span className={ratingColor}>
-            {metrics.fps} FPS
-          </span>
-          {eventCount !== undefined && (
-            <span className="text-gray-300">{eventCount} events</span>
-          )}
+          <span className={ratingColor}>{metrics.fps} FPS</span>
+          {eventCount !== undefined && <span className="text-gray-300">{eventCount} events</span>}
           {renderMethod && (
             <span className="text-gray-400 uppercase text-[10px]">{renderMethod}</span>
           )}
@@ -159,9 +155,7 @@ export function PerformanceOverlay({
       <div className="px-3 py-2 border-b border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 rounded-t-lg">
         <div className="flex items-center justify-between">
           <span className="font-semibold text-gray-700 dark:text-gray-300">Performance</span>
-          <span className={`font-bold ${ratingColor} uppercase text-[10px]`}>
-            {metrics.rating}
-          </span>
+          <span className={`font-bold ${ratingColor} uppercase text-[10px]`}>{metrics.rating}</span>
         </div>
       </div>
 
@@ -170,16 +164,12 @@ export function PerformanceOverlay({
         {/* FPS */}
         <div className="flex justify-between items-center">
           <span className="text-gray-600 dark:text-gray-400">FPS:</span>
-          <span className={`font-bold ${ratingColor}`}>
-            {metrics.fps}
-          </span>
+          <span className={`font-bold ${ratingColor}`}>{metrics.fps}</span>
         </div>
 
         <div className="flex justify-between items-center">
           <span className="text-gray-600 dark:text-gray-400">Avg FPS:</span>
-          <span className="text-gray-900 dark:text-gray-100">
-            {metrics.avgFps}
-          </span>
+          <span className="text-gray-900 dark:text-gray-100">{metrics.avgFps}</span>
         </div>
 
         {/* Render Time */}
@@ -194,9 +184,7 @@ export function PerformanceOverlay({
         {eventCount !== undefined && (
           <div className="flex justify-between items-center pt-1 border-t border-gray-200 dark:border-gray-700">
             <span className="text-gray-600 dark:text-gray-400">Events:</span>
-            <span className="text-gray-900 dark:text-gray-100">
-              {eventCount.toLocaleString()}
-            </span>
+            <span className="text-gray-900 dark:text-gray-100">{eventCount.toLocaleString()}</span>
           </div>
         )}
 
@@ -204,7 +192,9 @@ export function PerformanceOverlay({
         {isVirtualized !== undefined && (
           <div className="flex justify-between items-center">
             <span className="text-gray-600 dark:text-gray-400">Virtual:</span>
-            <span className={isVirtualized ? 'text-green-600 dark:text-green-400' : 'text-gray-500'}>
+            <span
+              className={isVirtualized ? 'text-green-600 dark:text-green-400' : 'text-gray-500'}
+            >
               {isVirtualized ? 'ON' : 'OFF'}
             </span>
           </div>
@@ -214,9 +204,7 @@ export function PerformanceOverlay({
         {renderMethod && (
           <div className="flex justify-between items-center">
             <span className="text-gray-600 dark:text-gray-400">Renderer:</span>
-            <span className="text-gray-900 dark:text-gray-100 uppercase">
-              {renderMethod}
-            </span>
+            <span className="text-gray-900 dark:text-gray-100 uppercase">{renderMethod}</span>
           </div>
         )}
 

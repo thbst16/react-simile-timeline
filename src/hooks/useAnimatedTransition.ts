@@ -18,7 +18,7 @@ export const easings = {
   easeOutQuad: (t: number): number => t * (2 - t),
   easeInOutQuad: (t: number): number => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t),
   easeInCubic: (t: number): number => t * t * t,
-  easeOutCubic: (t: number): number => (--t) * t * t + 1,
+  easeOutCubic: (t: number): number => --t * t * t + 1,
   easeInOutCubic: (t: number): number =>
     t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1,
   easeInElastic: (t: number): number => {
@@ -73,13 +73,7 @@ export interface UseAnimatedTransitionResult {
 export function useAnimatedTransition(
   options: UseAnimatedTransitionOptions = {}
 ): UseAnimatedTransitionResult {
-  const {
-    duration = 300,
-    easing = easings.easeOutQuad,
-    onStart,
-    onComplete,
-    onUpdate,
-  } = options;
+  const { duration = 300, easing = easings.easeOutQuad, onStart, onComplete, onUpdate } = options;
 
   const [progress, setProgress] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -205,13 +199,7 @@ export interface UseSpringResult {
  * spring.setValue(100); // Animates to 100 with spring physics
  */
 export function useSpring(options: UseSpringOptions = {}): UseSpringResult {
-  const {
-    stiffness = 170,
-    damping = 26,
-    mass = 1,
-    initialVelocity = 0,
-    onComplete,
-  } = options;
+  const { stiffness = 170, damping = 26, mass = 1, initialVelocity = 0, onComplete } = options;
 
   const [value, setValueState] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -246,8 +234,7 @@ export function useSpring(options: UseSpringOptions = {}): UseSpringResult {
       setValueState(newValue);
 
       // Check if spring has settled
-      const isSettled =
-        Math.abs(velocityRef.current) < 0.01 && Math.abs(newValue - target) < 0.01;
+      const isSettled = Math.abs(velocityRef.current) < 0.01 && Math.abs(newValue - target) < 0.01;
 
       if (isSettled) {
         currentValueRef.current = target;

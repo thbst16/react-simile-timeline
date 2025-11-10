@@ -26,10 +26,7 @@ export interface DateBounds {
  * const bounds = calculateEventDateBounds(events, 1000 * 60 * 60 * 24 * 30); // 30 days padding
  * console.log(bounds.minDate, bounds.maxDate);
  */
-export function calculateEventDateBounds(
-  events: TimelineEvent[],
-  padding: number = 0
-): DateBounds {
+export function calculateEventDateBounds(events: TimelineEvent[], padding: number = 0): DateBounds {
   if (!events || events.length === 0) {
     // No events - return a default range around now
     const now = new Date();

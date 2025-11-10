@@ -31,10 +31,7 @@ export interface FilterOptions {
 /**
  * Filter events based on search query
  */
-export function searchEvents(
-  events: TimelineEvent[],
-  query: string
-): TimelineEvent[] {
+export function searchEvents(events: TimelineEvent[], query: string): TimelineEvent[] {
   if (!query || query.trim() === '') {
     return events;
   }
@@ -143,10 +140,7 @@ export function filterByAttributes(
 /**
  * Main filter function that applies all filter options
  */
-export function filterEvents(
-  events: TimelineEvent[],
-  options: FilterOptions
-): TimelineEvent[] {
+export function filterEvents(events: TimelineEvent[], options: FilterOptions): TimelineEvent[] {
   let filtered = events;
 
   // Apply search
@@ -156,11 +150,7 @@ export function filterEvents(
 
   // Apply date range filter
   if (options.dateRange) {
-    filtered = filterByDateRange(
-      filtered,
-      options.dateRange.start,
-      options.dateRange.end
-    );
+    filtered = filterByDateRange(filtered, options.dateRange.start, options.dateRange.end);
   }
 
   // Apply attribute filters
@@ -187,10 +177,7 @@ export interface SearchMatch {
   }[];
 }
 
-export function getSearchMatches(
-  events: TimelineEvent[],
-  query: string
-): SearchMatch[] {
+export function getSearchMatches(events: TimelineEvent[], query: string): SearchMatch[] {
   if (!query || query.trim() === '') {
     return [];
   }
@@ -242,10 +229,7 @@ export function getSearchMatches(
 /**
  * Sort events by relevance to search query
  */
-export function sortByRelevance(
-  events: TimelineEvent[],
-  query: string
-): TimelineEvent[] {
+export function sortByRelevance(events: TimelineEvent[], query: string): TimelineEvent[] {
   if (!query || query.trim() === '') {
     return events;
   }

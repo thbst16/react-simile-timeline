@@ -26,12 +26,7 @@ import type { Decorator } from '../types/decorators';
 import { useTimelineStore } from '../store/timelineStore';
 import { ThemeProvider, useTheme } from '../hooks/useTheme';
 import { useHotZones } from '../hooks/useHotZones';
-import {
-  useKeyboardNav,
-  useTimelineScroll,
-  usePanZoom,
-  useEventFilter,
-} from '../hooks';
+import { useKeyboardNav, useTimelineScroll, usePanZoom, useEventFilter } from '../hooks';
 
 /**
  * Performance Demo Inner Component
@@ -133,7 +128,14 @@ function Sprint5PerformanceDemoInner(): JSX.Element {
   const decorators = useMemo((): Decorator[] => {
     if (datasetSize >= 500) return [];
     return [
-      { type: 'point', date: '1963-11-22T12:30:00', label: '12:30 PM', color: '#dc2626', opacity: 0.8, width: 3 },
+      {
+        type: 'point',
+        date: '1963-11-22T12:30:00',
+        label: '12:30 PM',
+        color: '#dc2626',
+        opacity: 0.8,
+        width: 3,
+      },
     ];
   }, [datasetSize]);
 
@@ -236,7 +238,9 @@ function Sprint5PerformanceDemoInner(): JSX.Element {
             type="text"
             placeholder="Search..."
             value={eventFilter.filters.search || ''}
-            onChange={(e) => eventFilter.setFilters({ ...eventFilter.filters, search: e.target.value })}
+            onChange={(e) =>
+              eventFilter.setFilters({ ...eventFilter.filters, search: e.target.value })
+            }
             className="flex-1 max-w-xs px-3 py-1.5 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm"
           />
 
@@ -262,8 +266,12 @@ function Sprint5PerformanceDemoInner(): JSX.Element {
           )}
 
           <div className="ml-auto text-xs text-gray-600 dark:text-gray-400">
-            {displayEvents.length >= 500 && <span className="text-green-600 font-semibold mr-2">✓ Virtualized</span>}
-            {displayEvents.length >= 1000 && <span className="text-blue-600 font-semibold">✓ Canvas</span>}
+            {displayEvents.length >= 500 && (
+              <span className="text-green-600 font-semibold mr-2">✓ Virtualized</span>
+            )}
+            {displayEvents.length >= 1000 && (
+              <span className="text-blue-600 font-semibold">✓ Canvas</span>
+            )}
           </div>
         </div>
       </div>
@@ -313,7 +321,9 @@ function Sprint5PerformanceDemoInner(): JSX.Element {
         </div>
       </div>
 
-      {selectedEvent && <EventBubble event={selectedEvent} onClose={() => setSelectedEvent(null)} />}
+      {selectedEvent && (
+        <EventBubble event={selectedEvent} onClose={() => setSelectedEvent(null)} />
+      )}
 
       {showPerformance && (
         <PerformanceOverlay
@@ -325,15 +335,24 @@ function Sprint5PerformanceDemoInner(): JSX.Element {
           compact={performanceCompact}
           customMetrics={{
             'Total Events': events.length,
-            'Filtered': displayEvents.length,
+            Filtered: displayEvents.length,
           }}
         />
       )}
 
       {showHotZones && datasetSize < 500 && (
         <>
-          <HotZoneNavigator zones={hotZones.zones} position="edges" enableHover={true} visible={showHotZones} />
-          <HotZoneIndicator activeZones={hotZones.activeZones} position="bottom-left" visible={showHotZones} />
+          <HotZoneNavigator
+            zones={hotZones.zones}
+            position="edges"
+            enableHover={true}
+            visible={showHotZones}
+          />
+          <HotZoneIndicator
+            activeZones={hotZones.activeZones}
+            position="bottom-left"
+            visible={showHotZones}
+          />
         </>
       )}
 

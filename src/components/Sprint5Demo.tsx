@@ -31,7 +31,7 @@ const sampleEvents: TimelineEvent[] = [
     start: '1939-09-01',
     isDuration: true,
     end: '1945-09-02',
-    description: 'Global conflict involving most of the world\'s nations',
+    description: "Global conflict involving most of the world's nations",
     color: '#58a',
   },
   {
@@ -131,7 +131,9 @@ function ColorPalette(): JSX.Element {
       />
       <div style={{ flex: 1 }}>
         <div style={{ fontSize: '0.875rem', fontWeight: 500 }}>{label}</div>
-        <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', fontFamily: 'monospace' }}>
+        <div
+          style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', fontFamily: 'monospace' }}
+        >
           {color}
         </div>
       </div>
@@ -142,9 +144,22 @@ function ColorPalette(): JSX.Element {
     <div style={{ padding: '1rem' }}>
       <h3 style={{ margin: '0 0 1rem 0' }}>Color Palette</h3>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem' }}>
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+          gap: '1.5rem',
+        }}
+      >
         <div>
-          <h4 style={{ margin: '0 0 0.5rem 0', fontSize: '0.875rem', textTransform: 'uppercase', color: 'var(--text-secondary)' }}>
+          <h4
+            style={{
+              margin: '0 0 0.5rem 0',
+              fontSize: '0.875rem',
+              textTransform: 'uppercase',
+              color: 'var(--text-secondary)',
+            }}
+          >
             Band Colors
           </h4>
           <ColorSwatch label="Background" color={colors.band.background} />
@@ -153,7 +168,14 @@ function ColorPalette(): JSX.Element {
         </div>
 
         <div>
-          <h4 style={{ margin: '0 0 0.5rem 0', fontSize: '0.875rem', textTransform: 'uppercase', color: 'var(--text-secondary)' }}>
+          <h4
+            style={{
+              margin: '0 0 0.5rem 0',
+              fontSize: '0.875rem',
+              textTransform: 'uppercase',
+              color: 'var(--text-secondary)',
+            }}
+          >
             Event Colors
           </h4>
           <ColorSwatch label="Tape" color={colors.event.tape} />
@@ -163,7 +185,14 @@ function ColorPalette(): JSX.Element {
         </div>
 
         <div>
-          <h4 style={{ margin: '0 0 0.5rem 0', fontSize: '0.875rem', textTransform: 'uppercase', color: 'var(--text-secondary)' }}>
+          <h4
+            style={{
+              margin: '0 0 0.5rem 0',
+              fontSize: '0.875rem',
+              textTransform: 'uppercase',
+              color: 'var(--text-secondary)',
+            }}
+          >
             UI Colors
           </h4>
           <ColorSwatch label="Primary" color={colors.ui.primary} />
@@ -175,7 +204,14 @@ function ColorPalette(): JSX.Element {
         </div>
 
         <div>
-          <h4 style={{ margin: '0 0 0.5rem 0', fontSize: '0.875rem', textTransform: 'uppercase', color: 'var(--text-secondary)' }}>
+          <h4
+            style={{
+              margin: '0 0 0.5rem 0',
+              fontSize: '0.875rem',
+              textTransform: 'uppercase',
+              color: 'var(--text-secondary)',
+            }}
+          >
             Timescale Colors
           </h4>
           <ColorSwatch label="Background" color={colors.timescale.background} />
@@ -199,7 +235,9 @@ function TypographySamples(): JSX.Element {
       <h3 style={{ margin: '0 0 1rem 0' }}>Typography</h3>
 
       <div style={{ marginBottom: '1rem' }}>
-        <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}>
+        <div
+          style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}
+        >
           Font Family
         </div>
         <div style={{ fontFamily: typography.fontFamily, fontSize: '1rem' }}>
@@ -207,41 +245,112 @@ function TypographySamples(): JSX.Element {
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+          gap: '1rem',
+        }}
+      >
         <div>
-          <h4 style={{ margin: '0 0 0.5rem 0', fontSize: '0.875rem', textTransform: 'uppercase', color: 'var(--text-secondary)' }}>
+          <h4
+            style={{
+              margin: '0 0 0.5rem 0',
+              fontSize: '0.875rem',
+              textTransform: 'uppercase',
+              color: 'var(--text-secondary)',
+            }}
+          >
             Font Sizes
           </h4>
-          <div style={{ fontSize: typography.fontSize.xs }}>Extra Small (xs): {typography.fontSize.xs}</div>
-          <div style={{ fontSize: typography.fontSize.sm }}>Small (sm): {typography.fontSize.sm}</div>
+          <div style={{ fontSize: typography.fontSize.xs }}>
+            Extra Small (xs): {typography.fontSize.xs}
+          </div>
+          <div style={{ fontSize: typography.fontSize.sm }}>
+            Small (sm): {typography.fontSize.sm}
+          </div>
           <div style={{ fontSize: typography.fontSize.base }}>Base: {typography.fontSize.base}</div>
-          <div style={{ fontSize: typography.fontSize.lg }}>Large (lg): {typography.fontSize.lg}</div>
-          <div style={{ fontSize: typography.fontSize.xl }}>Extra Large (xl): {typography.fontSize.xl}</div>
-          <div style={{ fontSize: typography.fontSize['2xl'] }}>2XL: {typography.fontSize['2xl']}</div>
+          <div style={{ fontSize: typography.fontSize.lg }}>
+            Large (lg): {typography.fontSize.lg}
+          </div>
+          <div style={{ fontSize: typography.fontSize.xl }}>
+            Extra Large (xl): {typography.fontSize.xl}
+          </div>
+          <div style={{ fontSize: typography.fontSize['2xl'] }}>
+            2XL: {typography.fontSize['2xl']}
+          </div>
         </div>
 
         <div>
-          <h4 style={{ margin: '0 0 0.5rem 0', fontSize: '0.875rem', textTransform: 'uppercase', color: 'var(--text-secondary)' }}>
+          <h4
+            style={{
+              margin: '0 0 0.5rem 0',
+              fontSize: '0.875rem',
+              textTransform: 'uppercase',
+              color: 'var(--text-secondary)',
+            }}
+          >
             Font Weights
           </h4>
-          <div style={{ fontWeight: typography.fontWeight.normal }}>Normal: {typography.fontWeight.normal}</div>
-          <div style={{ fontWeight: typography.fontWeight.medium }}>Medium: {typography.fontWeight.medium}</div>
-          <div style={{ fontWeight: typography.fontWeight.semibold }}>Semibold: {typography.fontWeight.semibold}</div>
-          <div style={{ fontWeight: typography.fontWeight.bold }}>Bold: {typography.fontWeight.bold}</div>
+          <div style={{ fontWeight: typography.fontWeight.normal }}>
+            Normal: {typography.fontWeight.normal}
+          </div>
+          <div style={{ fontWeight: typography.fontWeight.medium }}>
+            Medium: {typography.fontWeight.medium}
+          </div>
+          <div style={{ fontWeight: typography.fontWeight.semibold }}>
+            Semibold: {typography.fontWeight.semibold}
+          </div>
+          <div style={{ fontWeight: typography.fontWeight.bold }}>
+            Bold: {typography.fontWeight.bold}
+          </div>
         </div>
 
         <div>
-          <h4 style={{ margin: '0 0 0.5rem 0', fontSize: '0.875rem', textTransform: 'uppercase', color: 'var(--text-secondary)' }}>
+          <h4
+            style={{
+              margin: '0 0 0.5rem 0',
+              fontSize: '0.875rem',
+              textTransform: 'uppercase',
+              color: 'var(--text-secondary)',
+            }}
+          >
             Line Heights
           </h4>
-          <div style={{ lineHeight: typography.lineHeight.tight, border: '1px solid var(--border)', padding: '0.25rem', marginBottom: '0.25rem' }}>
-            Tight: {typography.lineHeight.tight}<br />Second line to show spacing
+          <div
+            style={{
+              lineHeight: typography.lineHeight.tight,
+              border: '1px solid var(--border)',
+              padding: '0.25rem',
+              marginBottom: '0.25rem',
+            }}
+          >
+            Tight: {typography.lineHeight.tight}
+            <br />
+            Second line to show spacing
           </div>
-          <div style={{ lineHeight: typography.lineHeight.normal, border: '1px solid var(--border)', padding: '0.25rem', marginBottom: '0.25rem' }}>
-            Normal: {typography.lineHeight.normal}<br />Second line to show spacing
+          <div
+            style={{
+              lineHeight: typography.lineHeight.normal,
+              border: '1px solid var(--border)',
+              padding: '0.25rem',
+              marginBottom: '0.25rem',
+            }}
+          >
+            Normal: {typography.lineHeight.normal}
+            <br />
+            Second line to show spacing
           </div>
-          <div style={{ lineHeight: typography.lineHeight.relaxed, border: '1px solid var(--border)', padding: '0.25rem' }}>
-            Relaxed: {typography.lineHeight.relaxed}<br />Second line to show spacing
+          <div
+            style={{
+              lineHeight: typography.lineHeight.relaxed,
+              border: '1px solid var(--border)',
+              padding: '0.25rem',
+            }}
+          >
+            Relaxed: {typography.lineHeight.relaxed}
+            <br />
+            Second line to show spacing
           </div>
         </div>
       </div>
@@ -288,8 +397,12 @@ function EventPreview(): JSX.Element {
                     width: isTape ? '60px' : '12px',
                     height: isTape ? '14px' : '12px',
                     backgroundColor: isTape
-                      ? (isHovered ? colors.event.tapeHover : colors.event.tape)
-                      : (isHovered ? colors.event.pointHover : colors.event.point),
+                      ? isHovered
+                        ? colors.event.tapeHover
+                        : colors.event.tape
+                      : isHovered
+                        ? colors.event.pointHover
+                        : colors.event.point,
                     borderRadius: isTape ? '2px' : '50%',
                     transition: 'background-color 150ms ease',
                   }}
@@ -313,7 +426,8 @@ function EventPreview(): JSX.Element {
                       color: colors.ui.textSecondary,
                     }}
                   >
-                    {event.start}{event.isDuration && ` → ${event.end}`}
+                    {event.start}
+                    {event.isDuration && ` → ${event.end}`}
                   </div>
                   {event.description && (
                     <div
@@ -345,40 +459,66 @@ function DemoContent(): JSX.Element {
 
   return (
     <div
-      style={{
-        minHeight: '100vh',
-        backgroundColor: theme.colors.ui.background,
-        color: theme.colors.ui.text,
-        fontFamily: theme.typography.fontFamily,
-        '--primary': theme.colors.ui.primary,
-        '--secondary': theme.colors.ui.secondary,
-        '--accent': theme.colors.ui.accent,
-        '--background': theme.colors.ui.background,
-        '--surface': theme.colors.ui.surface,
-        '--border': theme.colors.ui.border,
-        '--text': theme.colors.ui.text,
-        '--text-secondary': theme.colors.ui.textSecondary,
-      } as React.CSSProperties}
+      style={
+        {
+          minHeight: '100vh',
+          backgroundColor: theme.colors.ui.background,
+          color: theme.colors.ui.text,
+          fontFamily: theme.typography.fontFamily,
+          '--primary': theme.colors.ui.primary,
+          '--secondary': theme.colors.ui.secondary,
+          '--accent': theme.colors.ui.accent,
+          '--background': theme.colors.ui.background,
+          '--surface': theme.colors.ui.surface,
+          '--border': theme.colors.ui.border,
+          '--text': theme.colors.ui.text,
+          '--text-secondary': theme.colors.ui.textSecondary,
+        } as React.CSSProperties
+      }
     >
       <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-        <header style={{ padding: '2rem 1rem', borderBottom: `1px solid ${theme.colors.ui.border}` }}>
-          <h1 style={{ margin: '0 0 0.5rem 0', fontSize: theme.typography.fontSize['2xl'], fontWeight: theme.typography.fontWeight.bold }}>
+        <header
+          style={{ padding: '2rem 1rem', borderBottom: `1px solid ${theme.colors.ui.border}` }}
+        >
+          <h1
+            style={{
+              margin: '0 0 0.5rem 0',
+              fontSize: theme.typography.fontSize['2xl'],
+              fontWeight: theme.typography.fontWeight.bold,
+            }}
+          >
             Sprint 5 Theme Demo
           </h1>
-          <p style={{ margin: 0, color: theme.colors.ui.textSecondary, fontSize: theme.typography.fontSize.base }}>
+          <p
+            style={{
+              margin: 0,
+              color: theme.colors.ui.textSecondary,
+              fontSize: theme.typography.fontSize.base,
+            }}
+          >
             Showcase of the theming system with Classic and Dark themes
           </p>
         </header>
 
         <ThemeControls />
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '2rem', padding: '2rem 1rem' }}>
+        <div
+          style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '2rem', padding: '2rem 1rem' }}
+        >
           <ColorPalette />
           <TypographySamples />
           <EventPreview />
         </div>
 
-        <footer style={{ padding: '2rem 1rem', borderTop: `1px solid ${theme.colors.ui.border}`, textAlign: 'center', color: theme.colors.ui.textSecondary, fontSize: theme.typography.fontSize.sm }}>
+        <footer
+          style={{
+            padding: '2rem 1rem',
+            borderTop: `1px solid ${theme.colors.ui.border}`,
+            textAlign: 'center',
+            color: theme.colors.ui.textSecondary,
+            fontSize: theme.typography.fontSize.sm,
+          }}
+        >
           Sprint 5: Polish & Performance - Theming System
         </footer>
       </div>

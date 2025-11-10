@@ -55,7 +55,7 @@ describe('validation', () => {
       const result = validateEvent(event, 0);
 
       expect(result.valid).toBe(false);
-      expect(result.errors).toContain('Event at index 0 is missing required \'title\'');
+      expect(result.errors).toContain("Event at index 0 is missing required 'title'");
     });
 
     it('should validate start must be a string', () => {
@@ -67,7 +67,9 @@ describe('validation', () => {
       const result = validateEvent(event);
 
       expect(result.valid).toBe(false);
-      expect(result.errors).toContain('Event "Invalid Start" has invalid \'start\' date (must be a string)');
+      expect(result.errors).toContain(
+        'Event "Invalid Start" has invalid \'start\' date (must be a string)'
+      );
     });
 
     it('should validate title must be a string', () => {
@@ -79,7 +81,9 @@ describe('validation', () => {
       const result = validateEvent(event);
 
       expect(result.valid).toBe(false);
-      expect(result.errors.some(e => e.includes('invalid \'title\' (must be a string)'))).toBe(true);
+      expect(result.errors.some((e) => e.includes("invalid 'title' (must be a string)"))).toBe(
+        true
+      );
     });
 
     it('should require end date for duration events', () => {
@@ -93,7 +97,7 @@ describe('validation', () => {
 
       expect(result.valid).toBe(false);
       expect(result.errors).toContain(
-        'Event "Duration Without End" is marked as duration event but missing \'end\' date or \'durationEvent\''
+        "Event \"Duration Without End\" is marked as duration event but missing 'end' date or 'durationEvent'"
       );
     });
 
@@ -108,7 +112,9 @@ describe('validation', () => {
       const result = validateEvent(event);
 
       expect(result.valid).toBe(false);
-      expect(result.errors.some(e => e.includes('has \'end\' date') && e.includes('before \'start\' date'))).toBe(true);
+      expect(
+        result.errors.some((e) => e.includes("has 'end' date") && e.includes("before 'start' date"))
+      ).toBe(true);
     });
 
     it('should accept durationEvent as alternative to end date', () => {
@@ -192,7 +198,7 @@ describe('validation', () => {
     it('should accept named colors', () => {
       const colors = ['red', 'blue', 'green', 'black', 'white', 'navy', 'teal'];
 
-      colors.forEach(color => {
+      colors.forEach((color) => {
         const event: TimelineEvent = {
           start: '2020-01-15',
           title: 'Event',
@@ -215,9 +221,9 @@ describe('validation', () => {
       const result = validateEvent(event);
 
       expect(result.warnings).toHaveLength(3);
-      expect(result.warnings.some(w => w.includes('invalid link URL'))).toBe(true);
-      expect(result.warnings.some(w => w.includes('invalid image URL'))).toBe(true);
-      expect(result.warnings.some(w => w.includes('invalid icon URL'))).toBe(true);
+      expect(result.warnings.some((w) => w.includes('invalid link URL'))).toBe(true);
+      expect(result.warnings.some((w) => w.includes('invalid image URL'))).toBe(true);
+      expect(result.warnings.some((w) => w.includes('invalid icon URL'))).toBe(true);
     });
 
     it('should accept valid URL formats', () => {
@@ -296,7 +302,7 @@ describe('validation', () => {
 
       const result = validateEvent(event, 5);
 
-      expect(result.errors).toContain('Event at index 5 is missing required \'title\'');
+      expect(result.errors).toContain("Event at index 5 is missing required 'title'");
     });
 
     it('should use generic label when no title or index', () => {
@@ -306,7 +312,7 @@ describe('validation', () => {
 
       const result = validateEvent(event);
 
-      expect(result.errors).toContain('Event is missing required \'title\'');
+      expect(result.errors).toContain("Event is missing required 'title'");
     });
   });
 
@@ -454,7 +460,7 @@ describe('validation', () => {
       const result = validateDataset(data);
 
       expect(result.valid).toBe(false);
-      expect(result.datasetErrors.some(e => e.includes('a') && e.includes('b'))).toBe(true);
+      expect(result.datasetErrors.some((e) => e.includes('a') && e.includes('b'))).toBe(true);
     });
   });
 
@@ -481,7 +487,7 @@ describe('validation', () => {
 
       expect(formatted).toContain('Found 1 invalid event(s)');
       expect(formatted).toContain('Event 1:');
-      expect(formatted).toContain('missing required \'start\' date');
+      expect(formatted).toContain("missing required 'start' date");
     });
 
     it('should format warnings', () => {
@@ -530,8 +536,8 @@ describe('validation', () => {
       const formatted = formatValidationErrors(result);
 
       expect(formatted).toContain('Event 1:');
-      expect(formatted).toContain('missing required \'start\' date');
-      expect(formatted).toContain('missing required \'title\'');
+      expect(formatted).toContain("missing required 'start' date");
+      expect(formatted).toContain("missing required 'title'");
     });
   });
 });

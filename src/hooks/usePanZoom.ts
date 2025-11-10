@@ -56,9 +56,7 @@ export interface UsePanZoomResult {
  *   onZoomChange: (level) => console.log('Zoom:', level)
  * });
  */
-export function usePanZoom(
-  options: UsePanZoomOptions = {}
-): UsePanZoomResult {
+export function usePanZoom(options: UsePanZoomOptions = {}): UsePanZoomResult {
   const {
     initialZoom = 1,
     minZoom = 0.1,
@@ -73,12 +71,15 @@ export function usePanZoom(
   const [zoom, setZoomState] = useState(initialZoom);
   const [isZooming, setIsZooming] = useState(false);
 
-  const setZoom = useCallback((level: number) => {
-    const clampedZoom = Math.max(minZoom, Math.min(maxZoom, level));
-    setZoomState(clampedZoom);
-    onZoomChange?.(clampedZoom);
-    // TODO: Implement smooth zoom animation
-  }, [minZoom, maxZoom, onZoomChange]);
+  const setZoom = useCallback(
+    (level: number) => {
+      const clampedZoom = Math.max(minZoom, Math.min(maxZoom, level));
+      setZoomState(clampedZoom);
+      onZoomChange?.(clampedZoom);
+      // TODO: Implement smooth zoom animation
+    },
+    [minZoom, maxZoom, onZoomChange]
+  );
 
   const zoomIn = useCallback(() => {
     setZoom(zoom + zoomStep);
@@ -92,71 +93,77 @@ export function usePanZoom(
     setZoom(initialZoom);
   }, [initialZoom, setZoom]);
 
-  const pan = useCallback((deltaX: number, deltaY: number) => {
-    // Apply zoom factor to pan delta
-    const adjustedX = deltaX / zoom;
-    const adjustedY = deltaY / zoom;
-    onPan?.(adjustedX, adjustedY);
-  }, [onPan, zoom]);
+  const pan = useCallback(
+    (deltaX: number, deltaY: number) => {
+      // Apply zoom factor to pan delta
+      const adjustedX = deltaX / zoom;
+      const adjustedY = deltaY / zoom;
+      onPan?.(adjustedX, adjustedY);
+    },
+    [onPan, zoom]
+  );
 
   // Mouse wheel zoom handler
-  const handleWheel = useCallback((event: WheelEvent) => {
-    if (!enableWheelZoom) return;
+  const handleWheel = useCallback(
+    (event: WheelEvent) => {
+      if (!enableWheelZoom) return;
 
-    event.preventDefault();
-    setIsZooming(true);
+      event.preventDefault();
+      setIsZooming(true);
 
-    // Determine zoom direction based on wheel delta
-    const delta = -Math.sign(event.deltaY);
-    const zoomChange = delta * zoomStep;
+      // Determine zoom direction based on wheel delta
+      const delta = -Math.sign(event.deltaY);
+      const zoomChange = delta * zoomStep;
 
-    setZoom(zoom + zoomChange);
+      setZoom(zoom + zoomChange);
 
-    // Reset zooming state after a short delay
-    setTimeout(() => setIsZooming(false), 100);
-  }, [enableWheelZoom, zoom, zoomStep, setZoom]);
+      // Reset zooming state after a short delay
+      setTimeout(() => setIsZooming(false), 100);
+    },
+    [enableWheelZoom, zoom, zoomStep, setZoom]
+  );
 
   // Pinch zoom handler (touch)
   const lastPinchDistance = useRef<number>(0);
 
-  const handleTouchStart = useCallback((event: TouchEvent) => {
-    if (!enablePinchZoom || event.touches.length !== 2) return;
+  const handleTouchStart = useCallback(
+    (event: TouchEvent) => {
+      if (!enablePinchZoom || event.touches.length !== 2) return;
 
-    const touch1 = event.touches[0];
-    const touch2 = event.touches[1];
-    if (!touch1 || !touch2) return;
+      const touch1 = event.touches[0];
+      const touch2 = event.touches[1];
+      if (!touch1 || !touch2) return;
 
-    const distance = Math.hypot(
-      touch2.clientX - touch1.clientX,
-      touch2.clientY - touch1.clientY
-    );
+      const distance = Math.hypot(touch2.clientX - touch1.clientX, touch2.clientY - touch1.clientY);
 
-    lastPinchDistance.current = distance;
-    setIsZooming(true);
-  }, [enablePinchZoom]);
+      lastPinchDistance.current = distance;
+      setIsZooming(true);
+    },
+    [enablePinchZoom]
+  );
 
-  const handleTouchMove = useCallback((event: TouchEvent) => {
-    if (!enablePinchZoom || event.touches.length !== 2) return;
+  const handleTouchMove = useCallback(
+    (event: TouchEvent) => {
+      if (!enablePinchZoom || event.touches.length !== 2) return;
 
-    event.preventDefault();
+      event.preventDefault();
 
-    const touch1 = event.touches[0];
-    const touch2 = event.touches[1];
-    if (!touch1 || !touch2) return;
+      const touch1 = event.touches[0];
+      const touch2 = event.touches[1];
+      if (!touch1 || !touch2) return;
 
-    const distance = Math.hypot(
-      touch2.clientX - touch1.clientX,
-      touch2.clientY - touch1.clientY
-    );
+      const distance = Math.hypot(touch2.clientX - touch1.clientX, touch2.clientY - touch1.clientY);
 
-    if (lastPinchDistance.current > 0) {
-      const scale = distance / lastPinchDistance.current;
-      const newZoom = zoom * scale;
-      setZoom(newZoom);
-    }
+      if (lastPinchDistance.current > 0) {
+        const scale = distance / lastPinchDistance.current;
+        const newZoom = zoom * scale;
+        setZoom(newZoom);
+      }
 
-    lastPinchDistance.current = distance;
-  }, [enablePinchZoom, zoom, setZoom]);
+      lastPinchDistance.current = distance;
+    },
+    [enablePinchZoom, zoom, setZoom]
+  );
 
   const handleTouchEnd = useCallback(() => {
     if (!enablePinchZoom) return;

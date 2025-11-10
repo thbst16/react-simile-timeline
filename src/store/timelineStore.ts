@@ -199,8 +199,7 @@ export const useTimelineStore = create<TimelineState>((set) => ({
   /**
    * Reset to default state
    */
-  reset: () =>
-    set(defaultState),
+  reset: () => set(defaultState),
 }));
 
 /**

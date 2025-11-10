@@ -261,9 +261,7 @@ function Sprint4DemoInner(): JSX.Element {
       <div className="bg-white border-b border-gray-200 px-6 py-4">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">
-              Sprint 4 Demo - Interactions
-            </h1>
+            <h1 className="text-2xl font-bold text-gray-900">Sprint 4 Demo - Interactions</h1>
             <p className="text-sm text-gray-600 mt-1">
               Try keyboard, mouse, and touch interactions!
             </p>
@@ -448,33 +446,19 @@ function Sprint4DemoInner(): JSX.Element {
       <div className="bg-blue-50 border-b border-blue-200 px-6 py-3">
         <div className="grid grid-cols-4 gap-4 text-xs">
           <div>
-            <span className="font-semibold text-blue-900 block mb-1">
-              🖱️ Mouse:
-            </span>
-            <span className="text-blue-700">
-              Drag to pan • Wheel to zoom
-            </span>
+            <span className="font-semibold text-blue-900 block mb-1">🖱️ Mouse:</span>
+            <span className="text-blue-700">Drag to pan • Wheel to zoom</span>
           </div>
           <div>
-            <span className="font-semibold text-blue-900 block mb-1">
-              ⌨️ Keyboard:
-            </span>
-            <span className="text-blue-700">
-              ← → Pan • +/- Zoom • ESC Close
-            </span>
+            <span className="font-semibold text-blue-900 block mb-1">⌨️ Keyboard:</span>
+            <span className="text-blue-700">← → Pan • +/- Zoom • ESC Close</span>
           </div>
           <div>
-            <span className="font-semibold text-blue-900 block mb-1">
-              👆 Touch:
-            </span>
-            <span className="text-blue-700">
-              Swipe to pan • Pinch to zoom
-            </span>
+            <span className="font-semibold text-blue-900 block mb-1">👆 Touch:</span>
+            <span className="text-blue-700">Swipe to pan • Pinch to zoom</span>
           </div>
           <div>
-            <span className="font-semibold text-blue-900 block mb-1">
-              📊 State:
-            </span>
+            <span className="font-semibold text-blue-900 block mb-1">📊 State:</span>
             <span className="text-blue-700">
               Zoom: {panZoom.zoom.toFixed(2)}x • Pan: {Math.round(panDelta)}px
             </span>
@@ -551,10 +535,7 @@ function Sprint4DemoInner(): JSX.Element {
 
       {/* Event Bubble Modal */}
       {selectedEvent && (
-        <EventBubble
-          event={selectedEvent}
-          onClose={() => setSelectedEvent(null)}
-        />
+        <EventBubble event={selectedEvent} onClose={() => setSelectedEvent(null)} />
       )}
 
       {/* Stats Footer */}
@@ -564,13 +545,19 @@ function Sprint4DemoInner(): JSX.Element {
             Showing: {eventFilter.count} / {eventFilter.total} events
             {eventFilter.hasActiveFilters && <span className="text-blue-600 ml-2">(Filtered)</span>}
             {eventFilter.highlightedEvents.length > 0 && (
-              <span className="text-green-600 ml-2">| {eventFilter.highlightedEvents.length} matches</span>
+              <span className="text-green-600 ml-2">
+                | {eventFilter.highlightedEvents.length} matches
+              </span>
             )}
           </div>
           <div>
-            Hooks: useKeyboardNav ✓ | useTimelineScroll ✓ | usePanZoom ✓ | useBandSync ✓ | useEventFilter ✓ | useAnimatedTransition ✓
+            Hooks: useKeyboardNav ✓ | useTimelineScroll ✓ | usePanZoom ✓ | useBandSync ✓ |
+            useEventFilter ✓ | useAnimatedTransition ✓
           </div>
-          <div>Zoom: {panZoom.zoom.toFixed(2)}x | Pan: {Math.round(panDelta)}px | Animation: {panAnimation.isAnimating ? '⚡' : '💤'}</div>
+          <div>
+            Zoom: {panZoom.zoom.toFixed(2)}x | Pan: {Math.round(panDelta)}px | Animation:{' '}
+            {panAnimation.isAnimating ? '⚡' : '💤'}
+          </div>
         </div>
       </div>
     </div>

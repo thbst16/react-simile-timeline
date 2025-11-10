@@ -2,7 +2,18 @@
  * Band-related type definitions for Simile Timeline
  */
 
-export type IntervalUnit = 'MILLISECOND' | 'SECOND' | 'MINUTE' | 'HOUR' | 'DAY' | 'WEEK' | 'MONTH' | 'YEAR' | 'DECADE' | 'CENTURY' | 'MILLENNIUM';
+export type IntervalUnit =
+  | 'MILLISECOND'
+  | 'SECOND'
+  | 'MINUTE'
+  | 'HOUR'
+  | 'DAY'
+  | 'WEEK'
+  | 'MONTH'
+  | 'YEAR'
+  | 'DECADE'
+  | 'CENTURY'
+  | 'MILLENNIUM';
 
 export type PainterType = 'original' | 'compact' | 'overview';
 

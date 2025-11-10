@@ -185,9 +185,7 @@ export function addInterval(date: Date, amount: number, unit: IntervalUnit): Dat
  * Check if a date string is in BCE format
  */
 export function isBCEDate(dateString: string): boolean {
-  return (
-    dateString.startsWith('-') || /\s(BC|BCE|B\.C\.|B\.C\.E\.)$/i.test(dateString)
-  );
+  return dateString.startsWith('-') || /\s(BC|BCE|B\.C\.|B\.C\.E\.)$/i.test(dateString);
 }
 
 /**

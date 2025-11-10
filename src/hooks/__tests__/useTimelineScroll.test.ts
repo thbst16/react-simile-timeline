@@ -33,9 +33,7 @@ describe('useTimelineScroll', () => {
 
   it('should enable mouse drag by default', () => {
     const onScroll = vi.fn();
-    const { result } = renderHook(() =>
-      useTimelineScroll({ onScroll })
-    );
+    const { result } = renderHook(() => useTimelineScroll({ onScroll }));
 
     // Attach ref to container
     if (result.current.scrollRef.current === null) {
@@ -50,9 +48,7 @@ describe('useTimelineScroll', () => {
 
   it('should have scrollRef defined', () => {
     const onScroll = vi.fn();
-    const { result } = renderHook(() =>
-      useTimelineScroll({ enableMouseDrag: true, onScroll })
-    );
+    const { result } = renderHook(() => useTimelineScroll({ enableMouseDrag: true, onScroll }));
 
     expect(result.current.scrollRef).toBeDefined();
     expect(result.current.isScrolling).toBe(false);
@@ -87,9 +83,7 @@ describe('useTimelineScroll', () => {
 
   it('should disable mouse drag when enableMouseDrag is false', () => {
     const onScroll = vi.fn();
-    const { result } = renderHook(() =>
-      useTimelineScroll({ enableMouseDrag: false, onScroll })
-    );
+    const { result } = renderHook(() => useTimelineScroll({ enableMouseDrag: false, onScroll }));
 
     Object.defineProperty(result.current.scrollRef, 'current', {
       value: container,
@@ -110,9 +104,7 @@ describe('useTimelineScroll', () => {
 
   it('should respect enableTouch option', () => {
     const onScroll = vi.fn();
-    const { result } = renderHook(() =>
-      useTimelineScroll({ enableTouch: true, onScroll })
-    );
+    const { result } = renderHook(() => useTimelineScroll({ enableTouch: true, onScroll }));
 
     expect(result.current.scrollRef).toBeDefined();
     expect(result.current.isScrolling).toBe(false);

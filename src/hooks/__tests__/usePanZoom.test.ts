@@ -25,9 +25,7 @@ describe('usePanZoom', () => {
   });
 
   it('should initialize with custom zoom level', () => {
-    const { result } = renderHook(() =>
-      usePanZoom({ initialZoom: 2 })
-    );
+    const { result } = renderHook(() => usePanZoom({ initialZoom: 2 }));
 
     expect(result.current.zoom).toBe(2);
   });
@@ -100,9 +98,7 @@ describe('usePanZoom', () => {
 
   it('should set specific zoom level', () => {
     const onZoomChange = vi.fn();
-    const { result } = renderHook(() =>
-      usePanZoom({ onZoomChange })
-    );
+    const { result } = renderHook(() => usePanZoom({ onZoomChange }));
 
     act(() => {
       result.current.setZoom(3.5);
@@ -113,9 +109,7 @@ describe('usePanZoom', () => {
   });
 
   it('should reset zoom to initial level', () => {
-    const { result } = renderHook(() =>
-      usePanZoom({ initialZoom: 2 })
-    );
+    const { result } = renderHook(() => usePanZoom({ initialZoom: 2 }));
 
     act(() => {
       result.current.setZoom(5);
@@ -132,9 +126,7 @@ describe('usePanZoom', () => {
 
   it('should call onPan with zoom-adjusted delta', () => {
     const onPan = vi.fn();
-    const { result } = renderHook(() =>
-      usePanZoom({ initialZoom: 2, onPan })
-    );
+    const { result } = renderHook(() => usePanZoom({ initialZoom: 2, onPan }));
 
     act(() => {
       result.current.pan(100, 50);
@@ -184,9 +176,7 @@ describe('usePanZoom', () => {
   });
 
   it('should set isZooming during wheel zoom', () => {
-    const { result } = renderHook(() =>
-      usePanZoom({ enableWheelZoom: true })
-    );
+    const { result } = renderHook(() => usePanZoom({ enableWheelZoom: true }));
 
     act(() => {
       const event = new WheelEvent('wheel', {

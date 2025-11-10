@@ -47,9 +47,7 @@ export interface UseBandSyncResult {
  *   ]
  * });
  */
-export function useBandSync(
-  options: UseBandSyncOptions
-): UseBandSyncResult {
+export function useBandSync(options: UseBandSyncOptions): UseBandSyncResult {
   const { bands, onBandScroll } = options;
   const bandsRef = useRef<Map<string, BandSyncConfig>>(new Map());
   const scrollingBandRef = useRef<string | null>(null);
@@ -58,54 +56,57 @@ export function useBandSync(
   // Initialize bands map when bands prop changes
   useEffect(() => {
     bandsRef.current.clear();
-    bands.forEach(band => {
+    bands.forEach((band) => {
       bandsRef.current.set(band.bandId, band);
     });
   }, [bands]);
 
-  const notifyScroll = useCallback((bandId: string, deltaPixels: number) => {
-    const sourceBand = bandsRef.current.get(bandId);
-    if (!sourceBand) return;
+  const notifyScroll = useCallback(
+    (bandId: string, deltaPixels: number) => {
+      const sourceBand = bandsRef.current.get(bandId);
+      if (!sourceBand) return;
 
-    // Prevent circular updates
-    if (scrollingBandRef.current === bandId) return;
+      // Prevent circular updates
+      if (scrollingBandRef.current === bandId) return;
 
-    scrollingBandRef.current = bandId;
+      scrollingBandRef.current = bandId;
 
-    try {
-      // Propagate scroll to other bands based on sync ratios
-      bandsRef.current.forEach((targetBand, targetId) => {
-        if (targetId === bandId) return; // Skip source band
+      try {
+        // Propagate scroll to other bands based on sync ratios
+        bandsRef.current.forEach((targetBand, targetId) => {
+          if (targetId === bandId) return; // Skip source band
 
-        // Calculate synced delta based on ratio
-        const sourceSyncRatio = sourceBand.syncRatio ?? 1;
-        const targetSyncRatio = targetBand.syncRatio ?? 1;
+          // Calculate synced delta based on ratio
+          const sourceSyncRatio = sourceBand.syncRatio ?? 1;
+          const targetSyncRatio = targetBand.syncRatio ?? 1;
 
-        // Relative sync ratio: how much target should move relative to source
-        const relativeSyncRatio = targetSyncRatio / sourceSyncRatio;
-        const syncedDelta = deltaPixels * relativeSyncRatio;
+          // Relative sync ratio: how much target should move relative to source
+          const relativeSyncRatio = targetSyncRatio / sourceSyncRatio;
+          const syncedDelta = deltaPixels * relativeSyncRatio;
 
-        // Call the sync callback if registered
-        const syncCallback = syncCallbacksRef.current.get(targetId);
-        if (syncCallback) {
-          syncCallback(syncedDelta);
-        }
+          // Call the sync callback if registered
+          const syncCallback = syncCallbacksRef.current.get(targetId);
+          if (syncCallback) {
+            syncCallback(syncedDelta);
+          }
 
-        // Notify parent of band scroll
-        onBandScroll?.(targetId, syncedDelta);
-      });
+          // Notify parent of band scroll
+          onBandScroll?.(targetId, syncedDelta);
+        });
 
-      // Notify parent of source band scroll
-      onBandScroll?.(bandId, deltaPixels);
-    } finally {
-      // Clear scrolling flag after a short delay to allow propagation
-      setTimeout(() => {
-        if (scrollingBandRef.current === bandId) {
-          scrollingBandRef.current = null;
-        }
-      }, 0);
-    }
-  }, [onBandScroll]);
+        // Notify parent of source band scroll
+        onBandScroll?.(bandId, deltaPixels);
+      } finally {
+        // Clear scrolling flag after a short delay to allow propagation
+        setTimeout(() => {
+          if (scrollingBandRef.current === bandId) {
+            scrollingBandRef.current = null;
+          }
+        }, 0);
+      }
+    },
+    [onBandScroll]
+  );
 
   const getSyncedDelta = useCallback((bandId: string, masterDelta: number): number => {
     const band = bandsRef.current.get(bandId);
@@ -115,13 +116,16 @@ export function useBandSync(
     return masterDelta * syncRatio;
   }, []);
 
-  const registerBand = useCallback((config: BandSyncConfig, syncCallback?: (delta: number) => void) => {
-    bandsRef.current.set(config.bandId, config);
+  const registerBand = useCallback(
+    (config: BandSyncConfig, syncCallback?: (delta: number) => void) => {
+      bandsRef.current.set(config.bandId, config);
 
-    if (syncCallback) {
-      syncCallbacksRef.current.set(config.bandId, syncCallback);
-    }
-  }, []);
+      if (syncCallback) {
+        syncCallbacksRef.current.set(config.bandId, syncCallback);
+      }
+    },
+    []
+  );
 
   const unregisterBand = useCallback((bandId: string) => {
     bandsRef.current.delete(bandId);

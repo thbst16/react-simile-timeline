@@ -37,9 +37,7 @@ export class EventSource {
       this.events = data.events;
     } else {
       // Load valid events, skip invalid ones
-      this.events = this.validationResult.results
-        .filter((r) => r.valid)
-        .map((r) => r.event);
+      this.events = this.validationResult.results.filter((r) => r.valid).map((r) => r.event);
 
       console.warn(
         `Loaded ${this.events.length} valid events, skipped ${this.validationResult.invalidEvents} invalid events`

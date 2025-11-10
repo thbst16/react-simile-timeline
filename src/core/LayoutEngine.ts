@@ -252,7 +252,8 @@ export class LayoutEngine {
   private calculateVerticalPositions(items: LayoutItem[]): void {
     for (const item of items) {
       // y = trackOffset + (track * (trackHeight + trackGap))
-      item.y = this.config.trackOffset + (item.track * (this.config.trackHeight + this.config.trackGap));
+      item.y =
+        this.config.trackOffset + item.track * (this.config.trackHeight + this.config.trackGap);
     }
   }
 
@@ -267,7 +268,7 @@ export class LayoutEngine {
       return this.config.trackOffset + this.config.trackHeight;
     }
 
-    const maxTrack = Math.max(...items.map(item => item.track));
+    const maxTrack = Math.max(...items.map((item) => item.track));
     const tracksHeight = (maxTrack + 1) * this.config.trackHeight + maxTrack * this.config.trackGap;
 
     return this.config.trackOffset + tracksHeight;
@@ -278,7 +279,7 @@ export class LayoutEngine {
    */
   public getTrackCount(items: LayoutItem[]): number {
     if (items.length === 0) return 0;
-    return Math.max(...items.map(item => item.track)) + 1;
+    return Math.max(...items.map((item) => item.track)) + 1;
   }
 
   /**

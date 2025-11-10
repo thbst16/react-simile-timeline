@@ -293,12 +293,7 @@ export function useCanvasRenderer(options: UseCanvasRendererOptions): UseCanvasR
    * Draw a point event (instant event)
    */
   const drawPointEvent = useCallback(
-    (
-      ctx: CanvasRenderingContext2D,
-      event: TimelineEvent,
-      x: number,
-      y: number
-    ) => {
+    (ctx: CanvasRenderingContext2D, event: TimelineEvent, x: number, y: number) => {
       const isSelected = event.id === selectedEventId;
       const isHovered = event.id === hoveredEventId;
 
@@ -372,7 +367,7 @@ export function useCanvasRenderer(options: UseCanvasRendererOptions): UseCanvasR
       if (y + trackHeight < 0 || y > height) return;
 
       // Determine if tape or point event
-      const isTape = event.isDuration || (endPixel - startPixel) > 1;
+      const isTape = event.isDuration || endPixel - startPixel > 1;
 
       // Draw event
       if (isTape) {
@@ -433,12 +428,7 @@ export function useCanvasRenderer(options: UseCanvasRendererOptions): UseCanvasR
       const info = renderInfoRef.current[i];
       if (!info) continue;
 
-      if (
-        x >= info.x &&
-        x <= info.x + info.width &&
-        y >= info.y &&
-        y <= info.y + info.height
-      ) {
+      if (x >= info.x && x <= info.x + info.width && y >= info.y && y <= info.y + info.height) {
         return info.event;
       }
     }

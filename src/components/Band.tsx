@@ -160,9 +160,7 @@ export function Band({
           const eventStart = new Date(event.start);
           const eventEnd = event.end ? new Date(event.end) : eventStart;
 
-          return (
-            eventStart <= viewport.maxVisibleDate && eventEnd >= viewport.minVisibleDate
-          );
+          return eventStart <= viewport.maxVisibleDate && eventEnd >= viewport.minVisibleDate;
         } catch {
           return false;
         }
@@ -194,12 +192,7 @@ export function Band({
       {/* Event layer */}
       {viewport && (
         <div className="absolute inset-0 pointer-events-none">
-          <EventLayer
-            events={visibleEvents}
-            ether={ether}
-            viewport={viewport}
-            height={height}
-          />
+          <EventLayer events={visibleEvents} ether={ether} viewport={viewport} height={height} />
         </div>
       )}
 

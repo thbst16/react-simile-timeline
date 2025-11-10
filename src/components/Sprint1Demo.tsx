@@ -45,9 +45,8 @@ export function Sprint1Demo(): JSX.Element {
       const validation = eventSource.getValidationResult();
       if (validation) {
         const validText = `Loaded: ${validation.validEvents} valid, ${validation.invalidEvents} invalid events`;
-        const dateText = loadedEvents.length > 0
-          ? ` • Auto-centered on: ${loadedEvents[0]?.start}`
-          : '';
+        const dateText =
+          loadedEvents.length > 0 ? ` • Auto-centered on: ${loadedEvents[0]?.start}` : '';
         setValidationInfo(validText + dateText);
       }
     } catch (error) {
@@ -56,13 +55,7 @@ export function Sprint1Demo(): JSX.Element {
   };
 
   const testDateParsing = (): void => {
-    const testDates = [
-      '2006-06-28T00:00:00Z',
-      'June 28, 2006',
-      '-500',
-      '500 BC',
-      '776 BCE',
-    ];
+    const testDates = ['2006-06-28T00:00:00Z', 'June 28, 2006', '-500', '500 BC', '776 BCE'];
 
     // eslint-disable-next-line no-console
     console.log('=== Date Parsing Tests ===');
@@ -121,9 +114,7 @@ export function Sprint1Demo(): JSX.Element {
           <h1 className="text-4xl font-bold text-gray-900 mb-2">
             Sprint 1: Foundation & Data Layer Demo
           </h1>
-          <p className="text-gray-600">
-            Testing date parsing, validation, and EventSource API
-          </p>
+          <p className="text-gray-600">Testing date parsing, validation, and EventSource API</p>
         </div>
 
         {/* Data Loading Controls */}
@@ -179,7 +170,8 @@ export function Sprint1Demo(): JSX.Element {
         <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
           <h2 className="text-2xl font-bold mb-4">Zustand Store State</h2>
           <p className="text-sm text-gray-600 mb-4">
-            Global state that will control timeline view in Sprint 2. Auto-updates when loading data.
+            Global state that will control timeline view in Sprint 2. Auto-updates when loading
+            data.
           </p>
           <div className="grid grid-cols-2 gap-4 mb-4">
             <div>
@@ -195,9 +187,7 @@ export function Sprint1Demo(): JSX.Element {
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2">
-                Zoom: {zoom.toFixed(2)}x
-              </label>
+              <label className="block text-sm font-medium mb-2">Zoom: {zoom.toFixed(2)}x</label>
               <input
                 type="range"
                 min="0.1"
@@ -208,7 +198,8 @@ export function Sprint1Demo(): JSX.Element {
                 className="w-full"
               />
               <div className="mt-2 text-xs text-gray-500">
-                <strong>Effect:</strong> {zoom < 1 ? 'Zoomed out' : zoom > 1 ? 'Zoomed in' : 'Normal'}
+                <strong>Effect:</strong>{' '}
+                {zoom < 1 ? 'Zoomed out' : zoom > 1 ? 'Zoomed in' : 'Normal'}
                 {' • '}
                 Will control timeline scale in Sprint 2
               </div>
@@ -222,12 +213,12 @@ export function Sprint1Demo(): JSX.Element {
 
         {/* Events List */}
         <div className="bg-white rounded-lg shadow-lg p-6">
-          <h2 className="text-2xl font-bold mb-4">
-            Loaded Events ({events.length})
-          </h2>
+          <h2 className="text-2xl font-bold mb-4">Loaded Events ({events.length})</h2>
 
           {events.length === 0 ? (
-            <p className="text-gray-500">No events loaded. Click a button above to load test data.</p>
+            <p className="text-gray-500">
+              No events loaded. Click a button above to load test data.
+            </p>
           ) : (
             <div className="space-y-2">
               {events.map((event, index) => {

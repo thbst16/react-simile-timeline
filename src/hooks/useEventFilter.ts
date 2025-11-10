@@ -65,9 +65,7 @@ export interface UseEventFilterResult {
  *   sortByRelevance: true
  * });
  */
-export function useEventFilter(
-  options: UseEventFilterOptions
-): UseEventFilterResult {
+export function useEventFilter(options: UseEventFilterOptions): UseEventFilterResult {
   const { events, initialFilters, sortByRelevance: shouldSort = false } = options;
 
   const [searchQuery, setSearchQuery] = useState('');

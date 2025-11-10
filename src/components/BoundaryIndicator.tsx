@@ -59,8 +59,7 @@ export function BoundaryIndicator({
     return null;
   }
 
-  const defaultMessage =
-    position === 'left' ? 'Start of timeline' : 'End of timeline';
+  const defaultMessage = position === 'left' ? 'Start of timeline' : 'End of timeline';
   const displayMessage = message || defaultMessage;
 
   return (

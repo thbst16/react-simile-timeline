@@ -108,11 +108,7 @@ export { classicTheme, darkTheme, defaultTheme, themes, themeList } from './them
 // Core Types
 // ============================================================================
 
-export type {
-  TimelineEvent,
-  EventData,
-  DateTimeFormat,
-} from './types/events';
+export type { TimelineEvent, EventData, DateTimeFormat } from './types/events';
 
 export type { TimelineTheme, ThemeMode, ThemeContextValue } from './types/theme';
 

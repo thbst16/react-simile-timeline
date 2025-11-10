@@ -15,7 +15,11 @@ export { useBandSync } from './useBandSync';
 export type { BandSyncConfig, UseBandSyncOptions, UseBandSyncResult } from './useBandSync';
 
 export { useKeyboardNav } from './useKeyboardNav';
-export type { KeyboardShortcut, UseKeyboardNavOptions, UseKeyboardNavResult } from './useKeyboardNav';
+export type {
+  KeyboardShortcut,
+  UseKeyboardNavOptions,
+  UseKeyboardNavResult,
+} from './useKeyboardNav';
 
 export { useEventFilter } from './useEventFilter';
 export type { UseEventFilterOptions, UseEventFilterResult } from './useEventFilter';
@@ -74,10 +78,7 @@ export type {
 } from './useResponsive';
 
 export { useAccessibility } from './useAccessibility';
-export type {
-  UseAccessibilityOptions,
-  UseAccessibilityResult,
-} from './useAccessibility';
+export type { UseAccessibilityOptions, UseAccessibilityResult } from './useAccessibility';
 
 export { usePerformanceMonitor } from './usePerformanceMonitor';
 export type {

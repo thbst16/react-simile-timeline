@@ -19,13 +19,9 @@ describe('useHotZones', () => {
   });
 
   it('initializes with provided zones', () => {
-    const initialZones: HotZone[] = [
-      { start: '2020-01-01', end: '2020-12-31', magnify: 2 },
-    ];
+    const initialZones: HotZone[] = [{ start: '2020-01-01', end: '2020-12-31', magnify: 2 }];
 
-    const { result } = renderHook(() =>
-      useHotZones({ initialZones })
-    );
+    const { result } = renderHook(() => useHotZones({ initialZones }));
 
     expect(result.current.zones).toEqual(initialZones);
   });
@@ -51,9 +47,7 @@ describe('useHotZones', () => {
       { start: '2020-07-01', end: '2020-12-31', magnify: 3 },
     ];
 
-    const { result } = renderHook(() =>
-      useHotZones({ initialZones })
-    );
+    const { result } = renderHook(() => useHotZones({ initialZones }));
 
     act(() => {
       result.current.removeZone(0);
@@ -64,13 +58,9 @@ describe('useHotZones', () => {
   });
 
   it('clears all zones', () => {
-    const initialZones: HotZone[] = [
-      { start: '2020-01-01', end: '2020-12-31', magnify: 2 },
-    ];
+    const initialZones: HotZone[] = [{ start: '2020-01-01', end: '2020-12-31', magnify: 2 }];
 
-    const { result } = renderHook(() =>
-      useHotZones({ initialZones })
-    );
+    const { result } = renderHook(() => useHotZones({ initialZones }));
 
     act(() => {
       result.current.clearZones();
@@ -81,39 +71,27 @@ describe('useHotZones', () => {
   });
 
   it('calculates magnification at a date inside hot zone', () => {
-    const initialZones: HotZone[] = [
-      { start: '2020-01-01', end: '2020-12-31', magnify: 2 },
-    ];
+    const initialZones: HotZone[] = [{ start: '2020-01-01', end: '2020-12-31', magnify: 2 }];
 
-    const { result } = renderHook(() =>
-      useHotZones({ initialZones })
-    );
+    const { result } = renderHook(() => useHotZones({ initialZones }));
 
     const magnification = result.current.getMagnificationAt(new Date('2020-06-15'));
     expect(magnification).toBe(2);
   });
 
   it('returns base magnification for date outside hot zone', () => {
-    const initialZones: HotZone[] = [
-      { start: '2020-01-01', end: '2020-12-31', magnify: 2 },
-    ];
+    const initialZones: HotZone[] = [{ start: '2020-01-01', end: '2020-12-31', magnify: 2 }];
 
-    const { result } = renderHook(() =>
-      useHotZones({ initialZones, baseMagnification: 1 })
-    );
+    const { result } = renderHook(() => useHotZones({ initialZones, baseMagnification: 1 }));
 
     const magnification = result.current.getMagnificationAt(new Date('2021-06-15'));
     expect(magnification).toBe(1);
   });
 
   it('checks if date is in hot zone', () => {
-    const initialZones: HotZone[] = [
-      { start: '2020-01-01', end: '2020-12-31', magnify: 2 },
-    ];
+    const initialZones: HotZone[] = [{ start: '2020-01-01', end: '2020-12-31', magnify: 2 }];
 
-    const { result } = renderHook(() =>
-      useHotZones({ initialZones })
-    );
+    const { result } = renderHook(() => useHotZones({ initialZones }));
 
     expect(result.current.isInHotZone(new Date('2020-06-15'))).toBe(true);
     expect(result.current.isInHotZone(new Date('2021-06-15'))).toBe(false);
@@ -126,14 +104,9 @@ describe('useHotZones', () => {
       { start: '2021-01-01', end: '2021-12-31', magnify: 4 },
     ];
 
-    const { result } = renderHook(() =>
-      useHotZones({ initialZones })
-    );
+    const { result } = renderHook(() => useHotZones({ initialZones }));
 
-    const zones = result.current.findZonesInRange(
-      new Date('2020-05-01'),
-      new Date('2020-08-01')
-    );
+    const zones = result.current.findZonesInRange(new Date('2020-05-01'), new Date('2020-08-01'));
 
     expect(zones).toHaveLength(2);
     expect(zones[0].magnify).toBe(2);
@@ -146,15 +119,10 @@ describe('useHotZones', () => {
       { start: '2020-07-01', end: '2020-12-31', magnify: 3 },
     ];
 
-    const { result } = renderHook(() =>
-      useHotZones({ initialZones })
-    );
+    const { result } = renderHook(() => useHotZones({ initialZones }));
 
     act(() => {
-      result.current.updateActiveZones(
-        new Date('2020-01-01'),
-        new Date('2020-03-31')
-      );
+      result.current.updateActiveZones(new Date('2020-01-01'), new Date('2020-03-31'));
     });
 
     expect(result.current.activeZones).toHaveLength(1);
@@ -166,9 +134,7 @@ describe('useHotZones', () => {
       { start: '2020-01-01', end: '2020-12-31', magnify: 2, unit: 'DAY' },
     ];
 
-    const { result } = renderHook(() =>
-      useHotZones({ initialZones })
-    );
+    const { result } = renderHook(() => useHotZones({ initialZones }));
 
     const unit = result.current.getUnitAt(new Date('2020-06-15'));
     expect(unit).toBe('DAY');
@@ -186,9 +152,7 @@ describe('useHotZones', () => {
       },
     ];
 
-    const { result } = renderHook(() =>
-      useHotZones({ initialZones })
-    );
+    const { result } = renderHook(() => useHotZones({ initialZones }));
 
     const calc = result.current.calculateAt(new Date('2020-06-15'));
 
@@ -225,9 +189,7 @@ describe('useHotZones', () => {
       { start: '2020-06-01', end: '2020-08-31', magnify: 3 },
     ];
 
-    const { result } = renderHook(() =>
-      useHotZones({ initialZones })
-    );
+    const { result } = renderHook(() => useHotZones({ initialZones }));
 
     // Date in overlapping region should get higher magnification
     const magnification = result.current.getMagnificationAt(new Date('2020-07-15'));
