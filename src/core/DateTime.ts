@@ -79,6 +79,12 @@ export function parseDate(dateString: string): Date {
   throw new Error(`Unable to parse date: "${dateString}"`);
 }
 
+// Detect Node.js version's setUTCFullYear behavior for negative years
+// Some versions have an off-by-one quirk, others don't
+const testDate = new Date(0);
+testDate.setUTCFullYear(-1);
+const nodeHasOffByOne = testDate.getFullYear() === -2;
+
 /**
  * Parse BCE (Before Common Era) dates
  *
@@ -110,10 +116,12 @@ function parseBCEDate(dateString: string): Date {
   }
 
   // Create date with BCE year
-  // Note: JavaScript's setUTCFullYear has an off-by-one quirk with negative years
-  // setUTCFullYear(-500) returns -501 from getFullYear(), which is correct for astronomical year numbering
+  // Note: Different Node.js versions handle setUTCFullYear differently with negative years
+  // Some have an off-by-one quirk (setUTCFullYear(-500) → getFullYear() = -501)
+  // Others don't (setUTCFullYear(-500) → getFullYear() = -500)
+  // We compensate to ensure consistent behavior: astronomical year numbering (1 BC = year 0)
   const date = new Date(0);
-  date.setUTCFullYear(year);
+  date.setUTCFullYear(nodeHasOffByOne ? year : year - 1);
   date.setUTCMonth(0);
   date.setUTCDate(1);
   date.setUTCHours(0, 0, 0, 0);
