@@ -8,6 +8,9 @@ on:
       - 'v*.*.*-beta.*'
       - 'v*.*.*-rc.*'
 
+permissions:
+  contents: write
+
 jobs:
   release:
     name: Build & Publish
