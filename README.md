@@ -6,10 +6,23 @@
 [![Tests](https://img.shields.io/badge/tests-348%20passing-success)](./src/__tests__)
 [![Coverage](https://img.shields.io/badge/coverage->80%25-success)](./docs/PERFORMANCE.md)
 [![Bundle Size](https://img.shields.io/badge/bundle-<150KB-success)](./docs/PERFORMANCE.md)
+[![Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://react-simile-timeline.vercel.app/)
 
 A modern, production-ready React port of MIT's Simile Timeline widget. Built with TypeScript, optimized for performance, and 100% compatible with original Simile JSON format.
 
 > ⚠️ **Alpha Release**: This is v0.1.0-alpha.0. The API may change before v1.0.0. Not recommended for production use without thorough testing. Feedback welcome!
+
+## 🎮 Live Demo
+
+**[View Interactive Demo →](https://react-simile-timeline.vercel.app/)**
+
+Try the full-featured demo with:
+- 🎛️ Dataset selector (100, 500, 1000, 2000 events)
+- 🎨 Theme switcher (Light/Dark/Auto)
+- 📊 Real-time performance monitoring
+- ⌨️ Full keyboard navigation
+- 🔍 Search and filtering
+- 🎯 Hot zones navigation
 
 ## ✨ Features
 

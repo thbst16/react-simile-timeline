@@ -87,7 +87,7 @@
   "bugs": {
     "url": "https://github.com/thbst16/react-simile-timeline/issues"
   },
-  "homepage": "https://github.com/thbst16/react-simile-timeline#readme",
+  "homepage": "https://react-simile-timeline.vercel.app",
   "engines": {
     "node": ">=16.0.0"
   },
