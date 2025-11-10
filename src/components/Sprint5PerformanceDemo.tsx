@@ -1,7 +1,7 @@
 /**
- * Sprint 5 Performance Demo
+ * React SIMILE Timeline - Interactive Demo
  *
- * Comprehensive demo showcasing all Sprint 5 performance features:
+ * Comprehensive demo showcasing all features:
  * - Performance monitoring with FPS overlay
  * - Virtualization for large datasets (1000+ events)
  * - Adaptive rendering (Canvas fallback)
@@ -9,8 +9,6 @@
  * - Hot zones navigation
  * - Panning bounds
  * - Full accessibility
- *
- * Sprint 7: Complete Sprint 5 Features
  */
 
 import { useState, useEffect, useMemo, useRef, useCallback } from 'react';
@@ -29,7 +27,7 @@ import { useHotZones } from '../hooks/useHotZones';
 import { useKeyboardNav, useTimelineScroll, usePanZoom, useEventFilter } from '../hooks';
 
 /**
- * Performance Demo Inner Component
+ * Interactive Demo Inner Component
  */
 function Sprint5PerformanceDemoInner(): JSX.Element {
   const { mode, setMode } = useTheme();
@@ -171,10 +169,10 @@ function Sprint5PerformanceDemoInner(): JSX.Element {
         <div className="flex items-center justify-between mb-4">
           <div>
             <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-              Sprint 5 Performance Demo
+              React SIMILE Timeline
             </h1>
             <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-              {displayEvents.length.toLocaleString()} events • Virtualization • Adaptive Rendering
+              {displayEvents.length.toLocaleString()} events • Virtualization • Adaptive Rendering • 60fps
             </p>
           </div>
 
