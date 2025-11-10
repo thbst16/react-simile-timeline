@@ -110,7 +110,8 @@ function parseBCEDate(dateString: string): Date {
   }
 
   // Create date with BCE year
-  // Note: JavaScript Date with setFullYear works with negative years
+  // Note: JavaScript's setUTCFullYear has an off-by-one quirk with negative years
+  // setUTCFullYear(-500) returns -501 from getFullYear(), which is correct for astronomical year numbering
   const date = new Date(0);
   date.setUTCFullYear(year);
   date.setUTCMonth(0);
