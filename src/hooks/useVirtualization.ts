@@ -283,7 +283,7 @@ export function useAutoVirtualization(options: UseAutoVirtualizationOptions): Us
     const container = containerRef.current;
     let timeoutId: number | null = null;
 
-    const handleScroll = () => {
+    const handleScroll = (): void => {
       if (timeoutId) {
         window.clearTimeout(timeoutId);
       }

@@ -307,7 +307,7 @@ export function useResponsive(options: UseResponsiveOptions = {}): UseResponsive
 
     let timeoutId: number | null = null;
 
-    const debouncedResize = () => {
+    const debouncedResize = (): void => {
       if (timeoutId) {
         window.clearTimeout(timeoutId);
       }
@@ -321,7 +321,7 @@ export function useResponsive(options: UseResponsiveOptions = {}): UseResponsive
     window.addEventListener('orientationchange', debouncedResize);
 
     // Detect touch capability changes
-    const handleTouchStart = () => setIsTouch(true);
+    const handleTouchStart = (): void => setIsTouch(true);
     window.addEventListener('touchstart', handleTouchStart, { once: true });
 
     return () => {

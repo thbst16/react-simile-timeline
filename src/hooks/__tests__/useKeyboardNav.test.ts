@@ -8,11 +8,11 @@ import { renderHook, act } from '@testing-library/react';
 import { useKeyboardNav } from '../useKeyboardNav';
 
 describe('useKeyboardNav', () => {
-  let keydownEvent: KeyboardEvent;
+  let _keydownEvent: KeyboardEvent;
 
   beforeEach(() => {
     // Mock keyboard events
-    keydownEvent = new KeyboardEvent('keydown', {
+    _keydownEvent = new KeyboardEvent('keydown', {
       bubbles: true,
       cancelable: true,
     });

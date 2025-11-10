@@ -235,23 +235,23 @@ export interface KeyboardCheck {
  */
 export function createAriaLabel(
   type: 'timeline' | 'band' | 'event' | 'timescale',
-  details: Record<string, any>
+  details: Record<string, unknown>
 ): string {
   switch (type) {
     case 'timeline':
-      return `Timeline showing ${details['eventCount'] || 0} events from ${details['startDate'] || 'unknown'} to ${details['endDate'] || 'unknown'}`;
+      return `Timeline showing ${String(details['eventCount'] ?? 0)} events from ${String(details['startDate'] ?? 'unknown')} to ${String(details['endDate'] ?? 'unknown')}`;
 
     case 'band':
-      return `Timeline band ${details['index'] !== undefined ? details['index'] + 1 : ''} with ${details['eventCount'] || 0} events`;
+      return `Timeline band ${details['index'] !== undefined ? Number(details['index']) + 1 : ''} with ${String(details['eventCount'] ?? 0)} events`;
 
     case 'event':
       if (details['isDuration']) {
-        return `${details['title'] || 'Event'} from ${details['start']} to ${details['end']}. ${details['description'] || ''}`;
+        return `${String(details['title'] ?? 'Event')} from ${String(details['start'] ?? '')} to ${String(details['end'] ?? '')}. ${String(details['description'] ?? '')}`;
       }
-      return `${details['title'] || 'Event'} on ${details['start']}. ${details['description'] || ''}`;
+      return `${String(details['title'] ?? 'Event')} on ${String(details['start'] ?? '')}. ${String(details['description'] ?? '')}`;
 
     case 'timescale':
-      return `Time scale showing ${details['unit'] || 'time'} intervals`;
+      return `Time scale showing ${String(details['unit'] ?? 'time')} intervals`;
 
     default:
       return '';
@@ -336,7 +336,7 @@ export function isFocusable(element: HTMLElement): boolean {
 /**
  * Ensure focus is visible with proper styling
  */
-export function ensureFocusVisible(element: HTMLElement, theme: any): void {
+export function ensureFocusVisible(element: HTMLElement, theme: { colors: { ui: { primary: string } } }): void {
   element.style.outline = `2px solid ${theme.colors.ui.primary}`;
   element.style.outlineOffset = '2px';
 }

@@ -95,7 +95,7 @@ export function HotZoneNavigator({
   /**
    * Navigate to a hot zone
    */
-  const navigateToZone = (zone: HotZone) => {
+  const navigateToZone = (zone: HotZone): void => {
     try {
       const startDate = new Date(zone.start);
       const endDate = new Date(zone.end);
@@ -110,7 +110,7 @@ export function HotZoneNavigator({
   /**
    * Handle zone hover
    */
-  const handleZoneHover = (index: number, zone: HotZone) => {
+  const handleZoneHover = (index: number, zone: HotZone): void => {
     setHoveredZone(index);
 
     if (enableHover) {
@@ -131,7 +131,7 @@ export function HotZoneNavigator({
   /**
    * Handle zone hover end
    */
-  const handleZoneHoverEnd = () => {
+  const handleZoneHoverEnd = (): void => {
     setHoveredZone(null);
 
     // Clear timeout
@@ -144,7 +144,7 @@ export function HotZoneNavigator({
   /**
    * Handle zone click
    */
-  const handleZoneClick = (zone: HotZone) => {
+  const handleZoneClick = (zone: HotZone): void => {
     navigateToZone(zone);
   };
 

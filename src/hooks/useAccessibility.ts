@@ -82,7 +82,7 @@ export interface UseAccessibilityResult {
    */
   getAriaLabel: (
     type: 'timeline' | 'band' | 'event' | 'timescale',
-    details: Record<string, any>
+    details: Record<string, unknown>
   ) => string;
 
   /**
@@ -177,7 +177,7 @@ export function useAccessibility(
    * Get ARIA label
    */
   const getAriaLabel = useCallback(
-    (type: 'timeline' | 'band' | 'event' | 'timescale', details: Record<string, any>) => {
+    (type: 'timeline' | 'band' | 'event' | 'timescale', details: Record<string, unknown>) => {
       return createAriaLabel(type, details);
     },
     []

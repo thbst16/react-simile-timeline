@@ -52,4 +52,20 @@ module.exports = {
     'react/prop-types': 'off', // Using TypeScript for prop validation
     'react/react-in-jsx-scope': 'off', // Not needed with new JSX transform
   },
+  overrides: [
+    {
+      // Relax rules for test files
+      files: ['**/__tests__/**/*.ts', '**/__tests__/**/*.tsx', '**/*.test.ts', '**/*.test.tsx', '**/*.spec.ts', '**/*.spec.tsx'],
+      rules: {
+        '@typescript-eslint/no-explicit-any': 'off',
+        '@typescript-eslint/no-unsafe-assignment': 'off',
+        '@typescript-eslint/no-unsafe-member-access': 'off',
+        '@typescript-eslint/no-unsafe-call': 'off',
+        '@typescript-eslint/no-unsafe-return': 'off',
+        '@typescript-eslint/no-unsafe-argument': 'off',
+        '@typescript-eslint/require-await': 'off',
+        '@typescript-eslint/no-unused-vars': 'warn',
+      },
+    },
+  ],
 };

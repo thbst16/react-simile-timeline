@@ -60,7 +60,7 @@ const sampleEvents: TimelineEvent[] = [
 /**
  * Theme Controls Component
  */
-function ThemeControls() {
+function ThemeControls(): JSX.Element {
   const { mode, setMode, availableThemes } = useTheme();
   const { isDark, toggle } = useThemeToggle();
 
@@ -115,10 +115,10 @@ function ThemeControls() {
 /**
  * Color Palette Component
  */
-function ColorPalette() {
+function ColorPalette(): JSX.Element {
   const colors = useThemeColors();
 
-  const ColorSwatch = ({ label, color }: { label: string; color: string }) => (
+  const ColorSwatch = ({ label, color }: { label: string; color: string }): JSX.Element => (
     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
       <div
         style={{
@@ -191,7 +191,7 @@ function ColorPalette() {
 /**
  * Typography Samples Component
  */
-function TypographySamples() {
+function TypographySamples(): JSX.Element {
   const typography = useThemeTypography();
 
   return (
@@ -252,7 +252,7 @@ function TypographySamples() {
 /**
  * Event Rendering Preview
  */
-function EventPreview() {
+function EventPreview(): JSX.Element {
   const colors = useThemeColors();
   const typography = useThemeTypography();
   const [hoveredEvent, setHoveredEvent] = useState<string | null>(null);
@@ -340,7 +340,7 @@ function EventPreview() {
 /**
  * Demo Content (without provider)
  */
-function DemoContent() {
+function DemoContent(): JSX.Element {
   const { theme } = useTheme();
 
   return (
@@ -350,16 +350,15 @@ function DemoContent() {
         backgroundColor: theme.colors.ui.background,
         color: theme.colors.ui.text,
         fontFamily: theme.typography.fontFamily,
-        // CSS custom properties for easier styling
-        ['--primary' as any]: theme.colors.ui.primary,
-        ['--secondary' as any]: theme.colors.ui.secondary,
-        ['--accent' as any]: theme.colors.ui.accent,
-        ['--background' as any]: theme.colors.ui.background,
-        ['--surface' as any]: theme.colors.ui.surface,
-        ['--border' as any]: theme.colors.ui.border,
-        ['--text' as any]: theme.colors.ui.text,
-        ['--text-secondary' as any]: theme.colors.ui.textSecondary,
-      }}
+        '--primary': theme.colors.ui.primary,
+        '--secondary': theme.colors.ui.secondary,
+        '--accent': theme.colors.ui.accent,
+        '--background': theme.colors.ui.background,
+        '--surface': theme.colors.ui.surface,
+        '--border': theme.colors.ui.border,
+        '--text': theme.colors.ui.text,
+        '--text-secondary': theme.colors.ui.textSecondary,
+      } as React.CSSProperties}
     >
       <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
         <header style={{ padding: '2rem 1rem', borderBottom: `1px solid ${theme.colors.ui.border}` }}>
@@ -390,7 +389,7 @@ function DemoContent() {
 /**
  * Main Sprint 5 Demo Component
  */
-export default function Sprint5Demo() {
+export default function Sprint5Demo(): JSX.Element {
   return (
     <ThemeProvider defaultMode="light">
       <DemoContent />

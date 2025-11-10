@@ -172,7 +172,7 @@ export function useKeyboardNav(
   useEffect(() => {
     if (!enabled) return;
 
-    const handleKeyDown = (event: KeyboardEvent) => {
+    const handleKeyDown = (event: KeyboardEvent): void => {
       // Don't capture if user is typing in an input
       if (
         event.target instanceof HTMLInputElement ||

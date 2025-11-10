@@ -23,7 +23,7 @@ export interface FilterOptions {
     hasIcon?: boolean;
   };
   /** Filter by custom property values */
-  properties?: Record<string, any>;
+  properties?: Record<string, unknown>;
   /** Custom filter function */
   customFilter?: (event: TimelineEvent) => boolean;
 }

@@ -227,13 +227,13 @@ export function usePerformanceMonitor(
   /**
    * Calculate performance rating
    */
-  const calculateRating = (fps: number): PerformanceMetrics['rating'] => {
+  const calculateRating = useCallback((fps: number): PerformanceMetrics['rating'] => {
     const ratio = fps / targetFps;
     if (ratio >= 0.95) return 'excellent';
     if (ratio >= 0.75) return 'good';
     if (ratio >= 0.5) return 'fair';
     return 'poor';
-  };
+  }, [targetFps]);
 
   /**
    * Update metrics periodically
@@ -278,7 +278,7 @@ export function usePerformanceMonitor(
     }, updateInterval);
 
     return () => clearInterval(intervalId);
-  }, [enabled, targetFps, updateInterval, onMetricsUpdate, onPerformanceDrop]);
+  }, [enabled, targetFps, updateInterval, onMetricsUpdate, onPerformanceDrop, calculateRating]);
 
   /**
    * Auto-record frames using RAF
@@ -287,7 +287,7 @@ export function usePerformanceMonitor(
     if (!enabled) return;
 
     let rafId: number;
-    const animate = () => {
+    const animate = (): void => {
       recordFrame();
       rafId = requestAnimationFrame(animate);
     };

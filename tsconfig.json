@@ -45,5 +45,5 @@
     "skipLibCheck": true
   },
   "include": ["src"],
-  "exclude": ["node_modules", "dist", "**/*.spec.ts", "**/*.test.ts"]
+  "exclude": ["node_modules", "dist"]
 }

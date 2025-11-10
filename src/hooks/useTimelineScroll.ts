@@ -60,6 +60,7 @@ export function useTimelineScroll(
   const animationFrameRef = useRef<number>();
 
   // Debounced scroll callback (16ms = 60fps)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedOnScroll = useCallback(
     debounce((delta: number) => {
       onScroll?.(delta);
@@ -98,23 +99,9 @@ export function useTimelineScroll(
     [debouncedOnScroll]
   );
 
-  // Handle mouse drag end
-  const handleMouseUp = useCallback(() => {
-    if (!isDraggingRef.current) return;
-
-    isDraggingRef.current = false;
-
-    // Apply momentum scrolling
-    if (Math.abs(velocityRef.current) > 1) {
-      applyMomentum();
-    } else {
-      setIsScrolling(false);
-    }
-  }, []);
-
   // Apply momentum/inertia scrolling
-  const applyMomentum = useCallback(() => {
-    const tick = () => {
+  const applyMomentum = useCallback((): void => {
+    const tick = (): void => {
       velocityRef.current *= friction;
 
       if (Math.abs(velocityRef.current) > 0.5) {
@@ -128,6 +115,20 @@ export function useTimelineScroll(
 
     tick();
   }, [friction, debouncedOnScroll]);
+
+  // Handle mouse drag end
+  const handleMouseUp = useCallback(() => {
+    if (!isDraggingRef.current) return;
+
+    isDraggingRef.current = false;
+
+    // Apply momentum scrolling
+    if (Math.abs(velocityRef.current) > 1) {
+      applyMomentum();
+    } else {
+      setIsScrolling(false);
+    }
+  }, [applyMomentum]);
 
   // Handle touch start
   const handleTouchStart = useCallback(
@@ -245,7 +246,7 @@ export function useTimelineScroll(
 }
 
 // Utility: Debounce function
-function debounce<T extends (...args: any[]) => any>(
+function debounce<T extends (...args: never[]) => unknown>(
   func: T,
   wait: number
 ): (...args: Parameters<T>) => void {

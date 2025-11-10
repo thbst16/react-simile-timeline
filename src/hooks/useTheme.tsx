@@ -7,6 +7,7 @@
  * Sprint 5: Polish & Performance
  */
 
+/* eslint-disable react-refresh/only-export-components */
 import { useContext, createContext, useState, useEffect, useCallback, useMemo } from 'react';
 import type { TimelineTheme, ThemeMode, ThemeContextValue } from '../types/theme';
 import { classicTheme, darkTheme, themeList } from '../themes';
@@ -165,7 +166,7 @@ export function useTheme(): ThemeContextValue {
  * const colors = useThemeColors();
  * const bandBg = colors.band.background;
  */
-export function useThemeColors() {
+export function useThemeColors(): TimelineTheme['colors'] {
   const { theme } = useTheme();
   return theme.colors;
 }
@@ -177,7 +178,7 @@ export function useThemeColors() {
  * const typography = useThemeTypography();
  * const fontSize = typography.fontSize.base;
  */
-export function useThemeTypography() {
+export function useThemeTypography(): TimelineTheme['typography'] {
   const { theme } = useTheme();
   return theme.typography;
 }
@@ -188,7 +189,7 @@ export function useThemeTypography() {
  * @example
  * const { isDark, toggle } = useThemeToggle();
  */
-export function useThemeToggle() {
+export function useThemeToggle(): { isDark: boolean; toggle: () => void } {
   const { mode, setMode } = useTheme();
 
   const isDark = mode === 'dark' || (mode === 'auto' &&

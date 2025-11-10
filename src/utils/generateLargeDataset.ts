@@ -152,7 +152,7 @@ export function generateSimileJSON(options: GenerateDatasetOptions): EventData {
 
   return {
     dateTimeFormat: 'iso8601',
-    events: events as TimelineEvent[],
+    events: events,
   };
 }
 

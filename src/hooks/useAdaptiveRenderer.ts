@@ -195,7 +195,7 @@ export function useAdaptiveRenderer(
   /**
    * Manually switch rendering method
    */
-  const switchMethod = (newMethod: RenderMethod) => {
+  const switchMethod = (newMethod: RenderMethod): void => {
     if (newMethod !== method) {
       setMethod(newMethod);
       onMethodChange?.(newMethod, 'Manual switch');
@@ -205,7 +205,7 @@ export function useAdaptiveRenderer(
   /**
    * Report performance metrics
    */
-  const reportPerformance = (fps: number, renderTime: number) => {
+  const reportPerformance = (fps: number, renderTime: number): void => {
     setPerformanceHistory((prev) => {
       const updated = [...prev, { fps, renderTime }];
       // Keep only last 10 measurements
