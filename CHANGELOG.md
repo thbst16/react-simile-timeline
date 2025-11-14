@@ -15,6 +15,49 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Additional theme presets
 - Plugin architecture for custom painters
 
+## [0.1.0-beta.1] - 2025-11-13
+
+### ⚠️ Beta Release
+
+This is a **beta release** with significant UX improvements and new demo content. API is stabilizing but may still have minor changes before v1.0.0.
+
+### Added
+- **Classic Vintage Theme**: Aged paper aesthetic with serif typography and warm sepia tones
+- **Demo Timeline Selector**: Interactive landing page with 3 demo timelines
+- **JFK Timeline**: 32 events covering JFK's life and assassination (1917-1963)
+- **World Cup 2006 Timeline**: 48 events with detailed finals coverage
+- **Timeline Controls**: Event count, date range display, and reset button
+- **Theme Switcher Component**: Icon-based theme toggle (Classic/Dark/Auto)
+- **Panning Bounds**: Prevents dragging into empty space beyond event dates
+- **Theme-Aware Rendering**: Event labels adapt to theme (light/dark mode contrast)
+
+### Changed
+- Improved event label positioning for better readability
+- Enhanced theme switcher contrast in classic/vintage mode
+- Auto-centering on timeline load for better initial view
+- Better zoom levels for dense timelines
+- Dark mode label colors for improved contrast (#e0e0e0 in dark mode)
+
+### Fixed
+- Event label overlap in dense timelines
+- JSON filename mapping for demo data
+- Event track assignment for proper vertical cascading
+- Theme colors not applying to event labels
+
+### Removed
+- Internal sprint demo components (Sprint1Demo through Sprint5Demo)
+- Development documentation and artifacts
+- Sprint-specific test files
+
+### Performance
+- Bundle size: 40.62 KB gzipped (well under 150KB target)
+- 60fps maintained during panning and zooming
+- Instant theme switching (<16ms)
+- Efficient event layout for 1000+ events
+
+### Documentation
+- All essential production docs retained (API.md, EXAMPLES.md, MIGRATION.md, PERFORMANCE.md)
+
 ## [0.1.0-alpha.0] - 2025-11-08
 
 ### ⚠️ Alpha Release Warning

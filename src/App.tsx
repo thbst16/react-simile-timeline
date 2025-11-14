@@ -1,5 +1,5 @@
-import { Sprint5PerformanceDemo } from './components/Sprint5PerformanceDemo';
+import { LandingPage } from './components/LandingPage';
 
 export function App(): JSX.Element {
-  return <Sprint5PerformanceDemo />;
+  return <LandingPage />;
 }
