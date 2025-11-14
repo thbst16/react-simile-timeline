@@ -30,7 +30,7 @@ export class OriginalPainter implements EventPainter {
   }
 
   getTrackOffset(): number {
-    return 25;
+    return 35;
   }
 
   showsLabels(): boolean {
@@ -178,6 +178,8 @@ export class OriginalPainter implements EventPainter {
     onClick: () => void
   ): ReactNode {
     const centerY = y + height / 2;
+    // Position label above icon, with room for icon radius
+    const labelY = centerY - theme.iconSize - 3;
 
     return (
       <g
@@ -189,10 +191,10 @@ export class OriginalPainter implements EventPainter {
         {/* Icon */}
         {this.renderIcon(x, centerY, theme.iconSize, eventColor, theme)}
 
-        {/* Event label above icon */}
+        {/* Event label at top of track */}
         <text
           x={x}
-          y={y + theme.labelOffsetY}
+          y={labelY}
           textAnchor="middle"
           fontSize={theme.labelFontSize}
           fontFamily={theme.labelFontFamily}
@@ -202,7 +204,7 @@ export class OriginalPainter implements EventPainter {
             pointerEvents: 'none',
           }}
         >
-          {this.truncateLabel(event.title, 120)}
+          {this.truncateLabel(event.title, 100)}
         </text>
 
         {/* Hover title for accessibility */}

@@ -186,6 +186,15 @@ export interface TimelineTheme {
     overlay: number;
     modal: number;
   };
+
+  /** Texture configuration (optional for vintage themes) */
+  texture?: {
+    enabled: boolean;
+    pattern: string; // data URI
+    opacity: number;
+    blendMode: 'multiply' | 'overlay' | 'soft-light';
+    size: number; // pattern size in px
+  };
 }
 
 /**

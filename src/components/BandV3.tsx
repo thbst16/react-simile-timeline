@@ -93,6 +93,17 @@ export function BandV3({
   // Get center date from store
   const { centerDate, setCenterDate } = useTimelineStore();
 
+  // Get theme for event colors
+  const { theme } = useTheme();
+
+  // Create theme-aware event theme for painters
+  const eventTheme = useMemo(() => ({
+    ...DEFAULT_EVENT_THEME,
+    defaultTextColor: theme.colors.event.label,
+    defaultEventColor: theme.colors.event.tape,
+    defaultBorderColor: theme.colors.ui.border,
+  }), [theme]);
+
   // Create painter based on type
   const painter = useMemo((): EventPainter => {
     switch (painterType) {
@@ -176,6 +187,26 @@ export function BandV3({
     return () => window.removeEventListener('resize', handleResize);
   }, [centerDate, ether, height]);
 
+  // Calculate timeline bounds from events (for pan limiting)
+  const dateBounds = useMemo(() => {
+    if (events.length === 0) return null;
+
+    const dates = events.map(e => new Date(e.start).getTime()).filter(t => !isNaN(t));
+    if (dates.length === 0) return null;
+
+    const minDate = new Date(Math.min(...dates));
+    const maxDate = new Date(Math.max(...dates));
+
+    // Add 10% padding on each side for better UX
+    const range = maxDate.getTime() - minDate.getTime();
+    const padding = range * 0.1;
+
+    return {
+      minDate: new Date(minDate.getTime() - padding),
+      maxDate: new Date(maxDate.getTime() + padding),
+    };
+  }, [events]);
+
   // Mouse drag handlers
   const handleMouseDown = useCallback(
     (e: React.MouseEvent): void => {
@@ -190,12 +221,25 @@ export function BandV3({
       if (!isDragging) return;
 
       const deltaX = dragStart.x - e.clientX;
-      const newCenterDate = ether.pixelToDate(deltaX, dragStart.centerDate);
+      let newCenterDate = ether.pixelToDate(deltaX, dragStart.centerDate);
+
+      // Clamp centerDate to stay within timeline bounds
+      if (dateBounds) {
+        const newTime = newCenterDate.getTime();
+        const minTime = dateBounds.minDate.getTime();
+        const maxTime = dateBounds.maxDate.getTime();
+
+        if (newTime < minTime) {
+          newCenterDate = dateBounds.minDate;
+        } else if (newTime > maxTime) {
+          newCenterDate = dateBounds.maxDate;
+        }
+      }
 
       setCenterDate(newCenterDate);
       onScroll?.(newCenterDate);
     },
-    [isDragging, dragStart, ether, setCenterDate, onScroll]
+    [isDragging, dragStart, ether, setCenterDate, onScroll, dateBounds]
   );
 
   const handleMouseUp = useCallback((): void => {
@@ -270,19 +314,11 @@ export function BandV3({
         <div className="absolute inset-0" style={{ zIndex: 2 }}>
           <svg width={viewport.width} height={height} className="absolute inset-0">
             {layoutItems.map((item) =>
-              painter.render(item, viewport, DEFAULT_EVENT_THEME, onEventClick)
+              painter.render(item, viewport, eventTheme, onEventClick)
             )}
           </svg>
         </div>
       )}
-
-      {/* Debug info */}
-      <div className="absolute top-2 left-2 text-xs text-gray-500 dark:text-gray-400 bg-white/80 dark:bg-gray-800/80 px-2 py-1 rounded pointer-events-none">
-        <div>Band: {id}</div>
-        <div>Painter: {painterType}</div>
-        <div>Events: {layoutItems.length} visible</div>
-        <div>Tracks: {layoutEngine.getTrackCount(layoutItems)}</div>
-      </div>
     </div>
   );
 }
