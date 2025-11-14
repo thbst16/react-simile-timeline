@@ -31,7 +31,7 @@ export class CompactPainter implements EventPainter {
   }
 
   getTrackOffset(): number {
-    return 25;
+    return 35;
   }
 
   showsLabels(): boolean {

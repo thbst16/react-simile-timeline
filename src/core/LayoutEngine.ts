@@ -60,6 +60,12 @@ export interface LayoutConfig {
 
   /** Whether to respect manual track assignments (event.track) */
   respectManualTracks?: boolean;
+
+  /** Label buffer for collision detection (pixels to add around labels) */
+  labelBuffer?: number;
+
+  /** Average character width in pixels for label collision detection */
+  labelCharWidth?: number;
 }
 
 /**
@@ -68,9 +74,11 @@ export interface LayoutConfig {
 const DEFAULT_LAYOUT_CONFIG: LayoutConfig = {
   trackHeight: 30,
   trackGap: 5,
-  trackOffset: 25, // Space for timescale labels
+  trackOffset: 35, // Space for timescale labels (increased to prevent overlap)
   minTapeWidth: 2,
   respectManualTracks: true,
+  labelBuffer: 10, // Extra pixels around labels for collision detection
+  labelCharWidth: 6, // Average character width for label estimation
 };
 
 /**
@@ -191,10 +199,17 @@ export class LayoutEngine {
           trackOccupancy.push([]);
         }
 
-        // Mark track as occupied
+        // Mark track as occupied (including label buffer)
         const track = trackOccupancy[manualTrack];
         if (track) {
-          track.push([item.x, item.x + item.width]);
+          let buffer = 0;
+          if (item.isDuration) {
+            buffer = this.config.labelBuffer || 10;
+          } else {
+            const labelWidth = item.event.title.length * (this.config.labelCharWidth || 6);
+            buffer = labelWidth / 2 + (this.config.labelBuffer || 10);
+          }
+          track.push([item.x - buffer, item.x + item.width + buffer]);
         }
         continue;
       }
@@ -220,20 +235,41 @@ export class LayoutEngine {
       item.track = assignedTrack;
       const assignedTrackArray = trackOccupancy[assignedTrack];
       if (assignedTrackArray) {
-        assignedTrackArray.push([item.x, item.x + item.width]);
+        // Calculate occupied range including label buffer
+        let buffer = 0;
+        if (item.isDuration) {
+          buffer = this.config.labelBuffer || 10;
+        } else {
+          const labelWidth = item.event.title.length * (this.config.labelCharWidth || 6);
+          buffer = labelWidth / 2 + (this.config.labelBuffer || 10);
+        }
+        assignedTrackArray.push([item.x - buffer, item.x + item.width + buffer]);
       }
     }
   }
 
   /**
    * Check if an event can fit in a track without overlapping
+   *
+   * This method accounts for both the event marker/tape AND the label text
+   * to prevent overlapping labels that make events unreadable.
    */
   private canFitInTrack(item: LayoutItem, occupiedRanges: Array<[number, number]>): boolean {
     const itemStart = item.x;
     const itemEnd = item.x + item.width;
 
-    // For instant events (width = 0), add small buffer for visual separation
-    const buffer = item.isDuration ? 0 : 5;
+    // Calculate buffer based on label width for better collision detection
+    let buffer = 0;
+
+    if (item.isDuration) {
+      // Duration events: minimal buffer since label is above the tape
+      buffer = this.config.labelBuffer || 10;
+    } else {
+      // Instant events: buffer must account for label text width
+      // Estimate label width: title length * average char width + buffer on each side
+      const labelWidth = item.event.title.length * (this.config.labelCharWidth || 6);
+      buffer = labelWidth / 2 + (this.config.labelBuffer || 10);
+    }
 
     for (const [occupiedStart, occupiedEnd] of occupiedRanges) {
       // Check for overlap
@@ -252,8 +288,7 @@ export class LayoutEngine {
   private calculateVerticalPositions(items: LayoutItem[]): void {
     for (const item of items) {
       // y = trackOffset + (track * (trackHeight + trackGap))
-      item.y =
-        this.config.trackOffset + item.track * (this.config.trackHeight + this.config.trackGap);
+      item.y = this.config.trackOffset + (item.track * (this.config.trackHeight + this.config.trackGap));
     }
   }
 
@@ -268,7 +303,7 @@ export class LayoutEngine {
       return this.config.trackOffset + this.config.trackHeight;
     }
 
-    const maxTrack = Math.max(...items.map((item) => item.track));
+    const maxTrack = Math.max(...items.map(item => item.track));
     const tracksHeight = (maxTrack + 1) * this.config.trackHeight + maxTrack * this.config.trackGap;
 
     return this.config.trackOffset + tracksHeight;
@@ -279,7 +314,7 @@ export class LayoutEngine {
    */
   public getTrackCount(items: LayoutItem[]): number {
     if (items.length === 0) return 0;
-    return Math.max(...items.map((item) => item.track)) + 1;
+    return Math.max(...items.map(item => item.track)) + 1;
   }
 
   /**
