@@ -1,7 +1,7 @@
 # React Simile Timeline
 
-[![npm version](https://img.shields.io/npm/v/react-simile-timeline)](https://www.npmjs.com/package/react-simile-timeline)
-[![npm beta](https://img.shields.io/npm/v/react-simile-timeline/beta?label=beta)](https://www.npmjs.com/package/react-simile-timeline)
+[![npm latest](https://img.shields.io/npm/v/react-simile-timeline?label=npm%40latest)](https://www.npmjs.com/package/react-simile-timeline)
+[![npm beta](https://img.shields.io/npm/v/react-simile-timeline/beta?label=npm%40beta&color=orange)](https://www.npmjs.com/package/react-simile-timeline)
 [![npm downloads](https://img.shields.io/npm/dm/react-simile-timeline)](https://www.npmjs.com/package/react-simile-timeline)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-blue)](https://www.typescriptlang.org/)
@@ -67,10 +67,11 @@ yarn add react-simile-timeline@beta
 pnpm add react-simile-timeline@beta
 ```
 
-**Stable Version:**
+**Stable Version (Alpha):**
 ```bash
 npm install react-simile-timeline
-# Gets v0.1.0-alpha.0 (previous stable)
+# Gets v0.1.0-alpha.0 (tagged as 'latest')
+# Note: Beta.1 is recommended for new projects
 ```
 
 ## 🚀 Quick Start
