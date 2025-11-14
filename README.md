@@ -1,29 +1,49 @@
 # React Simile Timeline
 
 [![npm version](https://img.shields.io/npm/v/react-simile-timeline)](https://www.npmjs.com/package/react-simile-timeline)
+[![npm beta](https://img.shields.io/npm/v/react-simile-timeline/beta?label=beta)](https://www.npmjs.com/package/react-simile-timeline)
 [![npm downloads](https://img.shields.io/npm/dm/react-simile-timeline)](https://www.npmjs.com/package/react-simile-timeline)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-blue)](https://www.typescriptlang.org/)
-[![Tests](https://img.shields.io/badge/tests-361%20passing-success)](./src/__tests__)
+[![Tests](https://img.shields.io/badge/tests-passing-success)](./src/__tests__)
 [![Coverage](https://img.shields.io/badge/coverage->80%25-success)](./docs/PERFORMANCE.md)
-[![Bundle Size](https://img.shields.io/badge/bundle-40KB%20gzipped-success)](./docs/PERFORMANCE.md)
+[![Bundle Size](https://img.shields.io/badge/bundle-40.6KB%20gzipped-success)](./docs/PERFORMANCE.md)
 [![Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://react-simile-timeline.vercel.app/)
 
 A modern, production-ready React port of MIT's Simile Timeline widget. Built with TypeScript, optimized for performance, and 100% compatible with original Simile JSON format.
 
-> ⚠️ **Alpha Release**: This is v0.1.0-alpha.0. The API may change before v1.0.0. Not recommended for production use without thorough testing. Feedback welcome!
+> 🎉 **Beta Release**: v0.1.0-beta.1 now available! New features: Classic Vintage theme, 3 demo timelines, timeline controls, panning bounds. [See what's new](#whats-new-in-beta1)
+>
+> Install beta: `npm install react-simile-timeline@beta`
 
 ## 🎮 Live Demo
 
 **[View Interactive Demo →](https://react-simile-timeline.vercel.app/)**
 
-Try the full-featured demo with:
-- 🎛️ Dataset selector (100, 500, 1000, 2000 events)
-- 🎨 Theme switcher (Light/Dark/Auto)
-- 📊 Real-time performance monitoring
-- ⌨️ Full keyboard navigation
-- 🔍 Search and filtering
-- 🎯 Hot zones navigation
+Try the interactive demo with:
+- 📊 **3 Demo Timelines**: World History, JFK Assassination, World Cup 2006
+- 🎨 **Theme Switcher**: Classic Vintage, Dark, Auto modes
+- 🎛️ **Timeline Controls**: Event count, date range, reset button
+- 🖱️ **Panning Bounds**: Smooth dragging with limits
+- ⌨️ **Full Keyboard Navigation**
+- 📱 **Mobile Responsive**
+
+## 🎉 What's New in Beta.1
+
+**v0.1.0-beta.1** (November 2025) introduces major UX improvements:
+
+- ✨ **Classic Vintage Theme**: Aged paper aesthetic with serif typography and warm sepia tones
+- 📚 **Demo Timelines**: 3 pre-loaded timelines showcasing different use cases
+  - 🌍 World History (10 major events, 3000 BCE - 2000 CE)
+  - 🇺🇸 JFK (32 events from his life and assassination)
+  - ⚽ World Cup 2006 (48 events with detailed finals coverage)
+- 🎛️ **Timeline Controls**: New panel showing event count, date range, and reset button
+- 🚫 **Panning Bounds**: Prevents dragging into empty space beyond event dates
+- 🎨 **Theme Switcher**: Easy toggle between Classic, Dark, and Auto themes
+- 🌓 **Dark Mode Polish**: Improved label contrast (#e0e0e0 on dark backgrounds)
+- 📦 **Smaller Bundle**: Removed 2,000+ lines of internal demo code
+
+**Quality**: 40.6KB gzipped, 60fps performance, TypeScript strict mode, WCAG 2.1 AA compliant
 
 ## ✨ Features
 
@@ -38,12 +58,19 @@ Try the full-featured demo with:
 
 ## 📦 Installation
 
+**Beta Version (Recommended):**
+```bash
+npm install react-simile-timeline@beta
+# or
+yarn add react-simile-timeline@beta
+# or
+pnpm add react-simile-timeline@beta
+```
+
+**Stable Version:**
 ```bash
 npm install react-simile-timeline
-# or
-yarn add react-simile-timeline
-# or
-pnpm add react-simile-timeline
+# Gets v0.1.0-alpha.0 (previous stable)
 ```
 
 ## 🚀 Quick Start
