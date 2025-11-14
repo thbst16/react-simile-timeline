@@ -12,9 +12,9 @@
 
 A modern, production-ready React port of MIT's Simile Timeline widget. Built with TypeScript, optimized for performance, and 100% compatible with original Simile JSON format.
 
-> 🎉 **Beta Release**: v0.1.0-beta.1 now available! New features: Classic Vintage theme, 3 demo timelines, timeline controls, panning bounds. [See what's new](#whats-new-in-beta1)
+> 🎉 **Beta.1 is now the default version!** New features: Classic Vintage theme, 3 demo timelines, timeline controls, panning bounds. [See what's new](#whats-new-in-beta1)
 >
-> Install beta: `npm install react-simile-timeline@beta`
+> Install: `npm install react-simile-timeline`
 
 ## 🎮 Live Demo
 
@@ -58,20 +58,21 @@ Try the interactive demo with:
 
 ## 📦 Installation
 
-**Beta Version (Recommended):**
-```bash
-npm install react-simile-timeline@beta
-# or
-yarn add react-simile-timeline@beta
-# or
-pnpm add react-simile-timeline@beta
-```
-
-**Stable Version (Alpha):**
+**Latest Version (Beta.1):**
 ```bash
 npm install react-simile-timeline
-# Gets v0.1.0-alpha.0 (tagged as 'latest')
-# Note: Beta.1 is recommended for new projects
+# or
+yarn add react-simile-timeline
+# or
+pnpm add react-simile-timeline
+```
+
+This installs **v0.1.0-beta.1** (tagged as `latest` on npm).
+
+**Previous Alpha Version:**
+```bash
+npm install react-simile-timeline@alpha
+# Gets v0.1.0-alpha.0 if needed for compatibility
 ```
 
 ## 🚀 Quick Start
