@@ -15,6 +15,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Additional theme presets
 - Plugin architecture for custom painters
 
+## [0.1.0-beta.2] - 2025-11-13
+
+### Fixed
+- Updated README with correct beta.1 feature descriptions and installation instructions
+- Fixed prettier code formatting in 5 component files
+- Corrected npm badges to show beta version properly
+
+### Documentation
+- Comprehensive "What's New in Beta.1" section added to README
+- Updated installation instructions to reflect beta.1 as default version
+- Clarified alpha version access instructions
+
 ## [0.1.0-beta.1] - 2025-11-13
 
 ### ⚠️ Beta Release
