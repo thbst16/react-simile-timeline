@@ -97,12 +97,15 @@ export function BandV3({
   const { theme } = useTheme();
 
   // Create theme-aware event theme for painters
-  const eventTheme = useMemo(() => ({
-    ...DEFAULT_EVENT_THEME,
-    defaultTextColor: theme.colors.event.label,
-    defaultEventColor: theme.colors.event.tape,
-    defaultBorderColor: theme.colors.ui.border,
-  }), [theme]);
+  const eventTheme = useMemo(
+    () => ({
+      ...DEFAULT_EVENT_THEME,
+      defaultTextColor: theme.colors.event.label,
+      defaultEventColor: theme.colors.event.tape,
+      defaultBorderColor: theme.colors.ui.border,
+    }),
+    [theme]
+  );
 
   // Create painter based on type
   const painter = useMemo((): EventPainter => {
@@ -191,7 +194,7 @@ export function BandV3({
   const dateBounds = useMemo(() => {
     if (events.length === 0) return null;
 
-    const dates = events.map(e => new Date(e.start).getTime()).filter(t => !isNaN(t));
+    const dates = events.map((e) => new Date(e.start).getTime()).filter((t) => !isNaN(t));
     if (dates.length === 0) return null;
 
     const minDate = new Date(Math.min(...dates));
@@ -313,9 +316,7 @@ export function BandV3({
       {viewport && (
         <div className="absolute inset-0" style={{ zIndex: 2 }}>
           <svg width={viewport.width} height={height} className="absolute inset-0">
-            {layoutItems.map((item) =>
-              painter.render(item, viewport, eventTheme, onEventClick)
-            )}
+            {layoutItems.map((item) => painter.render(item, viewport, eventTheme, onEventClick))}
           </svg>
         </div>
       )}

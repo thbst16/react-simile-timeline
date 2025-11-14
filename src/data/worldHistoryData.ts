@@ -11,7 +11,8 @@ export const worldHistoryEvents: TimelineEvent[] = [
   {
     id: 'pyramids',
     title: 'Great Pyramid of Giza Built',
-    description: 'Construction of the Great Pyramid of Giza, one of the Seven Wonders of the Ancient World',
+    description:
+      'Construction of the Great Pyramid of Giza, one of the Seven Wonders of the Ancient World',
     start: '-2560-01-01T00:00:00Z',
     isDuration: false,
     color: '#D4AF37',
@@ -79,7 +80,8 @@ export const worldHistoryEvents: TimelineEvent[] = [
   {
     id: 'printing-press',
     title: 'Gutenberg Printing Press',
-    description: 'Johannes Gutenberg invents the movable-type printing press in Mainz, Germany. This revolutionary innovation made books affordable and accessible, sparking the spread of knowledge and literacy throughout Europe and beyond.',
+    description:
+      'Johannes Gutenberg invents the movable-type printing press in Mainz, Germany. This revolutionary innovation made books affordable and accessible, sparking the spread of knowledge and literacy throughout Europe and beyond.',
     start: '1440-01-01T00:00:00Z',
     isDuration: false,
     color: '#FF6347',
@@ -88,7 +90,8 @@ export const worldHistoryEvents: TimelineEvent[] = [
   {
     id: 'columbus',
     title: 'Columbus Reaches Americas',
-    description: 'Christopher Columbus lands in the Bahamas, initiating sustained European contact with the Americas. This voyage marked the beginning of centuries of transatlantic colonization and cultural exchange.',
+    description:
+      'Christopher Columbus lands in the Bahamas, initiating sustained European contact with the Americas. This voyage marked the beginning of centuries of transatlantic colonization and cultural exchange.',
     start: '1492-10-12T00:00:00Z',
     isDuration: false,
     color: '#20B2AA',
@@ -99,7 +102,8 @@ export const worldHistoryEvents: TimelineEvent[] = [
   {
     id: 'reformation',
     title: 'Protestant Reformation',
-    description: 'Martin Luther posts his 95 Theses on the door of All Saints\' Church in Wittenberg, challenging papal authority and church practices. This bold act sparked the Protestant Reformation, forever changing Christianity and European society.',
+    description:
+      "Martin Luther posts his 95 Theses on the door of All Saints' Church in Wittenberg, challenging papal authority and church practices. This bold act sparked the Protestant Reformation, forever changing Christianity and European society.",
     start: '1517-10-31T00:00:00Z',
     isDuration: false,
     color: '#8B008B',
@@ -108,7 +112,8 @@ export const worldHistoryEvents: TimelineEvent[] = [
   {
     id: 'shakespeare',
     title: "Shakespeare's Career",
-    description: "William Shakespeare's literary career spans from his early plays to his final masterpieces. The Bard of Avon wrote 37 plays and 154 sonnets, creating timeless works like Hamlet, Romeo and Juliet, and Macbeth that continue to captivate audiences worldwide.",
+    description:
+      "William Shakespeare's literary career spans from his early plays to his final masterpieces. The Bard of Avon wrote 37 plays and 154 sonnets, creating timeless works like Hamlet, Romeo and Juliet, and Macbeth that continue to captivate audiences worldwide.",
     start: '1590-01-01T00:00:00Z',
     end: '1613-01-01T00:00:00Z',
     isDuration: true,
@@ -118,7 +123,8 @@ export const worldHistoryEvents: TimelineEvent[] = [
   {
     id: 'galileo',
     title: "Galileo's Telescope",
-    description: 'Galileo Galilei turns his improved telescope to the heavens, discovering Jupiter\'s four largest moons, the phases of Venus, and the detailed surface of the Moon. His observations provided crucial evidence for the heliocentric model of the solar system.',
+    description:
+      "Galileo Galilei turns his improved telescope to the heavens, discovering Jupiter's four largest moons, the phases of Venus, and the detailed surface of the Moon. His observations provided crucial evidence for the heliocentric model of the solar system.",
     start: '1609-01-01T00:00:00Z',
     isDuration: false,
     color: '#4682B4',
@@ -127,7 +133,8 @@ export const worldHistoryEvents: TimelineEvent[] = [
   {
     id: 'newton',
     title: "Newton's Principia",
-    description: 'Isaac Newton publishes "Philosophiæ Naturalis Principia Mathematica," laying the foundation for classical mechanics. The work introduces his three laws of motion and universal gravitation, revolutionizing our understanding of the physical universe.',
+    description:
+      'Isaac Newton publishes "Philosophiæ Naturalis Principia Mathematica," laying the foundation for classical mechanics. The work introduces his three laws of motion and universal gravitation, revolutionizing our understanding of the physical universe.',
     start: '1687-07-05T00:00:00Z',
     isDuration: false,
     color: '#FF4500',
@@ -138,7 +145,8 @@ export const worldHistoryEvents: TimelineEvent[] = [
   {
     id: 'american-revolution',
     title: 'American Revolution',
-    description: 'The Thirteen American Colonies wage a war of independence against British rule, beginning with the Battles of Lexington and Concord. The revolution culminated in the Treaty of Paris, establishing the United States as a sovereign nation founded on principles of liberty and self-governance.',
+    description:
+      'The Thirteen American Colonies wage a war of independence against British rule, beginning with the Battles of Lexington and Concord. The revolution culminated in the Treaty of Paris, establishing the United States as a sovereign nation founded on principles of liberty and self-governance.',
     start: '1775-04-19T00:00:00Z',
     end: '1783-09-03T00:00:00Z',
     isDuration: true,
@@ -148,7 +156,8 @@ export const worldHistoryEvents: TimelineEvent[] = [
   {
     id: 'french-revolution',
     title: 'French Revolution',
-    description: 'The storming of the Bastille prison marks the beginning of the French Revolution. This pivotal moment sparked a decade of political upheaval, overthrowing the monarchy and reshaping French society around ideals of liberty, equality, and fraternity.',
+    description:
+      'The storming of the Bastille prison marks the beginning of the French Revolution. This pivotal moment sparked a decade of political upheaval, overthrowing the monarchy and reshaping French society around ideals of liberty, equality, and fraternity.',
     start: '1789-07-14T00:00:00Z',
     isDuration: false,
     color: '#0055A4',
@@ -166,7 +175,8 @@ export const worldHistoryEvents: TimelineEvent[] = [
   {
     id: 'darwin',
     title: "Darwin's Origin of Species",
-    description: 'Charles Darwin publishes "On the Origin of Species," introducing the scientific theory of evolution through natural selection. This groundbreaking work fundamentally changed our understanding of biology and humanity\'s place in nature, sparking scientific and philosophical debates that continue today.',
+    description:
+      'Charles Darwin publishes "On the Origin of Species," introducing the scientific theory of evolution through natural selection. This groundbreaking work fundamentally changed our understanding of biology and humanity\'s place in nature, sparking scientific and philosophical debates that continue today.',
     start: '1859-11-24T00:00:00Z',
     isDuration: false,
     color: '#2E8B57',
@@ -175,7 +185,8 @@ export const worldHistoryEvents: TimelineEvent[] = [
   {
     id: 'civil-war',
     title: 'American Civil War',
-    description: 'The deadliest conflict in American history pits the Union against the Confederacy over issues of slavery, states\' rights, and the nature of the federal government. The war resulted in the abolition of slavery and the preservation of the United States as a single, unified nation.',
+    description:
+      "The deadliest conflict in American history pits the Union against the Confederacy over issues of slavery, states' rights, and the nature of the federal government. The war resulted in the abolition of slavery and the preservation of the United States as a single, unified nation.",
     start: '1861-04-12T00:00:00Z',
     end: '1865-04-09T00:00:00Z',
     isDuration: true,
@@ -187,7 +198,8 @@ export const worldHistoryEvents: TimelineEvent[] = [
   {
     id: 'wright-brothers',
     title: 'First Powered Flight',
-    description: 'Orville and Wilbur Wright achieve the first sustained, controlled, powered heavier-than-air flight near Kitty Hawk, North Carolina. Their 12-second flight covered 120 feet and launched the age of aviation, forever changing transportation and warfare.',
+    description:
+      'Orville and Wilbur Wright achieve the first sustained, controlled, powered heavier-than-air flight near Kitty Hawk, North Carolina. Their 12-second flight covered 120 feet and launched the age of aviation, forever changing transportation and warfare.',
     start: '1903-12-17T00:00:00Z',
     isDuration: false,
     color: '#87CEEB',
@@ -196,7 +208,8 @@ export const worldHistoryEvents: TimelineEvent[] = [
   {
     id: 'einstein',
     title: "Einstein's Relativity",
-    description: 'Albert Einstein publishes his theory of special relativity, introducing the famous equation E=mc² and revolutionizing physics. His work fundamentally altered our understanding of space, time, energy, and gravity, becoming one of the pillars of modern physics.',
+    description:
+      'Albert Einstein publishes his theory of special relativity, introducing the famous equation E=mc² and revolutionizing physics. His work fundamentally altered our understanding of space, time, energy, and gravity, becoming one of the pillars of modern physics.',
     start: '1905-01-01T00:00:00Z',
     isDuration: false,
     color: '#FF6347',
@@ -205,7 +218,8 @@ export const worldHistoryEvents: TimelineEvent[] = [
   {
     id: 'wwi',
     title: 'World War I',
-    description: 'The "Great War" engulfs Europe and beyond, introducing modern warfare with tanks, aircraft, and chemical weapons. The conflict resulted in over 17 million deaths and reshaped the political map of Europe, setting the stage for World War II.',
+    description:
+      'The "Great War" engulfs Europe and beyond, introducing modern warfare with tanks, aircraft, and chemical weapons. The conflict resulted in over 17 million deaths and reshaped the political map of Europe, setting the stage for World War II.',
     start: '1914-07-28T00:00:00Z',
     end: '1918-11-11T00:00:00Z',
     isDuration: true,
@@ -223,7 +237,8 @@ export const worldHistoryEvents: TimelineEvent[] = [
   {
     id: 'wwii',
     title: 'World War II',
-    description: 'The deadliest conflict in human history engulfs the globe, pitting the Axis powers against the Allies. The war resulted in an estimated 70-85 million deaths, including the Holocaust, and ended with the atomic bombings of Hiroshima and Nagasaki, ushering in the nuclear age.',
+    description:
+      'The deadliest conflict in human history engulfs the globe, pitting the Axis powers against the Allies. The war resulted in an estimated 70-85 million deaths, including the Holocaust, and ended with the atomic bombings of Hiroshima and Nagasaki, ushering in the nuclear age.',
     start: '1939-09-01T00:00:00Z',
     end: '1945-09-02T00:00:00Z',
     isDuration: true,
@@ -241,7 +256,8 @@ export const worldHistoryEvents: TimelineEvent[] = [
   {
     id: 'dna',
     title: 'DNA Structure Discovered',
-    description: 'James Watson and Francis Crick, building on Rosalind Franklin\'s X-ray crystallography work, discover the double helix structure of DNA. This breakthrough unlocked the secrets of heredity and launched the modern era of molecular biology and genetics.',
+    description:
+      "James Watson and Francis Crick, building on Rosalind Franklin's X-ray crystallography work, discover the double helix structure of DNA. This breakthrough unlocked the secrets of heredity and launched the modern era of molecular biology and genetics.",
     start: '1953-04-25T00:00:00Z',
     isDuration: false,
     color: '#9370DB',
@@ -258,7 +274,8 @@ export const worldHistoryEvents: TimelineEvent[] = [
   {
     id: 'moon-landing',
     title: 'Moon Landing',
-    description: 'NASA\'s Apollo 11 mission successfully lands humans on the Moon for the first time. Neil Armstrong and Buzz Aldrin spend 21 hours on the lunar surface while Michael Collins orbits above, marking humanity\'s greatest achievement in space exploration.',
+    description:
+      "NASA's Apollo 11 mission successfully lands humans on the Moon for the first time. Neil Armstrong and Buzz Aldrin spend 21 hours on the lunar surface while Michael Collins orbits above, marking humanity's greatest achievement in space exploration.",
     start: '1969-07-20T00:00:00Z',
     isDuration: false,
     color: '#C0C0C0',
@@ -267,7 +284,8 @@ export const worldHistoryEvents: TimelineEvent[] = [
   {
     id: 'internet',
     title: 'World Wide Web',
-    description: 'Tim Berners-Lee invents the World Wide Web while working at CERN, creating the first web browser and web server. This invention transformed global communication, commerce, and information sharing, connecting billions of people worldwide.',
+    description:
+      'Tim Berners-Lee invents the World Wide Web while working at CERN, creating the first web browser and web server. This invention transformed global communication, commerce, and information sharing, connecting billions of people worldwide.',
     start: '1989-03-12T00:00:00Z',
     isDuration: false,
     color: '#4169E1',
@@ -276,7 +294,8 @@ export const worldHistoryEvents: TimelineEvent[] = [
   {
     id: 'berlin-wall-fall',
     title: 'Fall of Berlin Wall',
-    description: 'The Berlin Wall falls after 28 years of dividing East and West Berlin, symbolizing the end of the Cold War. This historic moment led to German reunification and marked the beginning of a new era in European and world politics.',
+    description:
+      'The Berlin Wall falls after 28 years of dividing East and West Berlin, symbolizing the end of the Cold War. This historic moment led to German reunification and marked the beginning of a new era in European and world politics.',
     start: '1989-11-09T00:00:00Z',
     isDuration: false,
     color: '#FFD700',
@@ -287,7 +306,8 @@ export const worldHistoryEvents: TimelineEvent[] = [
   {
     id: 'human-genome',
     title: 'Human Genome Project',
-    description: 'The Human Genome Project completes the sequencing of the entire human genome, mapping all 3 billion base pairs of human DNA. This monumental achievement opened new frontiers in medicine, enabling personalized treatments and deeper understanding of genetic diseases.',
+    description:
+      'The Human Genome Project completes the sequencing of the entire human genome, mapping all 3 billion base pairs of human DNA. This monumental achievement opened new frontiers in medicine, enabling personalized treatments and deeper understanding of genetic diseases.',
     start: '2003-04-14T00:00:00Z',
     isDuration: false,
     color: '#9370DB',
@@ -296,7 +316,8 @@ export const worldHistoryEvents: TimelineEvent[] = [
   {
     id: 'smartphone',
     title: 'iPhone Released',
-    description: 'Apple unveils the first iPhone, revolutionizing mobile technology by combining a phone, iPod, and internet communicator into one device. The iPhone\'s multi-touch interface and App Store ecosystem transformed how billions of people communicate, work, and access information.',
+    description:
+      "Apple unveils the first iPhone, revolutionizing mobile technology by combining a phone, iPod, and internet communicator into one device. The iPhone's multi-touch interface and App Store ecosystem transformed how billions of people communicate, work, and access information.",
     start: '2007-01-09T00:00:00Z',
     isDuration: false,
     color: '#A9A9A9',
@@ -305,7 +326,8 @@ export const worldHistoryEvents: TimelineEvent[] = [
   {
     id: 'covid',
     title: 'COVID-19 Pandemic',
-    description: 'The COVID-19 pandemic spreads globally, causing unprecedented disruption to daily life, economies, and healthcare systems worldwide. The pandemic accelerated remote work, digital transformation, and highlighted the importance of global health cooperation and scientific innovation.',
+    description:
+      'The COVID-19 pandemic spreads globally, causing unprecedented disruption to daily life, economies, and healthcare systems worldwide. The pandemic accelerated remote work, digital transformation, and highlighted the importance of global health cooperation and scientific innovation.',
     start: '2020-01-01T00:00:00Z',
     end: '2023-05-11T00:00:00Z',
     isDuration: true,
@@ -317,25 +339,25 @@ export const worldHistoryEvents: TimelineEvent[] = [
 // Simplified version for hero (dates from 1400 CE onwards that JavaScript can parse)
 // Excludes BCE dates which require special parsing
 export const heroEvents: TimelineEvent[] = [
-  worldHistoryEvents.find(e => e.id === 'printing-press')!,
-  worldHistoryEvents.find(e => e.id === 'columbus')!,
-  worldHistoryEvents.find(e => e.id === 'reformation')!,
-  worldHistoryEvents.find(e => e.id === 'shakespeare')!,
-  worldHistoryEvents.find(e => e.id === 'galileo')!,
-  worldHistoryEvents.find(e => e.id === 'newton')!,
-  worldHistoryEvents.find(e => e.id === 'american-revolution')!,
-  worldHistoryEvents.find(e => e.id === 'french-revolution')!,
-  worldHistoryEvents.find(e => e.id === 'darwin')!,
-  worldHistoryEvents.find(e => e.id === 'civil-war')!,
-  worldHistoryEvents.find(e => e.id === 'wright-brothers')!,
-  worldHistoryEvents.find(e => e.id === 'einstein')!,
-  worldHistoryEvents.find(e => e.id === 'wwi')!,
-  worldHistoryEvents.find(e => e.id === 'wwii')!,
-  worldHistoryEvents.find(e => e.id === 'dna')!,
-  worldHistoryEvents.find(e => e.id === 'moon-landing')!,
-  worldHistoryEvents.find(e => e.id === 'internet')!,
-  worldHistoryEvents.find(e => e.id === 'berlin-wall-fall')!,
-  worldHistoryEvents.find(e => e.id === 'human-genome')!,
-  worldHistoryEvents.find(e => e.id === 'smartphone')!,
-  worldHistoryEvents.find(e => e.id === 'covid')!,
+  worldHistoryEvents.find((e) => e.id === 'printing-press')!,
+  worldHistoryEvents.find((e) => e.id === 'columbus')!,
+  worldHistoryEvents.find((e) => e.id === 'reformation')!,
+  worldHistoryEvents.find((e) => e.id === 'shakespeare')!,
+  worldHistoryEvents.find((e) => e.id === 'galileo')!,
+  worldHistoryEvents.find((e) => e.id === 'newton')!,
+  worldHistoryEvents.find((e) => e.id === 'american-revolution')!,
+  worldHistoryEvents.find((e) => e.id === 'french-revolution')!,
+  worldHistoryEvents.find((e) => e.id === 'darwin')!,
+  worldHistoryEvents.find((e) => e.id === 'civil-war')!,
+  worldHistoryEvents.find((e) => e.id === 'wright-brothers')!,
+  worldHistoryEvents.find((e) => e.id === 'einstein')!,
+  worldHistoryEvents.find((e) => e.id === 'wwi')!,
+  worldHistoryEvents.find((e) => e.id === 'wwii')!,
+  worldHistoryEvents.find((e) => e.id === 'dna')!,
+  worldHistoryEvents.find((e) => e.id === 'moon-landing')!,
+  worldHistoryEvents.find((e) => e.id === 'internet')!,
+  worldHistoryEvents.find((e) => e.id === 'berlin-wall-fall')!,
+  worldHistoryEvents.find((e) => e.id === 'human-genome')!,
+  worldHistoryEvents.find((e) => e.id === 'smartphone')!,
+  worldHistoryEvents.find((e) => e.id === 'covid')!,
 ];

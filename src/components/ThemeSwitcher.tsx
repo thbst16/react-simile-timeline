@@ -56,11 +56,13 @@ export const ThemeSwitcher: React.FC = () => {
             className="relative px-3 py-2 rounded-md transition-all duration-200"
             style={{
               backgroundColor: isActive
-                ? (mode === 'light' ? '#6b5444' : theme.colors.ui.primary)
-                : (mode === 'light' ? '#a89274' : 'transparent'),
-              color: isActive
-                ? '#fff'
-                : (mode === 'light' ? '#fff' : theme.colors.ui.text),
+                ? mode === 'light'
+                  ? '#6b5444'
+                  : theme.colors.ui.primary
+                : mode === 'light'
+                  ? '#a89274'
+                  : 'transparent',
+              color: isActive ? '#fff' : mode === 'light' ? '#fff' : theme.colors.ui.text,
               border: `1px solid ${mode === 'light' ? '#6b5444' : theme.colors.ui.border}`,
               cursor: 'pointer',
               fontSize: '18px',

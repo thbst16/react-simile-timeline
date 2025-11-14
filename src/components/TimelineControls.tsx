@@ -30,7 +30,7 @@ export const TimelineControls: React.FC<TimelineControlsProps> = ({
   const dateRange = (() => {
     if (events.length === 0) return null;
 
-    const dates = events.map(e => new Date(e.start).getTime()).filter(t => !isNaN(t));
+    const dates = events.map((e) => new Date(e.start).getTime()).filter((t) => !isNaN(t));
     if (dates.length === 0) return null;
 
     const minDate = new Date(Math.min(...dates));
