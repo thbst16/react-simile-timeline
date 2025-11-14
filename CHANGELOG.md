@@ -15,6 +15,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Additional theme presets
 - Plugin architecture for custom painters
 
+## [0.1.0-beta.3] - 2025-11-13
+
+### Fixed
+- **Event Cascading**: Implemented label-aware collision detection in LayoutEngine
+  - Events now properly cascade across multiple tracks without label overlap
+  - JFK timeline events display correctly across tracks
+  - World Cup 2006 dense timeline (36 events in 31 days) renders without overlap
+  - Intelligent buffer calculation based on label text width
+- **Track Spacing**: Increased trackOffset from 25px to 35px to prevent timescale label overlap
+- **Painter Logic**: Conditional painter selection for optimal dense timeline rendering
+
+### Changed
+- LayoutEngine collision detection now accounts for label text width (characters × 6px)
+- Duration events: 10px buffer (label above tape)
+- Instant events: label_width/2 + 10px buffer (label beside icon)
+
 ## [0.1.0-beta.2] - 2025-11-13
 
 ### Fixed
