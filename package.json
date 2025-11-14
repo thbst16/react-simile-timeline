@@ -1,6 +1,6 @@
 {
   "name": "react-simile-timeline",
-  "version": "0.1.0-alpha.0",
+  "version": "0.1.0-beta.1",
   "description": "Modern React port of MIT's Simile Timeline widget with full TypeScript support, accessibility, and touch gestures",
   "type": "module",
   "main": "./dist/react-simile-timeline.umd.cjs",
