@@ -305,7 +305,7 @@ const LandingPageInner: React.FC = () => {
                     ether={detailEther}
                     events={demoEvents}
                     decorators={[]}
-                    painterType="original"
+                    painterType={selectedDemo === 'world-cup-2006' ? 'compact' : 'original'}
                     showTimescale={true}
                     onEventClick={handleEventClick}
                   />
