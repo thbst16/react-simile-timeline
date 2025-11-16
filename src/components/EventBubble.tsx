@@ -162,7 +162,7 @@ export function EventBubble({
       ],
       // Sanitize URLs to prevent javascript: and data: schemes
       ALLOWED_URI_REGEXP:
-        /^(?:(?:(?:f|ht)tps?|mailto|tel|callto|sms|cid|xmpp):|[^a-z]|[a-z+.\-]+(?:[^a-z+.\-:]|$))/i,
+        /^(?:(?:(?:f|ht)tps?|mailto|tel|callto|sms|cid|xmpp):|[^a-z]|[a-z+.-]+(?:[^a-z+.-:]|$))/i,
       // Keep relative URLs safe
       KEEP_CONTENT: true,
     });
