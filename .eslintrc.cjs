@@ -13,7 +13,7 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:react/jsx-runtime',
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs', 'vite.config.ts', 'vitest.config.ts', '*.config.ts', '*.config.js'],
+  ignorePatterns: ['dist', 'demo', '.eslintrc.cjs', 'vite.config.ts', 'vitest.config.ts', '*.config.ts', '*.config.js'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 'latest',
