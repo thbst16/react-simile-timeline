@@ -15,6 +15,86 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Additional theme presets
 - Plugin architecture for custom painters
 
+## [1.0.0] - 2025-11-16
+
+### 🎉 Stable Release
+
+This is the **first stable release** of React Simile Timeline. The API is now frozen and will remain backward compatible through all 1.x versions. No breaking changes will be introduced until v2.0.0.
+
+### Added
+
+#### Security
+- **HTML Sanitization**: Event descriptions containing HTML are now automatically sanitized using DOMPurify to prevent XSS attacks
+  - Allowed tags: Text formatting (b, i, em, strong, etc.), links, structure (p, div, span), lists, tables, headers, code blocks
+  - Blocked content: Scripts, iframes, event handlers, dangerous URLs (javascript:, data:, vbscript:)
+  - Smart URL validation with regex pattern matching
+  - Memoized sanitization for optimal performance
+
+#### Documentation
+- **MIGRATION.md**: Complete beta → v1.0 upgrade guide (491 lines)
+  - Quick start migration steps
+  - Detailed breaking changes documentation
+  - Migration impact by use case
+  - Upgrade checklist and timeline
+- **BREAKING_CHANGES.md**: HTML sanitization documentation (605 lines)
+  - Comprehensive allowed/blocked tags reference
+  - Security rationale and best practices
+  - Migration examples for common scenarios
+- **SECURITY.md**: Security documentation and XSS prevention (681 lines)
+  - DOMPurify configuration details
+  - Attack vectors and prevention strategies
+  - Reporting vulnerabilities
+- **THEMING.md**: Complete theming guide and API reference (992 lines)
+  - Built-in themes documentation
+  - Custom theme creation tutorial
+  - Accessibility guidelines
+
+### Changed
+- **API Stability**: All public APIs frozen until v2.0.0
+  - Component props (Timeline, Band, EventBubble)
+  - Hook signatures (useTheme, useKeyboardNav, etc.)
+  - Type definitions (TimelineEvent, BandConfig, etc.)
+  - Painter interfaces (OriginalPainter, CompactPainter, OverviewPainter)
+- **Version Display**: LandingPage now shows version dynamically from package.json
+
+### Security
+- **XSS Prevention**: All HTML content in event descriptions is sanitized
+- **Safe Defaults**: Only safe HTML tags and attributes allowed
+- **URL Validation**: Dangerous URL schemes automatically blocked
+
+### Performance
+- Bundle size: 50.98 KB gzipped (66% under 150KB target)
+- 60fps scrolling maintained with 1000+ events
+- Memoized HTML sanitization for optimal performance
+
+### Testing
+- 399/399 tests passing (100%)
+- Comprehensive sanitization test suite (467 lines)
+  - XSS prevention tests (script injection, event handlers, dangerous URLs)
+  - Allowed HTML tag verification
+  - Edge case handling (empty content, unicode, HTML entities)
+  - Performance and regression tests
+
+### Breaking Changes
+
+#### HTML Sanitization
+Event descriptions containing HTML will be automatically sanitized. This may affect:
+- **Scripts**: `<script>` tags removed (use onEventClick prop instead)
+- **Event Handlers**: onclick, onerror removed (use React event handlers)
+- **Forms**: Form elements blocked (use custom event bubbles)
+- **Styles**: Inline styles removed (use CSS classes instead)
+
+See MIGRATION.md and BREAKING_CHANGES.md for complete migration guide.
+
+### Quality Metrics
+- ✅ TypeScript: Strict mode, 0 errors
+- ✅ ESLint: 0 warnings
+- ✅ Prettier: All files formatted
+- ✅ Tests: 399/399 passing
+- ✅ Build: Success
+- ✅ Accessibility: WCAG 2.1 AA compliant
+- ✅ Backward Compatibility: Beta releases upgrade seamlessly (except sanitization)
+
 ## [0.1.0-beta.3] - 2025-11-13
 
 ### Fixed
