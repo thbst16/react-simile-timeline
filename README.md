@@ -7,12 +7,12 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-blue)](https://www.typescriptlang.org/)
 [![Tests](https://img.shields.io/badge/tests-passing-success)](./src/__tests__)
 [![Coverage](https://img.shields.io/badge/coverage->80%25-success)](./docs/PERFORMANCE.md)
-[![Bundle Size](https://img.shields.io/badge/bundle-40.6KB%20gzipped-success)](./docs/PERFORMANCE.md)
+[![Bundle Size](https://img.shields.io/badge/bundle-50.98KB%20gzipped-success)](./docs/PERFORMANCE.md)
 [![Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://react-simile-timeline.vercel.app/)
 
 A modern, production-ready React port of MIT's Simile Timeline widget. Built with TypeScript, optimized for performance, and 100% compatible with original Simile JSON format.
 
-> 🎉 **Beta.1 is now the default version!** New features: Classic Vintage theme, 3 demo timelines, timeline controls, panning bounds. [See what's new](#whats-new-in-beta1)
+> 🎉 **v1.0.0 Stable Release!** The API is now frozen until v2.0. New features: HTML sanitization (XSS prevention), frozen API, complete documentation suite. [See what's new](#whats-new-in-v100)
 >
 > Install: `npm install react-simile-timeline`
 
@@ -28,22 +28,34 @@ Try the interactive demo with:
 - ⌨️ **Full Keyboard Navigation**
 - 📱 **Mobile Responsive**
 
-## 🎉 What's New in Beta.1
+## 🎉 What's New in v1.0.0
 
-**v0.1.0-beta.1** (November 2025) introduces major UX improvements:
+**v1.0.0 Stable Release** (November 16, 2025) - The API is now frozen until v2.0!
 
-- ✨ **Classic Vintage Theme**: Aged paper aesthetic with serif typography and warm sepia tones
-- 📚 **Demo Timelines**: 3 pre-loaded timelines showcasing different use cases
-  - 🌍 World History (10 major events, 3000 BCE - 2000 CE)
-  - 🇺🇸 JFK (32 events from his life and assassination)
-  - ⚽ World Cup 2006 (48 events with detailed finals coverage)
-- 🎛️ **Timeline Controls**: New panel showing event count, date range, and reset button
-- 🚫 **Panning Bounds**: Prevents dragging into empty space beyond event dates
-- 🎨 **Theme Switcher**: Easy toggle between Classic, Dark, and Auto themes
-- 🌓 **Dark Mode Polish**: Improved label contrast (#e0e0e0 on dark backgrounds)
-- 📦 **Smaller Bundle**: Removed 2,000+ lines of internal demo code
+### 🔒 Security
+- **HTML Sanitization**: Event descriptions automatically sanitized with DOMPurify to prevent XSS attacks
+- **Safe Defaults**: Only safe HTML tags allowed (text formatting, links, lists, tables)
+- **XSS Prevention**: Scripts, event handlers, and dangerous URLs automatically blocked
 
-**Quality**: 40.6KB gzipped, 60fps performance, TypeScript strict mode, WCAG 2.1 AA compliant
+### 📚 Complete Documentation Suite (2,769 lines)
+- **[MIGRATION.md](./docs/MIGRATION.md)**: Beta → v1.0 upgrade guide with examples
+- **[BREAKING_CHANGES.md](./docs/BREAKING_CHANGES.md)**: Detailed breaking changes documentation
+- **[SECURITY.md](./docs/SECURITY.md)**: Security best practices and XSS prevention
+- **[THEMING.md](./docs/THEMING.md)**: Complete theming guide with custom theme creation
+
+### 🔐 API Freeze
+- All public APIs frozen until v2.0 (no breaking changes in v1.x)
+- TypeScript interfaces, component props, and hooks are now stable
+- Safe to use in production with confidence
+
+### ✅ Quality Metrics
+- **50.98 KB gzipped** (66% under 150KB target)
+- **399/399 tests passing** (100%)
+- **60fps performance** with 1000+ events
+- **WCAG 2.1 AA compliant**
+- **TypeScript strict mode** with 0 errors
+
+**[Full Release Notes →](./RELEASE_NOTES_v1.0.0.md)**
 
 ## ✨ Features
 
@@ -58,7 +70,7 @@ Try the interactive demo with:
 
 ## 📦 Installation
 
-**Latest Version (Beta.1):**
+**Stable Release (v1.0.0):**
 ```bash
 npm install react-simile-timeline
 # or
@@ -67,12 +79,15 @@ yarn add react-simile-timeline
 pnpm add react-simile-timeline
 ```
 
-This installs **v0.1.0-beta.1** (tagged as `latest` on npm).
+This installs **v1.0.0** (stable, production-ready).
 
-**Previous Alpha Version:**
+**Beta/Alpha Versions:**
 ```bash
+# Beta version
+npm install react-simile-timeline@beta
+
+# Alpha version
 npm install react-simile-timeline@alpha
-# Gets v0.1.0-alpha.0 if needed for compatibility
 ```
 
 ## 🚀 Quick Start
