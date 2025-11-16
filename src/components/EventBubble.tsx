@@ -153,13 +153,7 @@ export function EventBubble({
         'pre',
         'hr',
       ],
-      ALLOWED_ATTR: [
-        'href',
-        'target',
-        'rel',
-        'class',
-        'id',
-      ],
+      ALLOWED_ATTR: ['href', 'target', 'rel', 'class', 'id'],
       // Sanitize URLs to prevent javascript: and data: schemes
       ALLOWED_URI_REGEXP:
         /^(?:(?:(?:f|ht)tps?|mailto|tel|callto|sms|cid|xmpp):|[^a-z]|[a-z+.-]+(?:[^a-z+.-:]|$))/i,
@@ -200,10 +194,7 @@ export function EventBubble({
         {/* Header */}
         <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-4">
           <div className="flex items-start justify-between">
-            <h2
-              id="event-bubble-title"
-              className="text-xl font-bold pr-8 leading-tight"
-            >
+            <h2 id="event-bubble-title" className="text-xl font-bold pr-8 leading-tight">
               {event.title}
             </h2>
             <button
@@ -213,12 +204,7 @@ export function EventBubble({
               aria-label="Close event details"
               type="button"
             >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -231,15 +217,11 @@ export function EventBubble({
 
           {/* Date info */}
           <div className="mt-2 text-sm text-blue-100">
-            <time dateTime={event.start}>
-              {formatDate(startDate)}
-            </time>
+            <time dateTime={event.start}>{formatDate(startDate)}</time>
             {endDate && (
               <>
                 {' — '}
-                <time dateTime={event.end}>
-                  {formatDate(endDate)}
-                </time>
+                <time dateTime={event.end}>{formatDate(endDate)}</time>
               </>
             )}
           </div>
@@ -261,9 +243,7 @@ export function EventBubble({
                 loading="lazy"
               />
               {event.caption && (
-                <p className="text-sm text-gray-600 mt-2 italic">
-                  {event.caption}
-                </p>
+                <p className="text-sm text-gray-600 mt-2 italic">{event.caption}</p>
               )}
             </div>
           )}
@@ -291,12 +271,7 @@ export function EventBubble({
                 className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition-colors"
               >
                 <span>Learn more</span>
-                <svg
-                  className="w-4 h-4 ml-1"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
+                <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"

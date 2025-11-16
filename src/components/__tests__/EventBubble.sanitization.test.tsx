@@ -21,9 +21,7 @@ describe('EventBubble - HTML Sanitization', () => {
 
   describe('XSS Prevention', () => {
     it('should strip <script> tags', () => {
-      const event = createEvent(
-        'Safe content <script>alert("XSS")</script> more content'
-      );
+      const event = createEvent('Safe content <script>alert("XSS")</script> more content');
 
       render(<EventBubble event={event} onClose={mockOnClose} />);
 
@@ -34,9 +32,7 @@ describe('EventBubble - HTML Sanitization', () => {
     });
 
     it('should strip <iframe> tags', () => {
-      const event = createEvent(
-        'Content <iframe src="http://evil.com"></iframe> more'
-      );
+      const event = createEvent('Content <iframe src="http://evil.com"></iframe> more');
 
       render(<EventBubble event={event} onClose={mockOnClose} />);
 
@@ -46,9 +42,7 @@ describe('EventBubble - HTML Sanitization', () => {
     });
 
     it('should strip onclick event handlers', () => {
-      const event = createEvent(
-        '<p onclick="alert(\'XSS\')">Click me</p>'
-      );
+      const event = createEvent('<p onclick="alert(\'XSS\')">Click me</p>');
 
       render(<EventBubble event={event} onClose={mockOnClose} />);
 
@@ -58,9 +52,7 @@ describe('EventBubble - HTML Sanitization', () => {
     });
 
     it('should strip onerror event handlers', () => {
-      const event = createEvent(
-        '<img src="x" onerror="alert(\'XSS\')">Description'
-      );
+      const event = createEvent('<img src="x" onerror="alert(\'XSS\')">Description');
 
       render(<EventBubble event={event} onClose={mockOnClose} />);
 
@@ -72,9 +64,7 @@ describe('EventBubble - HTML Sanitization', () => {
     });
 
     it('should strip javascript: URLs', () => {
-      const event = createEvent(
-        '<a href="javascript:alert(\'XSS\')">Click</a>'
-      );
+      const event = createEvent('<a href="javascript:alert(\'XSS\')">Click</a>');
 
       render(<EventBubble event={event} onClose={mockOnClose} />);
 
@@ -98,9 +88,7 @@ describe('EventBubble - HTML Sanitization', () => {
     });
 
     it('should strip vbscript: URLs', () => {
-      const event = createEvent(
-        '<a href="vbscript:msgbox(\'XSS\')">Click</a>'
-      );
+      const event = createEvent('<a href="vbscript:msgbox(\'XSS\')">Click</a>');
 
       render(<EventBubble event={event} onClose={mockOnClose} />);
 
@@ -111,9 +99,7 @@ describe('EventBubble - HTML Sanitization', () => {
     });
 
     it('should strip <object> tags', () => {
-      const event = createEvent(
-        'Text <object data="http://evil.com"></object> more'
-      );
+      const event = createEvent('Text <object data="http://evil.com"></object> more');
 
       render(<EventBubble event={event} onClose={mockOnClose} />);
 
@@ -123,9 +109,7 @@ describe('EventBubble - HTML Sanitization', () => {
     });
 
     it('should strip <embed> tags', () => {
-      const event = createEvent(
-        'Text <embed src="http://evil.com"> more'
-      );
+      const event = createEvent('Text <embed src="http://evil.com"> more');
 
       render(<EventBubble event={event} onClose={mockOnClose} />);
 

@@ -81,9 +81,7 @@ const LandingPageInner: React.FC = () => {
     if (demoEvents.length === 0) return;
 
     // Calculate the middle date of the event range
-    const dates = demoEvents
-      .map(e => new Date(e.start).getTime())
-      .filter(t => !isNaN(t));
+    const dates = demoEvents.map((e) => new Date(e.start).getTime()).filter((t) => !isNaN(t));
 
     if (dates.length === 0) return;
 
@@ -104,9 +102,7 @@ const LandingPageInner: React.FC = () => {
   const handleReset = useCallback((): void => {
     if (demoEvents.length === 0) return;
 
-    const dates = demoEvents
-      .map(e => new Date(e.start).getTime())
-      .filter(t => !isNaN(t));
+    const dates = demoEvents.map((e) => new Date(e.start).getTime()).filter((t) => !isNaN(t));
 
     if (dates.length === 0) return;
 
@@ -131,8 +127,8 @@ const LandingPageInner: React.FC = () => {
       } else {
         // Map demo IDs to actual JSON filenames
         const fileMap: Record<string, string> = {
-          'jfk': 'jfk-timeline.json',
-          'world-cup-2006': 'world-cup-2006.json'
+          jfk: 'jfk-timeline.json',
+          'world-cup-2006': 'world-cup-2006.json',
         };
         const filename = fileMap[demo];
         const response = await fetch(`/demo-data/${filename}`);
@@ -141,7 +137,8 @@ const LandingPageInner: React.FC = () => {
           throw new Error(`Failed to fetch: ${response.status} ${response.statusText}`);
         }
 
-        const data: { dateTimeFormat: string; events: TimelineEvent[] } = await response.json() as { dateTimeFormat: string; events: TimelineEvent[] };
+        const data: { dateTimeFormat: string; events: TimelineEvent[] } =
+          (await response.json()) as { dateTimeFormat: string; events: TimelineEvent[] };
         setDemoEvents(data.events);
       }
     } catch (error) {
@@ -174,8 +171,8 @@ const LandingPageInner: React.FC = () => {
               Modern React port of MIT&apos;s classic SIMILE Timeline
             </p>
             <p className="text-lg text-slate-500 dark:text-slate-400 max-w-3xl mx-auto">
-              Production-ready, TypeScript-based timeline component with 100% compatibility
-              for original Simile JSON format
+              Production-ready, TypeScript-based timeline component with 100% compatibility for
+              original Simile JSON format
             </p>
 
             {/* Quick Stats */}
@@ -272,9 +269,12 @@ const LandingPageInner: React.FC = () => {
                   </div>
                 </div>
                 <p className="text-sm text-slate-600 dark:text-slate-400">
-                  {selectedDemo === 'jfk' && `Life and presidency of John F. Kennedy - from birth to legacy (${demoEvents.length} events loaded)`}
-                  {selectedDemo === 'world-cup-2006' && `Complete tournament coverage from Germany - Italy's historic victory (${demoEvents.length} events loaded)`}
-                  {selectedDemo === 'world-history' && `From ancient civilizations to modern technology - interactive historical events (${demoEvents.length} events loaded)`}
+                  {selectedDemo === 'jfk' &&
+                    `Life and presidency of John F. Kennedy - from birth to legacy (${demoEvents.length} events loaded)`}
+                  {selectedDemo === 'world-cup-2006' &&
+                    `Complete tournament coverage from Germany - Italy's historic victory (${demoEvents.length} events loaded)`}
+                  {selectedDemo === 'world-history' &&
+                    `From ancient civilizations to modern technology - interactive historical events (${demoEvents.length} events loaded)`}
                 </p>
               </div>
               <div className="h-[480px] overflow-hidden relative">
@@ -313,10 +313,7 @@ const LandingPageInner: React.FC = () => {
                 </div>
 
                 {/* Timeline Controls */}
-                <TimelineControls
-                  events={demoEvents}
-                  onReset={handleReset}
-                />
+                <TimelineControls events={demoEvents} onReset={handleReset} />
               </div>
             </div>
           </div>
@@ -338,7 +335,8 @@ const LandingPageInner: React.FC = () => {
                 100% Compatible
               </h3>
               <p className="text-slate-600 dark:text-slate-400">
-                Load original Simile JSON files without modification. Drop-in replacement for legacy timelines.
+                Load original Simile JSON files without modification. Drop-in replacement for legacy
+                timelines.
               </p>
               <div className="mt-4 text-sm text-slate-500 dark:text-slate-500">
                 Simile JSON format • BCE dates • All painters
@@ -352,7 +350,8 @@ const LandingPageInner: React.FC = () => {
                 High Performance
               </h3>
               <p className="text-slate-600 dark:text-slate-400">
-                60fps scrolling with 1000+ events. Virtualization and adaptive rendering for large datasets.
+                60fps scrolling with 1000+ events. Virtualization and adaptive rendering for large
+                datasets.
               </p>
               <div className="mt-4 text-sm text-slate-500 dark:text-slate-500">
                 60fps scroll • 2000+ events • Canvas fallback
@@ -394,7 +393,8 @@ const LandingPageInner: React.FC = () => {
                 Beautiful Themes
               </h3>
               <p className="text-slate-600 dark:text-slate-400">
-                Classic vintage, modern dark, or auto. Try the theme switcher above to see all options.
+                Classic vintage, modern dark, or auto. Try the theme switcher above to see all
+                options.
               </p>
               <div className="mt-4 text-sm text-slate-500 dark:text-slate-500">
                 Vintage • Dark • Auto • WCAG AA compliant
@@ -408,7 +408,8 @@ const LandingPageInner: React.FC = () => {
                 TypeScript-First
               </h3>
               <p className="text-slate-600 dark:text-slate-400">
-                Full TypeScript support with comprehensive type definitions for type-safe development.
+                Full TypeScript support with comprehensive type definitions for type-safe
+                development.
               </p>
               <div className="mt-4 text-sm text-slate-500 dark:text-slate-500">
                 Strict mode • Full types • IntelliSense
@@ -425,7 +426,8 @@ const LandingPageInner: React.FC = () => {
             Why Choose React Simile Timeline?
           </h2>
           <p className="text-center text-slate-600 dark:text-slate-400 mb-12 max-w-2xl mx-auto">
-            Built for modern React applications while maintaining 100% compatibility with original SIMILE format
+            Built for modern React applications while maintaining 100% compatibility with original
+            SIMILE format
           </p>
 
           <div className="bg-white dark:bg-slate-800 rounded-lg shadow-xl overflow-hidden border border-slate-200 dark:border-slate-700">
@@ -568,9 +570,7 @@ const LandingPageInner: React.FC = () => {
       {/* Footer CTA */}
       <section className="py-16 bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-700 dark:to-purple-700">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">
-            Ready to Build Your Timeline?
-          </h2>
+          <h2 className="text-3xl font-bold text-white mb-4">Ready to Build Your Timeline?</h2>
           <p className="text-xl text-blue-100 mb-8">
             Join developers building modern timelines with React Simile Timeline
           </p>
@@ -600,10 +600,7 @@ const LandingPageInner: React.FC = () => {
 
       {/* Event Bubble Modal */}
       {selectedEvent && (
-        <EventBubble
-          event={selectedEvent}
-          onClose={() => setSelectedEvent(null)}
-        />
+        <EventBubble event={selectedEvent} onClose={() => setSelectedEvent(null)} />
       )}
     </div>
   );
