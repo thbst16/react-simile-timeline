@@ -13,7 +13,8 @@
  * Sprint 3: Advanced Rendering
  */
 
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef, useCallback, useMemo } from 'react';
+import DOMPurify from 'dompurify';
 import type { TimelineEvent } from '../types/events';
 
 export interface EventBubbleProps {
@@ -105,6 +106,68 @@ export function EventBubble({
     [onClose]
   );
 
+  // Sanitize HTML content (XSS prevention)
+  const sanitizedDescription = useMemo(() => {
+    if (!event.description) return '';
+
+    return DOMPurify.sanitize(event.description, {
+      ALLOWED_TAGS: [
+        // Text formatting
+        'b',
+        'i',
+        'em',
+        'strong',
+        'u',
+        's',
+        'sup',
+        'sub',
+        'mark',
+        // Links
+        'a',
+        // Structure
+        'p',
+        'br',
+        'div',
+        'span',
+        // Lists
+        'ul',
+        'ol',
+        'li',
+        // Tables
+        'table',
+        'thead',
+        'tbody',
+        'tr',
+        'th',
+        'td',
+        // Headers
+        'h1',
+        'h2',
+        'h3',
+        'h4',
+        'h5',
+        'h6',
+        // Other
+        'blockquote',
+        'code',
+        'pre',
+        'hr',
+      ],
+      ALLOWED_ATTR: [
+        'href',
+        'target',
+        'rel',
+        'class',
+        'id',
+      ],
+      // Sanitize URLs to prevent javascript: and data: schemes
+      ALLOWED_URI_REGEXP:
+        /^(?:(?:(?:f|ht)tps?|mailto|tel|callto|sms|cid|xmpp):|[^a-z]|[a-z+.-]+(?:[^a-z+.-:]|$))/i,
+      // Keep relative URLs safe
+      KEEP_CONTENT: true,
+    });
+  }, [event.description]);
+
   // Format dates
   const startDate = new Date(event.start);
   const endDate = event.end ? new Date(event.end) : null;
@@ -137,7 +200,10 @@ export function EventBubble({
         {/* Header */}
         <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-4">
           <div className="flex items-start justify-between">
-            <h2 id="event-bubble-title" className="text-xl font-bold pr-8 leading-tight">
+            <h2
+              id="event-bubble-title"
+              className="text-xl font-bold pr-8 leading-tight"
+            >
               {event.title}
             </h2>
             <button
@@ -147,7 +213,12 @@ export function EventBubble({
               aria-label="Close event details"
               type="button"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -160,11 +231,15 @@ export function EventBubble({
 
           {/* Date info */}
           <div className="mt-2 text-sm text-blue-100">
-            <time dateTime={event.start}>{formatDate(startDate)}</time>
+            <time dateTime={event.start}>
+              {formatDate(startDate)}
+            </time>
             {endDate && (
               <>
                 {' — '}
-                <time dateTime={event.end}>{formatDate(endDate)}</time>
+                <time dateTime={event.end}>
+                  {formatDate(endDate)}
+                </time>
               </>
             )}
           </div>
@@ -186,16 +261,18 @@ export function EventBubble({
                 loading="lazy"
               />
               {event.caption && (
-                <p className="text-sm text-gray-600 mt-2 italic">{event.caption}</p>
+                <p className="text-sm text-gray-600 mt-2 italic">
+                  {event.caption}
+                </p>
               )}
             </div>
           )}
 
-          {/* Description (HTML content) */}
-          {event.description && (
+          {/* Description (HTML content - sanitized for security) */}
+          {sanitizedDescription && (
             <div
               className="prose prose-sm max-w-none text-gray-700 mb-4"
-              dangerouslySetInnerHTML={{ __html: event.description }}
+              dangerouslySetInnerHTML={{ __html: sanitizedDescription }}
             />
           )}
 
@@ -214,7 +291,12 @@ export function EventBubble({
                 className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition-colors"
               >
                 <span>Learn more</span>
-                <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg
+                  className="w-4 h-4 ml-1"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"

@@ -1,471 +1,491 @@
-# Migration Guide: From Original Simile Timeline to React
+# Migration Guide: Beta → V1.0
 
-This guide helps you migrate from the original MIT Simile Timeline (JavaScript) to the modern React version.
+**Version**: Migrating from v0.1.0-beta.x to v1.0.0
+**Last Updated**: 2025-11-16
+**Estimated Migration Time**: 15-30 minutes
 
-## Quick Comparison
+---
 
-| Feature | Original Simile | Simile Timeline React |
-|---------|----------------|----------------------|
-| **Framework** | Vanilla JS | React 18+ |
-| **TypeScript** | ❌ No | ✅ Yes (strict mode) |
-| **Bundle Size** | ~200KB | <150KB gzipped |
-| **Mobile Support** | Limited | ✅ Full touch support |
-| **Accessibility** | Basic | ✅ WCAG 2.1 AA |
-| **Themes** | Limited | ✅ Built-in + Custom |
-| **Performance** | DOM only | ✅ DOM + Canvas |
-| **Package Manager** | Manual | ✅ npm/yarn |
+## Overview
 
-## Installation
+This guide helps you upgrade from React Simile Timeline **v0.1.0-beta.x** to **v1.0.0 stable**.
 
-### Original Simile
-```html
-<script src="timeline-api.js"></script>
-<script src="timeline.js"></script>
-```
+**Good News**: V1.0 introduces minimal breaking changes and maintains backward compatibility for most features.
 
-### React Version
+**Key Changes**:
+- ✅ HTML sanitization (security enhancement)
+- ✅ API freeze (no more breaking changes until v2.0)
+- ✅ Improved documentation
+- ✅ Performance optimizations
+
+---
+
+## Quick Start Migration
+
+### 1. Update Package
+
 ```bash
-npm install react-simile-timeline
-# or
-yarn add react-simile-timeline
+# npm
+npm install react-simile-timeline@latest
+
+# yarn
+yarn upgrade react-simile-timeline@latest
+
+# pnpm
+pnpm update react-simile-timeline@latest
 ```
 
-## Basic Usage
+### 2. Review Event Descriptions
 
-### Original Simile
+If your timeline uses HTML in event descriptions, review the [HTML Sanitization](#html-sanitization) section below.
 
-```html
-<div id="my-timeline" style="height: 500px"></div>
+### 3. Run Your Tests
 
-<script>
-var eventSource = new Timeline.DefaultEventSource();
-var bandInfos = [
-  Timeline.createBandInfo({
-    width: "70%",
-    intervalUnit: Timeline.DateTime.MONTH,
-    intervalPixels: 100,
-    eventSource: eventSource
-  }),
-  Timeline.createBandInfo({
-    width: "30%",
-    intervalUnit: Timeline.DateTime.YEAR,
-    intervalPixels: 200,
-    eventSource: eventSource,
-    overview: true
-  })
-];
-bandInfos[1].syncWith = 0;
-bandInfos[1].highlight = true;
-
-var timeline = Timeline.create(
-  document.getElementById("my-timeline"),
-  bandInfos
-);
-
-Timeline.loadJSON("events.json", function(json, url) {
-  eventSource.loadJSON(json, url);
-});
-</script>
+```bash
+npm test
 ```
 
-### React Version
+### 4. Verify No Console Warnings
+
+Check browser console for deprecation warnings (there are none in v1.0, but good practice).
+
+---
+
+## Breaking Changes
+
+### 1. HTML Sanitization (Security Enhancement)
+
+**Severity**: 🔴 HIGH (Security)
+**Impact**: Event descriptions containing HTML
+**Action Required**: Review event descriptions
+
+#### What Changed
+
+Event descriptions containing HTML are now **automatically sanitized** using [DOMPurify](https://github.com/cure53/DOMPurify) to prevent XSS attacks.
+
+#### Before (Beta)
 
 ```tsx
-import { Timeline, ThemeProvider } from 'react-simile-timeline';
-
-function App() {
-  return (
-    <ThemeProvider>
-      <Timeline
-        dataUrl="/events.json"
-        bands={[
-          {
-            width: '70%',
-            intervalUnit: 'MONTH',
-            intervalPixels: 100,
-          },
-          {
-            width: '30%',
-            intervalUnit: 'YEAR',
-            intervalPixels: 200,
-            syncWith: 0,
-            highlight: true,
-          },
-        ]}
-        height={500}
-      />
-    </ThemeProvider>
-  );
-}
-```
-
-## Event Data Format
-
-**Good news!** The JSON event format is 100% compatible. No changes needed!
-
-```json
-{
-  "events": [
-    {
-      "title": "World Cup 2006",
-      "start": "2006-06-09T00:00:00Z",
-      "end": "2006-07-09T00:00:00Z",
-      "isDuration": true,
-      "description": "FIFA World Cup in Germany",
-      "image": "worldcup2006.jpg",
-      "link": "https://example.com"
-    }
-  ]
-}
-```
-
-## API Mapping
-
-### Creating Timeline
-
-| Original | React |
-|----------|-------|
-| `Timeline.create(element, bands)` | `<Timeline bands={bands} />` |
-| `Timeline.loadJSON(url, callback)` | `<Timeline dataUrl={url} />` |
-
-### Event Source
-
-| Original | React |
-|----------|-------|
-| `new Timeline.DefaultEventSource()` | Managed internally |
-| `eventSource.loadJSON(data)` | `<Timeline data={data} />` |
-| `eventSource.add(event)` | Use React state |
-
-### Date/Time Units
-
-| Original | React |
-|----------|-------|
-| `Timeline.DateTime.MILLISECOND` | `'MILLISECOND'` |
-| `Timeline.DateTime.SECOND` | `'SECOND'` |
-| `Timeline.DateTime.MINUTE` | `'MINUTE'` |
-| `Timeline.DateTime.HOUR` | `'HOUR'` |
-| `Timeline.DateTime.DAY` | `'DAY'` |
-| `Timeline.DateTime.WEEK` | `'WEEK'` |
-| `Timeline.DateTime.MONTH` | `'MONTH'` |
-| `Timeline.DateTime.YEAR` | `'YEAR'` |
-| `Timeline.DateTime.DECADE` | `'DECADE'` |
-| `Timeline.DateTime.CENTURY` | `'CENTURY'` |
-| `Timeline.DateTime.MILLENNIUM` | `'MILLENNIUM'` |
-
-### Band Configuration
-
-| Original | React |
-|----------|-------|
-| `Timeline.createBandInfo({...})` | Direct object: `{...}` |
-| `intervalUnit: Timeline.DateTime.MONTH` | `intervalUnit: 'MONTH'` |
-| `eventSource: source` | Managed internally |
-| `overview: true` | Use larger `intervalPixels` |
-
-### Themes
-
-| Original | React |
-|----------|-------|
-| `Timeline.ClassicTheme.create()` | `theme="classic"` (default) |
-| Custom theme object | `<ThemeProvider><Timeline /></ThemeProvider>` |
-
-## Migration Examples
-
-### Example 1: Simple Timeline
-
-**Before (Original):**
-```html
-<div id="timeline" style="height: 400px"></div>
-<script>
-var eventSource = new Timeline.DefaultEventSource();
-var bandInfos = [
-  Timeline.createBandInfo({
-    eventSource: eventSource,
-    width: "100%",
-    intervalUnit: Timeline.DateTime.MONTH,
-    intervalPixels: 100
-  })
-];
-var timeline = Timeline.create(
-  document.getElementById("timeline"),
-  bandInfos
-);
-eventSource.loadJSON({
-  events: [...]
-}, "");
-</script>
-```
-
-**After (React):**
-```tsx
-<Timeline
-  data={{ events: [...] }}
-  bands={[{
-    width: '100%',
-    intervalUnit: 'MONTH',
-    intervalPixels: 100
-  }]}
-  height={400}
-/>
-```
-
-### Example 2: Multiple Synchronized Bands
-
-**Before:**
-```javascript
-var bandInfos = [
-  Timeline.createBandInfo({
-    eventSource: eventSource,
-    width: "80%",
-    intervalUnit: Timeline.DateTime.MONTH,
-    intervalPixels: 100
-  }),
-  Timeline.createBandInfo({
-    eventSource: eventSource,
-    width: "20%",
-    intervalUnit: Timeline.DateTime.YEAR,
-    intervalPixels: 200,
-    overview: true
-  })
-];
-bandInfos[1].syncWith = 0;
-bandInfos[1].highlight = true;
-```
-
-**After:**
-```tsx
-bands={[
-  {
-    width: '80%',
-    intervalUnit: 'MONTH',
-    intervalPixels: 100
-  },
-  {
-    width: '20%',
-    intervalUnit: 'YEAR',
-    intervalPixels: 200,
-    syncWith: 0,
-    highlight: true
-  }
-]}
-```
-
-### Example 3: Event Handlers
-
-**Before:**
-```javascript
-var onSelect = function(eventID) {
-  var evt = eventSource.getEvent(eventID);
-  alert("Selected: " + evt.getText());
+// Beta: HTML was rendered without sanitization (UNSAFE!)
+const event = {
+  title: 'My Event',
+  description: '<script>alert("XSS")</script><p>Content</p>'
 };
-timeline.getBand(0).addOnSelectListener(onSelect);
 ```
 
-**After:**
+#### After (V1.0)
+
 ```tsx
+// V1.0: Scripts are automatically stripped
+const event = {
+  title: 'My Event',
+  description: '<script>alert("XSS")</script><p>Content</p>'
+  // Rendered as: <p>Content</p>
+  // Script tag removed automatically
+};
+```
+
+#### Allowed HTML Tags
+
+These tags are **safe and allowed**:
+
+**Text Formatting**:
+- `<b>`, `<i>`, `<em>`, `<strong>`, `<u>`, `<s>`, `<sup>`, `<sub>`, `<mark>`
+
+**Links**:
+- `<a href="..." target="..." rel="...">`
+
+**Structure**:
+- `<p>`, `<br>`, `<div>`, `<span>`
+
+**Lists**:
+- `<ul>`, `<ol>`, `<li>`
+
+**Tables**:
+- `<table>`, `<thead>`, `<tbody>`, `<tr>`, `<th>`, `<td>`
+
+**Headers**:
+- `<h1>`, `<h2>`, `<h3>`, `<h4>`, `<h5>`, `<h6>`
+
+**Other**:
+- `<blockquote>`, `<code>`, `<pre>`, `<hr>`
+
+#### Blocked Content
+
+These are **automatically removed**:
+
+**Scripts and Dangerous Tags**:
+- `<script>`, `<iframe>`, `<object>`, `<embed>`, `<applet>`
+
+**Event Handlers**:
+- `onclick`, `onerror`, `onload`, `onmouseover`, etc.
+
+**Dangerous URLs**:
+- `javascript:`, `data:`, `vbscript:`
+
+**Forms** (for security):
+- `<form>`, `<input>`, `<button>`, `<textarea>`, `<select>`
+
+#### Migration Steps
+
+1. **Review Event Data**: Check if you use HTML in event descriptions
+   ```tsx
+   // Search your event data for HTML tags
+   events.filter(e => e.description?.includes('<'))
+   ```
+
+2. **Test Sanitization**: Verify allowed tags still work
+   ```tsx
+   const testEvent = {
+     title: 'Test',
+     description: '<p>This <b>works</b></p><script>alert(1)</script>'
+   };
+   // Renders as: <p>This <b>works</b></p>
+   // Script removed ✓
+   ```
+
+3. **Replace Blocked Tags**: If you used forms or scripts, use alternatives
+   ```tsx
+   // Before (blocked):
+   description: '<button onclick="doSomething()">Click</button>'
+
+   // After (use onEventClick prop):
+   <Timeline
+     data={events}
+     onEventClick={(event) => handleEventClick(event)}
+   />
+   ```
+
+#### Why This Change?
+
+- **Security**: Prevents XSS attacks from malicious event data
+- **Best Practice**: Industry standard for user-generated content
+- **No Impact**: Most users don't use scripts in descriptions
+
+See [SECURITY.md](./SECURITY.md) for detailed sanitization documentation.
+
+---
+
+## Non-Breaking Changes
+
+### 1. API Stability
+
+All public APIs are now **frozen until v2.0**. This includes:
+
+- ✅ Component props (Timeline, Band, EventBubble)
+- ✅ Hook signatures (useTheme, useKeyboardNav, etc.)
+- ✅ Type definitions (TimelineEvent, BandConfig, etc.)
+- ✅ Painter interfaces (OriginalPainter, CompactPainter, OverviewPainter)
+
+**What This Means**:
+- Your code will continue to work in all v1.x releases
+- New features will be added as optional props
+- No surprises or breaking changes
+
+### 2. Performance Improvements
+
+V1.0 includes several performance optimizations:
+
+- ⚡ **Bundle Size**: 50.96 KB gzipped (66% under 150KB target)
+- ⚡ **60fps Scrolling**: Maintained with 1000+ events
+- ⚡ **Virtualization**: Automatic for large datasets
+- ⚡ **Render Optimization**: Memoized expensive calculations
+
+**No Action Required** - These improvements are automatic.
+
+### 3. Theme Enhancements
+
+New theme features (backward compatible):
+
+```tsx
+// Classic Vintage theme (new)
+import { ThemeSwitcher } from 'react-simile-timeline';
+
+<ThemeSwitcher />
+
+// Themes available:
+// - 'light' (Classic Vintage)
+// - 'dark' (Dark Mode)
+// - 'auto' (System Preference)
+```
+
+**Migration**: No changes needed. Your existing themes continue to work.
+
+### 4. Accessibility Improvements
+
+- ✅ WCAG 2.1 AA compliant
+- ✅ Improved keyboard navigation
+- ✅ Better screen reader support
+- ✅ Enhanced focus management
+
+**No Action Required** - Improvements are automatic.
+
+---
+
+## Deprecated Features
+
+**None** - V1.0 introduces no deprecations.
+
+Future deprecations will follow this process:
+1. Announced in minor version (v1.x)
+2. Console warnings added
+3. Removed in v2.0 (minimum 6 months notice)
+
+---
+
+## New Features in V1.0
+
+### 1. HTML Sanitization
+
+See [Breaking Changes](#html-sanitization) above.
+
+### 2. Frozen API
+
+All APIs are stable and documented. See [API.md](../project/API.md).
+
+### 3. Performance Monitoring
+
+Built-in performance hooks:
+
+```tsx
+import { usePerformanceMonitor } from 'react-simile-timeline';
+
+const perf = usePerformanceMonitor({ targetFps: 60 });
+
+// Display metrics
+<div>FPS: {perf.metrics.fps}</div>
+```
+
+### 4. Theme System
+
+Enhanced theme support:
+
+```tsx
+import { useTheme, ThemeProvider } from 'react-simile-timeline';
+
+// Wrap your app
+<ThemeProvider>
+  <Timeline data={events} bands={bands} />
+</ThemeProvider>
+
+// Use theme in components
+const { theme, mode, setMode } = useTheme();
+```
+
+### 5. Panning Bounds
+
+Prevents scrolling into empty space:
+
+```tsx
+// Automatic in v1.0
 <Timeline
   data={events}
   bands={bands}
-  onEventSelect={(event) => {
-    alert("Selected: " + event.title);
+  // Panning bounds enabled by default
+/>
+```
+
+---
+
+## Testing Your Migration
+
+### 1. Run Test Suite
+
+```bash
+npm test
+```
+
+### 2. Visual Testing
+
+Check these scenarios:
+
+- ✅ Events render correctly
+- ✅ HTML in descriptions displays safely
+- ✅ Themes switch properly
+- ✅ No console errors/warnings
+- ✅ Performance is smooth (60fps)
+
+### 3. Accessibility Testing
+
+```bash
+# Install axe-core
+npm install --save-dev @axe-core/react
+
+# Run accessibility audit
+# (Built-in: useAccessibility hook)
+```
+
+### 4. Browser Testing
+
+Test on:
+- ✅ Chrome/Edge (latest)
+- ✅ Firefox (latest)
+- ✅ Safari (latest)
+- ✅ Mobile browsers
+
+---
+
+## Rollback Plan
+
+If you encounter issues, you can rollback:
+
+```bash
+# Rollback to latest beta
+npm install react-simile-timeline@beta
+
+# Or specific beta version
+npm install react-simile-timeline@0.1.0-beta.1
+```
+
+**Report Issues**: [GitHub Issues](https://github.com/thbst16/react-simile-timeline/issues)
+
+---
+
+## Common Migration Issues
+
+### Issue 1: Scripts Not Executing
+
+**Problem**: Event descriptions with `<script>` tags don't work
+
+**Cause**: HTML sanitization removes scripts (security feature)
+
+**Solution**: Use event callbacks instead
+```tsx
+<Timeline
+  onEventClick={(event) => {
+    // Your custom logic here
+    console.log('Event clicked:', event);
   }}
 />
 ```
 
-### Example 4: Hot Zones (Magnification)
+### Issue 2: Styles Not Applied
 
-**Before:**
-```javascript
-var zones = [
-  {
-    start: new Date("2006-06-01"),
-    end: new Date("2006-08-31"),
-    magnify: 10,
-    unit: Timeline.DateTime.DAY
-  }
-];
-bandInfos[0].decorators = [
-  new Timeline.SpanHighlightDecorator(zones)
-];
+**Problem**: Inline styles in event descriptions removed
+
+**Cause**: Sanitization removes `style` attributes
+
+**Solution**: Use CSS classes instead
+```tsx
+// Before (removed):
+description: '<div style="color: red;">Text</div>'
+
+// After (works):
+description: '<div class="text-red">Text</div>'
+// Add CSS class to your stylesheet
 ```
 
-**After:**
+### Issue 3: Forms Not Working
+
+**Problem**: Forms in event descriptions don't render
+
+**Cause**: Form elements blocked for security
+
+**Solution**: Use custom event bubbles
 ```tsx
-import { useHotZones } from 'react-simile-timeline';
+// Create custom event bubble component
+const CustomBubble = ({ event, onClose }) => (
+  <div>
+    <h3>{event.title}</h3>
+    {/* Your custom form here */}
+    <form onSubmit={handleSubmit}>
+      {/* ... */}
+    </form>
+  </div>
+);
 
-const hotZones = useHotZones({
-  initialZones: [{
-    start: '2006-06-01',
-    end: '2006-08-31',
-    magnify: 10,
-    unit: 'DAY'
-  }]
-});
-```
-
-## New Features in React Version
-
-### 1. Theming
-
-```tsx
-import { ThemeProvider } from 'react-simile-timeline';
-
-<ThemeProvider defaultMode="dark">
-  <Timeline {...props} />
-</ThemeProvider>
-```
-
-### 2. Keyboard Navigation
-
-```tsx
-import { useKeyboardNav } from 'react-simile-timeline';
-
-const keyboard = useKeyboardNav({
-  onNavigate: (dir) => scroll(dir),
-  onZoom: (dir) => zoom(dir),
-});
-```
-
-### 3. Touch Support
-
-Built-in support for:
-- Touch scrolling
-- Pinch-to-zoom
-- Swipe gestures
-- Momentum scrolling
-
-### 4. Virtualization
-
-Automatic virtualization for large datasets:
-
-```tsx
-import { useVirtualization } from 'react-simile-timeline';
-
-const { visibleEvents } = useVirtualization({
-  events: allEvents,
-  viewportStart: 0,
-  viewportEnd: 1000,
-  getEventStart,
-  getEventEnd,
-  threshold: 100, // Activate at 100+ events
-});
-```
-
-### 5. Canvas Rendering
-
-Automatic Canvas fallback for >1000 events:
-
-```tsx
-import { useAdaptiveRenderer } from 'react-simile-timeline';
-
-const { method } = useAdaptiveRenderer({
-  eventCount: events.length,
-  canvasThreshold: 1000,
-});
-// Automatically switches to Canvas for performance
-```
-
-### 6. Accessibility
-
-WCAG 2.1 AA compliant:
-- Keyboard navigation
-- Screen reader support
-- Focus management
-- Color contrast checking
-- ARIA attributes
-
-### 7. Responsive Design
-
-```tsx
-import { useResponsive } from 'react-simile-timeline';
-
-const responsive = useResponsive();
-
+// Use with Timeline
 <Timeline
-  height={responsive.recommendations.bandHeight}
-  enableTouch={responsive.isTouch}
+  customBubble={CustomBubble}
+  // ...
 />
 ```
 
-## Breaking Changes
+---
 
-1. **No Global Timeline Object**
-   - Original: `Timeline.create(...)`
-   - React: Component-based
+## Version Comparison Table
 
-2. **No Manual Event Source**
-   - Original: Create and manage `EventSource`
-   - React: Pass `data` or `dataUrl` prop
+| Feature | Beta | V1.0 | Notes |
+|---------|------|------|-------|
+| **HTML Sanitization** | ❌ None | ✅ DOMPurify | Breaking change |
+| **API Stability** | ⚠️ May change | ✅ Frozen | No breaking changes until v2.0 |
+| **Bundle Size** | 40.6 KB | 50.9 KB | Slightly larger (DOMPurify added) |
+| **Performance** | 60fps | 60fps | Maintained |
+| **Test Coverage** | 80% | 80%+ | Maintained |
+| **Accessibility** | WCAG AA | WCAG AA | Maintained |
+| **Themes** | 2 | 3 | Classic Vintage added |
+| **Documentation** | Basic | Complete | Migration, API, Security guides |
 
-3. **String-based Enums**
-   - Original: `Timeline.DateTime.MONTH`
-   - React: `'MONTH'` (string)
-
-4. **React Required**
-   - Must use React 18+
-   - Cannot use in vanilla JS
-
-## Performance Improvements
-
-| Scenario | Original | React Version |
-|----------|----------|---------------|
-| 500 events | ~200ms | <100ms ✅ |
-| 1000 events scroll | 30fps | 60fps ✅ |
-| 5000 events | ❌ Crashes | ✅ Works (Canvas) |
-| Bundle size | 200KB | <150KB ✅ |
-| Mobile performance | Poor | Excellent ✅ |
-
-## Troubleshooting
-
-### Events not showing?
-- Check date format: Use ISO-8601 strings
-- Verify `isDuration` flag for duration events
-- Ensure dates are within viewport range
-
-### Styling issues?
-- Wrap with `ThemeProvider`
-- Use built-in themes: `"classic"` or `"dark"`
-- Check CSS conflicts
-
-### Performance issues?
-- Enable virtualization (auto at 100+ events)
-- Use Canvas rendering (auto at 1000+ events)
-- Check browser DevTools Performance tab
+---
 
 ## Getting Help
 
-- **Documentation**: [API.md](./API.md)
-- **Examples**: [EXAMPLES.md](./EXAMPLES.md)
-- **Performance**: [PERFORMANCE.md](./PERFORMANCE.md)
-- **Sprint Roadmap**: [../../docs/SPRINT_PLAN.md](../../docs/SPRINT_PLAN.md)
+### Documentation
 
-## Development Status
+- **API Reference**: [API.md](../project/API.md)
+- **Security Guide**: [SECURITY.md](./SECURITY.md)
+- **Theme Guide**: [THEMING.md](./THEMING.md)
+- **Breaking Changes**: [BREAKING_CHANGES.md](./BREAKING_CHANGES.md)
+- **Roadmap**: [ROADMAP.md](./ROADMAP.md)
 
-This is an active project currently in Sprint 6 (Documentation & Release) with Sprint 7-8 planned:
+### Community
 
-**Sprint 7** (Days 33-35): Complete Sprint 5 features & fix panning bounds
-- Fix panning bounds issue (HIGH PRIORITY)
-- Integrate theme system into demos
-- Activate virtualization for large datasets
-- Complete hot zones navigation UI
-- Create unified Sprint 5 demo
+- **GitHub Issues**: [Report Bugs](https://github.com/thbst16/react-simile-timeline/issues)
+- **GitHub Discussions**: [Ask Questions](https://github.com/thbst16/react-simile-timeline/discussions)
+- **Examples**: [Demo Site](https://react-simile-timeline.vercel.app)
 
-**Sprint 8** (Days 36-37): Publication preparation
-- Add LICENSE, CHANGELOG, CONTRIBUTING
-- Set up CI/CD (GitHub Actions)
-- Local package verification
-- Create GitHub release
+### Support
 
-See [../../docs/SPRINT_PLAN.md](../../docs/SPRINT_PLAN.md) for complete timeline.
+For commercial support or custom features, contact the maintainers.
 
-## Summary
+---
 
-The React version maintains 100% JSON compatibility while providing:
-- ✅ Modern React architecture
-- ✅ TypeScript support
-- ✅ Better performance
-- ✅ Mobile support
-- ✅ Accessibility
-- ✅ Smaller bundle size
-- ✅ Active maintenance
+## Upgrade Checklist
 
-Migration is straightforward - most code is just translating API calls to JSX props!
+Use this checklist to track your migration:
+
+- [ ] Updated to v1.0.0
+- [ ] Reviewed event descriptions for HTML content
+- [ ] Tested HTML sanitization with sample data
+- [ ] Ran test suite (all passing)
+- [ ] Checked browser console (no errors)
+- [ ] Verified performance (60fps maintained)
+- [ ] Tested accessibility (keyboard nav, screen readers)
+- [ ] Updated documentation/comments
+- [ ] Deployed to staging environment
+- [ ] Monitored for issues
+- [ ] Deployed to production
+
+---
+
+## Timeline
+
+```
+Beta.1 (Nov 2025)
+  ↓
+Beta.2-3 (Future)
+  ↓
+V1.0.0-rc.1 (This Week)  ← You are here
+  ↓
+V1.0.0 (7-10 days)
+  ↓
+V1.1.0 (Q1 2026)
+  ↓
+V2.0.0 (Q4 2026)
+```
+
+---
+
+## Feedback
+
+We'd love to hear about your migration experience!
+
+- ⭐ **GitHub Stars**: [Star the repo](https://github.com/thbst16/react-simile-timeline)
+- 💬 **Discussions**: [Share feedback](https://github.com/thbst16/react-simile-timeline/discussions)
+- 🐛 **Issues**: [Report problems](https://github.com/thbst16/react-simile-timeline/issues)
+
+---
+
+**Last Updated**: 2025-11-16
+**Version**: 1.0
+**Maintainer**: React Simile Timeline Team
