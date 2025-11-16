@@ -316,7 +316,11 @@ export function BandV3({
       {viewport && (
         <div className="absolute inset-0" style={{ zIndex: 2 }}>
           <svg width={viewport.width} height={height} className="absolute inset-0">
-            {layoutItems.map((item) => painter.render(item, viewport, eventTheme, onEventClick))}
+            {layoutItems.map((item) => (
+              <g key={item.event.id || `event-${item.x}-${item.track}`}>
+                {painter.render(item, viewport, eventTheme, onEventClick)}
+              </g>
+            ))}
           </svg>
         </div>
       )}
