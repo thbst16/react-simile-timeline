@@ -10,9 +10,25 @@ import type { TimelineEvent } from 'react-simile-timeline';
 import {
   Timeline,
   ThemeProvider,
-  ThemeSwitcher,
   EventBubble,
+  useTheme,
 } from 'react-simile-timeline';
+
+// Simple theme switcher component for demo
+function ThemeSwitcher() {
+  const { mode, setMode } = useTheme();
+
+  return (
+    <button
+      onClick={() => setMode(mode === 'dark' ? 'light' : 'dark')}
+      className="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+      aria-label="Toggle theme"
+      title={`Switch to ${mode === 'dark' ? 'light' : 'dark'} mode`}
+    >
+      {mode === 'dark' ? '🌙' : '☀️'}
+    </button>
+  );
+}
 
 type DemoTimeline = 'world-history' | 'jfk' | 'world-cup-2006';
 
