@@ -1,0 +1,253 @@
+{
+  "dateTimeFormat": "iso8601",
+  "events": [
+    {
+      "start": "2006-06-09T18:00:00",
+      "title": "Opening Match: Germany vs Costa Rica",
+      "description": "Tournament opens with host Germany defeating Costa Rica 4-2 in Munich. Phillip Lahm scores after 6 minutes.",
+      "color": "#c9a961",
+      "track": 0
+    },
+    {
+      "start": "2006-06-10T15:00:00",
+      "title": "Poland vs Ecuador",
+      "description": "Ecuador wins 2-0 in Group A. Carlos Tenorio scores both goals.",
+      "color": "#8b7355",
+      "track": 1
+    },
+    {
+      "start": "2006-06-10T18:00:00",
+      "title": "England vs Paraguay",
+      "description": "England wins 1-0 thanks to a Carlos Gamarra own goal in the 3rd minute.",
+      "color": "#8b7355",
+      "track": 0
+    },
+    {
+      "start": "2006-06-11T15:00:00",
+      "title": "Argentina vs Côte d'Ivoire",
+      "description": "Argentina dominates 2-1. Hernan Crespo scores twice.",
+      "color": "#8b7355",
+      "track": 1
+    },
+    {
+      "start": "2006-06-12T18:00:00",
+      "title": "Brazil vs Croatia",
+      "description": "Brazil wins 1-0. Kaka scores the only goal in the opening match of Group F.",
+      "color": "#6b8e5f",
+      "track": 0
+    },
+    {
+      "start": "2006-06-13T18:00:00",
+      "title": "Italy vs Ghana",
+      "description": "Italy wins 2-0 in their Group E opener. Andrea Pirlo scores a spectacular goal from distance.",
+      "color": "#6b8e5f",
+      "track": 1
+    },
+    {
+      "start": "2006-06-14T21:00:00",
+      "title": "Spain vs Ukraine",
+      "description": "Spain wins 4-0 in dominant fashion. David Villa scores a hat-trick.",
+      "color": "#8b7355",
+      "track": 0
+    },
+    {
+      "start": "2006-06-15T15:00:00",
+      "title": "Netherlands vs Serbia and Montenegro",
+      "description": "Netherlands wins 1-0 with an Arjen Robben goal.",
+      "color": "#8b7355",
+      "track": 1
+    },
+    {
+      "start": "2006-06-16T15:00:00",
+      "title": "Mexico vs Iran",
+      "description": "Mexico wins 3-1. Omar Bravo scores twice for El Tri.",
+      "color": "#8b7355",
+      "track": 0
+    },
+    {
+      "start": "2006-06-17T15:00:00",
+      "title": "Italy vs USA - Battle of Nuremberg",
+      "description": "Italy draws 1-1 with USA in a match featuring 3 red cards and 5 yellow cards. One of the most controversial matches of the tournament.",
+      "color": "#a65a4a",
+      "track": 1
+    },
+    {
+      "start": "2006-06-18T21:00:00",
+      "title": "Argentina vs Serbia and Montenegro",
+      "description": "Argentina wins 6-0, the largest margin of victory in the tournament. Lionel Messi makes his World Cup debut.",
+      "color": "#c9a961",
+      "track": 0
+    },
+    {
+      "start": "2006-06-20T16:00:00",
+      "title": "Germany vs Ecuador",
+      "description": "Germany wins 3-0 to secure progression to knockout stages. Miroslav Klose scores twice.",
+      "color": "#8b7355",
+      "track": 1
+    },
+    {
+      "start": "2006-06-21T16:00:00",
+      "title": "England vs Sweden",
+      "description": "England draws 2-2. Joe Cole scores a spectacular volley, one of the goals of the tournament.",
+      "color": "#8b7355",
+      "track": 0
+    },
+    {
+      "start": "2006-06-22T16:00:00",
+      "title": "Brazil vs Japan",
+      "description": "Brazil wins 4-1 to top Group F. Ronaldo scores twice to move within one of Gerd Müller's World Cup goal record.",
+      "color": "#6b8e5f",
+      "track": 1
+    },
+    {
+      "start": "2006-06-23T16:00:00",
+      "title": "Italy vs Czech Republic",
+      "description": "Italy wins 2-0 to top Group E. Marco Materazzi and Filippo Inzaghi score.",
+      "color": "#6b8e5f",
+      "track": 0
+    },
+    {
+      "start": "2006-06-24T17:00:00",
+      "title": "Round of 16: Germany vs Sweden",
+      "description": "Germany wins 2-0. Lukas Podolski scores both goals to send Germany through to quarter-finals.",
+      "color": "#c9a961",
+      "track": 0
+    },
+    {
+      "start": "2006-06-24T21:00:00",
+      "title": "Round of 16: Argentina vs Mexico",
+      "description": "Argentina wins 2-1 in extra time. Maxi Rodriguez scores a stunning volley in the 98th minute.",
+      "color": "#c9a961",
+      "track": 1
+    },
+    {
+      "start": "2006-06-25T17:00:00",
+      "title": "Round of 16: England vs Ecuador",
+      "description": "England wins 1-0. David Beckham's free kick goal sends England to quarter-finals.",
+      "color": "#c9a961",
+      "track": 0
+    },
+    {
+      "start": "2006-06-25T21:00:00",
+      "title": "Round of 16: Portugal vs Netherlands",
+      "description": "Portugal wins 1-0 in the 'Battle of Nuremberg Part 2'. Match features 16 yellow cards and 4 red cards, setting a World Cup record.",
+      "color": "#a65a4a",
+      "track": 1
+    },
+    {
+      "start": "2006-06-26T17:00:00",
+      "title": "Round of 16: Italy vs Australia",
+      "description": "Italy wins 1-0 with a controversial last-minute penalty converted by Francesco Totti in the 95th minute.",
+      "color": "#c9a961",
+      "track": 0
+    },
+    {
+      "start": "2006-06-26T21:00:00",
+      "title": "Round of 16: Switzerland vs Ukraine",
+      "description": "Ukraine wins on penalties (3-0) after 0-0 draw. First scoreless penalty shootout in World Cup history.",
+      "color": "#c9a961",
+      "track": 1
+    },
+    {
+      "start": "2006-06-27T17:00:00",
+      "title": "Round of 16: Brazil vs Ghana",
+      "description": "Brazil wins 3-0. Ronaldo scores his 15th World Cup goal, breaking the all-time record.",
+      "color": "#c9a961",
+      "track": 0
+    },
+    {
+      "start": "2006-06-27T21:00:00",
+      "title": "Round of 16: Spain vs France",
+      "description": "France wins 3-1. Zinedine Zidane dominates midfield in one of his finest World Cup performances.",
+      "color": "#c9a961",
+      "track": 1
+    },
+    {
+      "start": "2006-06-30T17:00:00",
+      "title": "Quarter-Final: Germany vs Argentina",
+      "description": "Germany wins on penalties (4-2) after 1-1 draw. Jens Lehmann saves two penalties with note card tactics.",
+      "color": "#c9a961",
+      "track": 0
+    },
+    {
+      "start": "2006-06-30T21:00:00",
+      "title": "Quarter-Final: Italy vs Ukraine",
+      "description": "Italy wins 3-0. Gianluca Zambrotta, Luca Toni, and substitute Alessandro Del Piero score.",
+      "color": "#c9a961",
+      "track": 1
+    },
+    {
+      "start": "2006-07-01T17:00:00",
+      "title": "Quarter-Final: England vs Portugal",
+      "description": "Portugal wins on penalties (3-1) after 0-0 draw. Cristiano Ronaldo winks after Wayne Rooney red card in controversial moment.",
+      "color": "#a65a4a",
+      "track": 0
+    },
+    {
+      "start": "2006-07-01T21:00:00",
+      "title": "Quarter-Final: Brazil vs France",
+      "description": "France wins 1-0. Thierry Henry scores from a quickly-taken free kick while Roberto Carlos ties his shoe. Defending champions eliminated.",
+      "color": "#c9a961",
+      "track": 1
+    },
+    {
+      "start": "2006-07-04T21:00:00",
+      "title": "Semi-Final: Germany vs Italy",
+      "description": "Italy wins 2-0 in extra time with goals from Fabio Grosso (119') and Alessandro Del Piero (121'). Germany's dream ends in heartbreak.",
+      "color": "#c9a961",
+      "track": 0
+    },
+    {
+      "start": "2006-07-05T21:00:00",
+      "title": "Semi-Final: Portugal vs France",
+      "description": "France wins 1-0. Zinedine Zidane's penalty in the 33rd minute sends France to the final.",
+      "color": "#c9a961",
+      "track": 1
+    },
+    {
+      "start": "2006-07-08T21:00:00",
+      "title": "Third Place Play-off: Germany vs Portugal",
+      "description": "Germany wins 3-1 to secure third place. Bastian Schweinsteiger scores twice. Home fans celebrate bronze medal.",
+      "color": "#8b7355",
+      "track": 0
+    },
+    {
+      "start": "2006-07-09T20:00:00",
+      "title": "Final: Italy vs France",
+      "description": "Italy wins on penalties (5-3) after 1-1 draw. Zidane's headbutt on Materazzi in extra time overshadows the final. Italy claims their 4th World Cup title.",
+      "color": "#c9a961",
+      "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/2006_FIFA_World_Cup_logo.svg/200px-2006_FIFA_World_Cup_logo.svg.png"
+    },
+    {
+      "start": "2006-07-09T20:07:00",
+      "title": "Zidane Opens Scoring",
+      "description": "Zinedine Zidane converts a penalty with a Panenka chip for his 31st international goal.",
+      "color": "#6b8e5f"
+    },
+    {
+      "start": "2006-07-09T20:19:00",
+      "title": "Materazzi Equalizes",
+      "description": "Marco Materazzi heads in Andrea Pirlo's corner to make it 1-1.",
+      "color": "#6b8e5f"
+    },
+    {
+      "start": "2006-07-09T21:50:00",
+      "title": "The Headbutt",
+      "description": "Zinedine Zidane headbutts Marco Materazzi in the chest and is sent off with a red card in his final professional match. One of the most shocking moments in World Cup history.",
+      "color": "#a65a4a"
+    },
+    {
+      "start": "2006-07-09T22:25:00",
+      "title": "Italy Wins Penalty Shootout",
+      "description": "Italy wins the penalty shootout 5-3. Fabio Grosso scores the winning penalty. Italy are world champions for the 4th time.",
+      "color": "#c9a961"
+    },
+    {
+      "start": "2006-07-09T22:30:00",
+      "title": "Trophy Presentation",
+      "description": "Italy captain Fabio Cannavaro lifts the FIFA World Cup trophy. Germany 2006 concludes as one of the most memorable tournaments in history.",
+      "color": "#c9a961",
+      "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/2006_FIFA_World_Cup_logo.svg/200px-2006_FIFA_World_Cup_logo.svg.png"
+    }
+  ]
+}

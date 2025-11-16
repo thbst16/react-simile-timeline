@@ -415,36 +415,64 @@ Current test coverage: **348 tests passing** with >80% code coverage across all 
 
 ## 🏗️ Development
 
+### Library Development
+
 ```bash
 # Install dependencies
 npm install
 
-# Start development server
-npm run dev
-
 # Build library
 npm run build
 
-# Run tests in watch mode
-npm run test
+# Run tests
+npm test
+
+# Type check
+npm run type-check
+
+# Lint
+npm run lint
+```
+
+### Demo Development
+
+The demo is a separate application that imports from the published npm package:
+
+```bash
+cd demo
+
+# Install demo dependencies
+npm install
+
+# Run demo locally
+npm run dev
+
+# Build demo
+npm run build
 ```
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed development guidelines.
 
-## 📦 Package Structure
+## 📦 Repository Structure
 
 ```
 react-simile-timeline/
-├── src/
+├── src/                # Library source code
 │   ├── components/     # Timeline, Band, EventBubble, etc.
 │   ├── hooks/          # All custom hooks
 │   ├── types/          # TypeScript definitions
 │   ├── themes/         # Classic & Dark themes
 │   ├── utils/          # Utilities
 │   └── core/           # Core timeline logic
+├── demo/               # Standalone demo app (imports from npm)
+│   ├── src/            # Demo source
+│   ├── public/         # Demo assets
+│   └── package.json    # Demo dependencies (includes react-simile-timeline)
 ├── docs/               # Documentation
-└── public/             # Demo assets
+└── dist/               # Built library (published to npm)
 ```
+
+**Note**: The demo application lives in `demo/` and imports from the published `react-simile-timeline` package, showing exactly how developers will use the library in production.
 
 ## 🌐 Browser Support
 

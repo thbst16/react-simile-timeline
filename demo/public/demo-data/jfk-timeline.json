@@ -1,0 +1,213 @@
+{
+  "dateTimeFormat": "iso8601",
+  "events": [
+    {
+      "start": "1917-05-29",
+      "title": "Birth of John F. Kennedy",
+      "description": "John Fitzgerald Kennedy born in Brookline, Massachusetts, the second of nine children in the prominent Kennedy family.",
+      "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/John_F._Kennedy%2C_White_House_photo_portrait%2C_looking_up.jpg/220px-John_F._Kennedy%2C_White_House_photo_portrait%2C_looking_up.jpg",
+      "color": "#8b7355"
+    },
+    {
+      "start": "1920-01-01",
+      "title": "Near-Fatal Illness",
+      "description": "At age three, JFK nearly dies of scarlet fever, beginning a lifetime of health challenges.",
+      "color": "#a65a4a"
+    },
+    {
+      "start": "1936-09-01",
+      "title": "Enters Harvard University",
+      "description": "Kennedy begins his studies at Harvard University, following in his older brother Joe's footsteps.",
+      "color": "#8b7355"
+    },
+    {
+      "start": "1940-06-01",
+      "title": "Graduates from Harvard",
+      "description": "Kennedy graduates cum laude from Harvard University with a Bachelor of Arts in government.",
+      "color": "#8b7355"
+    },
+    {
+      "start": "1941-09-01",
+      "title": "Joins U.S. Naval Reserve",
+      "description": "Kennedy joins the U.S. Naval Reserve as World War II intensifies.",
+      "color": "#6b8e5f"
+    },
+    {
+      "start": "1943-08-02",
+      "title": "PT-109 Incident",
+      "description": "Kennedy's PT boat is rammed and sunk by a Japanese destroyer. He saves his crew, earning the Navy and Marine Corps Medal for heroism.",
+      "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/PT-109.jpg/300px-PT-109.jpg",
+      "color": "#6b8e5f"
+    },
+    {
+      "start": "1944-08-01",
+      "end": "1945-03-01",
+      "title": "Health Issues and Discharge",
+      "description": "Kennedy suffers from chronic back pain and other health problems related to his PT-109 injuries. Honorably discharged from active duty in early 1945.",
+      "isDuration": true,
+      "color": "#a65a4a"
+    },
+    {
+      "start": "1946-11-05",
+      "title": "Elected to U.S. House of Representatives",
+      "description": "Kennedy elected to represent Massachusetts' 11th congressional district at age 29.",
+      "color": "#8b7355"
+    },
+    {
+      "start": "1952-11-04",
+      "title": "Elected to U.S. Senate",
+      "description": "Kennedy defeats incumbent Republican Henry Cabot Lodge Jr. to become U.S. Senator from Massachusetts.",
+      "color": "#8b7355"
+    },
+    {
+      "start": "1953-09-12",
+      "title": "Marries Jacqueline Bouvier",
+      "description": "John F. Kennedy marries Jacqueline Lee Bouvier in Newport, Rhode Island. The wedding is one of the social events of the year.",
+      "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/John_F._Kennedy_and_Jacqueline_Bouvier_wedding.jpg/220px-John_F._Kennedy_and_Jacqueline_Bouvier_wedding.jpg",
+      "color": "#c9a961"
+    },
+    {
+      "start": "1954-10-21",
+      "end": "1955-02-01",
+      "title": "Back Surgery and Recovery",
+      "description": "Kennedy undergoes dangerous spinal surgery and nearly dies during recovery. During convalescence, he writes 'Profiles in Courage'.",
+      "isDuration": true,
+      "color": "#a65a4a"
+    },
+    {
+      "start": "1956-01-02",
+      "title": "'Profiles in Courage' Published",
+      "description": "Kennedy's book about eight U.S. Senators who defied popular opinion is published. It wins the Pulitzer Prize in 1957.",
+      "color": "#c9a961"
+    },
+    {
+      "start": "1957-11-27",
+      "title": "Daughter Caroline Born",
+      "description": "Caroline Bouvier Kennedy, the first child of John and Jacqueline Kennedy, is born.",
+      "color": "#c9a961"
+    },
+    {
+      "start": "1958-11-04",
+      "title": "Re-elected to Senate",
+      "description": "Kennedy wins re-election to the U.S. Senate by a landslide margin, positioning him for a presidential run.",
+      "color": "#8b7355"
+    },
+    {
+      "start": "1960-01-02",
+      "title": "Announces Presidential Campaign",
+      "description": "Kennedy announces his candidacy for President of the United States.",
+      "color": "#8b7355"
+    },
+    {
+      "start": "1960-07-13",
+      "title": "Democratic Nomination",
+      "description": "Kennedy wins the Democratic nomination for president at the Democratic National Convention in Los Angeles.",
+      "color": "#8b7355"
+    },
+    {
+      "start": "1960-09-26",
+      "title": "First Televised Presidential Debate",
+      "description": "Kennedy debates Richard Nixon in the first-ever televised presidential debate. His poised appearance gives him a critical advantage.",
+      "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Kennedy_Nixon_Debat_%282%29.jpg/300px-Kennedy_Nixon_Debat_%282%29.jpg",
+      "color": "#8b7355"
+    },
+    {
+      "start": "1960-11-08",
+      "title": "Wins Presidential Election",
+      "description": "Kennedy defeats Richard Nixon by a narrow margin to become the 35th President of the United States, the youngest person ever elected president at age 43.",
+      "color": "#c9a961"
+    },
+    {
+      "start": "1960-11-25",
+      "title": "Son John Jr. Born",
+      "description": "John Fitzgerald Kennedy Jr. is born, shortly after the presidential election.",
+      "color": "#c9a961"
+    },
+    {
+      "start": "1961-01-20",
+      "title": "Inauguration as 35th President",
+      "description": "Kennedy is inaugurated as President. His inaugural address includes the famous line: 'Ask not what your country can do for you—ask what you can do for your country.'",
+      "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/John_F._Kennedy_Inaugural_Address%2C_20_January_1961_%28full_version%29.ogv/300px--John_F._Kennedy_Inaugural_Address%2C_20_January_1961_%28full_version%29.ogv.jpg",
+      "color": "#c9a961"
+    },
+    {
+      "start": "1961-03-01",
+      "title": "Establishes Peace Corps",
+      "description": "Kennedy signs an executive order establishing the Peace Corps, a volunteer program providing international development assistance.",
+      "color": "#6b8e5f"
+    },
+    {
+      "start": "1961-04-17",
+      "title": "Bay of Pigs Invasion",
+      "description": "CIA-trained Cuban exiles attempt to invade Cuba at the Bay of Pigs. The operation is a complete failure, with all invaders killed or captured.",
+      "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Map_of_the_Bay_of_Pigs_Invasion.jpg/300px-Map_of_the_Bay_of_Pigs_Invasion.jpg",
+      "color": "#a65a4a"
+    },
+    {
+      "start": "1961-05-25",
+      "title": "Moon Landing Goal Announced",
+      "description": "Kennedy announces the goal of landing a man on the Moon before the end of the decade, launching the Apollo program.",
+      "color": "#6b8e5f"
+    },
+    {
+      "start": "1961-08-13",
+      "title": "Berlin Wall Erected",
+      "description": "East Germany begins construction of the Berlin Wall. Kennedy responds by reinforcing U.S. commitment to West Berlin.",
+      "color": "#a65a4a"
+    },
+    {
+      "start": "1962-02-20",
+      "title": "John Glenn Orbits Earth",
+      "description": "Astronaut John Glenn becomes the first American to orbit the Earth aboard Friendship 7, a major milestone in the Space Race.",
+      "color": "#6b8e5f"
+    },
+    {
+      "start": "1962-10-16",
+      "end": "1962-10-28",
+      "title": "Cuban Missile Crisis",
+      "description": "U.S. spy planes discover Soviet nuclear missile bases in Cuba. The 13-day standoff brings the world to the brink of nuclear war. Crisis resolved when Soviets agree to remove missiles.",
+      "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/CubanMissileCrisis_Image10.jpg/300px-CubanMissileCrisis_Image10.jpg",
+      "isDuration": true,
+      "color": "#a65a4a"
+    },
+    {
+      "start": "1963-06-26",
+      "title": "'Ich bin ein Berliner' Speech",
+      "description": "Kennedy delivers his famous speech in West Berlin, declaring solidarity with the people of Berlin: 'Ich bin ein Berliner' (I am a Berliner).",
+      "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/President_Kennedy_gives_Ich_bin_ein_Berliner_speech_on_June_26%2C_1963.jpg/300px-President_Kennedy_gives_Ich_bin_ein_Berliner_speech_on_June_26%2C_1963.jpg",
+      "color": "#c9a961"
+    },
+    {
+      "start": "1963-08-05",
+      "title": "Limited Nuclear Test Ban Treaty",
+      "description": "Kennedy signs the Limited Nuclear Test Ban Treaty with the Soviet Union and United Kingdom, prohibiting nuclear weapons tests in the atmosphere, outer space, and underwater.",
+      "color": "#6b8e5f"
+    },
+    {
+      "start": "1963-08-07",
+      "title": "Son Patrick Dies",
+      "description": "Patrick Bouvier Kennedy, born prematurely two days earlier, dies of infant respiratory distress syndrome. This tragedy deeply affects the Kennedy family.",
+      "color": "#a65a4a"
+    },
+    {
+      "start": "1963-11-22",
+      "title": "Assassination in Dallas",
+      "description": "President Kennedy is assassinated in Dallas, Texas, while riding in a motorcade. He is struck by rifle bullets and dies at Parkland Hospital. Lee Harvey Oswald is arrested for the murder.",
+      "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Jfk_rice_stadium_moon_speech.jpg/220px-Jfk_rice_stadium_moon_speech.jpg",
+      "color": "#000000"
+    },
+    {
+      "start": "1963-11-24",
+      "title": "Oswald Killed",
+      "description": "Lee Harvey Oswald, accused assassin of President Kennedy, is shot and killed by nightclub owner Jack Ruby while in police custody.",
+      "color": "#a65a4a"
+    },
+    {
+      "start": "1963-11-25",
+      "title": "State Funeral",
+      "description": "President Kennedy's state funeral is held in Washington, D.C. Leaders from 92 nations attend. He is buried at Arlington National Cemetery.",
+      "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Kennedy_funeral%2C_Arlington_National_Cemetery.jpg/300px-Kennedy_funeral%2C_Arlington_National_Cemetery.jpg",
+      "color": "#8b7355"
+    }
+  ]
+}
