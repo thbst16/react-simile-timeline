@@ -6,11 +6,9 @@
  */
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import type { TimelineEvent } from 'react-simile-timeline';
 import {
   Timeline,
   ThemeProvider,
-  EventBubble,
   useTheme,
 } from 'react-simile-timeline';
 
@@ -99,45 +97,24 @@ const heroEvents: TimelineEvent[] = [
 ];
 
 const LandingPageInner: React.FC = () => {
-  const [selectedEvent, setSelectedEvent] = useState<TimelineEvent | null>(null);
-  const [selectedDemo, setSelectedDemo] = useState<DemoTimeline>('world-history');
-  const [demoEvents, setDemoEvents] = useState<TimelineEvent[]>(heroEvents);
-  const [isLoading, setIsLoading] = useState(false);
+  const [selectedDemo, setSelectedDemo] = useState<DemoTimeline>('jfk');
+  const [dataUrl, setDataUrl] = useState<string>('/demo-data/jfk-timeline.json');
 
-  // Load demo timeline data
-  const loadDemoTimeline = useCallback(async (demo: DemoTimeline) => {
-    setIsLoading(true);
-    try {
-      let url: string;
-      switch (demo) {
-        case 'jfk':
-          url = '/demo-data/jfk-timeline.json';
-          break;
-        case 'world-cup-2006':
-          url = '/demo-data/world-cup-2006.json';
-          break;
-        case 'world-history':
-        default:
-          setDemoEvents(heroEvents);
-          setIsLoading(false);
-          return;
-      }
-
-      const response = await fetch(url);
-      const data = await response.json();
-      setDemoEvents(data.events || []);
-    } catch (error) {
-      console.error('Failed to load timeline:', error);
-      setDemoEvents(heroEvents);
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
-
-  // Load timeline when selection changes
+  // Update data URL when selection changes
   useEffect(() => {
-    loadDemoTimeline(selectedDemo);
-  }, [selectedDemo, loadDemoTimeline]);
+    switch (selectedDemo) {
+      case 'jfk':
+        setDataUrl('/demo-data/jfk-timeline.json');
+        break;
+      case 'world-cup-2006':
+        setDataUrl('/demo-data/world-cup-2006.json');
+        break;
+      case 'world-history':
+      default:
+        setDataUrl('/demo-data/jfk-timeline.json'); // Use JFK as default since we don't have world history JSON
+        break;
+    }
+  }, [selectedDemo]);
 
   // Configure bands based on selected timeline
   const bands = useMemo(() => {
@@ -191,10 +168,11 @@ const LandingPageInner: React.FC = () => {
     }
   }, [selectedDemo]);
 
-  // Reset handler
+  // Reset handler - simply reload by changing key
+  const [resetKey, setResetKey] = useState(0);
   const handleReset = useCallback(() => {
-    loadDemoTimeline(selectedDemo);
-  }, [selectedDemo, loadDemoTimeline]);
+    setResetKey(prev => prev + 1);
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
@@ -270,10 +248,7 @@ const LandingPageInner: React.FC = () => {
           </div>
 
           {/* Controls */}
-          <div className="mt-4 flex items-center justify-between">
-            <div className="text-sm text-gray-600 dark:text-gray-400">
-              <span className="font-medium">{demoEvents.length} events</span>
-            </div>
+          <div className="mt-4 flex items-center justify-end">
             <button
               onClick={handleReset}
               className="px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
@@ -287,21 +262,12 @@ const LandingPageInner: React.FC = () => {
       {/* Timeline */}
       <div className="max-w-7xl mx-auto px-4 pb-8">
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
-          {isLoading ? (
-            <div className="flex items-center justify-center h-96">
-              <div className="text-gray-600 dark:text-gray-400">
-                Loading timeline...
-              </div>
-            </div>
-          ) : (
-            <Timeline
-              data={demoEvents}
-              bands={bands}
-              width="100%"
-              height={600}
-              onEventClick={(event) => setSelectedEvent(event)}
-            />
-          )}
+          <Timeline
+            key={resetKey}
+            dataUrl={dataUrl}
+            width="100%"
+            height={600}
+          />
         </div>
       </div>
 
@@ -366,13 +332,6 @@ const LandingPageInner: React.FC = () => {
         </div>
       </div>
 
-      {/* Event Bubble */}
-      {selectedEvent && (
-        <EventBubble
-          event={selectedEvent}
-          onClose={() => setSelectedEvent(null)}
-        />
-      )}
     </div>
   );
 };
