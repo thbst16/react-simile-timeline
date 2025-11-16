@@ -80,15 +80,6 @@ pnpm add react-simile-timeline
 
 This installs **v1.0.0** (stable, production-ready).
 
-**Beta/Alpha Versions:**
-```bash
-# Beta version
-npm install react-simile-timeline@beta
-
-# Alpha version
-npm install react-simile-timeline@alpha
-```
-
 ## 🚀 Quick Start
 
 ```tsx
@@ -508,5 +499,3 @@ See [CHANGELOG.md](./CHANGELOG.md) for planned features.
 ---
 
 Made with ❤️ using React, TypeScript, and modern web technologies.
-
-**v0.1.0-alpha.0** - Initial alpha release
