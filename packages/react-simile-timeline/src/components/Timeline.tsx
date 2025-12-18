@@ -175,6 +175,9 @@ export function Timeline({
       style={containerStyle}
       data-theme={themeAttr}
       data-testid="timeline-container"
+      role="region"
+      aria-label="Timeline visualization"
+      aria-roledescription="interactive timeline"
     >
       <TimelineProvider
         events={timelineData.events}

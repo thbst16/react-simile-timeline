@@ -1,4 +1,4 @@
-import { useRef, useEffect, useCallback, useMemo } from 'react';
+import { useRef, useEffect, useCallback, useMemo, useState } from 'react';
 import type { BandConfig } from '../types';
 import { useTimelineContext } from './TimelineProvider';
 import { usePan } from '../hooks/usePan';
@@ -7,6 +7,9 @@ import { TimeScale } from './TimeScale';
 import { EventTrack } from './EventTrack';
 import { OverviewMarkers } from './OverviewMarkers';
 import { HotZones } from './HotZones';
+
+/** Height reserved for time scale at bottom of band (24px scale + 16px padding) */
+const TIME_SCALE_RESERVED_HEIGHT = 40;
 
 export interface BandProps {
   /** Band configuration */
@@ -31,7 +34,9 @@ function calculatePixelsPerMs(config: BandConfig): number {
  */
 export function Band({ config, isPrimary = false }: BandProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const eventsRef = useRef<HTMLDivElement>(null);
   const { state, actions, events, hotZones } = useTimelineContext();
+  const [eventsAreaHeight, setEventsAreaHeight] = useState(0);
 
   // Calculate this band's pixels per ms (may differ from primary), adjusted by zoom level
   const bandPixelsPerMs = useMemo(
@@ -133,8 +138,49 @@ export function Band({ config, isPrimary = false }: BandProps) {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isPrimary, actions]);
 
+  // Measure events area height for maxTracks calculation
+  useEffect(() => {
+    const eventsContainer = eventsRef.current;
+    if (!eventsContainer) return;
+
+    const measureHeight = () => {
+      setEventsAreaHeight(eventsContainer.clientHeight);
+    };
+
+    // Initial measurement
+    measureHeight();
+
+    // Observe resize
+    const resizeObserver = new ResizeObserver(measureHeight);
+    resizeObserver.observe(eventsContainer);
+
+    return () => resizeObserver.disconnect();
+  }, []);
+
+  // Calculate max tracks based on available height
+  const trackHeight = config.trackHeight || 24;
+  const trackGap = config.trackGap || 4;
+  // Reserve extra space at bottom to ensure events don't crowd the time scale
+  const BOTTOM_PADDING = 16;
+  // Default max tracks when height hasn't been measured yet (prevents initial overflow)
+  const DEFAULT_MAX_TRACKS = 6;
+  const maxTracks = useMemo(() => {
+    if (eventsAreaHeight <= 0) return DEFAULT_MAX_TRACKS;
+    // Calculate how many tracks fit in the available space
+    // Each track takes trackHeight + trackGap, plus padding at top and bottom
+    const availableHeight = eventsAreaHeight - BOTTOM_PADDING - trackGap;
+    const calculated = Math.max(1, Math.floor(availableHeight / (trackHeight + trackGap)));
+    // Cap at a reasonable maximum to prevent overcrowding
+    return Math.min(calculated, 10);
+  }, [eventsAreaHeight, trackHeight, trackGap]);
+
   // Parse height from config
   const height = config.height || (config.overview ? '30%' : '70%');
+
+  // Construct accessible label for band
+  const bandLabel = config.overview
+    ? `Overview band at ${config.timeUnit || 'year'} scale`
+    : `Detail band at ${config.timeUnit || 'day'} scale`;
 
   return (
     <div
@@ -150,6 +196,10 @@ export function Band({ config, isPrimary = false }: BandProps) {
       }}
       onPointerDown={panProps.onPointerDown}
       data-band-id={config.id}
+      role="group"
+      aria-label={bandLabel}
+      aria-roledescription="timeline band"
+      tabIndex={isPrimary ? 0 : -1}
     >
       {/* Hot zones layer - renders behind events */}
       {hotZones.length > 0 && (
@@ -164,13 +214,14 @@ export function Band({ config, isPrimary = false }: BandProps) {
 
       {/* Event layer - pointer-events:none allows drag on band, events re-enable on markers */}
       <div
+        ref={eventsRef}
         className="timeline-band__events"
         style={{
           position: 'absolute',
           top: 0,
           left: 0,
           right: 0,
-          bottom: 32, // Leave space for time scale + padding
+          bottom: TIME_SCALE_RESERVED_HEIGHT,
           overflow: 'hidden',
           pointerEvents: 'none',
         }}
@@ -190,9 +241,10 @@ export function Band({ config, isPrimary = false }: BandProps) {
             pixelsPerMs={bandPixelsPerMs}
             viewportWidth={state.viewportWidth}
             centerDate={state.centerDate}
-            trackHeight={config.trackHeight || 24}
-            trackGap={config.trackGap || 4}
+            trackHeight={trackHeight}
+            trackGap={trackGap}
             showLabels={config.showEventLabels !== false}
+            maxTracks={maxTracks}
           />
         )}
       </div>

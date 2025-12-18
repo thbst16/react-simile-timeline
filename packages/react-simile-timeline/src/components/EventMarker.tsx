@@ -15,6 +15,10 @@ export interface EventMarkerProps {
   isDuration?: boolean;
   /** Width of the duration tape in pixels */
   durationWidth?: number;
+  /** Whether the label should be sticky (event scrolled off-left) */
+  isSticky?: boolean;
+  /** X position for sticky label */
+  stickyX?: number;
 }
 
 /** Default event color */
@@ -35,6 +39,8 @@ export function EventMarker({
   showLabel = true,
   isDuration = false,
   durationWidth,
+  isSticky = false,
+  stickyX,
 }: EventMarkerProps) {
   const { state, actions } = useTimelineContext();
 
@@ -50,11 +56,21 @@ export function EventMarker({
   const color = event.color || (isDuration ? DEFAULT_TAPE_COLOR : DEFAULT_COLOR);
   const textColor = event.textColor || 'var(--event-text-color, #333)';
 
+  // Construct accessible label
+  const ariaLabel = event.description
+    ? `${event.title}: ${event.description.substring(0, 100)}${event.description.length > 100 ? '...' : ''}`
+    : event.title;
+
   // Render duration event as a tape/bar
   if (isDuration && durationWidth) {
+    // For sticky labels, calculate offset from parent's x position to achieve stickyX
+    // Parent is at position x, we want label at position stickyX
+    // So label offset = stickyX - x
+    const stickyOffset = isSticky && stickyX !== undefined ? stickyX - x : undefined;
+
     return (
       <div
-        className={`timeline-event timeline-event--duration ${isSelected ? 'timeline-event--selected' : ''} ${event.classname || ''}`}
+        className={`timeline-event timeline-event--duration ${isSelected ? 'timeline-event--selected' : ''} ${isSticky ? 'timeline-event--sticky' : ''} ${event.classname || ''}`}
         style={{
           position: 'absolute',
           left: x,
@@ -62,11 +78,16 @@ export function EventMarker({
           display: 'flex',
           alignItems: 'center',
           cursor: 'pointer',
-          zIndex: isSelected ? 10 : 1,
+          zIndex: isSelected ? 10 : (isSticky ? 5 : 1),
           pointerEvents: 'auto',
         }}
         onClick={handleClick}
         data-event-id={event.title}
+        role="button"
+        tabIndex={0}
+        aria-label={ariaLabel}
+        aria-pressed={isSelected}
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleClick(e as unknown as React.MouseEvent); } }}
       >
         {/* Duration tape */}
         <div
@@ -87,20 +108,29 @@ export function EventMarker({
           }}
         />
 
-        {/* Duration event label */}
+        {/* Duration event label - positioned sticky if needed */}
         {showLabel && (
           <span
-            className="timeline-event__label"
+            className={`timeline-event__label ${isSticky ? 'timeline-event__label--sticky' : ''}`}
             style={{
-              marginLeft: 6,
+              position: stickyOffset !== undefined ? 'absolute' : 'relative',
+              left: stickyOffset !== undefined ? stickyOffset : undefined,
+              marginLeft: stickyOffset !== undefined ? 0 : 6,
               fontSize: 'var(--event-font-size, 12px)',
               fontFamily: 'var(--timeline-font-family, system-ui, sans-serif)',
               color: textColor,
               whiteSpace: 'nowrap',
-              fontWeight: isSelected ? 600 : 400,
+              fontWeight: isSelected || isSticky ? 600 : 400,
               textShadow: '0 0 2px white, 0 0 2px white',
+              backgroundColor: isSticky ? 'rgba(255, 255, 255, 0.95)' : undefined,
+              padding: isSticky ? '2px 6px' : undefined,
+              borderRadius: isSticky ? 3 : undefined,
+              boxShadow: isSticky ? '0 1px 4px rgba(0,0,0,0.2)' : undefined,
+              display: 'flex',
+              alignItems: 'center',
             }}
           >
+            {isSticky && <span style={{ marginRight: 4, opacity: 0.5 }}>◀</span>}
             {event.title}
           </span>
         )}
@@ -109,10 +139,13 @@ export function EventMarker({
     );
   }
 
+  // For sticky point events, calculate offset from parent's x position
+  const stickyOffset = isSticky && stickyX !== undefined ? stickyX - x : undefined;
+
   // Render point event as a dot
   return (
     <div
-      className={`timeline-event ${isSelected ? 'timeline-event--selected' : ''} ${event.classname || ''}`}
+      className={`timeline-event ${isSelected ? 'timeline-event--selected' : ''} ${isSticky ? 'timeline-event--sticky' : ''} ${event.classname || ''}`}
       style={{
         position: 'absolute',
         left: x,
@@ -120,42 +153,70 @@ export function EventMarker({
         display: 'flex',
         alignItems: 'center',
         cursor: 'pointer',
-        zIndex: isSelected ? 10 : 1,
+        zIndex: isSelected ? 10 : (isSticky ? 5 : 1),
         pointerEvents: 'auto',
       }}
       onClick={handleClick}
       data-event-id={event.title}
+      role="button"
+      tabIndex={0}
+      aria-label={ariaLabel}
+      aria-pressed={isSelected}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleClick(e as unknown as React.MouseEvent); } }}
     >
-      {/* Event dot */}
-      <div
-        className="timeline-event__dot"
-        style={{
-          width: 10,
-          height: 10,
-          borderRadius: '50%',
-          backgroundColor: color,
-          flexShrink: 0,
-          boxShadow: isSelected
-            ? `0 0 0 2px white, 0 0 0 4px ${color}`
-            : 'none',
-          transition: 'box-shadow 0.15s ease',
-        }}
-      />
+      {/* Event dot - hidden when sticky (dot is off-screen) */}
+      {!isSticky && (
+        <div
+          className="timeline-event__dot"
+          style={{
+            width: 10,
+            height: 10,
+            borderRadius: '50%',
+            backgroundColor: color,
+            flexShrink: 0,
+            boxShadow: isSelected
+              ? `0 0 0 2px white, 0 0 0 4px ${color}`
+              : 'none',
+            transition: 'box-shadow 0.15s ease',
+          }}
+        />
+      )}
 
-      {/* Event label */}
+      {/* Event label - positioned sticky if needed */}
       {showLabel && (
         <span
-          className="timeline-event__label"
+          className={`timeline-event__label ${isSticky ? 'timeline-event__label--sticky' : ''}`}
           style={{
-            marginLeft: 6,
+            position: stickyOffset !== undefined ? 'absolute' : 'relative',
+            left: stickyOffset !== undefined ? stickyOffset : undefined,
+            marginLeft: stickyOffset !== undefined ? 0 : 6,
             fontSize: 'var(--event-font-size, 12px)',
             fontFamily: 'var(--timeline-font-family, system-ui, sans-serif)',
             color: textColor,
             whiteSpace: 'nowrap',
-            fontWeight: isSelected ? 600 : 400,
+            fontWeight: isSelected || isSticky ? 600 : 400,
             textShadow: '0 0 2px white, 0 0 2px white',
+            backgroundColor: isSticky ? 'rgba(255, 255, 255, 0.95)' : undefined,
+            padding: isSticky ? '2px 6px' : undefined,
+            borderRadius: isSticky ? 3 : undefined,
+            boxShadow: isSticky ? '0 1px 4px rgba(0,0,0,0.2)' : undefined,
+            display: 'flex',
+            alignItems: 'center',
           }}
         >
+          {isSticky && (
+            <span
+              className="timeline-event__sticky-indicator"
+              style={{
+                width: 8,
+                height: 8,
+                borderRadius: '50%',
+                backgroundColor: color,
+                marginRight: 6,
+                flexShrink: 0,
+              }}
+            />
+          )}
           {event.title}
         </span>
       )}

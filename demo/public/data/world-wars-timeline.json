@@ -1,0 +1,1056 @@
+{
+  "dateTimeFormat": "iso8601",
+  "events": [
+    {
+      "start": "1914-06-28",
+      "title": "Assassination of Archduke Franz Ferdinand",
+      "description": "Archduke Franz Ferdinand of Austria and his wife Sophie are assassinated in Sarajevo by Gavrilo Princip, a Bosnian Serb nationalist. This event triggers the chain of events leading to World War I.",
+      "color": "#8B0000"
+    },
+    {
+      "start": "1914-07-28",
+      "title": "Austria-Hungary Declares War on Serbia",
+      "description": "Austria-Hungary declares war on Serbia, marking the official start of World War I.",
+      "color": "#8B0000"
+    },
+    {
+      "start": "1914-08-01",
+      "title": "Germany Declares War on Russia",
+      "description": "Germany declares war on Russia, expanding the conflict. Germany also begins mobilization against France.",
+      "color": "#8B0000"
+    },
+    {
+      "start": "1914-08-03",
+      "title": "Germany Declares War on France",
+      "description": "Germany declares war on France and begins invasion through Belgium, triggering British entry into the war.",
+      "color": "#8B0000"
+    },
+    {
+      "start": "1914-08-04",
+      "title": "Britain Declares War on Germany",
+      "description": "Britain declares war on Germany following the invasion of neutral Belgium, bringing the British Empire into the conflict.",
+      "color": "#8B0000"
+    },
+    {
+      "start": "1914-08-04",
+      "end": "1918-11-11",
+      "title": "World War I",
+      "description": "The Great War: a global conflict primarily fought in Europe, involving the Allied Powers against the Central Powers.",
+      "isDuration": true,
+      "color": "#8B0000"
+    },
+    {
+      "start": "1914-08-26",
+      "end": "1914-08-30",
+      "title": "Battle of Tannenberg",
+      "description": "German forces decisively defeat the Russian Second Army in East Prussia, killing or capturing over 150,000 Russian soldiers.",
+      "isDuration": true,
+      "color": "#B22222"
+    },
+    {
+      "start": "1914-09-05",
+      "end": "1914-09-12",
+      "title": "First Battle of the Marne",
+      "description": "French and British forces halt the German advance on Paris, ending hopes of a quick German victory and beginning trench warfare.",
+      "isDuration": true,
+      "color": "#B22222"
+    },
+    {
+      "start": "1914-10-19",
+      "end": "1914-11-22",
+      "title": "First Battle of Ypres",
+      "description": "German forces attempt to capture Ypres in Belgium. The battle ends in stalemate and establishes the Western Front trench lines.",
+      "isDuration": true,
+      "color": "#B22222"
+    },
+    {
+      "start": "1915-02-19",
+      "end": "1916-01-09",
+      "title": "Gallipoli Campaign",
+      "description": "Allied attempt to capture Constantinople fails after months of brutal fighting. Over 500,000 casualties on both sides.",
+      "isDuration": true,
+      "color": "#B22222"
+    },
+    {
+      "start": "1915-04-22",
+      "title": "First Use of Poison Gas",
+      "description": "Germany uses chlorine gas at the Second Battle of Ypres, marking the first large-scale use of chemical weapons in warfare.",
+      "color": "#B22222"
+    },
+    {
+      "start": "1915-05-07",
+      "title": "Sinking of the Lusitania",
+      "description": "German U-boat sinks the British passenger liner RMS Lusitania, killing 1,198 including 128 Americans, shifting US public opinion.",
+      "color": "#8B0000"
+    },
+    {
+      "start": "1916-02-21",
+      "end": "1916-12-18",
+      "title": "Battle of Verdun",
+      "description": "One of the longest and bloodiest battles in history. German offensive against French positions results in over 700,000 combined casualties.",
+      "isDuration": true,
+      "color": "#B22222"
+    },
+    {
+      "start": "1916-05-31",
+      "end": "1916-06-01",
+      "title": "Battle of Jutland",
+      "description": "Largest naval battle of WWI between British Royal Navy and German High Seas Fleet. Tactically inconclusive but strategic British victory.",
+      "isDuration": true,
+      "color": "#B22222"
+    },
+    {
+      "start": "1916-07-01",
+      "end": "1916-11-18",
+      "title": "Battle of the Somme",
+      "description": "British and French offensive. First day sees 57,470 British casualties, the bloodiest day in British military history. Over 1 million total casualties.",
+      "isDuration": true,
+      "color": "#B22222"
+    },
+    {
+      "start": "1916-09-15",
+      "title": "First Use of Tanks",
+      "description": "British forces deploy tanks for the first time in battle during the Somme offensive, introducing a new era of mechanized warfare.",
+      "color": "#B22222"
+    },
+    {
+      "start": "1917-02-01",
+      "title": "Germany Resumes Unrestricted Submarine Warfare",
+      "description": "Germany announces resumption of unrestricted submarine warfare, sinking any ship in the war zone without warning.",
+      "color": "#8B0000"
+    },
+    {
+      "start": "1917-03-08",
+      "end": "1917-03-12",
+      "title": "February Revolution in Russia",
+      "description": "Popular uprising in Petrograd leads to abdication of Tsar Nicholas II and establishment of provisional government.",
+      "isDuration": true,
+      "color": "#CD5C5C"
+    },
+    {
+      "start": "1917-04-06",
+      "title": "United States Enters WWI",
+      "description": "US Congress declares war on Germany following unrestricted submarine warfare and the Zimmermann Telegram.",
+      "color": "#8B0000"
+    },
+    {
+      "start": "1917-04-09",
+      "end": "1917-05-16",
+      "title": "Battle of Arras",
+      "description": "British offensive in northern France. Initial success at Vimy Ridge but overall gains are limited.",
+      "isDuration": true,
+      "color": "#B22222"
+    },
+    {
+      "start": "1917-07-31",
+      "end": "1917-11-10",
+      "title": "Third Battle of Ypres (Passchendaele)",
+      "description": "British offensive in Flanders. Fought in terrible mud, results in approximately 500,000 combined casualties for minimal territorial gain.",
+      "isDuration": true,
+      "color": "#B22222"
+    },
+    {
+      "start": "1917-11-07",
+      "title": "October Revolution in Russia",
+      "description": "Bolsheviks led by Vladimir Lenin seize power in Petrograd, beginning the Russian Civil War and eventual Soviet state.",
+      "color": "#CD5C5C"
+    },
+    {
+      "start": "1917-11-20",
+      "end": "1917-12-07",
+      "title": "Battle of Cambrai",
+      "description": "First large-scale use of tanks in a combined arms offensive. Initial breakthrough but gains later reversed by German counterattack.",
+      "isDuration": true,
+      "color": "#B22222"
+    },
+    {
+      "start": "1918-01-08",
+      "title": "Wilson's Fourteen Points",
+      "description": "President Woodrow Wilson outlines his vision for post-war peace, including self-determination and a League of Nations.",
+      "color": "#8B0000"
+    },
+    {
+      "start": "1918-03-03",
+      "title": "Treaty of Brest-Litovsk",
+      "description": "Soviet Russia signs peace treaty with Central Powers, ending Russian participation in WWI and ceding vast territories.",
+      "color": "#8B0000"
+    },
+    {
+      "start": "1918-03-21",
+      "end": "1918-07-18",
+      "title": "German Spring Offensive",
+      "description": "Germany's final major offensive on the Western Front. Initial gains but ultimately fails to achieve decisive breakthrough.",
+      "isDuration": true,
+      "color": "#B22222"
+    },
+    {
+      "start": "1918-05-28",
+      "end": "1918-06-06",
+      "title": "Battle of Cantigny",
+      "description": "First major American offensive of the war. US 1st Division captures the village of Cantigny, demonstrating American combat capability.",
+      "isDuration": true,
+      "color": "#B22222"
+    },
+    {
+      "start": "1918-07-15",
+      "end": "1918-08-06",
+      "title": "Second Battle of the Marne",
+      "description": "Last major German offensive fails. Allied counterattack marks turning point; Germany now on defensive for remainder of war.",
+      "isDuration": true,
+      "color": "#B22222"
+    },
+    {
+      "start": "1918-08-08",
+      "end": "1918-11-11",
+      "title": "Hundred Days Offensive",
+      "description": "Final Allied offensive that leads to German defeat. Series of victories that break through German lines and end the war.",
+      "isDuration": true,
+      "color": "#B22222"
+    },
+    {
+      "start": "1918-09-26",
+      "end": "1918-11-11",
+      "title": "Meuse-Argonne Offensive",
+      "description": "Largest American military operation in history to that point. 1.2 million American soldiers participate, suffering 120,000+ casualties.",
+      "isDuration": true,
+      "color": "#B22222"
+    },
+    {
+      "start": "1918-11-09",
+      "title": "Kaiser Wilhelm II Abdicates",
+      "description": "German Kaiser Wilhelm II abdicates the throne and flees to the Netherlands. Germany is declared a republic.",
+      "color": "#8B0000"
+    },
+    {
+      "start": "1918-11-11",
+      "title": "Armistice Signed - WWI Ends",
+      "description": "Armistice signed at 5:00 AM, taking effect at 11:00 AM. The 'war to end all wars' concludes with over 17 million dead.",
+      "color": "#8B0000"
+    },
+    {
+      "start": "1919-01-18",
+      "end": "1919-06-28",
+      "title": "Paris Peace Conference",
+      "description": "Allied leaders meet to negotiate peace terms. The 'Big Four' - Wilson, Lloyd George, Clemenceau, and Orlando - shape post-war world.",
+      "isDuration": true,
+      "color": "#8B0000"
+    },
+    {
+      "start": "1919-06-28",
+      "title": "Treaty of Versailles Signed",
+      "description": "Germany signs Treaty of Versailles, accepting war guilt, territorial losses, military restrictions, and reparations. Seeds of WWII planted.",
+      "color": "#8B0000"
+    },
+    {
+      "start": "1920-01-10",
+      "title": "League of Nations Established",
+      "description": "First international organization for maintaining world peace begins operation. US Senate refuses to join.",
+      "color": "#8B0000"
+    },
+
+    {
+      "start": "1920-08-26",
+      "title": "19th Amendment Ratified",
+      "description": "Women gain the right to vote in the United States after decades of suffrage movement activism.",
+      "color": "#4A4A4A"
+    },
+    {
+      "start": "1921-01-01",
+      "end": "1929-10-28",
+      "title": "The Roaring Twenties",
+      "description": "Period of economic prosperity and cultural dynamism in Western societies, characterized by jazz, flappers, and rapid industrialization.",
+      "isDuration": true,
+      "color": "#696969"
+    },
+    {
+      "start": "1922-10-28",
+      "title": "Mussolini's March on Rome",
+      "description": "Benito Mussolini and his Fascist Party march on Rome. King Victor Emmanuel III appoints Mussolini Prime Minister of Italy.",
+      "color": "#4A4A4A"
+    },
+    {
+      "start": "1923-11-08",
+      "title": "Beer Hall Putsch",
+      "description": "Adolf Hitler attempts to seize power in Munich. The coup fails and Hitler is imprisoned, where he writes Mein Kampf.",
+      "color": "#4A4A4A"
+    },
+    {
+      "start": "1924-01-21",
+      "title": "Death of Vladimir Lenin",
+      "description": "Soviet leader Vladimir Lenin dies, leading to power struggle eventually won by Joseph Stalin.",
+      "color": "#4A4A4A"
+    },
+    {
+      "start": "1927-05-21",
+      "title": "Lindbergh Crosses Atlantic",
+      "description": "Charles Lindbergh completes first solo non-stop transatlantic flight in the Spirit of St. Louis.",
+      "color": "#696969"
+    },
+    {
+      "start": "1929-10-24",
+      "title": "Black Thursday",
+      "description": "Stock market begins to crash on the New York Stock Exchange. Investors trade 12.9 million shares in panic selling.",
+      "color": "#4A4A4A"
+    },
+    {
+      "start": "1929-10-29",
+      "title": "Black Tuesday - Stock Market Crash",
+      "description": "Stock market collapses as 16 million shares are traded. Billions of dollars lost, triggering the Great Depression worldwide.",
+      "color": "#4A4A4A"
+    },
+    {
+      "start": "1929-10-29",
+      "end": "1939-09-01",
+      "title": "The Great Depression",
+      "description": "Worst economic downturn in modern history. Global GDP falls by 15%, unemployment reaches 25% in US, widespread poverty and suffering.",
+      "isDuration": true,
+      "color": "#4A4A4A"
+    },
+    {
+      "start": "1930-06-17",
+      "title": "Smoot-Hawley Tariff Act",
+      "description": "US enacts protective tariffs on over 20,000 imported goods. Retaliatory tariffs worldwide worsen the Depression.",
+      "color": "#696969"
+    },
+    {
+      "start": "1931-05-11",
+      "title": "Creditanstalt Bank Collapses",
+      "description": "Austria's largest bank fails, triggering banking crises across Central Europe and deepening the global depression.",
+      "color": "#4A4A4A"
+    },
+    {
+      "start": "1931-09-18",
+      "title": "Japan Invades Manchuria",
+      "description": "Japanese forces seize Manchuria following the staged Mukden Incident. League of Nations condemns but takes no action.",
+      "color": "#000080"
+    },
+    {
+      "start": "1932-07-28",
+      "title": "Bonus Army Dispersed",
+      "description": "US Army forcibly evicts 43,000 WWI veterans from Washington D.C. who were demanding early payment of service bonuses.",
+      "color": "#696969"
+    },
+    {
+      "start": "1932-11-08",
+      "title": "FDR Elected President",
+      "description": "Franklin D. Roosevelt defeats Herbert Hoover in landslide victory, promising a 'New Deal' for Americans.",
+      "color": "#696969"
+    },
+    {
+      "start": "1933-01-30",
+      "title": "Hitler Becomes Chancellor of Germany",
+      "description": "Adolf Hitler is appointed Chancellor of Germany by President Hindenburg. Beginning of Nazi regime.",
+      "color": "#000080"
+    },
+    {
+      "start": "1933-02-27",
+      "title": "Reichstag Fire",
+      "description": "German parliament building burns. Nazis blame Communists and use the crisis to consolidate power.",
+      "color": "#000080"
+    },
+    {
+      "start": "1933-03-04",
+      "title": "FDR Inaugurated",
+      "description": "Roosevelt delivers famous 'The only thing we have to fear is fear itself' speech and begins New Deal programs.",
+      "color": "#696969"
+    },
+    {
+      "start": "1933-03-09",
+      "end": "1933-06-16",
+      "title": "First Hundred Days",
+      "description": "FDR's first hundred days see unprecedented legislative action: Emergency Banking Act, CCC, AAA, TVA, NIRA, and more.",
+      "isDuration": true,
+      "color": "#696969"
+    },
+    {
+      "start": "1933-03-20",
+      "title": "Dachau Concentration Camp Opens",
+      "description": "First Nazi concentration camp opens near Munich, initially for political prisoners. Model for later death camps.",
+      "color": "#000080"
+    },
+    {
+      "start": "1933-03-23",
+      "title": "Enabling Act Passed",
+      "description": "German parliament passes law giving Hitler dictatorial powers, effectively ending the Weimar Republic.",
+      "color": "#000080"
+    },
+    {
+      "start": "1933-12-05",
+      "title": "Prohibition Repealed",
+      "description": "21st Amendment ratified, ending the 13-year prohibition on alcohol in the United States.",
+      "color": "#696969"
+    },
+    {
+      "start": "1934-06-30",
+      "end": "1934-07-02",
+      "title": "Night of the Long Knives",
+      "description": "Hitler purges the SA leadership, including Ernst Röhm. At least 85 killed as Hitler consolidates power.",
+      "isDuration": true,
+      "color": "#000080"
+    },
+    {
+      "start": "1934-08-02",
+      "title": "Hitler Becomes Führer",
+      "description": "Following President Hindenburg's death, Hitler combines offices of President and Chancellor, becoming absolute dictator.",
+      "color": "#000080"
+    },
+    {
+      "start": "1935-03-16",
+      "title": "Germany Rejects Versailles Treaty",
+      "description": "Hitler announces rearmament and reintroduction of conscription, openly violating the Treaty of Versailles.",
+      "color": "#000080"
+    },
+    {
+      "start": "1935-08-14",
+      "title": "Social Security Act Signed",
+      "description": "FDR signs Social Security Act, establishing retirement benefits, unemployment insurance, and aid to dependent children.",
+      "color": "#696969"
+    },
+    {
+      "start": "1935-09-15",
+      "title": "Nuremberg Laws Enacted",
+      "description": "Nazi Germany passes anti-Semitic laws stripping Jews of citizenship and forbidding marriage with non-Jews.",
+      "color": "#000080"
+    },
+    {
+      "start": "1935-10-03",
+      "title": "Italy Invades Ethiopia",
+      "description": "Mussolini's Italy invades Ethiopia. League of Nations sanctions prove ineffective.",
+      "color": "#000080"
+    },
+    {
+      "start": "1936-03-07",
+      "title": "Germany Remilitarizes Rhineland",
+      "description": "German troops enter the demilitarized Rhineland. France and Britain protest but take no action.",
+      "color": "#000080"
+    },
+    {
+      "start": "1936-07-17",
+      "end": "1939-04-01",
+      "title": "Spanish Civil War",
+      "description": "Nationalist forces under Franco, aided by Germany and Italy, fight Republican government. Prelude to WWII with 500,000 dead.",
+      "isDuration": true,
+      "color": "#000080"
+    },
+    {
+      "start": "1936-10-25",
+      "title": "Rome-Berlin Axis Formed",
+      "description": "Germany and Italy sign treaty of friendship, forming the Axis alliance that would later include Japan.",
+      "color": "#000080"
+    },
+    {
+      "start": "1937-05-06",
+      "title": "Hindenburg Disaster",
+      "description": "German airship Hindenburg explodes while landing in New Jersey, killing 36 and ending the era of passenger airships.",
+      "color": "#696969"
+    },
+    {
+      "start": "1937-07-07",
+      "title": "Second Sino-Japanese War Begins",
+      "description": "Japan invades China proper following the Marco Polo Bridge Incident. Beginning of WWII in Asia.",
+      "color": "#000080"
+    },
+    {
+      "start": "1937-12-13",
+      "end": "1938-01-31",
+      "title": "Rape of Nanking",
+      "description": "Japanese forces capture Nanking (Nanjing). Mass murder, rape, and looting kill an estimated 200,000-300,000 Chinese civilians.",
+      "isDuration": true,
+      "color": "#000080"
+    },
+    {
+      "start": "1938-03-12",
+      "title": "Anschluss - Germany Annexes Austria",
+      "description": "German troops enter Austria, which is incorporated into the Third Reich. Britain and France protest but do not intervene.",
+      "color": "#000080"
+    },
+    {
+      "start": "1938-09-30",
+      "title": "Munich Agreement Signed",
+      "description": "Britain, France, Germany, and Italy agree to German annexation of Sudetenland. Chamberlain declares 'peace for our time.'",
+      "color": "#000080"
+    },
+    {
+      "start": "1938-11-09",
+      "end": "1938-11-10",
+      "title": "Kristallnacht (Night of Broken Glass)",
+      "description": "Nazi-organized pogrom against Jews throughout Germany and Austria. 91 killed, 30,000 sent to concentration camps, 7,500 businesses destroyed.",
+      "isDuration": true,
+      "color": "#000080"
+    },
+    {
+      "start": "1939-03-15",
+      "title": "Germany Occupies Czechoslovakia",
+      "description": "Germany occupies remainder of Czechoslovakia, violating Munich Agreement and proving appeasement has failed.",
+      "color": "#000080"
+    },
+    {
+      "start": "1939-08-23",
+      "title": "Nazi-Soviet Pact Signed",
+      "description": "Germany and Soviet Union sign non-aggression pact with secret protocol dividing Eastern Europe between them.",
+      "color": "#000080"
+    },
+    {
+      "start": "1939-09-01",
+      "title": "Germany Invades Poland - WWII Begins",
+      "description": "German forces launch blitzkrieg against Poland without declaration of war. World War II in Europe begins.",
+      "color": "#000080"
+    },
+    {
+      "start": "1939-09-01",
+      "end": "1945-09-02",
+      "title": "World War II",
+      "description": "Deadliest conflict in human history. Involves over 30 countries and results in 70-85 million deaths including the Holocaust.",
+      "isDuration": true,
+      "color": "#000080"
+    },
+    {
+      "start": "1939-09-03",
+      "title": "Britain and France Declare War on Germany",
+      "description": "Honoring their treaty obligations to Poland, Britain and France declare war on Germany.",
+      "color": "#000080"
+    },
+    {
+      "start": "1939-09-17",
+      "title": "Soviet Union Invades Poland",
+      "description": "Soviet forces invade eastern Poland per the secret Nazi-Soviet pact. Poland partitioned between Germany and USSR.",
+      "color": "#000080"
+    },
+    {
+      "start": "1939-11-30",
+      "end": "1940-03-13",
+      "title": "Winter War",
+      "description": "Soviet Union invades Finland. Despite initial Finnish successes, peace treaty cedes territory to USSR.",
+      "isDuration": true,
+      "color": "#4169E1"
+    },
+    {
+      "start": "1940-04-09",
+      "end": "1940-06-10",
+      "title": "German Invasion of Denmark and Norway",
+      "description": "Germany launches surprise invasion. Denmark falls in hours; Norway fights for two months before surrendering.",
+      "isDuration": true,
+      "color": "#4169E1"
+    },
+    {
+      "start": "1940-05-10",
+      "title": "Winston Churchill Becomes Prime Minister",
+      "description": "Churchill replaces Neville Chamberlain as British PM, promising 'blood, toil, tears and sweat.'",
+      "color": "#6495ED"
+    },
+    {
+      "start": "1940-05-10",
+      "end": "1940-06-25",
+      "title": "Fall of France",
+      "description": "Germany invades France through Belgium and the Ardennes, bypassing Maginot Line. France surrenders in 6 weeks.",
+      "isDuration": true,
+      "color": "#4169E1"
+    },
+    {
+      "start": "1940-05-26",
+      "end": "1940-06-04",
+      "title": "Dunkirk Evacuation",
+      "description": "Operation Dynamo evacuates 338,000 Allied troops from beaches of Dunkirk. 'Miracle of the little ships.'",
+      "isDuration": true,
+      "color": "#4169E1"
+    },
+    {
+      "start": "1940-06-22",
+      "title": "France Signs Armistice with Germany",
+      "description": "France surrenders. Northern France occupied; Vichy government established in south under German supervision.",
+      "color": "#000080"
+    },
+    {
+      "start": "1940-07-10",
+      "end": "1940-10-31",
+      "title": "Battle of Britain",
+      "description": "German Luftwaffe attempts to gain air superiority over Britain. RAF victory prevents German invasion. 'Never was so much owed by so many to so few.'",
+      "isDuration": true,
+      "color": "#4169E1"
+    },
+    {
+      "start": "1940-09-07",
+      "end": "1941-05-11",
+      "title": "The Blitz",
+      "description": "German bombing campaign against British cities. London bombed for 57 consecutive nights. Over 43,000 civilians killed.",
+      "isDuration": true,
+      "color": "#4169E1"
+    },
+    {
+      "start": "1940-09-27",
+      "title": "Tripartite Pact Signed",
+      "description": "Germany, Italy, and Japan sign military alliance, formally creating the Axis powers.",
+      "color": "#000080"
+    },
+    {
+      "start": "1941-03-11",
+      "title": "Lend-Lease Act Signed",
+      "description": "FDR signs act allowing US to supply weapons to Britain and other allies. US becomes 'arsenal of democracy.'",
+      "color": "#6495ED"
+    },
+    {
+      "start": "1941-04-06",
+      "end": "1941-06-01",
+      "title": "Invasion of Yugoslavia and Greece",
+      "description": "Germany invades Balkans to secure southern flank before attacking USSR. Both countries fall within weeks.",
+      "isDuration": true,
+      "color": "#4169E1"
+    },
+    {
+      "start": "1941-05-27",
+      "title": "Bismarck Sunk",
+      "description": "German battleship Bismarck, the most powerful warship in the Atlantic, is sunk by British Royal Navy after epic chase.",
+      "color": "#4169E1"
+    },
+    {
+      "start": "1941-06-22",
+      "title": "Operation Barbarossa Begins",
+      "description": "Germany launches largest military operation in history, invading Soviet Union with 3.8 million troops on a 2,900 km front.",
+      "color": "#4169E1"
+    },
+    {
+      "start": "1941-06-22",
+      "end": "1945-05-08",
+      "title": "Eastern Front",
+      "description": "War between Nazi Germany and Soviet Union. Deadliest theater of WWII with over 30 million military and civilian deaths.",
+      "isDuration": true,
+      "color": "#4169E1"
+    },
+    {
+      "start": "1941-08-14",
+      "title": "Atlantic Charter Signed",
+      "description": "FDR and Churchill issue joint declaration of war aims, laying groundwork for United Nations and post-war order.",
+      "color": "#6495ED"
+    },
+    {
+      "start": "1941-09-08",
+      "end": "1944-01-27",
+      "title": "Siege of Leningrad",
+      "description": "German and Finnish forces besiege Leningrad for 872 days. Over 1 million civilians die, mostly from starvation.",
+      "isDuration": true,
+      "color": "#4169E1"
+    },
+    {
+      "start": "1941-10-02",
+      "end": "1942-01-07",
+      "title": "Battle of Moscow",
+      "description": "German offensive to capture Soviet capital. Soviet counteroffensive pushes Germans back, ending hope of quick victory.",
+      "isDuration": true,
+      "color": "#4169E1"
+    },
+    {
+      "start": "1941-12-07",
+      "title": "Attack on Pearl Harbor",
+      "description": "Japan launches surprise attack on US Pacific Fleet at Pearl Harbor. 2,403 Americans killed. 'A date which will live in infamy.'",
+      "color": "#000080"
+    },
+    {
+      "start": "1941-12-08",
+      "title": "United States Declares War on Japan",
+      "description": "Congress declares war on Japan with only one dissenting vote. US fully enters World War II.",
+      "color": "#000080"
+    },
+    {
+      "start": "1941-12-11",
+      "title": "Germany and Italy Declare War on US",
+      "description": "Hitler and Mussolini declare war on the United States. US now fighting on two fronts.",
+      "color": "#000080"
+    },
+    {
+      "start": "1942-01-20",
+      "title": "Wannsee Conference",
+      "description": "Nazi officials meet to coordinate the 'Final Solution' - the systematic genocide of European Jews.",
+      "color": "#000080"
+    },
+    {
+      "start": "1942-02-19",
+      "title": "Japanese-American Internment Begins",
+      "description": "FDR signs Executive Order 9066 authorizing internment of 120,000 Japanese Americans in concentration camps.",
+      "color": "#6495ED"
+    },
+    {
+      "start": "1942-04-18",
+      "title": "Doolittle Raid",
+      "description": "US B-25 bombers raid Tokyo from aircraft carrier. Minimal damage but major morale boost for America.",
+      "color": "#4169E1"
+    },
+    {
+      "start": "1942-05-04",
+      "end": "1942-05-08",
+      "title": "Battle of the Coral Sea",
+      "description": "First naval battle fought entirely by aircraft. Japanese advance on Port Moresby halted. Tactical draw but strategic Allied victory.",
+      "isDuration": true,
+      "color": "#4169E1"
+    },
+    {
+      "start": "1942-06-04",
+      "end": "1942-06-07",
+      "title": "Battle of Midway",
+      "description": "Turning point of Pacific War. US sinks four Japanese carriers, ending Japanese naval superiority.",
+      "isDuration": true,
+      "color": "#4169E1"
+    },
+    {
+      "start": "1942-08-07",
+      "end": "1943-02-09",
+      "title": "Battle of Guadalcanal",
+      "description": "First major Allied offensive in Pacific. After six months of brutal fighting, Japan withdraws from the island.",
+      "isDuration": true,
+      "color": "#4169E1"
+    },
+    {
+      "start": "1942-08-23",
+      "end": "1943-02-02",
+      "title": "Battle of Stalingrad",
+      "description": "Bloodiest battle in human history. Soviet victory destroys German 6th Army. Turning point of the Eastern Front.",
+      "isDuration": true,
+      "color": "#4169E1"
+    },
+    {
+      "start": "1942-10-23",
+      "end": "1942-11-11",
+      "title": "Second Battle of El Alamein",
+      "description": "British victory in Egypt turns tide in North Africa. Montgomery defeats Rommel's Afrika Korps.",
+      "isDuration": true,
+      "color": "#4169E1"
+    },
+    {
+      "start": "1942-11-08",
+      "title": "Operation Torch",
+      "description": "Allied invasion of French North Africa. First major Anglo-American ground operation in European theater.",
+      "color": "#4169E1"
+    },
+    {
+      "start": "1943-01-14",
+      "end": "1943-01-24",
+      "title": "Casablanca Conference",
+      "description": "FDR and Churchill meet and announce policy of 'unconditional surrender' for Axis powers.",
+      "isDuration": true,
+      "color": "#6495ED"
+    },
+    {
+      "start": "1943-04-19",
+      "end": "1943-05-16",
+      "title": "Warsaw Ghetto Uprising",
+      "description": "Jewish resistance fighters in Warsaw Ghetto revolt against Nazi deportations. Brutally suppressed after nearly a month.",
+      "isDuration": true,
+      "color": "#4169E1"
+    },
+    {
+      "start": "1943-05-13",
+      "title": "Axis Forces Surrender in North Africa",
+      "description": "Over 275,000 Axis troops surrender in Tunisia, ending the North African campaign.",
+      "color": "#4169E1"
+    },
+    {
+      "start": "1943-07-05",
+      "end": "1943-08-23",
+      "title": "Battle of Kursk",
+      "description": "Largest tank battle in history. Soviet victory ends German offensive capability on Eastern Front.",
+      "isDuration": true,
+      "color": "#4169E1"
+    },
+    {
+      "start": "1943-07-10",
+      "end": "1943-08-17",
+      "title": "Allied Invasion of Sicily",
+      "description": "Operation Husky lands Allied forces in Sicily, first invasion of Axis territory in Europe.",
+      "isDuration": true,
+      "color": "#4169E1"
+    },
+    {
+      "start": "1943-07-25",
+      "title": "Mussolini Deposed",
+      "description": "Italian Fascist Grand Council votes to remove Mussolini from power. He is arrested on King's orders.",
+      "color": "#6495ED"
+    },
+    {
+      "start": "1943-09-03",
+      "title": "Italy Surrenders",
+      "description": "Italy signs armistice with Allies. Germany immediately occupies northern Italy.",
+      "color": "#000080"
+    },
+    {
+      "start": "1943-09-09",
+      "end": "1945-05-02",
+      "title": "Italian Campaign",
+      "description": "Allied forces fight up Italian peninsula against German defenders. Brutal mountain warfare continues until war's end.",
+      "isDuration": true,
+      "color": "#4169E1"
+    },
+    {
+      "start": "1943-11-28",
+      "end": "1943-12-01",
+      "title": "Tehran Conference",
+      "description": "First meeting of 'Big Three' - FDR, Churchill, Stalin. Agree on Operation Overlord and Soviet offensive.",
+      "isDuration": true,
+      "color": "#6495ED"
+    },
+    {
+      "start": "1944-01-22",
+      "end": "1944-06-05",
+      "title": "Battle of Anzio",
+      "description": "Allied amphibious landing south of Rome becomes bogged down for four months before breakout.",
+      "isDuration": true,
+      "color": "#4169E1"
+    },
+    {
+      "start": "1944-06-04",
+      "title": "Liberation of Rome",
+      "description": "Allied forces enter Rome, the first Axis capital to fall. Hitler orders German retreat.",
+      "color": "#4169E1"
+    },
+    {
+      "start": "1944-06-06",
+      "title": "D-Day - Normandy Invasion",
+      "description": "Largest amphibious invasion in history. 156,000 Allied troops land on five beaches in Normandy, France.",
+      "color": "#000080"
+    },
+    {
+      "start": "1944-06-06",
+      "end": "1944-08-25",
+      "title": "Battle of Normandy",
+      "description": "Allied forces break out from beachheads and liberate northern France. Over 425,000 Allied and German casualties.",
+      "isDuration": true,
+      "color": "#4169E1"
+    },
+    {
+      "start": "1944-06-15",
+      "end": "1944-07-09",
+      "title": "Battle of Saipan",
+      "description": "US captures Saipan in the Marianas, providing base for B-29 bombers to reach Japan.",
+      "isDuration": true,
+      "color": "#4169E1"
+    },
+    {
+      "start": "1944-06-19",
+      "end": "1944-06-20",
+      "title": "Battle of the Philippine Sea",
+      "description": "'Great Marianas Turkey Shoot' - US destroys Japanese naval aviation, sinking 3 carriers and 600+ aircraft.",
+      "isDuration": true,
+      "color": "#4169E1"
+    },
+    {
+      "start": "1944-06-22",
+      "end": "1944-08-19",
+      "title": "Operation Bagration",
+      "description": "Massive Soviet offensive destroys German Army Group Center. 400,000+ German casualties, liberation of Belarus.",
+      "isDuration": true,
+      "color": "#4169E1"
+    },
+    {
+      "start": "1944-07-20",
+      "title": "July 20 Plot Against Hitler",
+      "description": "German officers attempt to assassinate Hitler with bomb. Hitler survives; conspirators executed.",
+      "color": "#6495ED"
+    },
+    {
+      "start": "1944-08-01",
+      "end": "1944-10-02",
+      "title": "Warsaw Uprising",
+      "description": "Polish Home Army rises against German occupation. Soviet forces halt at the Vistula as Germans crush revolt.",
+      "isDuration": true,
+      "color": "#4169E1"
+    },
+    {
+      "start": "1944-08-15",
+      "end": "1944-09-14",
+      "title": "Operation Dragoon",
+      "description": "Allied invasion of southern France. German forces retreat north to avoid encirclement.",
+      "isDuration": true,
+      "color": "#4169E1"
+    },
+    {
+      "start": "1944-08-25",
+      "title": "Liberation of Paris",
+      "description": "Free French forces and US 4th Infantry Division liberate Paris. De Gaulle leads victory parade.",
+      "color": "#4169E1"
+    },
+    {
+      "start": "1944-09-17",
+      "end": "1944-09-25",
+      "title": "Operation Market Garden",
+      "description": "Bold Allied airborne operation to capture bridges in Netherlands fails at Arnhem. 'A bridge too far.'",
+      "isDuration": true,
+      "color": "#4169E1"
+    },
+    {
+      "start": "1944-10-20",
+      "end": "1944-12-31",
+      "title": "Battle of Leyte Gulf",
+      "description": "Largest naval battle in history. US destroys remaining Japanese naval power, liberates Philippines.",
+      "isDuration": true,
+      "color": "#4169E1"
+    },
+    {
+      "start": "1944-10-25",
+      "title": "First Kamikaze Attacks",
+      "description": "Japanese begin systematic suicide attacks against Allied ships in Battle of Leyte Gulf.",
+      "color": "#4169E1"
+    },
+    {
+      "start": "1944-12-16",
+      "end": "1945-01-25",
+      "title": "Battle of the Bulge",
+      "description": "Germany's last major offensive in the West. Initial success but lacks fuel; 186,000 American casualties.",
+      "isDuration": true,
+      "color": "#4169E1"
+    },
+    {
+      "start": "1945-01-12",
+      "end": "1945-02-02",
+      "title": "Vistula-Oder Offensive",
+      "description": "Massive Soviet offensive advances from Poland to within 70 km of Berlin.",
+      "isDuration": true,
+      "color": "#4169E1"
+    },
+    {
+      "start": "1945-01-27",
+      "title": "Liberation of Auschwitz",
+      "description": "Soviet forces liberate Auschwitz concentration camp complex, finding evidence of mass murder of over 1 million Jews.",
+      "color": "#4169E1"
+    },
+    {
+      "start": "1945-02-04",
+      "end": "1945-02-11",
+      "title": "Yalta Conference",
+      "description": "Big Three meet in Crimea. Agree on German occupation zones, UN, and Soviet entry into Pacific war.",
+      "isDuration": true,
+      "color": "#6495ED"
+    },
+    {
+      "start": "1945-02-13",
+      "end": "1945-02-15",
+      "title": "Bombing of Dresden",
+      "description": "Allied firebombing of Dresden kills 25,000+. Controversial attack on cultural city with disputed military value.",
+      "isDuration": true,
+      "color": "#4169E1"
+    },
+    {
+      "start": "1945-02-19",
+      "end": "1945-03-26",
+      "title": "Battle of Iwo Jima",
+      "description": "Marines capture strategic island after brutal fighting. Famous flag-raising photo. 6,800 Americans, 18,000 Japanese killed.",
+      "isDuration": true,
+      "color": "#4169E1"
+    },
+    {
+      "start": "1945-03-09",
+      "end": "1945-03-10",
+      "title": "Firebombing of Tokyo",
+      "description": "Most destructive bombing raid in history. 100,000+ killed, 16 square miles destroyed. More deadly than atomic bombs.",
+      "isDuration": true,
+      "color": "#4169E1"
+    },
+    {
+      "start": "1945-04-01",
+      "end": "1945-06-22",
+      "title": "Battle of Okinawa",
+      "description": "Last and bloodiest Pacific island battle. 12,000 Americans, 110,000 Japanese soldiers, and 150,000 civilians killed.",
+      "isDuration": true,
+      "color": "#4169E1"
+    },
+    {
+      "start": "1945-04-12",
+      "title": "Death of Franklin D. Roosevelt",
+      "description": "FDR dies of cerebral hemorrhage in Warm Springs, Georgia. Harry S. Truman becomes president.",
+      "color": "#6495ED"
+    },
+    {
+      "start": "1945-04-16",
+      "end": "1945-05-02",
+      "title": "Battle of Berlin",
+      "description": "Final major offensive of the European war. Soviet forces encircle and capture German capital.",
+      "isDuration": true,
+      "color": "#4169E1"
+    },
+    {
+      "start": "1945-04-25",
+      "title": "US and Soviet Forces Meet at Elbe",
+      "description": "American and Soviet troops meet at Torgau on the Elbe River, cutting Germany in two.",
+      "color": "#4169E1"
+    },
+    {
+      "start": "1945-04-28",
+      "title": "Mussolini Executed",
+      "description": "Italian partisans capture and execute Mussolini and his mistress. Bodies hung in Milan's Piazzale Loreto.",
+      "color": "#6495ED"
+    },
+    {
+      "start": "1945-04-30",
+      "title": "Hitler Commits Suicide",
+      "description": "Adolf Hitler commits suicide in his Berlin bunker as Soviet forces close in. Eva Braun dies with him.",
+      "color": "#6495ED"
+    },
+    {
+      "start": "1945-05-07",
+      "title": "Germany Surrenders at Reims",
+      "description": "General Jodl signs unconditional surrender at Eisenhower's headquarters in Reims, France.",
+      "color": "#000080"
+    },
+    {
+      "start": "1945-05-08",
+      "title": "V-E Day - Victory in Europe",
+      "description": "War in Europe officially ends. Celebrations worldwide as Germany surrenders unconditionally.",
+      "color": "#000080"
+    },
+    {
+      "start": "1945-07-16",
+      "title": "Trinity Test - First Atomic Bomb",
+      "description": "US successfully tests first atomic bomb at Alamogordo, New Mexico. Dawn of nuclear age.",
+      "color": "#000080"
+    },
+    {
+      "start": "1945-07-17",
+      "end": "1945-08-02",
+      "title": "Potsdam Conference",
+      "description": "Final Big Three conference. Truman, Stalin, Churchill (later Attlee) discuss post-war order and ultimatum to Japan.",
+      "isDuration": true,
+      "color": "#6495ED"
+    },
+    {
+      "start": "1945-08-06",
+      "title": "Atomic Bomb Dropped on Hiroshima",
+      "description": "B-29 'Enola Gay' drops 'Little Boy' on Hiroshima. Approximately 80,000 killed instantly, 140,000 by year's end.",
+      "color": "#000080"
+    },
+    {
+      "start": "1945-08-08",
+      "title": "Soviet Union Declares War on Japan",
+      "description": "USSR declares war on Japan and invades Manchuria with 1.6 million troops.",
+      "color": "#000080"
+    },
+    {
+      "start": "1945-08-09",
+      "title": "Atomic Bomb Dropped on Nagasaki",
+      "description": "B-29 'Bockscar' drops 'Fat Man' on Nagasaki. Approximately 40,000 killed instantly, 70,000 by year's end.",
+      "color": "#000080"
+    },
+    {
+      "start": "1945-08-15",
+      "title": "Japan Announces Surrender",
+      "description": "Emperor Hirohito broadcasts announcement of Japan's surrender. V-J Day celebrations begin worldwide.",
+      "color": "#000080"
+    },
+    {
+      "start": "1945-09-02",
+      "title": "Japan Signs Surrender - WWII Ends",
+      "description": "Japanese officials sign formal surrender aboard USS Missouri in Tokyo Bay. World War II officially ends.",
+      "color": "#000080"
+    },
+    {
+      "start": "1945-10-24",
+      "title": "United Nations Established",
+      "description": "UN Charter enters into force. New international organization aims to prevent future world wars.",
+      "color": "#6495ED"
+    },
+    {
+      "start": "1945-11-20",
+      "end": "1946-10-01",
+      "title": "Nuremberg Trials",
+      "description": "Major war criminals tried before International Military Tribunal. 12 sentenced to death for crimes against humanity.",
+      "isDuration": true,
+      "color": "#6495ED"
+    }
+  ]
+}

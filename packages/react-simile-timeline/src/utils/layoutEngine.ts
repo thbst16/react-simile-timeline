@@ -24,6 +24,10 @@ export interface LayoutEvent {
   endX?: number;
   /** Rendered width for duration events (endX - x) */
   durationWidth?: number;
+  /** Whether the label is sticky (event scrolled off-left) */
+  isSticky?: boolean;
+  /** X position for sticky label rendering */
+  stickyX?: number;
 }
 
 /** Average character width in pixels (approximate) */
@@ -38,6 +42,8 @@ const LABEL_GAP = 8;
 const MIN_DURATION_WIDTH = 20;
 /** Height of duration tape (pixels) */
 export const TAPE_HEIGHT = 18;
+/** Margin from left edge for sticky labels */
+const STICKY_MARGIN = 8;
 
 /**
  * Check if an event is a duration event
@@ -88,10 +94,48 @@ export function filterVisibleEvents(
 }
 
 /**
+ * Calculate sticky label positions for events that scroll off-left
+ * A label becomes sticky when:
+ * - Duration event: event starts off-left but extends into the viewport
+ * - Point event: event dot is off-left but label would have been partly visible
+ */
+export function calculateStickyLabels(events: LayoutEvent[]): LayoutEvent[] {
+  return events.map(event => {
+    // Event is fully visible, no sticky needed
+    if (event.x >= 0) {
+      return event;
+    }
+
+    // For duration events: sticky if the tape extends into viewport
+    if (event.isDuration && event.endX !== undefined && event.endX > STICKY_MARGIN) {
+      return {
+        ...event,
+        isSticky: true,
+        stickyX: STICKY_MARGIN,
+      };
+    }
+
+    // For point events: sticky if the label would have been visible
+    // (event is just off-left, within label width distance)
+    if (!event.isDuration && event.x > -event.width) {
+      return {
+        ...event,
+        isSticky: true,
+        stickyX: STICKY_MARGIN,
+      };
+    }
+
+    return event;
+  });
+}
+
+/**
  * Assign events to vertical tracks to prevent overlap
  * Uses greedy left-to-right algorithm
+ * @param events - Events to assign to tracks
+ * @param maxTracks - Maximum number of tracks allowed (0 = unlimited)
  */
-export function assignTracks(events: LayoutEvent[]): LayoutEvent[] {
+export function assignTracks(events: LayoutEvent[], maxTracks: number = 0): LayoutEvent[] {
   if (events.length === 0) return [];
 
   // Sort events by x position (left to right)
@@ -104,16 +148,31 @@ export function assignTracks(events: LayoutEvent[]): LayoutEvent[] {
     // Find first track where this event fits (no overlap)
     let assignedTrack = -1;
 
-    for (let t = 0; t < trackEnds.length; t++) {
+    const trackLimit = maxTracks > 0 ? Math.min(trackEnds.length, maxTracks) : trackEnds.length;
+
+    for (let t = 0; t < trackLimit; t++) {
       if (event.x >= trackEnds[t] + LABEL_GAP) {
         assignedTrack = t;
         break;
       }
     }
 
-    // If no existing track fits, create a new one
+    // If no existing track fits, create a new one (if under limit)
     if (assignedTrack === -1) {
-      assignedTrack = trackEnds.length;
+      if (maxTracks > 0 && trackEnds.length >= maxTracks) {
+        // At max tracks - find track with smallest end (best fit)
+        let minEnd = Infinity;
+        let minTrack = 0;
+        for (let t = 0; t < trackEnds.length; t++) {
+          if (trackEnds[t] < minEnd) {
+            minEnd = trackEnds[t];
+            minTrack = t;
+          }
+        }
+        assignedTrack = minTrack;
+      } else {
+        assignedTrack = trackEnds.length;
+      }
     }
 
     // Assign track and update track end position
@@ -126,6 +185,7 @@ export function assignTracks(events: LayoutEvent[]): LayoutEvent[] {
 
 /**
  * Calculate layout for events in the viewport
+ * @param maxTracks - Maximum number of tracks allowed (0 = unlimited)
  */
 export function calculateLayout(
   events: TimelineEvent[],
@@ -133,7 +193,8 @@ export function calculateLayout(
   pixelsPerMs: number,
   centerDate: Date,
   viewportWidth: number,
-  showLabels: boolean = true
+  showLabels: boolean = true,
+  maxTracks: number = 0
 ): LayoutEvent[] {
   // Calculate viewport left edge in time
   const viewportLeftMs = centerDate.getTime() - (viewportWidth / 2) / pixelsPerMs;
@@ -176,7 +237,10 @@ export function calculateLayout(
   });
 
   // Assign tracks to prevent overlap
-  return assignTracks(positioned);
+  const tracked = assignTracks(positioned, maxTracks);
+
+  // Calculate sticky labels for off-left events
+  return calculateStickyLabels(tracked);
 }
 
 /**

@@ -20,6 +20,8 @@ export interface EventTrackProps {
   trackGap?: number;
   /** Whether to show event labels */
   showLabels?: boolean;
+  /** Maximum number of tracks (0 = unlimited) */
+  maxTracks?: number;
 }
 
 /**
@@ -34,6 +36,7 @@ export function EventTrack({
   trackHeight = 24,
   trackGap = 4,
   showLabels = true,
+  maxTracks = 0,
 }: EventTrackProps) {
   // Calculate layout for all visible events
   const layoutEvents = useMemo(
@@ -43,9 +46,10 @@ export function EventTrack({
       pixelsPerMs,
       centerDate,
       viewportWidth,
-      showLabels
+      showLabels,
+      maxTracks
     ),
-    [events, visibleRange, pixelsPerMs, centerDate, viewportWidth, showLabels]
+    [events, visibleRange, pixelsPerMs, centerDate, viewportWidth, showLabels, maxTracks]
   );
 
   // Calculate total height needed
@@ -75,6 +79,8 @@ export function EventTrack({
             showLabel={showLabels}
             isDuration={layoutEvent.isDuration}
             durationWidth={layoutEvent.durationWidth}
+            isSticky={layoutEvent.isSticky}
+            stickyX={layoutEvent.stickyX}
           />
         );
       })}

@@ -1,5 +1,5 @@
 import { Timeline } from 'react-simile-timeline';
-import type { TimelineData, TimelineEvent, HotZone } from 'react-simile-timeline';
+import type { TimelineData, TimelineEvent, HotZone, BandConfig } from 'react-simile-timeline';
 
 // Sample data for demonstration
 const sampleData: TimelineData = {
@@ -47,6 +47,60 @@ const sampleHotZones: HotZone[] = [
     end: '1962-10-28',
     color: 'rgba(255, 100, 100, 0.25)',
     annotation: 'Cuban Missile Crisis',
+  },
+];
+
+// Three-band configuration for World Wars timeline
+const threeBandConfig: BandConfig[] = [
+  {
+    id: 'decade-overview',
+    height: '15%',
+    timeUnit: 'decade',
+    intervalPixels: 80,
+    overview: true,
+    syncWith: 'main',
+    showEventLabels: false,
+  },
+  {
+    id: 'main',
+    height: '60%',
+    timeUnit: 'year',
+    intervalPixels: 60,
+    overview: false,
+    showEventLabels: true,
+    trackHeight: 22,
+    trackGap: 3,
+  },
+  {
+    id: 'month-detail',
+    height: '25%',
+    timeUnit: 'month',
+    intervalPixels: 30,
+    overview: true,
+    syncWith: 'main',
+    showEventLabels: false,
+  },
+];
+
+// Hot zones for World Wars timeline
+const worldWarsHotZones: HotZone[] = [
+  {
+    start: '1914-07-28',
+    end: '1918-11-11',
+    color: 'rgba(139, 0, 0, 0.12)',
+    annotation: 'World War I',
+  },
+  {
+    start: '1929-10-29',
+    end: '1939-09-01',
+    color: 'rgba(74, 74, 74, 0.12)',
+    annotation: 'Great Depression',
+  },
+  {
+    start: '1939-09-01',
+    end: '1945-09-02',
+    color: 'rgba(0, 0, 128, 0.12)',
+    annotation: 'World War II',
   },
 ];
 
@@ -110,6 +164,27 @@ function App() {
           />
         </section>
 
+        {/* Three-Band World Wars Demo */}
+        <section className="bg-white rounded-lg shadow-md p-6 mb-8">
+          <h2 className="text-xl font-semibold text-gray-800 mb-4">
+            Three-Band Timeline: World Wars Era (1914-1945)
+          </h2>
+          <p className="text-gray-600 mb-6">
+            A comprehensive timeline featuring 153 events across World War I, the Great Depression,
+            and World War II. Uses three synchronized bands: decade overview (top),
+            year-scale detail (middle), and month-scale detail (bottom). Scroll to zoom, drag to pan.
+          </p>
+
+          <Timeline
+            dataUrl="/data/world-wars-timeline.json"
+            bands={threeBandConfig}
+            hotZones={worldWarsHotZones}
+            height={500}
+            centerDate="1939-09-01"
+            onEventClick={handleEventClick}
+          />
+        </section>
+
         {/* Info section */}
         <section className="bg-blue-50 rounded-lg p-6">
           <h3 className="text-lg font-semibold text-blue-800 mb-2">
@@ -119,12 +194,14 @@ function App() {
             React Simile Timeline features:
           </p>
           <ul className="list-disc list-inside text-blue-700 space-y-1">
-            <li>Multi-band synchronized timeline (detail + overview)</li>
-            <li>Horizontal pan with momentum scrolling</li>
-            <li>Point event rendering with colored markers</li>
+            <li>Multi-band synchronized timeline (2, 3, or more bands)</li>
+            <li>Horizontal pan with drag interaction</li>
+            <li>Mouse wheel zoom with dynamic scale adjustment</li>
+            <li>Point events (dots) and duration events (tapes)</li>
+            <li>Hot zones with highlighted regions and annotations</li>
             <li>Smart label layout to prevent overlap</li>
             <li>Event click popups with details</li>
-            <li>Keyboard navigation (arrow keys)</li>
+            <li>Keyboard navigation (arrows to pan, +/- to zoom)</li>
             <li>100% Simile JSON compatibility</li>
           </ul>
         </section>

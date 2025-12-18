@@ -175,7 +175,9 @@ export function EventPopup(_props: EventPopupProps) {
       className="timeline-popup"
       style={popupStyle}
       role="dialog"
-      aria-label={`Event details: ${selectedEvent.title}`}
+      aria-modal="true"
+      aria-labelledby="popup-title"
+      aria-describedby={selectedEvent.description ? "popup-description" : undefined}
     >
       {/* Close button */}
       <button
@@ -200,6 +202,7 @@ export function EventPopup(_props: EventPopupProps) {
 
       {/* Title */}
       <h3
+        id="popup-title"
         className="timeline-popup__title"
         style={{
           margin: '0 0 8px 0',
@@ -227,6 +230,7 @@ export function EventPopup(_props: EventPopupProps) {
       {/* Description */}
       {selectedEvent.description && (
         <div
+          id="popup-description"
           className="timeline-popup__description"
           style={{
             fontSize: 14,

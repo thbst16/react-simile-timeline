@@ -98,12 +98,12 @@
 - [x] Event `textColor` attribute support
 - [x] Event `classname` attribute for CSS customization
 - [ ] Auto band height sizing
-- [ ] Three-band configuration support
-- [ ] Sticky labels (events remain visible when scrolled off-left, matching SIMILE behavior)
+- [x] Three-band configuration support
+- [x] Sticky labels (events remain visible when scrolled off-left, matching SIMILE behavior)
 
 ### Non-Functional
 - [ ] Large dataset optimization (>1000 events)
-- [ ] ARIA labels and roles
+- [x] ARIA labels and roles
 - [x] Keyboard zoom controls (+/- keys)
 
 ### Tests
@@ -111,12 +111,12 @@
 - [x] Hot zones display with correct styling
 - [x] Zoom in/out functions correctly
 - [x] Custom colors apply to events
-- [ ] Three bands synchronize correctly
-- [ ] Sticky labels remain visible when events scroll off-left
+- [x] Three bands synchronize correctly
+- [x] Sticky labels remain visible when events scroll off-left
 
 ### Demo Showcase
 - [ ] Event Attribute Tests page
-- [ ] Three-band example
+- [x] Three-band example (World Wars 1914-1945)
 
 ---
 

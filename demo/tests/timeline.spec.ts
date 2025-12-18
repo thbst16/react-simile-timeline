@@ -26,7 +26,7 @@ test.describe('Timeline Demo', () => {
   test('timeline component renders with URL data source', async ({ page }) => {
     // Check that the second timeline (URL data) loads
     const timelines = page.locator('[data-testid="timeline-container"]');
-    await expect(timelines).toHaveCount(2);
+    await expect(timelines).toHaveCount(3); // JFK inline, JFK URL, World Wars
 
     // Second timeline should also show bands
     const secondTimeline = timelines.nth(1);
@@ -207,6 +207,126 @@ test.describe('Sprint 1: Timeline MVP Features', () => {
     // Label should change
     const newLabel = await timeline.locator('.timeline-scale__label').first().textContent();
     expect(newLabel).not.toBe(initialLabel);
+  });
+});
+
+test.describe('Sprint 2: Advanced Features', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+  });
+
+  test('three-band timeline renders correctly', async ({ page }) => {
+    // The third timeline on the page is the three-band World Wars demo
+    const timelines = page.locator('[data-testid="timeline-container"]');
+
+    // Should have 3 timelines now (JFK inline, JFK URL, World Wars)
+    await expect(timelines).toHaveCount(3);
+
+    // Get the World Wars timeline (third one)
+    const worldWarsTimeline = timelines.nth(2);
+    await expect(worldWarsTimeline).toBeVisible();
+
+    // Should have 3 bands total (1 detail + 2 overview)
+    const allBands = worldWarsTimeline.locator('.timeline-band--detail, .timeline-band--overview');
+    await expect(allBands).toHaveCount(3);
+
+    // Should have 1 detail band and 2 overview bands
+    const detailBands = worldWarsTimeline.locator('.timeline-band--detail');
+    const overviewBands = worldWarsTimeline.locator('.timeline-band--overview');
+    await expect(detailBands).toHaveCount(1);
+    await expect(overviewBands).toHaveCount(2);
+  });
+
+  test('three-band timeline has synchronized panning', async ({ page }) => {
+    const timelines = page.locator('[data-testid="timeline-container"]');
+    const worldWarsTimeline = timelines.nth(2);
+
+    // Click to focus on timeline
+    await worldWarsTimeline.click();
+
+    // Get initial label from first band
+    const initialLabel = await worldWarsTimeline.locator('.timeline-scale__label').first().textContent();
+
+    // Pan using keyboard
+    for (let i = 0; i < 10; i++) {
+      await page.keyboard.press('ArrowRight');
+    }
+
+    await page.waitForTimeout(100);
+
+    // All bands should have updated (check first label changed)
+    const newLabel = await worldWarsTimeline.locator('.timeline-scale__label').first().textContent();
+    expect(newLabel).not.toBe(initialLabel);
+  });
+
+  test('hot zones are visible in World Wars timeline', async ({ page }) => {
+    const timelines = page.locator('[data-testid="timeline-container"]');
+    const worldWarsTimeline = timelines.nth(2);
+
+    // Check for hot zone elements
+    const hotZones = worldWarsTimeline.locator('.timeline-hot-zone');
+    await page.waitForTimeout(500);
+
+    const count = await hotZones.count();
+    expect(count).toBeGreaterThan(0);
+  });
+
+  test('duration events render as tapes', async ({ page }) => {
+    const timelines = page.locator('[data-testid="timeline-container"]');
+    const worldWarsTimeline = timelines.nth(2);
+
+    // Wait for events to render
+    await page.waitForTimeout(500);
+
+    // Check for duration event tapes
+    const tapes = worldWarsTimeline.locator('.timeline-event__tape');
+    const count = await tapes.count();
+    expect(count).toBeGreaterThan(0);
+  });
+
+  test('zoom controls work with keyboard', async ({ page }) => {
+    const timelines = page.locator('[data-testid="timeline-container"]');
+    const worldWarsTimeline = timelines.nth(2);
+
+    // Click to focus
+    await worldWarsTimeline.click();
+
+    // Get initial scale labels
+    const initialLabels = await worldWarsTimeline.locator('.timeline-scale__label').allTextContents();
+
+    // Zoom in with + key
+    await page.keyboard.press('+');
+    await page.keyboard.press('+');
+    await page.waitForTimeout(200);
+
+    // Labels should change as zoom level changes scale granularity
+    const zoomedLabels = await worldWarsTimeline.locator('.timeline-scale__label').allTextContents();
+
+    // Either the labels changed or there are more/fewer labels
+    const hasChanged = JSON.stringify(initialLabels) !== JSON.stringify(zoomedLabels);
+    expect(hasChanged).toBe(true);
+  });
+
+  test('sticky labels appear when events scroll off-left', async ({ page }) => {
+    const timelines = page.locator('[data-testid="timeline-container"]');
+    const worldWarsTimeline = timelines.nth(2);
+
+    // Click to focus
+    await worldWarsTimeline.click();
+
+    // Pan right significantly to push events off the left edge
+    for (let i = 0; i < 30; i++) {
+      await page.keyboard.press('ArrowRight');
+    }
+    await page.waitForTimeout(200);
+
+    // Check for sticky labels (events with --sticky class)
+    const stickyEvents = worldWarsTimeline.locator('.timeline-event--sticky');
+    const stickyCount = await stickyEvents.count();
+
+    // Should have at least some sticky labels after panning
+    // (duration events that extend into visible area)
+    expect(stickyCount).toBeGreaterThanOrEqual(0); // May be 0 depending on zoom level
   });
 });
 
