@@ -42,11 +42,24 @@
   --popup-link-color: #0066cc;
   --popup-close-color: #666666;
 
+  /* Hot zones */
+  --hot-zone-text-color: #888888;
+  --hot-zone-border-color: rgba(0, 0, 0, 0.1);
+
+  /* Sticky labels and event selection */
+  --sticky-label-bg: rgba(255, 255, 255, 0.95);
+  --sticky-label-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  --event-text-shadow: 0 0 2px white, 0 0 2px white;
+  --event-selected-ring-color: white;
+
   /* Apply base styles */
   font-family: var(--timeline-font-family);
   background-color: var(--timeline-bg);
   border: 1px solid var(--timeline-border);
   box-sizing: border-box;
+
+  /* Smooth transitions for theme changes */
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 /* Classic theme (default) */
@@ -54,7 +67,7 @@
   /* Uses default variables */
 }
 
-/* Dark theme placeholder for Sprint 3 */
+/* Dark theme */
 .timeline-root[data-theme="dark"] {
   --timeline-bg: #1a1a1a;
   --timeline-border: #333;
@@ -71,6 +84,14 @@
   --popup-border: #444;
   --popup-text-color: #eee;
   --popup-date-color: #999;
+  --popup-link-color: #66b3ff;
+  --popup-close-color: #aaa;
+  --hot-zone-text-color: #aaa;
+  --hot-zone-border-color: rgba(255, 255, 255, 0.1);
+  --sticky-label-bg: rgba(42, 42, 42, 0.95);
+  --sticky-label-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+  --event-text-shadow: 0 0 2px #1a1a1a, 0 0 2px #1a1a1a;
+  --event-selected-ring-color: #444;
 }
 
 /* Loading state */
@@ -93,19 +114,35 @@
 .timeline-band {
   background-color: var(--band-bg);
   border-bottom: 1px solid var(--band-border);
+  /* Smooth transitions for theme changes */
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .timeline-band--overview {
   background-color: var(--overview-bg);
+  transition: background-color 0.3s ease;
 }
 
 .timeline-band--detail {
   background-color: var(--band-bg);
+  transition: background-color 0.3s ease;
 }
 
 /* Event markers */
 .timeline-event {
   transition: z-index 0s;
+  animation: event-fade-in 0.2s ease;
+}
+
+@keyframes event-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .timeline-event:hover .timeline-event__dot,
@@ -118,7 +155,7 @@
 }
 
 .timeline-event__label {
-  transition: font-weight 0.15s ease;
+  transition: font-weight 0.15s ease, color 0.3s ease, text-shadow 0.3s ease;
 }
 
 /* Time scale */
@@ -132,6 +169,7 @@
 
 .timeline-scale__label {
   font-variant-numeric: tabular-nums;
+  transition: color 0.3s ease;
 }
 
 /* Overview markers */

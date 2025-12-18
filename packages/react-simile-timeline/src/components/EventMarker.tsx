@@ -99,7 +99,7 @@ export function EventMarker({
             borderRadius: 3,
             flexShrink: 0,
             boxShadow: isSelected
-              ? `0 0 0 2px white, 0 0 0 4px ${color}`
+              ? `0 0 0 2px var(--event-selected-ring-color, white), 0 0 0 4px ${color}`
               : '0 1px 3px rgba(0,0,0,0.2)',
             transition: 'box-shadow 0.15s ease',
             backgroundImage: event.tapeImage ? `url(${event.tapeImage})` : undefined,
@@ -121,11 +121,11 @@ export function EventMarker({
               color: textColor,
               whiteSpace: 'nowrap',
               fontWeight: isSelected || isSticky ? 600 : 400,
-              textShadow: '0 0 2px white, 0 0 2px white',
-              backgroundColor: isSticky ? 'rgba(255, 255, 255, 0.95)' : undefined,
+              textShadow: 'var(--event-text-shadow, 0 0 2px white, 0 0 2px white)',
+              backgroundColor: isSticky ? 'var(--sticky-label-bg, rgba(255, 255, 255, 0.95))' : undefined,
               padding: isSticky ? '2px 6px' : undefined,
               borderRadius: isSticky ? 3 : undefined,
-              boxShadow: isSticky ? '0 1px 4px rgba(0,0,0,0.2)' : undefined,
+              boxShadow: isSticky ? 'var(--sticky-label-shadow, 0 1px 4px rgba(0,0,0,0.2))' : undefined,
               display: 'flex',
               alignItems: 'center',
             }}
@@ -175,7 +175,7 @@ export function EventMarker({
             backgroundColor: color,
             flexShrink: 0,
             boxShadow: isSelected
-              ? `0 0 0 2px white, 0 0 0 4px ${color}`
+              ? `0 0 0 2px var(--event-selected-ring-color, white), 0 0 0 4px ${color}`
               : 'none',
             transition: 'box-shadow 0.15s ease',
           }}
@@ -195,11 +195,11 @@ export function EventMarker({
             color: textColor,
             whiteSpace: 'nowrap',
             fontWeight: isSelected || isSticky ? 600 : 400,
-            textShadow: '0 0 2px white, 0 0 2px white',
-            backgroundColor: isSticky ? 'rgba(255, 255, 255, 0.95)' : undefined,
+            textShadow: 'var(--event-text-shadow, 0 0 2px white, 0 0 2px white)',
+            backgroundColor: isSticky ? 'var(--sticky-label-bg, rgba(255, 255, 255, 0.95))' : undefined,
             padding: isSticky ? '2px 6px' : undefined,
             borderRadius: isSticky ? 3 : undefined,
-            boxShadow: isSticky ? '0 1px 4px rgba(0,0,0,0.2)' : undefined,
+            boxShadow: isSticky ? 'var(--sticky-label-shadow, 0 1px 4px rgba(0,0,0,0.2))' : undefined,
             display: 'flex',
             alignItems: 'center',
           }}

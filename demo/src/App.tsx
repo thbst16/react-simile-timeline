@@ -1,5 +1,6 @@
+import React from 'react';
 import { Timeline } from 'react-simile-timeline';
-import type { TimelineData, TimelineEvent, HotZone, BandConfig } from 'react-simile-timeline';
+import type { TimelineData, TimelineEvent, HotZone, BandConfig, Theme } from 'react-simile-timeline';
 
 // Sample data for demonstration
 const sampleData: TimelineData = {
@@ -49,6 +50,17 @@ const sampleHotZones: HotZone[] = [
     annotation: 'Cuban Missile Crisis',
   },
 ];
+
+// Custom "sepia" theme demonstrating custom theme API
+const sepiaTheme: Theme = {
+  name: 'sepia',
+  backgroundColor: '#f5f0e6',
+  eventColor: '#8b6914',
+  eventTextColor: '#4a3c1f',
+  scaleColor: '#6b5a3d',
+  gridColor: '#d4c9b5',
+  hotZoneColor: 'rgba(139, 105, 20, 0.15)',
+};
 
 // Three-band configuration for World Wars timeline
 const threeBandConfig: BandConfig[] = [
@@ -105,6 +117,21 @@ const worldWarsHotZones: HotZone[] = [
 ];
 
 function App() {
+  const [themeName, setThemeName] = React.useState<'classic' | 'dark' | 'sepia'>('classic');
+  const [jfkCenterDate, setJfkCenterDate] = React.useState<string>('1960-11-08');
+
+  // Get the theme value (string for built-in, Theme object for custom)
+  const theme: 'classic' | 'dark' | Theme = themeName === 'sepia' ? sepiaTheme : themeName;
+
+  // Quick navigation dates for JFK timeline
+  const jfkNavDates = [
+    { label: 'Birth (1917)', date: '1917-05-29' },
+    { label: 'Election (1960)', date: '1960-11-08' },
+    { label: 'Inauguration (1961)', date: '1961-01-20' },
+    { label: 'Cuban Missile Crisis', date: '1962-10-22' },
+    { label: 'Assassination (1963)', date: '1963-11-22' },
+  ];
+
   const handleEventClick = (event: TimelineEvent) => {
     console.log('Event clicked:', event);
     // Note: The timeline's built-in popup shows event details
@@ -115,13 +142,36 @@ function App() {
     <div className="min-h-screen bg-gray-100">
       {/* Header */}
       <header className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 py-6">
-          <h1 className="text-3xl font-bold text-gray-900">
-            React Simile Timeline
-          </h1>
-          <p className="mt-2 text-gray-600">
-            A modern React implementation of the MIT SIMILE Timeline visualization
-          </p>
+        <div className="max-w-7xl mx-auto px-4 py-6 flex justify-between items-start">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900">
+              React Simile Timeline
+            </h1>
+            <p className="mt-2 text-gray-600">
+              A modern React implementation of the MIT SIMILE Timeline visualization
+            </p>
+          </div>
+          {/* Theme Toggle */}
+          <div className="flex items-center gap-2">
+            <span className="text-sm text-gray-600">Theme:</span>
+            <button
+              onClick={() => {
+                const themes: ('classic' | 'dark' | 'sepia')[] = ['classic', 'dark', 'sepia'];
+                const currentIndex = themes.indexOf(themeName);
+                const nextIndex = (currentIndex + 1) % themes.length;
+                setThemeName(themes[nextIndex]);
+              }}
+              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                themeName === 'dark'
+                  ? 'bg-gray-800 text-white'
+                  : themeName === 'sepia'
+                  ? 'bg-amber-100 text-amber-900 border border-amber-300'
+                  : 'bg-gray-200 text-gray-800'
+              }`}
+            >
+              {themeName === 'dark' ? '🌙 Dark' : themeName === 'sepia' ? '📜 Sepia' : '☀️ Light'}
+            </button>
+          </div>
         </div>
       </header>
 
@@ -135,15 +185,36 @@ function App() {
           <p className="text-gray-600 mb-6">
             This demo showcases the Timeline component with sample data from the
             life of John F. Kennedy. Drag to pan, click events for details.
+            Use the navigation buttons below to jump to key dates.
           </p>
+
+          {/* Jump to Date Navigation */}
+          <div className="flex flex-wrap gap-2 mb-4">
+            <span className="text-sm text-gray-500 self-center mr-2">Jump to:</span>
+            {jfkNavDates.map((nav) => (
+              <button
+                key={nav.date}
+                onClick={() => setJfkCenterDate(nav.date)}
+                className={`px-3 py-1 text-sm rounded-full transition-colors ${
+                  jfkCenterDate === nav.date
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                }`}
+              >
+                {nav.label}
+              </button>
+            ))}
+          </div>
 
           {/* Timeline component from the library */}
           <Timeline
             data={sampleData}
             hotZones={sampleHotZones}
             height={300}
-            centerDate="1960-11-08"
+            centerDate={jfkCenterDate}
+            theme={theme}
             onEventClick={handleEventClick}
+            branding={true}
           />
         </section>
 
@@ -160,6 +231,7 @@ function App() {
             dataUrl="/data/jfk-timeline.json"
             height={350}
             centerDate="1962-10-22"
+            theme={theme}
             onEventClick={handleEventClick}
           />
         </section>
@@ -181,7 +253,12 @@ function App() {
             hotZones={worldWarsHotZones}
             height={500}
             centerDate="1939-09-01"
+            theme={theme}
             onEventClick={handleEventClick}
+            branding={{
+              text: 'React Simile Timeline',
+              link: 'https://github.com/thbst16/react-simile-timeline',
+            }}
           />
         </section>
 

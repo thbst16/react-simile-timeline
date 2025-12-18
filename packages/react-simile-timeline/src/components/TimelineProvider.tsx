@@ -49,6 +49,8 @@ export interface TimelineState {
 export interface TimelineActions {
   /** Set the center date */
   setCenterDate: (date: Date) => void;
+  /** Jump to a specific date (accepts Date object or date string) */
+  jumpToDate: (date: Date | string) => void;
   /** Pan by milliseconds (positive = forward in time) */
   pan: (deltaMs: number) => void;
   /** Set the selected event with optional click position for popup */
@@ -310,6 +312,12 @@ export function TimelineProvider({
     callbacksRef.current.onScroll?.(date);
   }, []);
 
+  const jumpToDate = useCallback((date: Date | string) => {
+    const parsedDate = date instanceof Date ? date : parseDate(date);
+    setCenterDateState(parsedDate);
+    callbacksRef.current.onScroll?.(parsedDate);
+  }, []);
+
   const pan = useCallback((deltaMs: number) => {
     setCenterDateState(prev => {
       const newDate = new Date(prev.getTime() + deltaMs);
@@ -366,13 +374,14 @@ export function TimelineProvider({
 
   const actions: TimelineActions = useMemo(() => ({
     setCenterDate,
+    jumpToDate,
     pan,
     setSelectedEvent,
     setHoveredEvent,
     setIsPanning,
     setViewportWidth,
     zoom,
-  }), [setCenterDate, pan, setSelectedEvent, setHoveredEvent, zoom]);
+  }), [setCenterDate, jumpToDate, pan, setSelectedEvent, setHoveredEvent, zoom]);
 
   // Hot zones with default empty array
   const hotZones = useMemo(() => hotZonesProp || [], [hotZonesProp]);

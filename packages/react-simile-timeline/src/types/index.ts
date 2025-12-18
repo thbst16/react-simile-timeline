@@ -126,6 +126,20 @@ export interface Theme {
 }
 
 /**
+ * Branding/watermark configuration
+ */
+export interface BrandingConfig {
+  /** Text to display in the watermark */
+  text?: string;
+  /** URL to link to when clicked */
+  link?: string;
+  /** Position of the watermark */
+  position?: 'bottom-right' | 'bottom-left' | 'top-right' | 'top-left';
+  /** Whether to show the default "Powered by" prefix */
+  showPoweredBy?: boolean;
+}
+
+/**
  * Props for the Timeline component
  */
 export interface TimelineProps {
@@ -133,6 +147,8 @@ export interface TimelineProps {
   data?: TimelineData;
   /** URL to fetch timeline data from */
   dataUrl?: string;
+  /** Multiple URLs to fetch and merge timeline data from */
+  dataUrls?: string[];
   /** Band configurations */
   bands?: BandConfig[];
   /** Hot zone configurations */
@@ -157,4 +173,6 @@ export interface TimelineProps {
   className?: string;
   /** Inline styles for the container */
   style?: React.CSSProperties;
+  /** Optional branding/watermark configuration */
+  branding?: BrandingConfig | boolean;
 }

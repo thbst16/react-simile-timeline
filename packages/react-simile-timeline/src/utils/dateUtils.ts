@@ -58,6 +58,28 @@ export function parseDate(dateStr: string): Date {
 }
 
 /**
+ * Try to parse a date string, returning null if parsing fails
+ * Use this for graceful error handling of potentially invalid dates
+ */
+export function tryParseDate(dateStr: string | undefined | null): Date | null {
+  if (!dateStr) {
+    return null;
+  }
+  try {
+    return parseDate(dateStr);
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Check if a date string is valid
+ */
+export function isValidDate(dateStr: string | undefined | null): boolean {
+  return tryParseDate(dateStr) !== null;
+}
+
+/**
  * Format a date for display
  * Simple formatting without external dependencies
  */
@@ -154,15 +176,26 @@ export function getVisibleRange(
 
 /**
  * Calculate the median date from an array of events
+ * Gracefully handles invalid dates by skipping them
  */
 export function getMedianDate(events: Array<{ start: string }>): Date {
   if (events.length === 0) {
     return new Date();
   }
 
+  // Filter out events with invalid dates and get timestamps
   const timestamps = events
-    .map(e => parseDate(e.start).getTime())
+    .map(e => {
+      const date = tryParseDate(e.start);
+      return date ? date.getTime() : null;
+    })
+    .filter((t): t is number => t !== null)
     .sort((a, b) => a - b);
+
+  // Return current date if no valid timestamps
+  if (timestamps.length === 0) {
+    return new Date();
+  }
 
   const mid = Math.floor(timestamps.length / 2);
   const medianTs = timestamps.length % 2 === 0

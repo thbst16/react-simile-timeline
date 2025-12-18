@@ -95,8 +95,8 @@ export function HotZones({
             width: hz.width,
             height: '100%',
             backgroundColor: hz.color,
-            borderLeft: '1px solid rgba(0, 0, 0, 0.1)',
-            borderRight: '1px solid rgba(0, 0, 0, 0.1)',
+            borderLeft: '1px solid var(--hot-zone-border-color, rgba(0, 0, 0, 0.1))',
+            borderRight: '1px solid var(--hot-zone-border-color, rgba(0, 0, 0, 0.1))',
           }}
         >
           {/* Annotation text - positioned at bottom to avoid overlap with events */}
