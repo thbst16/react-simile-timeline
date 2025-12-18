@@ -158,7 +158,7 @@ function App() {
 
           <Timeline
             dataUrl="/data/jfk-timeline.json"
-            height={400}
+            height={350}
             centerDate="1962-10-22"
             onEventClick={handleEventClick}
           />

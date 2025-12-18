@@ -305,7 +305,6 @@ Features are categorized by priority level based on screenshot analysis:
 | Requirement | Target | Integration |
 |-------------|--------|-------------|
 | Rendering performance | 60 FPS smooth scrolling | Sprint 1+ |
-| Large dataset support | >1000 events without degradation | Sprint 2 |
 | Legacy JSON compatibility | 100% compatible with Simile JSON | Sprint 1 (Critical) |
 | NPM package size | <100KB gzipped | Sprint 4 |
 | Accessibility (WCAG 2.1) | Keyboard nav, ARIA labels, screen reader | Sprint 2+ |
@@ -439,7 +438,6 @@ These will be designed to maximize developer experience while maintaining Simile
 - [ ] Three-band configuration support
 
 **Non-Functional (integrated):**
-- Large dataset optimization (>1000 events)
 - ARIA labels and roles
 - Keyboard zoom controls
 
@@ -488,7 +486,6 @@ These will be designed to maximize developer experience while maintaining Simile
 **Demo Showcase:**
 - Full-featured demo with all options
 - Theme switcher demonstration
-- Performance stress test with large dataset
 
 ---
 

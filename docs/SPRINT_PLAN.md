@@ -102,7 +102,6 @@
 - [x] Sticky labels (events remain visible when scrolled off-left, matching SIMILE behavior)
 
 ### Non-Functional
-- [ ] Large dataset optimization (>1000 events)
 - [x] ARIA labels and roles
 - [x] Keyboard zoom controls (+/- keys)
 
@@ -153,7 +152,6 @@
 ### Demo Showcase
 - [ ] Full-featured demo with all options
 - [ ] Theme switcher demonstration
-- [ ] Performance stress test with large dataset
 
 ---
 
