@@ -1,0 +1,139 @@
+{
+  "dateTimeFormat": "iso8601",
+  "events": [
+    {
+      "start": "1917-05-29",
+      "title": "Birth of John F. Kennedy",
+      "description": "John Fitzgerald Kennedy born in Brookline, Massachusetts, the second of nine children in the prominent Kennedy family.",
+      "color": "#8b7355"
+    },
+    {
+      "start": "1936-09-01",
+      "title": "Enters Harvard University",
+      "description": "Kennedy begins his studies at Harvard University, following in his older brother Joe's footsteps.",
+      "color": "#8b7355"
+    },
+    {
+      "start": "1940-06-01",
+      "title": "Graduates from Harvard",
+      "description": "Kennedy graduates cum laude from Harvard University with a Bachelor of Arts in government.",
+      "color": "#8b7355"
+    },
+    {
+      "start": "1941-09-01",
+      "title": "Joins U.S. Naval Reserve",
+      "description": "Kennedy joins the U.S. Naval Reserve as World War II intensifies.",
+      "color": "#6b8e5f"
+    },
+    {
+      "start": "1943-08-02",
+      "title": "PT-109 Incident",
+      "description": "Kennedy's PT boat is rammed and sunk by a Japanese destroyer. He saves his crew, earning the Navy and Marine Corps Medal for heroism.",
+      "color": "#6b8e5f"
+    },
+    {
+      "start": "1944-08-01",
+      "end": "1945-03-01",
+      "title": "Health Issues and Discharge",
+      "description": "Kennedy suffers from chronic back pain and other health problems. Honorably discharged from active duty in early 1945.",
+      "isDuration": true,
+      "color": "#a65a4a"
+    },
+    {
+      "start": "1946-11-05",
+      "title": "Elected to U.S. House",
+      "description": "Kennedy elected to represent Massachusetts' 11th congressional district at age 29.",
+      "color": "#4a90d9"
+    },
+    {
+      "start": "1952-11-04",
+      "title": "Elected to U.S. Senate",
+      "description": "Kennedy defeats incumbent Republican Henry Cabot Lodge Jr. to become U.S. Senator from Massachusetts.",
+      "color": "#4a90d9"
+    },
+    {
+      "start": "1953-09-12",
+      "title": "Marries Jacqueline Bouvier",
+      "description": "John F. Kennedy marries Jacqueline Lee Bouvier in Newport, Rhode Island.",
+      "color": "#c9a961"
+    },
+    {
+      "start": "1957-11-27",
+      "title": "Daughter Caroline Born",
+      "description": "Caroline Bouvier Kennedy, the first child of John and Jacqueline Kennedy, is born.",
+      "color": "#c9a961"
+    },
+    {
+      "start": "1960-01-02",
+      "title": "Announces Presidential Campaign",
+      "description": "Kennedy announces his candidacy for President of the United States.",
+      "color": "#4a90d9"
+    },
+    {
+      "start": "1960-09-26",
+      "title": "First Presidential Debate",
+      "description": "Kennedy and Nixon participate in the first televised presidential debate, watched by 70 million viewers.",
+      "color": "#4a90d9"
+    },
+    {
+      "start": "1960-11-08",
+      "title": "Elected President",
+      "description": "Kennedy defeats Richard Nixon in one of the closest presidential elections in American history.",
+      "color": "#4a90d9"
+    },
+    {
+      "start": "1960-11-25",
+      "title": "Son John Jr. Born",
+      "description": "John Fitzgerald Kennedy Jr. born, just weeks after his father's election.",
+      "color": "#c9a961"
+    },
+    {
+      "start": "1961-01-20",
+      "title": "Inaugurated as President",
+      "description": "Kennedy delivers his famous inaugural address: 'Ask not what your country can do for you...'",
+      "color": "#4a90d9"
+    },
+    {
+      "start": "1961-01-20",
+      "end": "1963-11-22",
+      "title": "Kennedy Presidency",
+      "description": "John F. Kennedy serves as the 35th President of the United States.",
+      "isDuration": true,
+      "color": "#4a90d9"
+    },
+    {
+      "start": "1961-04-17",
+      "end": "1961-04-20",
+      "title": "Bay of Pigs Invasion",
+      "description": "CIA-sponsored invasion of Cuba fails disastrously, becoming a major embarrassment for the new administration.",
+      "isDuration": true,
+      "color": "#c41e3a"
+    },
+    {
+      "start": "1962-10-16",
+      "end": "1962-10-28",
+      "title": "Cuban Missile Crisis",
+      "description": "Thirteen-day confrontation between the United States and Soviet Union over nuclear missiles in Cuba.",
+      "isDuration": true,
+      "color": "#c41e3a"
+    },
+    {
+      "start": "1963-06-26",
+      "title": "\"Ich bin ein Berliner\" Speech",
+      "description": "Kennedy delivers his famous speech in West Berlin, expressing solidarity with the people of Berlin.",
+      "color": "#6b8e5f"
+    },
+    {
+      "start": "1963-08-28",
+      "title": "March on Washington",
+      "description": "Kennedy supports the March on Washington for Jobs and Freedom where Dr. King delivers 'I Have a Dream' speech.",
+      "color": "#6b8e5f"
+    },
+    {
+      "start": "1963-11-22",
+      "title": "Assassination",
+      "description": "President Kennedy is assassinated while riding in a motorcade through Dealey Plaza in Dallas, Texas.",
+      "color": "#c41e3a"
+    }
+  ]
+}
