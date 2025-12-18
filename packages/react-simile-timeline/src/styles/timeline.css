@@ -1,0 +1,173 @@
+/**
+ * React Simile Timeline Styles
+ * Uses CSS custom properties for theming without runtime dependencies
+ */
+
+/* Root container with CSS variables */
+.timeline-root {
+  /* Typography */
+  --timeline-font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Container */
+  --timeline-bg: #f5f5f5;
+  --timeline-border: #ddd;
+
+  /* Bands */
+  --band-bg: #ffffff;
+  --band-border: #e0e0e0;
+
+  /* Time scale */
+  --scale-bg: #fafafa;
+  --scale-text-color: #666666;
+  --scale-major-text-color: #333333;
+  --scale-line-color: #e0e0e0;
+  --scale-major-line-color: #999999;
+  --scale-font-size: 11px;
+
+  /* Events */
+  --event-default-color: #4a90d9;
+  --event-text-color: #333333;
+  --event-font-size: 12px;
+
+  /* Overview */
+  --overview-marker-height: 12px;
+  --overview-bg: #f9f9f9;
+
+  /* Popup */
+  --popup-bg: #ffffff;
+  --popup-border: #cccccc;
+  --popup-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  --popup-text-color: #333333;
+  --popup-date-color: #888888;
+  --popup-link-color: #0066cc;
+  --popup-close-color: #666666;
+
+  /* Apply base styles */
+  font-family: var(--timeline-font-family);
+  background-color: var(--timeline-bg);
+  border: 1px solid var(--timeline-border);
+  box-sizing: border-box;
+}
+
+/* Classic theme (default) */
+.timeline-root[data-theme="classic"] {
+  /* Uses default variables */
+}
+
+/* Dark theme placeholder for Sprint 3 */
+.timeline-root[data-theme="dark"] {
+  --timeline-bg: #1a1a1a;
+  --timeline-border: #333;
+  --band-bg: #2a2a2a;
+  --band-border: #444;
+  --scale-bg: #222;
+  --scale-text-color: #aaa;
+  --scale-major-text-color: #eee;
+  --scale-line-color: #444;
+  --scale-major-line-color: #666;
+  --event-text-color: #eee;
+  --overview-bg: #252525;
+  --popup-bg: #2a2a2a;
+  --popup-border: #444;
+  --popup-text-color: #eee;
+  --popup-date-color: #999;
+}
+
+/* Loading state */
+.timeline-loading,
+.timeline-error,
+.timeline-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--scale-text-color);
+  font-size: 14px;
+}
+
+.timeline-error {
+  color: #c00;
+}
+
+/* Band styles */
+.timeline-band {
+  background-color: var(--band-bg);
+  border-bottom: 1px solid var(--band-border);
+}
+
+.timeline-band--overview {
+  background-color: var(--overview-bg);
+}
+
+.timeline-band--detail {
+  background-color: var(--band-bg);
+}
+
+/* Event markers */
+.timeline-event {
+  transition: z-index 0s;
+}
+
+.timeline-event:hover .timeline-event__dot,
+.timeline-event--hovered .timeline-event__dot {
+  transform: scale(1.2);
+}
+
+.timeline-event__dot {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.timeline-event__label {
+  transition: font-weight 0.15s ease;
+}
+
+/* Time scale */
+.timeline-scale {
+  pointer-events: none;
+}
+
+.timeline-scale__tick {
+  transition: opacity 0.15s ease;
+}
+
+.timeline-scale__label {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Overview markers */
+.timeline-overview-marker {
+  transition: height 0.15s ease;
+}
+
+.timeline-overview-marker:hover {
+  height: calc(var(--overview-marker-height) * 1.5) !important;
+}
+
+/* Popup */
+.timeline-popup {
+  animation: popup-fade-in 0.15s ease;
+}
+
+@keyframes popup-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.timeline-popup__close:hover {
+  color: var(--event-default-color);
+}
+
+.timeline-popup__link:hover {
+  text-decoration: underline;
+}
+
+/* Ensure pointer events work correctly during pan */
+.timeline-band[style*="grabbing"] .timeline-event {
+  pointer-events: none;
+}

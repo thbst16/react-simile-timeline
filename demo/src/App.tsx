@@ -37,7 +37,8 @@ const sampleData: TimelineData = {
 function App() {
   const handleEventClick = (event: TimelineEvent) => {
     console.log('Event clicked:', event);
-    alert(`Event: ${event.title}\n\n${event.description || 'No description'}`);
+    // Note: The timeline's built-in popup shows event details
+    // This callback can be used for additional custom behavior
   };
 
   return (
@@ -63,13 +64,14 @@ function App() {
           </h2>
           <p className="text-gray-600 mb-6">
             This demo showcases the Timeline component with sample data from the
-            life of John F. Kennedy. Full interactive features coming in Sprint 1.
+            life of John F. Kennedy. Drag to pan, click events for details.
           </p>
 
           {/* Timeline component from the library */}
           <Timeline
             data={sampleData}
             height={300}
+            centerDate="1960-11-08"
             onEventClick={handleEventClick}
           />
         </section>
@@ -85,7 +87,8 @@ function App() {
 
           <Timeline
             dataUrl="/data/jfk-timeline.json"
-            height={300}
+            height={400}
+            centerDate="1962-10-22"
             onEventClick={handleEventClick}
           />
         </section>
@@ -96,15 +99,15 @@ function App() {
             About This Project
           </h3>
           <p className="text-blue-700 mb-4">
-            This is a Sprint 0 scaffold. The Timeline component will be fully
-            implemented in Sprint 1 with:
+            React Simile Timeline features:
           </p>
           <ul className="list-disc list-inside text-blue-700 space-y-1">
-            <li>Multi-band synchronized timeline</li>
-            <li>Horizontal pan (drag to scroll)</li>
-            <li>Point and duration event rendering</li>
+            <li>Multi-band synchronized timeline (detail + overview)</li>
+            <li>Horizontal pan with momentum scrolling</li>
+            <li>Point event rendering with colored markers</li>
             <li>Smart label layout to prevent overlap</li>
-            <li>Event click popups</li>
+            <li>Event click popups with details</li>
+            <li>Keyboard navigation (arrow keys)</li>
             <li>100% Simile JSON compatibility</li>
           </ul>
         </section>

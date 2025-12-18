@@ -25,9 +25,11 @@ describe('Timeline', () => {
     expect(screen.getByTestId('timeline-container')).toBeInTheDocument();
   });
 
-  it('displays event count when data is provided', () => {
+  it('renders timeline bands when data is provided', () => {
     render(<Timeline data={sampleData} />);
-    expect(screen.getByText(/2 events loaded/i)).toBeInTheDocument();
+    // Check that both detail and overview bands are rendered
+    expect(screen.getByTestId('timeline-container').querySelector('.timeline-band--detail')).toBeInTheDocument();
+    expect(screen.getByTestId('timeline-container').querySelector('.timeline-band--overview')).toBeInTheDocument();
   });
 
   it('shows loading state when dataUrl is provided', () => {

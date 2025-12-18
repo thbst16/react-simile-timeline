@@ -3,10 +3,37 @@
  * A modern React implementation of the MIT SIMILE Timeline visualization component
  */
 
-// Components
+// Main component
 export { Timeline } from './components/Timeline';
 
-// Types
+// Sub-components (for advanced usage)
+export {
+  TimelineProvider,
+  DEFAULT_BANDS,
+  useTimelineContext,
+  Band,
+  TimeScale,
+  EventTrack,
+  EventMarker,
+  OverviewMarkers,
+  EventPopup,
+} from './components';
+
+// Component types
+export type {
+  TimelineProviderProps,
+  TimelineState,
+  TimelineActions,
+  TimelineContextValue,
+  BandProps,
+  TimeScaleProps,
+  EventTrackProps,
+  EventMarkerProps,
+  OverviewMarkersProps,
+  EventPopupProps,
+} from './components';
+
+// Core types
 export type {
   TimelineProps,
   TimelineEvent,
@@ -16,8 +43,36 @@ export type {
   Theme,
 } from './types';
 
-// Hooks (will be implemented in Sprint 1)
-// export { useTimeline } from './hooks/useTimeline';
+// Hooks
+export { usePan } from './hooks';
+export type { UsePanOptions, UsePanResult } from './hooks';
 
-// Utils (will be implemented in Sprint 1)
-// export { parseSimileJson } from './utils/parseSimileJson';
+// Utilities
+export {
+  parseDate,
+  formatDate,
+  dateToPixel,
+  pixelToDate,
+  getVisibleRange,
+  getMedianDate,
+  TIME_UNITS,
+  getScaleConfig,
+  alignToUnit,
+  addInterval,
+  generateTicks,
+  calculateLayout,
+  assignTracks,
+  filterVisibleEvents,
+  estimateLabelWidth,
+  getTrackCount,
+} from './utils';
+
+export type {
+  TimeUnit,
+  ScaleConfig,
+  ScaleTick,
+  LayoutEvent,
+} from './utils';
+
+// Styles (consumers can import this directly if needed)
+import './styles/timeline.css';

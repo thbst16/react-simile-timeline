@@ -1,5 +1,35 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import type { TimelineProps, TimelineData } from '../types';
+import { TimelineProvider, useTimelineContext } from './TimelineProvider';
+import { Band } from './Band';
+import { EventPopup } from './EventPopup';
+import '../styles/timeline.css';
+
+/**
+ * Inner component that renders bands from context
+ */
+function TimelineBands() {
+  const { bands } = useTimelineContext();
+
+  return (
+    <div
+      className="timeline-bands"
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
+      }}
+    >
+      {bands.map((bandConfig, index) => (
+        <Band
+          key={bandConfig.id || `band-${index}`}
+          config={bandConfig}
+          isPrimary={index === 0 || !bandConfig.syncWith}
+        />
+      ))}
+    </div>
+  );
+}
 
 /**
  * Timeline component - A modern React implementation of MIT SIMILE Timeline
@@ -11,27 +41,37 @@ import type { TimelineProps, TimelineData } from '../types';
  *
  * // With URL data source
  * <Timeline dataUrl="/api/events.json" />
+ *
+ * // With custom bands
+ * <Timeline
+ *   data={data}
+ *   bands={[
+ *     { id: 'main', height: '80%', timeUnit: 'day' },
+ *     { id: 'overview', height: '20%', timeUnit: 'year', overview: true, syncWith: 'main' }
+ *   ]}
+ * />
  * ```
  */
 export function Timeline({
   data,
   dataUrl,
-  bands: _bands,
-  hotZones: _hotZones,
-  theme: _theme = 'classic',
-  centerDate: _centerDate,
+  bands,
+  hotZones: _hotZones, // Reserved for Sprint 2
+  theme = 'classic',
+  centerDate,
   width = '100%',
   height = 400,
-  onEventClick: _onEventClick,
-  onEventHover: _onEventHover,
-  onScroll: _onScroll,
-  onZoom: _onZoom,
+  onEventClick,
+  onEventHover,
+  onScroll,
+  onZoom: _onZoom, // Reserved for Sprint 2
   className,
   style,
 }: TimelineProps) {
   const [timelineData, setTimelineData] = useState<TimelineData | null>(data || null);
   const [loading, setLoading] = useState(!!dataUrl);
   const [error, setError] = useState<string | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   // Fetch data from URL if provided
   useEffect(() => {
@@ -64,26 +104,26 @@ export function Timeline({
     }
   }, [data]);
 
+  // Determine theme data attribute
+  const themeAttr = typeof theme === 'string' ? theme : theme?.name || 'classic';
+
   const containerStyle: React.CSSProperties = {
     width: typeof width === 'number' ? `${width}px` : width,
     height: typeof height === 'number' ? `${height}px` : height,
     position: 'relative',
     overflow: 'hidden',
-    backgroundColor: '#f5f5f5',
-    border: '1px solid #ddd',
     ...style,
   };
 
   if (loading) {
     return (
-      <div className={className} style={containerStyle}>
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: '100%',
-          color: '#666',
-        }}>
+      <div
+        className={`timeline-root ${className || ''}`}
+        style={containerStyle}
+        data-theme={themeAttr}
+        data-testid="timeline-container"
+      >
+        <div className="timeline-loading">
           Loading timeline...
         </div>
       </div>
@@ -92,14 +132,13 @@ export function Timeline({
 
   if (error) {
     return (
-      <div className={className} style={containerStyle}>
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: '100%',
-          color: '#c00',
-        }}>
+      <div
+        className={`timeline-root ${className || ''}`}
+        style={containerStyle}
+        data-theme={themeAttr}
+        data-testid="timeline-container"
+      >
+        <div className="timeline-error">
           Error: {error}
         </div>
       </div>
@@ -108,38 +147,46 @@ export function Timeline({
 
   if (!timelineData || !timelineData.events || timelineData.events.length === 0) {
     return (
-      <div className={className} style={containerStyle}>
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: '100%',
-          color: '#666',
-        }}>
+      <div
+        className={`timeline-root ${className || ''}`}
+        style={containerStyle}
+        data-theme={themeAttr}
+        data-testid="timeline-container"
+      >
+        <div className="timeline-empty">
           No timeline data available
         </div>
       </div>
     );
   }
 
-  // Sprint 0: Basic scaffold - full implementation in Sprint 1
+  // Pass bands to provider - if undefined, provider will auto-generate based on data
+  const bandConfigs = bands && bands.length > 0 ? bands : undefined;
+
+  // Parse initial center date
+  const initialCenterDate = centerDate
+    ? (centerDate instanceof Date ? centerDate : new Date(centerDate))
+    : undefined;
+
   return (
     <div
-      className={className}
+      ref={containerRef}
+      className={`timeline-root ${className || ''}`}
       style={containerStyle}
+      data-theme={themeAttr}
       data-testid="timeline-container"
     >
-      <div style={{ padding: '20px', textAlign: 'center' }}>
-        <h3 style={{ margin: '0 0 10px 0', color: '#333' }}>
-          React Simile Timeline
-        </h3>
-        <p style={{ margin: '0 0 10px 0', color: '#666', fontSize: '14px' }}>
-          {timelineData.events.length} events loaded
-        </p>
-        <p style={{ margin: 0, color: '#999', fontSize: '12px' }}>
-          Full implementation coming in Sprint 1
-        </p>
-      </div>
+      <TimelineProvider
+        events={timelineData.events}
+        bands={bandConfigs}
+        initialCenterDate={initialCenterDate}
+        onScroll={onScroll}
+        onEventClick={onEventClick}
+        onEventHover={onEventHover}
+      >
+        <TimelineBands />
+        <EventPopup containerRef={containerRef} />
+      </TimelineProvider>
     </div>
   );
 }
