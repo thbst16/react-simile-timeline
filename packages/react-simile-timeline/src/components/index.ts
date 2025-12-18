@@ -13,3 +13,5 @@ export { OverviewMarkers } from './OverviewMarkers';
 export type { OverviewMarkersProps } from './OverviewMarkers';
 export { EventPopup } from './EventPopup';
 export type { EventPopupProps } from './EventPopup';
+export { HotZones } from './HotZones';
+export type { HotZonesProps } from './HotZones';

@@ -1,5 +1,5 @@
 import { Timeline } from 'react-simile-timeline';
-import type { TimelineData, TimelineEvent } from 'react-simile-timeline';
+import type { TimelineData, TimelineEvent, HotZone } from 'react-simile-timeline';
 
 // Sample data for demonstration
 const sampleData: TimelineData = {
@@ -33,6 +33,22 @@ const sampleData: TimelineData = {
     },
   ],
 };
+
+// Hot zones to highlight key periods
+const sampleHotZones: HotZone[] = [
+  {
+    start: '1961-01-20',
+    end: '1963-11-22',
+    color: 'rgba(107, 142, 95, 0.15)',
+    annotation: 'Kennedy Presidency',
+  },
+  {
+    start: '1962-10-16',
+    end: '1962-10-28',
+    color: 'rgba(255, 100, 100, 0.25)',
+    annotation: 'Cuban Missile Crisis',
+  },
+];
 
 function App() {
   const handleEventClick = (event: TimelineEvent) => {
@@ -70,6 +86,7 @@ function App() {
           {/* Timeline component from the library */}
           <Timeline
             data={sampleData}
+            hotZones={sampleHotZones}
             height={300}
             centerDate="1960-11-08"
             onEventClick={handleEventClick}

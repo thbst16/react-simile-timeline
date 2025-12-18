@@ -6,6 +6,7 @@ import { TIME_UNITS, type TimeUnit, getVisibleRange } from '../utils/dateUtils';
 import { TimeScale } from './TimeScale';
 import { EventTrack } from './EventTrack';
 import { OverviewMarkers } from './OverviewMarkers';
+import { HotZones } from './HotZones';
 
 export interface BandProps {
   /** Band configuration */
@@ -30,10 +31,13 @@ function calculatePixelsPerMs(config: BandConfig): number {
  */
 export function Band({ config, isPrimary = false }: BandProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { state, actions, events } = useTimelineContext();
+  const { state, actions, events, hotZones } = useTimelineContext();
 
-  // Calculate this band's pixels per ms (may differ from primary)
-  const bandPixelsPerMs = useMemo(() => calculatePixelsPerMs(config), [config]);
+  // Calculate this band's pixels per ms (may differ from primary), adjusted by zoom level
+  const bandPixelsPerMs = useMemo(
+    () => calculatePixelsPerMs(config) * state.zoomLevel,
+    [config, state.zoomLevel]
+  );
 
   // Calculate visible range for this band
   const visibleRange = useMemo(
@@ -63,7 +67,7 @@ export function Band({ config, isPrimary = false }: BandProps) {
     keyboardPanAmount,
   });
 
-  // Update viewport width on resize
+  // Update viewport width on resize and attach wheel listener
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
@@ -74,6 +78,15 @@ export function Band({ config, isPrimary = false }: BandProps) {
       }
     };
 
+    // Handle mouse wheel zoom - must use native listener with { passive: false }
+    // to allow preventDefault() to stop page scrolling while zooming
+    const handleWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      // Scrolling up (negative deltaY) = zoom in, scrolling down = zoom out
+      const zoomFactor = e.deltaY < 0 ? 1.15 : 0.87;
+      actions.zoom(zoomFactor);
+    };
+
     // Initial measurement
     updateWidth();
 
@@ -81,7 +94,43 @@ export function Band({ config, isPrimary = false }: BandProps) {
     const resizeObserver = new ResizeObserver(updateWidth);
     resizeObserver.observe(container);
 
-    return () => resizeObserver.disconnect();
+    // Attach wheel listener with passive: false to allow preventDefault
+    container.addEventListener('wheel', handleWheel, { passive: false });
+
+    return () => {
+      resizeObserver.disconnect();
+      container.removeEventListener('wheel', handleWheel);
+    };
+  }, [isPrimary, actions]);
+
+  // Keyboard zoom controls (+ / - keys) - only on primary band
+  useEffect(() => {
+    if (!isPrimary) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Don't handle if focus is on an input
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) {
+        return;
+      }
+
+      switch (e.key) {
+        case '+':
+        case '=':
+          // Zoom in
+          actions.zoom(1.15);
+          e.preventDefault();
+          break;
+        case '-':
+        case '_':
+          // Zoom out
+          actions.zoom(0.87);
+          e.preventDefault();
+          break;
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isPrimary, actions]);
 
   // Parse height from config
@@ -102,6 +151,17 @@ export function Band({ config, isPrimary = false }: BandProps) {
       onPointerDown={panProps.onPointerDown}
       data-band-id={config.id}
     >
+      {/* Hot zones layer - renders behind events */}
+      {hotZones.length > 0 && (
+        <HotZones
+          hotZones={hotZones}
+          visibleRange={visibleRange}
+          pixelsPerMs={bandPixelsPerMs}
+          viewportWidth={state.viewportWidth}
+          centerDate={state.centerDate}
+        />
+      )}
+
       {/* Event layer - pointer-events:none allows drag on band, events re-enable on markers */}
       <div
         className="timeline-band__events"

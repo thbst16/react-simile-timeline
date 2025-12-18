@@ -56,7 +56,7 @@ export function Timeline({
   data,
   dataUrl,
   bands,
-  hotZones: _hotZones, // Reserved for Sprint 2
+  hotZones,
   theme = 'classic',
   centerDate,
   width = '100%',
@@ -179,6 +179,7 @@ export function Timeline({
       <TimelineProvider
         events={timelineData.events}
         bands={bandConfigs}
+        hotZones={hotZones}
         initialCenterDate={initialCenterDate}
         onScroll={onScroll}
         onEventClick={onEventClick}

@@ -33,158 +33,70 @@ export interface ScaleTick {
 }
 
 /**
+ * Estimated label widths for different formats (in pixels)
+ * These are approximate widths for 11px font
+ */
+const LABEL_WIDTHS: Record<string, number> = {
+  'HH:mm': 45,
+  'MMM d': 55,
+  'MMM d HH:mm': 95,
+  'MMM yyyy': 70,
+  'yyyy': 40,
+};
+
+/**
  * Determine appropriate scale configuration based on zoom level
  * @param pixelsPerMs - Current zoom level
- * @param minLabelSpacing - Minimum pixels between labels
  */
-export function getScaleConfig(
-  pixelsPerMs: number,
-  minLabelSpacing: number = 80
-): ScaleConfig {
-  // Calculate milliseconds per minimum label spacing
-  const msPerMinLabel = minLabelSpacing / pixelsPerMs;
-
+export function getScaleConfig(pixelsPerMs: number): ScaleConfig {
   const MINUTE = TIME_UNITS.minute;
   const HOUR = TIME_UNITS.hour;
   const DAY = TIME_UNITS.day;
   const MONTH = TIME_UNITS.month;
   const YEAR = TIME_UNITS.year;
 
-  // Find appropriate unit and interval
-  if (msPerMinLabel < 5 * MINUTE) {
-    return {
-      unit: 'minute',
-      interval: 1,
-      format: 'HH:mm',
-      tickMs: MINUTE,
-    };
-  } else if (msPerMinLabel < 15 * MINUTE) {
-    return {
-      unit: 'minute',
-      interval: 5,
-      format: 'HH:mm',
-      tickMs: 5 * MINUTE,
-    };
-  } else if (msPerMinLabel < 30 * MINUTE) {
-    return {
-      unit: 'minute',
-      interval: 15,
-      format: 'HH:mm',
-      tickMs: 15 * MINUTE,
-    };
-  } else if (msPerMinLabel < HOUR) {
-    return {
-      unit: 'minute',
-      interval: 30,
-      format: 'HH:mm',
-      tickMs: 30 * MINUTE,
-    };
-  } else if (msPerMinLabel < 3 * HOUR) {
-    return {
-      unit: 'hour',
-      interval: 1,
-      format: 'HH:mm',
-      tickMs: HOUR,
-    };
-  } else if (msPerMinLabel < 6 * HOUR) {
-    return {
-      unit: 'hour',
-      interval: 3,
-      format: 'HH:mm',
-      tickMs: 3 * HOUR,
-    };
-  } else if (msPerMinLabel < 12 * HOUR) {
-    return {
-      unit: 'hour',
-      interval: 6,
-      format: 'HH:mm',
-      tickMs: 6 * HOUR,
-    };
-  } else if (msPerMinLabel < DAY) {
-    return {
-      unit: 'hour',
-      interval: 12,
-      format: 'MMM d HH:mm',
-      tickMs: 12 * HOUR,
-    };
-  } else if (msPerMinLabel < 3 * DAY) {
-    return {
-      unit: 'day',
-      interval: 1,
-      format: 'MMM d',
-      tickMs: DAY,
-    };
-  } else if (msPerMinLabel < 7 * DAY) {
-    return {
-      unit: 'day',
-      interval: 3,
-      format: 'MMM d',
-      tickMs: 3 * DAY,
-    };
-  } else if (msPerMinLabel < 14 * DAY) {
-    return {
-      unit: 'week',
-      interval: 1,
-      format: 'MMM d',
-      tickMs: 7 * DAY,
-    };
-  } else if (msPerMinLabel < MONTH) {
-    return {
-      unit: 'week',
-      interval: 2,
-      format: 'MMM d',
-      tickMs: 14 * DAY,
-    };
-  } else if (msPerMinLabel < 3 * MONTH) {
-    return {
-      unit: 'month',
-      interval: 1,
-      format: 'MMM yyyy',
-      tickMs: MONTH,
-    };
-  } else if (msPerMinLabel < 6 * MONTH) {
-    return {
-      unit: 'month',
-      interval: 3,
-      format: 'MMM yyyy',
-      tickMs: 3 * MONTH,
-    };
-  } else if (msPerMinLabel < YEAR) {
-    return {
-      unit: 'month',
-      interval: 6,
-      format: 'MMM yyyy',
-      tickMs: 6 * MONTH,
-    };
-  } else if (msPerMinLabel < 5 * YEAR) {
-    return {
-      unit: 'year',
-      interval: 1,
-      format: 'yyyy',
-      tickMs: YEAR,
-    };
-  } else if (msPerMinLabel < 10 * YEAR) {
-    return {
-      unit: 'year',
-      interval: 5,
-      format: 'yyyy',
-      tickMs: 5 * YEAR,
-    };
-  } else if (msPerMinLabel < 50 * YEAR) {
-    return {
-      unit: 'decade',
-      interval: 1,
-      format: 'yyyy',
-      tickMs: 10 * YEAR,
-    };
-  } else {
-    return {
-      unit: 'century',
-      interval: 1,
-      format: 'yyyy',
-      tickMs: 100 * YEAR,
-    };
+  // Helper to check if a config would have adequate spacing
+  const hasAdequateSpacing = (tickMs: number, format: string): boolean => {
+    const spacing = tickMs * pixelsPerMs;
+    const labelWidth = LABEL_WIDTHS[format] || 60;
+    // Need at least labelWidth + 10px padding between label centers
+    return spacing >= labelWidth + 10;
+  };
+
+  // Try configs from finest to coarsest, picking the first with adequate spacing
+  const configs: ScaleConfig[] = [
+    { unit: 'minute', interval: 1, format: 'HH:mm', tickMs: MINUTE },
+    { unit: 'minute', interval: 5, format: 'HH:mm', tickMs: 5 * MINUTE },
+    { unit: 'minute', interval: 15, format: 'HH:mm', tickMs: 15 * MINUTE },
+    { unit: 'minute', interval: 30, format: 'HH:mm', tickMs: 30 * MINUTE },
+    { unit: 'hour', interval: 1, format: 'HH:mm', tickMs: HOUR },
+    { unit: 'hour', interval: 3, format: 'HH:mm', tickMs: 3 * HOUR },
+    { unit: 'hour', interval: 6, format: 'HH:mm', tickMs: 6 * HOUR },
+    { unit: 'hour', interval: 12, format: 'MMM d HH:mm', tickMs: 12 * HOUR },
+    { unit: 'day', interval: 1, format: 'MMM d', tickMs: DAY },
+    { unit: 'day', interval: 3, format: 'MMM d', tickMs: 3 * DAY },
+    { unit: 'week', interval: 1, format: 'MMM d', tickMs: 7 * DAY },
+    { unit: 'week', interval: 2, format: 'MMM d', tickMs: 14 * DAY },
+    { unit: 'month', interval: 1, format: 'MMM yyyy', tickMs: MONTH },
+    { unit: 'month', interval: 3, format: 'MMM yyyy', tickMs: 3 * MONTH },
+    { unit: 'month', interval: 6, format: 'MMM yyyy', tickMs: 6 * MONTH },
+    { unit: 'year', interval: 1, format: 'yyyy', tickMs: YEAR },
+    { unit: 'year', interval: 2, format: 'yyyy', tickMs: 2 * YEAR },
+    { unit: 'year', interval: 5, format: 'yyyy', tickMs: 5 * YEAR },
+    { unit: 'decade', interval: 1, format: 'yyyy', tickMs: 10 * YEAR },
+    { unit: 'decade', interval: 5, format: 'yyyy', tickMs: 50 * YEAR },
+    { unit: 'century', interval: 1, format: 'yyyy', tickMs: 100 * YEAR },
+  ];
+
+  // Find the finest-grained config that has adequate spacing
+  for (const config of configs) {
+    if (hasAdequateSpacing(config.tickMs, config.format)) {
+      return config;
+    }
   }
+
+  // Fallback to century if nothing else fits
+  return configs[configs.length - 1];
 }
 
 /**

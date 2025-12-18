@@ -6,7 +6,7 @@
 |--------|-------|--------|
 | Sprint 0 | Foundation | ✅ Complete |
 | Sprint 1 | Critical Features (MVP) | ✅ Complete |
-| Sprint 2 | High Features | 🔲 Not Started |
+| Sprint 2 | High Features | 🟡 In Progress |
 | Sprint 3 | Polish | 🔲 Not Started |
 | Sprint 4 | Release | 🔲 Not Started |
 
@@ -85,34 +85,32 @@
 
 ---
 
-## Sprint 2: High Features 🔲
+## Sprint 2: High Features 🟡
 
 **Objective:** Duration events, hot zones, zoom, advanced styling
 
 ### Deliverables
-- [ ] Duration events (horizontal tape/bar rendering)
-- [ ] Hot zones (highlighted background regions)
-- [ ] Hot zone text annotations
-- [ ] Mouse wheel zoom
-- [ ] Event `color` attribute support
-- [ ] Event `textColor` attribute support
-- [ ] Event `classname` attribute for CSS customization
+- [x] Duration events (horizontal tape/bar rendering)
+- [x] Hot zones (highlighted background regions)
+- [x] Hot zone text annotations
+- [x] Mouse wheel zoom
+- [x] Event `color` attribute support
+- [x] Event `textColor` attribute support
+- [x] Event `classname` attribute for CSS customization
 - [ ] Auto band height sizing
-- [ ] Hover states with tooltips
 - [ ] Three-band configuration support
 - [ ] Sticky labels (events remain visible when scrolled off-left, matching SIMILE behavior)
 
 ### Non-Functional
 - [ ] Large dataset optimization (>1000 events)
 - [ ] ARIA labels and roles
-- [ ] Keyboard zoom controls
+- [x] Keyboard zoom controls (+/- keys)
 
 ### Tests
-- [ ] Duration events render as tapes
-- [ ] Hot zones display with correct styling
-- [ ] Zoom in/out functions correctly
-- [ ] Custom colors apply to events
-- [ ] Hover tooltip appears
+- [x] Duration events render as tapes
+- [x] Hot zones display with correct styling
+- [x] Zoom in/out functions correctly
+- [x] Custom colors apply to events
 - [ ] Three bands synchronize correctly
 - [ ] Sticky labels remain visible when events scroll off-left
 

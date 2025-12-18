@@ -8,7 +8,7 @@ import {
   useEffect,
   type ReactNode,
 } from 'react';
-import type { TimelineEvent, BandConfig } from '../types';
+import type { TimelineEvent, BandConfig, HotZone } from '../types';
 import { getVisibleRange, getMedianDate, TIME_UNITS, type TimeUnit, parseDate } from '../utils/dateUtils';
 
 /**
@@ -39,6 +39,8 @@ export interface TimelineState {
   visibleRange: { start: Date; end: Date };
   /** Whether currently panning */
   isPanning: boolean;
+  /** Current zoom level (1.0 = default, >1 = zoomed in, <1 = zoomed out) */
+  zoomLevel: number;
 }
 
 /**
@@ -57,6 +59,8 @@ export interface TimelineActions {
   setIsPanning: (isPanning: boolean) => void;
   /** Set viewport width */
   setViewportWidth: (width: number) => void;
+  /** Zoom by a factor (>1 = zoom in, <1 = zoom out) */
+  zoom: (factor: number) => void;
 }
 
 /**
@@ -67,6 +71,7 @@ export interface TimelineContextValue {
   actions: TimelineActions;
   events: TimelineEvent[];
   bands: BandConfig[];
+  hotZones: HotZone[];
 }
 
 const TimelineContext = createContext<TimelineContextValue | null>(null);
@@ -215,6 +220,7 @@ export interface TimelineProviderProps {
   children: ReactNode;
   events: TimelineEvent[];
   bands?: BandConfig[];
+  hotZones?: HotZone[];
   initialCenterDate?: Date | string;
   onScroll?: (centerDate: Date) => void;
   onEventClick?: (event: TimelineEvent) => void;
@@ -229,6 +235,7 @@ export function TimelineProvider({
   children,
   events,
   bands: bandsProp,
+  hotZones: hotZonesProp,
   initialCenterDate,
   onScroll,
   onEventClick,
@@ -270,6 +277,11 @@ export function TimelineProvider({
   const [clickPosition, setClickPosition] = useState<ClickPosition | null>(null);
   const [hoveredEvent, setHoveredEventState] = useState<TimelineEvent | null>(null);
   const [isPanning, setIsPanning] = useState<boolean>(false);
+  const [zoomLevel, setZoomLevel] = useState<number>(1.0);
+
+  // Min/max zoom constraints
+  const MIN_ZOOM = 0.1;
+  const MAX_ZOOM = 10.0;
 
   // Track if first render has completed
   const isFirstRenderRef = useRef(true);
@@ -319,23 +331,38 @@ export function TimelineProvider({
     callbacksRef.current.onEventHover?.(event);
   }, []);
 
+  // Zoom action - factor > 1 zooms in, < 1 zooms out
+  const zoom = useCallback((factor: number) => {
+    setZoomLevel(prev => {
+      const newZoom = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, prev * factor));
+      return newZoom;
+    });
+  }, []);
+
+  // Effective pixels per ms including zoom
+  const effectivePixelsPerMs = useMemo(
+    () => pixelsPerMs * zoomLevel,
+    [pixelsPerMs, zoomLevel]
+  );
+
   // Computed visible range
   const visibleRange = useMemo(
-    () => getVisibleRange(centerDate, viewportWidth, pixelsPerMs),
-    [centerDate, viewportWidth, pixelsPerMs]
+    () => getVisibleRange(centerDate, viewportWidth, effectivePixelsPerMs),
+    [centerDate, viewportWidth, effectivePixelsPerMs]
   );
 
   // Build context value
   const state: TimelineState = useMemo(() => ({
     centerDate,
-    pixelsPerMillisecond: pixelsPerMs,
+    pixelsPerMillisecond: effectivePixelsPerMs,
     viewportWidth,
     selectedEvent,
     clickPosition,
     hoveredEvent,
     visibleRange,
     isPanning,
-  }), [centerDate, pixelsPerMs, viewportWidth, selectedEvent, clickPosition, hoveredEvent, visibleRange, isPanning]);
+    zoomLevel,
+  }), [centerDate, effectivePixelsPerMs, viewportWidth, selectedEvent, clickPosition, hoveredEvent, visibleRange, isPanning, zoomLevel]);
 
   const actions: TimelineActions = useMemo(() => ({
     setCenterDate,
@@ -344,14 +371,19 @@ export function TimelineProvider({
     setHoveredEvent,
     setIsPanning,
     setViewportWidth,
-  }), [setCenterDate, pan, setSelectedEvent, setHoveredEvent]);
+    zoom,
+  }), [setCenterDate, pan, setSelectedEvent, setHoveredEvent, zoom]);
+
+  // Hot zones with default empty array
+  const hotZones = useMemo(() => hotZonesProp || [], [hotZonesProp]);
 
   const contextValue: TimelineContextValue = useMemo(() => ({
     state,
     actions,
     events,
     bands,
-  }), [state, actions, events, bands]);
+    hotZones,
+  }), [state, actions, events, bands, hotZones]);
 
   return (
     <TimelineContext.Provider value={contextValue}>

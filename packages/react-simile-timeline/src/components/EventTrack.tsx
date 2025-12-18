@@ -73,6 +73,8 @@ export function EventTrack({
             x={layoutEvent.x}
             y={y}
             showLabel={showLabels}
+            isDuration={layoutEvent.isDuration}
+            durationWidth={layoutEvent.durationWidth}
           />
         );
       })}

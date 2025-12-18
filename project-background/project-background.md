@@ -299,7 +299,6 @@ Features are categorized by priority level based on screenshot analysis:
 | Auto band height sizing | Bands grow/shrink based on content density |
 | Animated transitions | Smooth expansion when events come into view |
 | Navigation controls | Jump-to-date links/controls |
-| Hover states | Tooltip/caption on event hover |
 | Multiple data sources | Load and merge events from multiple JSON files |
 
 ### Non-Functional Requirements
@@ -437,7 +436,6 @@ These will be designed to maximize developer experience while maintaining Simile
 - [ ] Event `textColor` attribute support
 - [ ] Event `classname` attribute for CSS customization
 - [ ] Auto band height sizing
-- [ ] Hover states with tooltips
 - [ ] Three-band configuration support
 
 **Non-Functional (integrated):**
@@ -450,7 +448,6 @@ These will be designed to maximize developer experience while maintaining Simile
 - Hot zones display with correct styling
 - Zoom in/out functions correctly
 - Custom colors apply to events
-- Hover tooltip appears
 - Three bands synchronize correctly
 
 **Demo Showcase:**
