@@ -1,6 +1,6 @@
 {
   "name": "react-simile-timeline",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A modern React implementation of the MIT SIMILE Timeline visualization component. Create interactive, multi-band timelines with point and duration events, hot zones, themes, and 100% Simile JSON compatibility.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -20,7 +20,8 @@
     "./style.css": "./dist/style.css"
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md"
   ],
   "sideEffects": [
     "*.css"
