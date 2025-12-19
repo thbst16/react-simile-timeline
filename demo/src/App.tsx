@@ -332,7 +332,7 @@ function App() {
                   </tr>
                   <tr>
                     <td className="px-6 py-4 font-mono text-sm text-blue-600">theme</td>
-                    <td className="px-6 py-4 font-mono text-sm text-gray-600">'classic' | 'dark' | Theme</td>
+                    <td className="px-6 py-4 font-mono text-sm text-gray-600">{`'classic' | 'dark' | Theme`}</td>
                     <td className="px-6 py-4 text-sm text-gray-600">Built-in or custom theme</td>
                   </tr>
                   <tr>
@@ -382,7 +382,7 @@ function App() {
             Ready to build amazing timelines?
           </h2>
           <p className="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
-            Get started with React Simile Timeline today. It's free, open source, and ready for production.
+            Get started with React Simile Timeline today. It&apos;s free, open source, and ready for production.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
