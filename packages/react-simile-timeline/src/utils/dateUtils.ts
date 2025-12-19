@@ -121,10 +121,11 @@ export function formatDate(date: Date, format: string): string {
       return day.toString();
     case 'HH:mm':
       return `${pad(hours)}:${pad(minutes)}`;
-    case 'h:mm a':
+    case 'h:mm a': {
       const h = hours % 12 || 12;
       const ampm = hours < 12 ? 'am' : 'pm';
       return `${h}:${pad(minutes)} ${ampm}`;
+    }
     case 'MMM d HH:mm':
       return `${monthNames[month]} ${day} ${pad(hours)}:${pad(minutes)}`;
     default:

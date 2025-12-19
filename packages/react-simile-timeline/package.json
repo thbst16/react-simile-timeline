@@ -1,7 +1,7 @@
 {
   "name": "react-simile-timeline",
-  "version": "0.0.1",
-  "description": "A modern React implementation of the MIT SIMILE Timeline visualization component",
+  "version": "0.1.0",
+  "description": "A modern React implementation of the MIT SIMILE Timeline visualization component. Create interactive, multi-band timelines with point and duration events, hot zones, themes, and 100% Simile JSON compatibility.",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -35,8 +35,8 @@
     "clean": "rm -rf dist"
   },
   "peerDependencies": {
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.4.0",
@@ -60,9 +60,16 @@
     "history",
     "events",
     "temporal",
-    "chart"
+    "chart",
+    "chronology",
+    "data-visualization",
+    "interactive",
+    "time-series",
+    "historical-events",
+    "gantt",
+    "schedule"
   ],
-  "author": "",
+  "author": "thbst16",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -71,5 +78,11 @@
   "bugs": {
     "url": "https://github.com/thbst16/react-simile-timeline/issues"
   },
-  "homepage": "https://github.com/thbst16/react-simile-timeline#readme"
+  "homepage": "https://github.com/thbst16/react-simile-timeline#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
 }
