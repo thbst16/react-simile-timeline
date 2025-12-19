@@ -7,7 +7,7 @@
 
 A modern React implementation of the [MIT SIMILE Timeline](https://www.simile-widgets.org/timeline/) visualization component.
 
-![React Simile Timeline Demo](https://raw.githubusercontent.com/thbst16/react-simile-timeline/main/docs/demo-screenshot.png)
+**[View Live Demo](https://react-simile-timeline.vercel.app/)**
 
 ## Features
 
