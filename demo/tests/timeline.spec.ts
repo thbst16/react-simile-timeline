@@ -9,8 +9,8 @@ test.describe('Timeline Demo', () => {
     // Check page title
     await expect(page).toHaveTitle(/React Simile Timeline/);
 
-    // Check header is visible
-    await expect(page.locator('h1')).toContainText('React Simile Timeline');
+    // Check header logo/brand is visible
+    await expect(page.locator('header')).toContainText('React Simile Timeline');
   });
 
   test('timeline component renders with inline data', async ({ page }) => {
@@ -24,13 +24,13 @@ test.describe('Timeline Demo', () => {
   });
 
   test('timeline component renders with URL data source', async ({ page }) => {
-    // Check that the second timeline (URL data) loads
+    // Check that timelines load (Basic, Theming, Hot Zones, Multi-Band)
     const timelines = page.locator('[data-testid="timeline-container"]');
-    await expect(timelines).toHaveCount(3); // JFK inline, JFK URL, World Wars
+    await expect(timelines).toHaveCount(4);
 
-    // Second timeline should also show bands
-    const secondTimeline = timelines.nth(1);
-    await expect(secondTimeline.locator('.timeline-band--detail')).toBeVisible();
+    // Multi-band timeline (last one) uses URL data source
+    const multiBandTimeline = timelines.nth(3);
+    await expect(multiBandTimeline.locator('.timeline-band--detail')).toBeVisible();
   });
 
   test('page has no console errors', async ({ page }) => {
@@ -113,9 +113,9 @@ test.describe('Sprint 1: Timeline MVP Features', () => {
     // Wait for events to render
     await page.waitForTimeout(500);
 
-    // Check that event dots are rendered
-    const eventDots = timeline.locator('.timeline-event__dot');
-    const count = await eventDots.count();
+    // Check that events are rendered (dots or tapes)
+    const events = timeline.locator('.timeline-event');
+    const count = await events.count();
     expect(count).toBeGreaterThan(0);
   });
 
@@ -216,14 +216,14 @@ test.describe('Sprint 2: Advanced Features', () => {
   });
 
   test('three-band timeline renders correctly', async ({ page }) => {
-    // The third timeline on the page is the three-band World Wars demo
+    // The fourth timeline on the page is the three-band Multi-Band demo
     const timelines = page.locator('[data-testid="timeline-container"]');
 
-    // Should have 3 timelines now (JFK inline, JFK URL, World Wars)
-    await expect(timelines).toHaveCount(3);
+    // Should have 4 timelines (Basic, Theming, Hot Zones, Multi-Band)
+    await expect(timelines).toHaveCount(4);
 
-    // Get the World Wars timeline (third one)
-    const worldWarsTimeline = timelines.nth(2);
+    // Get the Multi-Band timeline (fourth one)
+    const worldWarsTimeline = timelines.nth(3);
     await expect(worldWarsTimeline).toBeVisible();
 
     // Should have 3 bands total (1 detail + 2 overview)
@@ -239,7 +239,7 @@ test.describe('Sprint 2: Advanced Features', () => {
 
   test('three-band timeline has synchronized panning', async ({ page }) => {
     const timelines = page.locator('[data-testid="timeline-container"]');
-    const worldWarsTimeline = timelines.nth(2);
+    const worldWarsTimeline = timelines.nth(3);
 
     // Click to focus on timeline
     await worldWarsTimeline.click();
@@ -259,12 +259,13 @@ test.describe('Sprint 2: Advanced Features', () => {
     expect(newLabel).not.toBe(initialLabel);
   });
 
-  test('hot zones are visible in World Wars timeline', async ({ page }) => {
+  test('hot zones are visible in Hot Zones demo', async ({ page }) => {
     const timelines = page.locator('[data-testid="timeline-container"]');
-    const worldWarsTimeline = timelines.nth(2);
+    // Hot Zones demo is the third timeline (index 2)
+    const hotZonesTimeline = timelines.nth(2);
 
     // Check for hot zone elements
-    const hotZones = worldWarsTimeline.locator('.timeline-hot-zone');
+    const hotZones = hotZonesTimeline.locator('.timeline-hot-zone');
     await page.waitForTimeout(500);
 
     const count = await hotZones.count();
@@ -273,7 +274,7 @@ test.describe('Sprint 2: Advanced Features', () => {
 
   test('duration events render as tapes', async ({ page }) => {
     const timelines = page.locator('[data-testid="timeline-container"]');
-    const worldWarsTimeline = timelines.nth(2);
+    const worldWarsTimeline = timelines.nth(3);
 
     // Wait for events to render
     await page.waitForTimeout(500);
@@ -286,7 +287,7 @@ test.describe('Sprint 2: Advanced Features', () => {
 
   test('zoom controls work with keyboard', async ({ page }) => {
     const timelines = page.locator('[data-testid="timeline-container"]');
-    const worldWarsTimeline = timelines.nth(2);
+    const worldWarsTimeline = timelines.nth(3);
 
     // Click to focus
     await worldWarsTimeline.click();
@@ -309,7 +310,7 @@ test.describe('Sprint 2: Advanced Features', () => {
 
   test('sticky labels appear when events scroll off-left', async ({ page }) => {
     const timelines = page.locator('[data-testid="timeline-container"]');
-    const worldWarsTimeline = timelines.nth(2);
+    const worldWarsTimeline = timelines.nth(3);
 
     // Click to focus
     await worldWarsTimeline.click();
