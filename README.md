@@ -184,6 +184,47 @@ function App() {
 | `-` | Zoom out |
 | `Escape` | Close popup |
 
+### TypeScript Types
+
+```typescript
+interface TimelineData {
+  dateTimeFormat?: 'iso8601' | 'Gregorian' | string;
+  events: TimelineEvent[];
+}
+
+interface BandConfig {
+  id?: string;
+  height?: string;
+  timeUnit?: 'millisecond' | 'second' | 'minute' | 'hour'
+           | 'day' | 'week' | 'month' | 'year' | 'decade' | 'century';
+  intervalPixels?: number;
+  overview?: boolean;
+  syncWith?: string;
+  showEventLabels?: boolean;
+  trackHeight?: number;
+  trackGap?: number;
+}
+
+interface HotZone {
+  start: string;
+  end: string;
+  color?: string;
+  annotation?: string;
+  magnify?: number;
+}
+
+interface Theme {
+  name: string;
+  backgroundColor?: string;
+  eventColor?: string;
+  eventTextColor?: string;
+  tapeColor?: string;
+  scaleColor?: string;
+  gridColor?: string;
+  hotZoneColor?: string;
+}
+```
+
 ## Simile JSON Compatibility
 
 This library is 100% compatible with the original Simile Timeline JSON format:
@@ -235,10 +276,8 @@ pnpm typecheck
 
 ```
 ├── packages/
-│   └── react-simile-timeline/   # NPM library
-├── demo/                        # Demo application
-├── docs/                        # Documentation
-└── project-background/          # PRD and specifications
+│   └── react-simile-timeline/   # NPM library source
+└── demo/                        # Demo application
 ```
 
 ## Browser Support
