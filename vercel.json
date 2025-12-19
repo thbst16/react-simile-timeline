@@ -1,6 +1,0 @@
-{
-  "buildCommand": "pnpm build:lib && pnpm --filter demo build",
-  "outputDirectory": "demo/dist",
-  "installCommand": "pnpm install",
-  "framework": "vite"
-}
