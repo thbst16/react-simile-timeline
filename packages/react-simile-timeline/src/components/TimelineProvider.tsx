@@ -9,7 +9,7 @@ import {
   type ReactNode,
 } from 'react';
 import type { TimelineEvent, BandConfig, HotZone } from '../types';
-import { getVisibleRange, getMedianDate, TIME_UNITS, type TimeUnit, parseDate } from '../utils/dateUtils';
+import { getVisibleRange, getMedianDate, TIME_UNITS, type TimeUnit, parseDate, tryParseDate } from '../utils/dateUtils';
 
 /**
  * Click position for popup positioning
@@ -230,6 +230,30 @@ export interface TimelineProviderProps {
 }
 
 /**
+ * Resolve a center date from props.
+ *
+ * String values go through tryParseDate rather than the native constructor:
+ * a date-only string parsed natively is UTC midnight and lands a day early
+ * at negative UTC offsets. An unparseable string falls back to the median
+ * event date rather than becoming an Invalid Date.
+ */
+function resolveCenterDate(
+  value: Date | string | undefined,
+  fallbackEvents: TimelineEvent[]
+): Date {
+  if (value) {
+    if (value instanceof Date) {
+      return value;
+    }
+    const parsed = tryParseDate(value);
+    if (parsed) {
+      return parsed;
+    }
+  }
+  return getMedianDate(fallbackEvents);
+}
+
+/**
  * Timeline context provider
  * Manages shared state for all timeline bands
  */
@@ -256,24 +280,15 @@ export function TimelineProvider({
   const pixelsPerMs = calculatePixelsPerMs(primaryBand);
 
   // Helper to compute center date from props
-  const computeCenterDate = useCallback(() => {
-    if (initialCenterDate) {
-      return initialCenterDate instanceof Date
-        ? initialCenterDate
-        : new Date(initialCenterDate);
-    }
-    return getMedianDate(events);
-  }, [initialCenterDate, events]);
+  const computeCenterDate = useCallback(
+    () => resolveCenterDate(initialCenterDate, events),
+    [initialCenterDate, events]
+  );
 
   // State - use lazy initialization for centerDate
-  const [centerDate, setCenterDateState] = useState<Date>(() => {
-    if (initialCenterDate) {
-      return initialCenterDate instanceof Date
-        ? initialCenterDate
-        : new Date(initialCenterDate);
-    }
-    return getMedianDate(events);
-  });
+  const [centerDate, setCenterDateState] = useState<Date>(() =>
+    resolveCenterDate(initialCenterDate, events)
+  );
   const [viewportWidth, setViewportWidth] = useState<number>(800);
   const [selectedEvent, setSelectedEventState] = useState<TimelineEvent | null>(null);
   const [clickPosition, setClickPosition] = useState<ClickPosition | null>(null);

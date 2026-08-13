@@ -16,10 +16,6 @@ jobs:
     name: build-and-test (node ${{ matrix.node }}, TZ ${{ matrix.tz }})
     runs-on: ubuntu-latest
 
-    # Only the America/Chicago leg is allowed to fail, and only until #13 lands.
-    # See the matrix comment below.
-    continue-on-error: ${{ matrix.experimental }}
-
     strategy:
       # One failing leg must not cancel the others - the whole point of a matrix
       # is knowing which environments break, not just that one did.
@@ -27,21 +23,18 @@ jobs:
       matrix:
         node: [18, 20, 22, 24]
         tz: [UTC]
-        experimental: [false]
         include:
-          # Non-UTC leg. GitHub runners are UTC, which hid a real date-parsing
-          # defect for months: parseDate reads YYYY-MM-DD as UTC midnight and
-          # formats it with local getters, so date-only events render a day
-          # early at negative offsets. Locally: 55/55 pass under TZ=UTC,
-          # 54/55 under TZ=America/Chicago.
+          # Non-UTC leg, now blocking. GitHub runners are UTC, which hid a real
+          # date-parsing defect for months: parseDate read YYYY-MM-DD as UTC
+          # midnight and formatted it with local getters, so date-only events
+          # rendered a day early at negative offsets (#13).
           #
-          # This leg is EXPECTED TO FAIL until #13 is fixed. It is marked
-          # experimental so it reports red without blocking merges in the
-          # meantime. The #13 fix PR must delete this include entry's
-          # `experimental: true` so the leg becomes blocking.
+          # The defect is fixed and this leg passes, so it is a required check
+          # rather than an advisory one. Do not weaken it back to
+          # continue-on-error - a green UTC-only suite is exactly what let the
+          # original defect survive for eight months.
           - node: 20
             tz: America/Chicago
-            experimental: true
 
     env:
       TZ: ${{ matrix.tz }}
