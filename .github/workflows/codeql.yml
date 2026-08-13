@@ -1,0 +1,53 @@
+name: CodeQL
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    # Weekly, Monday 04:27 UTC. Off-peak and deliberately not on the hour -
+    # GitHub throttles schedules that bunch at :00.
+    - cron: '27 4 * * 1'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  analyze:
+    name: analyze (${{ matrix.language }})
+    runs-on: ubuntu-latest
+
+    permissions:
+      # Least privilege: only what the CodeQL action actually needs.
+      security-events: write # upload results to the Security tab
+      actions: read
+      contents: read
+
+    strategy:
+      fail-fast: false
+      matrix:
+        # javascript-typescript covers the library and the demo.
+        #
+        # actions scans the workflow files themselves for injection and
+        # untrusted-input issues. Included because this repository's
+        # workflows are part of the release path to npm - a compromised
+        # workflow is a supply-chain problem, not a CI inconvenience.
+        language: [javascript-typescript, actions]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+
+      # No build step. JavaScript/TypeScript and Actions are analyzed
+      # directly from source, so `pnpm build` would add time without
+      # changing what CodeQL sees.
+      - name: Perform CodeQL analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: '/language:${{ matrix.language }}'
