@@ -6,26 +6,63 @@ on:
   pull_request:
     branches: [main]
 
+# Supersede in-flight runs for the same ref rather than letting them finish.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build-and-test:
+    name: build-and-test (node ${{ matrix.node }}, TZ ${{ matrix.tz }})
     runs-on: ubuntu-latest
+
+    # Only the America/Chicago leg is allowed to fail, and only until #13 lands.
+    # See the matrix comment below.
+    continue-on-error: ${{ matrix.experimental }}
+
+    strategy:
+      # One failing leg must not cancel the others - the whole point of a matrix
+      # is knowing which environments break, not just that one did.
+      fail-fast: false
+      matrix:
+        node: [18, 20, 22, 24]
+        tz: [UTC]
+        experimental: [false]
+        include:
+          # Non-UTC leg. GitHub runners are UTC, which hid a real date-parsing
+          # defect for months: parseDate reads YYYY-MM-DD as UTC midnight and
+          # formats it with local getters, so date-only events render a day
+          # early at negative offsets. Locally: 55/55 pass under TZ=UTC,
+          # 54/55 under TZ=America/Chicago.
+          #
+          # This leg is EXPECTED TO FAIL until #13 is fixed. It is marked
+          # experimental so it reports red without blocking merges in the
+          # meantime. The #13 fix PR must delete this include entry's
+          # `experimental: true` so the leg becomes blocking.
+          - node: 20
+            tz: America/Chicago
+            experimental: true
+
+    env:
+      TZ: ${{ matrix.tz }}
 
     steps:
       - uses: actions/checkout@v4
 
+      # No `version:` input - the pnpm version is read from the
+      # `packageManager` field in package.json, so CI and local development
+      # cannot drift apart.
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8
+        uses: pnpm/action-setup@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: ${{ matrix.node }}
           cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       - name: Lint
         run: pnpm lint
@@ -38,6 +75,28 @@ jobs:
 
       - name: Unit tests
         run: pnpm test
+
+  e2e:
+    name: e2e
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build library
+        run: pnpm build:lib
 
       - name: Install Playwright browsers
         run: pnpm --filter demo exec playwright install chromium
