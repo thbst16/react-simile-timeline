@@ -1,0 +1,9 @@
+/*
+ * Root-level fallback for resolvers that predate the "exports" field.
+ *
+ * Modern bundlers resolve "react-simile-timeline/style.css" through the
+ * exports map straight to dist/style.css. Pre-exports resolvers (webpack 4
+ * and older) instead look for this file on disk, and without it the import
+ * documented in the README fails. Re-exporting keeps one source of truth.
+ */
+@import './dist/style.css';
