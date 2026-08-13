@@ -1,0 +1,60 @@
+# Dependabot version updates.
+#
+# DORMANT ON PURPOSE. Both ecosystems are set to open-pull-requests-limit: 0,
+# which disables *version* updates while leaving the configuration reviewed and
+# in place. Security updates are unaffected - those are governed by the
+# repository's Dependabot settings, not by this limit.
+#
+# Why dormant: every major dependency is currently 1-6 majors behind. Enabling
+# version updates today would open roughly two dozen major-bump pull requests
+# that duplicate and conflict with the deliberate, sequenced upgrades already
+# scoped as #18-#21. The automation would bury the actual work.
+#
+# When to enable: after the v1.1.0 milestone lands and the tree is current.
+# Raise both limits to 5 in a single PR at that point. Tracked on #6.
+
+version: 2
+
+updates:
+  - package-ecosystem: 'npm'
+    # pnpm workspace root. The lockfile here covers both workspace packages.
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      day: 'monday'
+    # 0 = version updates disabled. Raise to 5 after v1.1.0.
+    open-pull-requests-limit: 0
+    groups:
+      # Minor and patch bumps arrive as one PR so routine maintenance is a
+      # single review. Majors stay individual - those need real attention.
+      npm-minor-and-patch:
+        patterns:
+          - '*'
+        update-types:
+          - 'minor'
+          - 'patch'
+    labels:
+      - 'dependencies'
+      - 'chore'
+    commit-message:
+      prefix: 'chore(deps)'
+      prefix-development: 'chore(deps-dev)'
+
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      day: 'monday'
+    # Also 0 to match the plan. Workflow action updates do not collide with the
+    # npm upgrade work, so this one could reasonably be enabled sooner - see the
+    # note on #6.
+    open-pull-requests-limit: 0
+    groups:
+      github-actions:
+        patterns:
+          - '*'
+    labels:
+      - 'dependencies'
+      - 'ci'
+    commit-message:
+      prefix: 'chore(actions)'
