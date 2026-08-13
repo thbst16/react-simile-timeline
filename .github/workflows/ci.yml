@@ -63,6 +63,13 @@ jobs:
       - name: Build library
         run: pnpm build:lib
 
+      # Guards the exports map against silently breaking type resolution.
+      # The require condition once pointed at an index.d.cts that was never
+      # emitted, so every CommonJS consumer on node16/nodenext got an
+      # untyped module while the build stayed green (#14).
+      - name: Check package exports
+        run: pnpm --filter react-simile-timeline check:exports
+
       - name: Type check
         run: pnpm typecheck
 
