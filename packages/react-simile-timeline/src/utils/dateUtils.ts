@@ -3,6 +3,45 @@
  * Supports ISO 8601, legacy Simile formats, year-only, and BCE dates
  */
 
+/** ISO 8601 calendar dates carrying no time component: "2023-01-15" or "2023-01". */
+const ISO_DATE_ONLY = /^(\d{4})-(\d{2})(?:-(\d{2}))?$/;
+
+/**
+ * Parse an ISO date-only string as local midnight.
+ *
+ * `new Date("2023-01-15")` is UTC midnight by specification, but every
+ * consumer of these values reads them with local getters, so parsing
+ * natively shifts date-only events one day earlier at negative UTC offsets.
+ *
+ * Native ISO bounds are reproduced exactly so this stays a timezone fix and
+ * nothing more: month must be 01-12 and day 01-31, while overflow inside
+ * those bounds still rolls over ("2023-02-29" -> March 1, as before).
+ *
+ * Returns null when the string is not a date-only form or is out of bounds,
+ * leaving the caller to fall through to the other formats.
+ */
+function parseIsoDateOnly(value: string): Date | null {
+  const match = value.match(ISO_DATE_ONLY);
+  if (!match) {
+    return null;
+  }
+
+  const year = Number(match[1]);
+  const month = Number(match[2]);
+  const day = match[3] === undefined ? 1 : Number(match[3]);
+
+  if (month < 1 || month > 12 || day < 1 || day > 31) {
+    return null;
+  }
+
+  // Built via setFullYear rather than the constructor so years 0-99 are not
+  // remapped into the 1900s.
+  const date = new Date(0);
+  date.setFullYear(year, month - 1, day);
+  date.setHours(0, 0, 0, 0);
+  return date;
+}
+
 /**
  * Parse a date string into a Date object
  * Supports multiple formats for Simile compatibility:
@@ -10,6 +49,13 @@
  * - Legacy: "Jan 15 2023", "January 15, 2023"
  * - Year only: "2023"
  * - BCE: "-500" (500 BCE)
+ *
+ * Timezone semantics:
+ * - Date-only strings ("2023-01-15", "2023-01") resolve to local midnight,
+ *   so the calendar day a caller wrote is the calendar day rendered.
+ * - Datetimes without an offset ("2023-06-20T14:30:00") are local, per spec.
+ * - An explicit "Z" or "+/-HH:MM" suffix is honored as an absolute instant,
+ *   because the caller chose that deliberately.
  */
 export function parseDate(dateStr: string): Date {
   if (!dateStr) {
@@ -26,6 +72,13 @@ export function parseDate(dateStr: string): Date {
     date.setFullYear(year, 0, 1);
     date.setHours(0, 0, 0, 0);
     return date;
+  }
+
+  // Date-only strings must be built locally, before the native parser gets
+  // them and interprets them as UTC.
+  const dateOnly = parseIsoDateOnly(trimmed);
+  if (dateOnly) {
+    return dateOnly;
   }
 
   // Try ISO 8601 first (most common)

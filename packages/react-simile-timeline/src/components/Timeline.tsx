@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import type { TimelineProps, TimelineData, BrandingConfig } from '../types';
+import { tryParseDate } from '../utils/dateUtils';
 import { TimelineProvider, useTimelineContext } from './TimelineProvider';
 import { Band } from './Band';
 import { EventPopup } from './EventPopup';
@@ -273,9 +274,13 @@ export function Timeline({
   // Pass bands to provider - if undefined, provider will auto-generate based on data
   const bandConfigs = bands && bands.length > 0 ? bands : undefined;
 
-  // Parse initial center date
+  // Parse initial center date. String values go through tryParseDate rather
+  // than the native constructor: a date-only string parsed natively is UTC
+  // midnight and lands a day early at negative offsets. An unparseable value
+  // yields undefined so the timeline falls back to the median event date
+  // instead of centering on an Invalid Date.
   const initialCenterDate = centerDate
-    ? (centerDate instanceof Date ? centerDate : new Date(centerDate))
+    ? (centerDate instanceof Date ? centerDate : tryParseDate(centerDate) ?? undefined)
     : undefined;
 
   // Resolve branding config

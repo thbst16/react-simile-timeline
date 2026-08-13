@@ -5,14 +5,48 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.3] - Unreleased
+
+### Fixed
+
+- **Date-only events no longer render one day early outside UTC.** `"2023-01-15"`
+  and other date-only strings were parsed as **UTC midnight** — per the ECMAScript
+  specification — and then read back with local-time getters. At any negative UTC
+  offset the calendar day shifted backwards by one, so an event written as
+  January 15 rendered as January 14 throughout the Americas. Date-only strings now
+  resolve to **local midnight**, so the day you write is the day that renders.
+
+  **This changes rendered output.** If you previously compensated by shifting your
+  data forward a day, remove that adjustment. Timelines built from date-only Simile
+  JSON will move by one day at negative offsets — to the correct day.
+
+  Unaffected: datetimes without an offset (`"2023-06-20T14:30:00"`, already local),
+  values with an explicit `Z` or `±HH:MM` suffix (still absolute instants), year-only
+  and BCE values, and legacy Simile formats. Native ISO bounds are preserved —
+  out-of-range months and days still fail, and in-range overflow such as
+  `"2023-02-29"` still rolls over.
+
+- The `centerDate` prop shared the same defect. String values were parsed with the
+  native constructor, so `centerDate="2023-01-15"` centered a day early at negative
+  offsets. String values now use the same parser as event dates, and an unparseable
+  string falls back to the median event date instead of producing an `Invalid Date`.
+
+### Changed
+
+- CI runs the unit suite under a non-UTC timezone as a required check. GitHub
+  runners are UTC, where this defect was invisible; the suite was red on any
+  developer machine west of Greenwich while CI stayed green.
+
 ## [1.0.2] - 2024-12-19
 
 ### Fixed
+
 - Include README.md in NPM package for proper display on npmjs.com
 
 ## [1.0.1] - 2024-12-19
 
 ### Changed
+
 - Enhanced README with feature table, code examples, and API reference for NPM
 
 ## [1.0.0] - 2024-12-19
@@ -20,6 +54,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 #### Core Features
+
 - `<Timeline>` component with configurable multi-band layout
 - Two-band and three-band timeline configurations
 - Band synchronization (linked scrolling between bands)
@@ -29,6 +64,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Time scale rendering with automatic label formatting
 
 #### Event Rendering
+
 - Point events with dot markers and labels
 - Duration events with horizontal tape/bar rendering
 - Smart label layout engine (vertical stacking, overlap prevention)
@@ -38,17 +74,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Overview band with tick markers
 
 #### Hot Zones
+
 - Highlighted background regions for time periods
 - Hot zone text annotations
 - Customizable colors per zone
 
 #### Theming
+
 - Classic theme (default light theme)
 - Dark theme with CSS custom properties
 - Custom theme support via Theme object with CSS variable overrides
 - Smooth animated transitions between themes
 
 #### Navigation & Data
+
 - Event click handler with popup/details display
 - Jump-to-date navigation via `jumpToDate` action
 - Simile JSON data loading from URL (`dataUrl` prop)
@@ -57,17 +96,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Graceful error handling for invalid dates
 
 #### Accessibility
+
 - ARIA labels and roles for screen readers
 - Keyboard-accessible interactions
 - Focus management
 
 #### Other
+
 - Optional SIMILE-style branding/watermark
 - 100% backward compatibility with Simile JSON format
 - TypeScript types for all public APIs
 - CSS-only styling (no runtime dependencies)
 
 ### Performance
+
 - 60+ FPS smooth scrolling (verified at 120 FPS average)
 - Efficient virtualization for large event sets
 - Optimized re-renders with React hooks
@@ -75,6 +117,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Planned
+
 - Zone magnification effect
 - Full WCAG 2.1 AA compliance
 - Visual regression testing
