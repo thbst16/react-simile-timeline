@@ -15,10 +15,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # No `version:` input - read from `packageManager` in package.json.
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8
+        uses: pnpm/action-setup@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -28,7 +27,7 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       - name: Build library
         run: pnpm build:lib
