@@ -30,7 +30,7 @@ A modern React implementation of the [MIT SIMILE Timeline](https://www.simile-wi
 | **Multi-Band** | Two-band, three-band, or custom configurations |
 | **Fully Themeable** | Classic, dark, and custom themes via CSS variables |
 | **Accessible** | ARIA labels, keyboard navigation, screen reader support |
-| **Lightweight** | ~12KB gzipped, zero runtime dependencies |
+| **Lightweight** | ~12KB gzipped in your bundle, zero runtime dependencies |
 
 ---
 
@@ -47,6 +47,17 @@ yarn add react-simile-timeline
 ```bash
 pnpm add react-simile-timeline
 ```
+
+### Package size
+
+Two different numbers, often confused:
+
+| Measure | Size | What it is |
+|---------|------|------------|
+| **Shipped to your users** | **~12 KB gzipped** | The ESM bundle (11.5 KB gzipped) plus the stylesheet (1.1 KB gzipped), after your bundler and your server's compression |
+| Installed in `node_modules` | ~404 KB | The whole published package on disk, including both builds, both type declarations, and sourcemaps |
+
+Sourcemaps are 271 KB of that 404 KB. They are shipped deliberately, so you can step into library source when debugging, and they are never sent to a browser unless devtools asks for them. They do not reach your users and do not count against your bundle.
 
 ---
 

@@ -15,6 +15,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # The tag is the only trigger for this workflow, and publishing is
+      # irreversible - npm's unpublish window is narrow and using it permanently
+      # burns the version number. That is how 1.0.0 was lost on this package.
+      # A tag that disagrees with package.json is one way to repeat it, so it
+      # fails here, in seconds, before anything is built or pushed anywhere.
+      - name: Verify tag matches package version
+        run: |
+          set -euo pipefail
+          tag="${GITHUB_REF_NAME}"
+          pkg="v$(node -p "require('./packages/react-simile-timeline/package.json').version")"
+          if [ "$tag" != "$pkg" ]; then
+            echo "::error::Tag ${tag} does not match package.json version ${pkg}. Nothing published."
+            exit 1
+          fi
+          echo "Tag ${tag} matches package.json version ${pkg}."
+
       # No `version:` input - read from `packageManager` in package.json.
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
@@ -32,6 +48,19 @@ jobs:
       - name: Build library
         run: pnpm build:lib
 
+      # Provenance is switched on through `publishConfig.provenance` in the
+      # package's package.json, NOT through a `--provenance` flag here.
+      #
+      # `pnpm --filter <pkg> publish` takes pnpm's recursive publish path, and
+      # on the pinned pnpm (9.0.0) that path discards the invoking argv and
+      # rebuilds the npm command from scratch: it forwards only --access,
+      # --dry-run and --otp. A `--provenance` flag on this line would be
+      # accepted by the CLI, silently dropped, and produce an unattested
+      # release that looks like it worked. `publishConfig` travels inside the
+      # packed tarball's manifest instead, so npm reads it whichever path pnpm
+      # takes. Verified: the field is present in the packed package.json.
+      #
+      # `id-token: write` above is what lets npm mint the attestation.
       - name: Publish to NPM
         run: pnpm --filter react-simile-timeline publish --no-git-checks
         env:
