@@ -31,11 +31,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   offsets. String values now use the same parser as event dates, and an unparseable
   string falls back to the median event date instead of producing an `Invalid Date`.
 
+### Added
+
+- **The published package carries npm provenance.** Releases are now attested,
+  giving a verifiable link between the tarball on npm and the workflow run and
+  commit that built it. Check it with
+  `npm view react-simile-timeline dist.attestations`.
+
 ### Changed
 
 - CI runs the unit suite under a non-UTC timezone as a required check. GitHub
   runners are UTC, where this defect was invisible; the suite was red on any
   developer machine west of Greenwich while CI stayed green.
+- The release workflow refuses to publish when the pushed tag does not match
+  the version in `package.json`.
+- Documentation corrections: both `Live Demo` links pointed at a host that
+  returned 404; the CHANGELOG release dates for `1.0.0`–`1.0.2` were a year
+  early; the TypeScript badge was pinned to a version the project had long
+  since left; and the README's size claim did not distinguish the ~12 KB that
+  reaches your users from the ~404 KB installed on disk.
 
 ## [1.0.2] - 2025-12-19
 
