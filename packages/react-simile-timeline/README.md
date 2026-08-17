@@ -4,7 +4,7 @@
 [![npm version](https://img.shields.io/npm/v/react-simile-timeline.svg)](https://www.npmjs.com/package/react-simile-timeline)
 [![npm downloads](https://img.shields.io/npm/dm/react-simile-timeline.svg)](https://www.npmjs.com/package/react-simile-timeline)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue.svg)](https://www.typescriptlang.org/)
+[![TypeScript](https://img.shields.io/github/package-json/dependency-version/thbst16/react-simile-timeline/dev/typescript?label=TypeScript&color=blue)](https://www.typescriptlang.org/)
 
 A modern React implementation of the [MIT SIMILE Timeline](https://www.simile-widgets.org/timeline/) visualization component. Build beautiful, interactive timelines with ease.
 
