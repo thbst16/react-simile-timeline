@@ -10,7 +10,7 @@ A modern React implementation of the [MIT SIMILE Timeline](https://www.simile-wi
 
 <p align="center">
   <strong>
-    <a href="https://react-simile-timeline.vercel.app/">Live Demo</a> •
+    <a href="https://react-simile-timeline-demo.vercel.app/">Live Demo</a> •
     <a href="#installation">Installation</a> •
     <a href="#quick-start">Quick Start</a> •
     <a href="#api-reference">API</a> •
@@ -269,7 +269,7 @@ MIT License - see [LICENSE](https://github.com/thbst16/react-simile-timeline/blo
 
 ## Links
 
-- [Live Demo](https://react-simile-timeline.vercel.app/)
+- [Live Demo](https://react-simile-timeline-demo.vercel.app/)
 - [GitHub Repository](https://github.com/thbst16/react-simile-timeline)
 - [Issue Tracker](https://github.com/thbst16/react-simile-timeline/issues)
 - [Changelog](https://github.com/thbst16/react-simile-timeline/blob/main/CHANGELOG.md)
