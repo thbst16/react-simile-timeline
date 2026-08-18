@@ -136,6 +136,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **Minimum Node version is now 20.19.** `engines.node` moved from `>=18.0.0`
+  to `>=20.19.0`. The build toolchain (Vite 8) requires it, and Node 18 reached
+  end of life in April 2025. The library itself is browser-targeted and its
+  built output is unaffected — this narrows a claim that could no longer be
+  tested rather than removing working support. Node 18 was also dropped from
+  the CI matrix, which now covers 20, 22 and 24.
+- Build toolchain modernized: Vite 5 → 8, `@vitejs/plugin-react` 4 → 6,
+  `vite-plugin-dts` 3 → 5, Vitest 1 → 4, jsdom 24 → 26. The published bundle is
+  smaller (ESM 11.7 KB → 10.8 KB gzipped) and the emitted type declarations are
+  byte-identical to `1.0.3`.
+
 ### Planned
 
 - Zone magnification effect

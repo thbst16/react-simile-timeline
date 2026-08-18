@@ -29,7 +29,11 @@ jobs:
       # is knowing which environments break, not just that one did.
       fail-fast: false
       matrix:
-        node: [18, 20, 22, 24]
+        # Node 18 was dropped when the toolchain moved to Vite 8, which
+        # requires ^20.19.0 || >=22.12.0. Node 18 reached end of life in April
+        # 2025. engines.node was narrowed to match rather than left claiming a
+        # runtime nothing exercises.
+        node: [20, 22, 24]
         tz: [UTC]
         include:
           # Non-UTC leg, now blocking. GitHub runners are UTC, which hid a real
