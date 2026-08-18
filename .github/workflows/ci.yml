@@ -16,6 +16,14 @@ jobs:
     name: build-and-test (node ${{ matrix.node }}, TZ ${{ matrix.tz }})
     runs-on: ubuntu-latest
 
+    # Least privilege. Without an explicit block both jobs inherit the
+    # repository default GITHUB_TOKEN scope, which is far wider than either
+    # needs - this job only reads the checkout. Flagged by CodeQL
+    # (actions/missing-workflow-permissions) since code scanning was added in
+    # #11; codeql.yml and release.yml already scope theirs.
+    permissions:
+      contents: read
+
     strategy:
       # One failing leg must not cancel the others - the whole point of a matrix
       # is knowing which environments break, not just that one did.
@@ -79,6 +87,12 @@ jobs:
   e2e:
     name: e2e
     runs-on: ubuntu-latest
+
+    # Least privilege, as above. The Playwright report upload on failure goes
+    # through the Actions artifact API rather than a token scope, so read on
+    # contents is enough - verified by forcing a failing run, not assumed.
+    permissions:
+      contents: read
 
     steps:
       - uses: actions/checkout@v4
