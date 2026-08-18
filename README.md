@@ -29,7 +29,7 @@ A modern React implementation of the [MIT SIMILE Timeline](https://www.simile-wi
 | **Modern Stack** | Built with React 18/19, TypeScript, and hooks |
 | **Multi-Band** | Two-band, three-band, or custom configurations |
 | **Fully Themeable** | Classic, dark, and custom themes via CSS variables |
-| **Accessible** | ARIA labels, keyboard navigation, screen reader support |
+| **Accessible** | Keyboard navigation, focus management, ARIA labels on events and popups |
 | **Lightweight** | ~12KB gzipped in your bundle, zero runtime dependencies |
 
 ---

@@ -139,5 +139,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Planned
 
 - Zone magnification effect
-- Full WCAG 2.1 AA compliance
+- Full WCAG 2.1 AA compliance ([#25](https://github.com/thbst16/react-simile-timeline/issues/25))
+  — audit and remediation. Until that lands, the project describes what is
+  implemented rather than asserting a conformance level.
 - Visual regression testing
