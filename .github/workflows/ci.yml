@@ -88,6 +88,46 @@ jobs:
       - name: Unit tests
         run: pnpm test
 
+  # Proves the lower bound of the peer range. The library's own dev/test
+  # environment runs React 19 (matching the @types/react it ships against);
+  # peerDependencies promise `^18 || ^19`, and until this job existed the 18
+  # half was never exercised - the credibility gap #21 was filed to close.
+  # React 18 is also covered end-to-end by the `e2e` job, whose demo pins
+  # React 18; this leg adds the unit level.
+  unit-react18:
+    name: unit-react18 (peer floor)
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # Pin the React 18 floor for the library's test environment. Not written
+      # to the lockfile - this is a throwaway CI mutation to run the same suite
+      # against the older supported runtime. @testing-library/react 16 already
+      # supports both React 18 and 19, so only React itself is moved.
+      - name: Pin React 18
+        run: >-
+          pnpm --filter react-simile-timeline add -D
+          react@^18 react-dom@^18 @types/react@^18 @types/react-dom@^18
+
+      - name: Unit tests on React 18
+        run: pnpm --filter react-simile-timeline test
+
   e2e:
     name: e2e
     runs-on: ubuntu-latest

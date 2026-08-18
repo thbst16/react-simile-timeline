@@ -5,7 +5,7 @@ import { formatDate, parseDate } from '../utils/dateUtils';
 
 export interface EventPopupProps {
   /** Container element for positioning reference */
-  containerRef?: React.RefObject<HTMLElement>;
+  containerRef?: React.RefObject<HTMLElement | null>;
 }
 
 /**
