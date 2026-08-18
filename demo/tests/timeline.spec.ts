@@ -7,7 +7,7 @@ test.describe('Timeline Demo', () => {
 
   test('demo app loads successfully', async ({ page }) => {
     // Check page title
-    await expect(page).toHaveTitle(/PERMISSIONS_PROBE_EXPECT_FAILURE/);
+    await expect(page).toHaveTitle(/React Simile Timeline/);
 
     // Check header logo/brand is visible
     await expect(page.locator('header')).toContainText('React Simile Timeline');
