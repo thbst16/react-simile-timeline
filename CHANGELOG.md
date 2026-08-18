@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.3] - Unreleased
+## [1.0.3] - 2026-08-17
 
 ### Fixed
 
@@ -31,25 +31,43 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   offsets. String values now use the same parser as event dates, and an unparseable
   string falls back to the median event date instead of producing an `Invalid Date`.
 
+### Added
+
+- **The published package carries npm provenance.** Releases are now attested,
+  giving a verifiable link between the tarball on npm and the workflow run and
+  commit that built it. Check it with
+  `npm view react-simile-timeline dist.attestations`.
+
 ### Changed
 
 - CI runs the unit suite under a non-UTC timezone as a required check. GitHub
   runners are UTC, where this defect was invisible; the suite was red on any
   developer machine west of Greenwich while CI stayed green.
+- The release workflow refuses to publish when the pushed tag does not match
+  the version in `package.json`.
+- Documentation corrections: both `Live Demo` links pointed at a host that
+  returned 404; the CHANGELOG release dates for `1.0.0`–`1.0.2` were a year
+  early; the TypeScript badge was pinned to a version the project had long
+  since left; and the README's size claim did not distinguish the ~12 KB that
+  reaches your users from the ~404 KB installed on disk.
 
-## [1.0.2] - 2024-12-19
+## [1.0.2] - 2025-12-19
 
 ### Fixed
 
 - Include README.md in NPM package for proper display on npmjs.com
 
-## [1.0.1] - 2024-12-19
+## [1.0.1] - 2025-12-19
 
 ### Changed
 
 - Enhanced README with feature table, code examples, and API reference for NPM
 
-## [1.0.0] - 2024-12-19
+## [1.0.0] - 2025-11-16
+
+> **Not installable from npm.** `1.0.0` was published and then unpublished, and
+> npm permanently blocks republishing an unpublished version. Use `1.0.1` or
+> later. The tag and GitHub release remain as history.
 
 ### Added
 
@@ -111,7 +129,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Performance
 
 - 60+ FPS smooth scrolling (verified at 120 FPS average)
-- Efficient virtualization for large event sets
+- Viewport culling — only events inside the visible date range are rendered, so
+  the rendered node count is bounded by the viewport rather than by the size of
+  the dataset
 - Optimized re-renders with React hooks
 
 ## [Unreleased]

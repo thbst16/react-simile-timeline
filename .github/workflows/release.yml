@@ -4,9 +4,48 @@ on:
   push:
     tags:
       - 'v*'
+  # Manual dry check of the NPM_TOKEN secret. Selects the verify-token job
+  # only - it can never publish. See the job guards below.
+  workflow_dispatch:
 
 jobs:
+  # There is no way to confirm the publish credential short of using it, and
+  # using it for real is the irreversible step. This job answers "is the token
+  # still good?" with a whoami and nothing else: no build, no pack, no publish.
+  #
+  # Run it from the Actions tab before pushing a release tag. A dead token
+  # discovered here costs nothing; discovered after tagging it costs a version
+  # number, because the tag is consumed whether or not the publish succeeds.
+  verify-token:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Check NPM_TOKEN against the registry
+        run: |
+          set -euo pipefail
+          if ! who=$(npm whoami 2>&1); then
+            echo "::error::NPM_TOKEN is not accepted by the registry. Do not push a release tag until it is replaced."
+            echo "$who"
+            exit 1
+          fi
+          echo "NPM_TOKEN authenticates as: ${who}"
+          echo "Publish rights are a separate question - confirm this account can publish react-simile-timeline."
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
   publish:
+    # Belt and braces: this job runs for a pushed tag and nothing else, so a
+    # manual dispatch cannot reach the publish step however the triggers change.
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -14,6 +53,22 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
+      # The tag is the only trigger for this workflow, and publishing is
+      # irreversible - npm's unpublish window is narrow and using it permanently
+      # burns the version number. That is how 1.0.0 was lost on this package.
+      # A tag that disagrees with package.json is one way to repeat it, so it
+      # fails here, in seconds, before anything is built or pushed anywhere.
+      - name: Verify tag matches package version
+        run: |
+          set -euo pipefail
+          tag="${GITHUB_REF_NAME}"
+          pkg="v$(node -p "require('./packages/react-simile-timeline/package.json').version")"
+          if [ "$tag" != "$pkg" ]; then
+            echo "::error::Tag ${tag} does not match package.json version ${pkg}. Nothing published."
+            exit 1
+          fi
+          echo "Tag ${tag} matches package.json version ${pkg}."
 
       # No `version:` input - read from `packageManager` in package.json.
       - name: Setup pnpm
@@ -32,6 +87,19 @@ jobs:
       - name: Build library
         run: pnpm build:lib
 
+      # Provenance is switched on through `publishConfig.provenance` in the
+      # package's package.json, NOT through a `--provenance` flag here.
+      #
+      # `pnpm --filter <pkg> publish` takes pnpm's recursive publish path, and
+      # on the pinned pnpm (9.0.0) that path discards the invoking argv and
+      # rebuilds the npm command from scratch: it forwards only --access,
+      # --dry-run and --otp. A `--provenance` flag on this line would be
+      # accepted by the CLI, silently dropped, and produce an unattested
+      # release that looks like it worked. `publishConfig` travels inside the
+      # packed tarball's manifest instead, so npm reads it whichever path pnpm
+      # takes. Verified: the field is present in the packed package.json.
+      #
+      # `id-token: write` above is what lets npm mint the attestation.
       - name: Publish to NPM
         run: pnpm --filter react-simile-timeline publish --no-git-checks
         env:

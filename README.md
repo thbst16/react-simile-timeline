@@ -4,13 +4,13 @@
 [![npm version](https://img.shields.io/npm/v/react-simile-timeline.svg)](https://www.npmjs.com/package/react-simile-timeline)
 [![npm downloads](https://img.shields.io/npm/dm/react-simile-timeline.svg)](https://www.npmjs.com/package/react-simile-timeline)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue.svg)](https://www.typescriptlang.org/)
+[![TypeScript](https://img.shields.io/github/package-json/dependency-version/thbst16/react-simile-timeline/dev/typescript?label=TypeScript&color=blue)](https://www.typescriptlang.org/)
 
 A modern React implementation of the [MIT SIMILE Timeline](https://www.simile-widgets.org/timeline/) visualization component. Build beautiful, interactive timelines with ease.
 
 <p align="center">
   <strong>
-    <a href="https://react-simile-timeline.vercel.app/">Live Demo</a> •
+    <a href="https://react-simile-timeline-demo.vercel.app/">Live Demo</a> •
     <a href="#installation">Installation</a> •
     <a href="#quick-start">Quick Start</a> •
     <a href="#api-reference">API</a> •
@@ -30,7 +30,7 @@ A modern React implementation of the [MIT SIMILE Timeline](https://www.simile-wi
 | **Multi-Band** | Two-band, three-band, or custom configurations |
 | **Fully Themeable** | Classic, dark, and custom themes via CSS variables |
 | **Accessible** | ARIA labels, keyboard navigation, screen reader support |
-| **Lightweight** | ~12KB gzipped, zero runtime dependencies |
+| **Lightweight** | ~12KB gzipped in your bundle, zero runtime dependencies |
 
 ---
 
@@ -47,6 +47,17 @@ yarn add react-simile-timeline
 ```bash
 pnpm add react-simile-timeline
 ```
+
+### Package size
+
+Two different numbers, often confused:
+
+| Measure | Size | What it is |
+|---------|------|------------|
+| **Shipped to your users** | **~12 KB gzipped** | The ESM bundle (11.5 KB gzipped) plus the stylesheet (1.1 KB gzipped), after your bundler and your server's compression |
+| Installed in `node_modules` | ~404 KB | The whole published package on disk, including both builds, both type declarations, and sourcemaps |
+
+Sourcemaps are 271 KB of that 404 KB. They are shipped deliberately, so you can step into library source when debugging, and they are never sent to a browser unless devtools asks for them. They do not reach your users and do not count against your bundle.
 
 ---
 
@@ -269,7 +280,7 @@ MIT License - see [LICENSE](https://github.com/thbst16/react-simile-timeline/blo
 
 ## Links
 
-- [Live Demo](https://react-simile-timeline.vercel.app/)
+- [Live Demo](https://react-simile-timeline-demo.vercel.app/)
 - [GitHub Repository](https://github.com/thbst16/react-simile-timeline)
 - [Issue Tracker](https://github.com/thbst16/react-simile-timeline/issues)
 - [Changelog](https://github.com/thbst16/react-simile-timeline/blob/main/CHANGELOG.md)
