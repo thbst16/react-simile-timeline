@@ -148,6 +148,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `vite-plugin-dts` 3 → 5, Vitest 1 → 4, jsdom 24 → 26. The published bundle is
   smaller (ESM 11.7 KB → 10.8 KB gzipped) and the emitted type declarations are
   byte-identical to `1.0.3`.
+- **React 19 support is now tested, not just asserted.** The library's own test
+  suite runs against React 19 by default, and a dedicated CI job exercises the
+  React 18 floor, so the `react: ^18 || ^19` peer promise is verified on both
+  ends for the first time. Adopted `@types/react`/`@types/react-dom` 19,
+  `@testing-library/react` 16, and TypeScript 6. The published type
+  declarations now resolve the `JSX` namespace through `react` (React 19's
+  location) rather than `react/jsx-runtime`; this is compatible with
+  `@types/react` 18.3 and later. Lint moved to ESLint 9 flat config.
 
 ### Planned
 
