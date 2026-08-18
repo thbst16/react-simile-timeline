@@ -11,25 +11,38 @@
     "preview": "pnpm --filter demo preview",
     "test": "pnpm --filter react-simile-timeline test",
     "test:e2e": "pnpm --filter demo test:e2e",
-    "lint": "eslint . --ext .ts,.tsx",
-    "lint:fix": "eslint . --ext .ts,.tsx --fix",
+    "lint": "eslint . --max-warnings=0",
+    "lint:fix": "eslint . --fix",
     "format": "prettier --write \"**/*.{ts,tsx,json,md}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,json,md}\"",
     "typecheck": "pnpm -r typecheck",
     "clean": "pnpm -r clean && rm -rf node_modules"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^7.0.0",
-    "@typescript-eslint/parser": "^7.0.0",
-    "eslint": "^8.57.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-react": "^7.34.0",
-    "eslint-plugin-react-hooks": "^4.6.0",
+    "@eslint/js": "^9.39.5",
+    "eslint": "^9.39.5",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "globals": "^16.5.0",
     "prettier": "^3.2.0",
-    "typescript": "^5.4.0"
+    "typescript": "^5.4.0",
+    "typescript-eslint": "^8.67.0"
   },
   "packageManager": "pnpm@9.0.0",
   "engines": {
     "node": ">=20.19.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "flatted": ">=3.4.2",
+      "minimatch@<3.1.4": ">=3.1.4",
+      "minimatch@>=9 <9.0.7": ">=9.0.7",
+      "picomatch@<2.3.2": ">=2.3.2",
+      "picomatch@>=4 <4.0.4": ">=4.0.4",
+      "brace-expansion@<1.1.16": ">=1.1.16",
+      "brace-expansion@>=2 <2.1.2": ">=2.1.2",
+      "js-yaml@>=4 <4.3.1": ">=4.3.1"
+    }
   }
 }

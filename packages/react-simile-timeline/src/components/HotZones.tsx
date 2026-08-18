@@ -28,12 +28,13 @@ export function HotZones({
   viewportWidth,
   centerDate,
 }: HotZonesProps) {
-  // Calculate viewport left edge in time
-  const viewportLeftMs = centerDate.getTime() - (viewportWidth / 2) / pixelsPerMs;
-  const viewportLeftDate = new Date(viewportLeftMs);
-
   // Filter and calculate positions for visible hot zones
   const visibleHotZones = useMemo(() => {
+    // Viewport left edge in time. Constructed inside the memo so it is not a
+    // fresh Date reference on every render, which would defeat memoization -
+    // this mirrors OverviewMarkers and the layout engine.
+    const viewportLeftMs = centerDate.getTime() - (viewportWidth / 2) / pixelsPerMs;
+    const viewportLeftDate = new Date(viewportLeftMs);
     return hotZones
       .map(zone => {
         try {
@@ -65,7 +66,7 @@ export function HotZones({
         }
       })
       .filter((z): z is NonNullable<typeof z> => z !== null);
-  }, [hotZones, visibleRange, viewportLeftDate, pixelsPerMs]);
+  }, [hotZones, visibleRange, centerDate, viewportWidth, pixelsPerMs]);
 
   if (visibleHotZones.length === 0) {
     return null;
