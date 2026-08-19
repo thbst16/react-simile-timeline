@@ -1,32 +1,10 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import dts from 'vite-plugin-dts';
-import { copyFileSync } from 'fs';
 import { resolve } from 'path';
 
 export default defineConfig({
   plugins: [
     react(),
-    dts({
-      insertTypesEntry: true,
-      // Renamed from `rollupTypes` in vite-plugin-dts 5. The old name is not
-      // an error, it is silently ignored - which emits a 1.1 kB re-export
-      // stub plus a dist/ tree of per-file declarations instead of the single
-      // 19.9 kB rolled-up bundle, while the build still reports success.
-      bundleTypes: true,
-      afterBuild: () => {
-        // The CJS entry needs declarations of its own. package.json sets
-        // "type": "module", so a .d.ts is ESM-flavoured types - pointing the
-        // require condition at it makes the package masquerade as ESM, which
-        // @arethetypeswrong/cli flags. Only the file extension carries that
-        // signal; the rolled-up declaration content is identical for both
-        // module systems, so it is copied verbatim.
-        copyFileSync(
-          resolve(import.meta.dirname, 'dist/index.d.ts'),
-          resolve(import.meta.dirname, 'dist/index.d.cts')
-        );
-      },
-    }),
   ],
   build: {
     lib: {

@@ -43,3 +43,4 @@ pnpm-debug.log*
 # Claude Code
 .claude/
 .mcp.json
+.dts-temp
