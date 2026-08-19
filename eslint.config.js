@@ -79,7 +79,7 @@ export default tseslint.config(
 
   // Node CLI scripts print to stdout by design.
   {
-    files: ['scripts/**/*.js', 'scripts/**/*.mjs'],
+    files: ['scripts/**/*.{js,mjs}'],
     rules: {
       'no-console': 'off',
     },
