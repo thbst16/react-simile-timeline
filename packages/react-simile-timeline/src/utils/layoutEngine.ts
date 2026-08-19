@@ -4,7 +4,7 @@
  */
 
 import type { TimelineEvent } from '../types';
-import { parseDate, dateToPixel } from './dateUtils';
+import { parseDate } from './dateUtils';
 
 /**
  * An event with computed layout information
@@ -91,6 +91,120 @@ export function filterVisibleEvents(
       return false;
     }
   });
+}
+
+/**
+ * An event with its start/end parsed to epoch milliseconds once, so the
+ * per-frame layout never re-parses. `index` is the position in the original
+ * events array; the visible set is restored to that order before track
+ * assignment so output matches the un-prepared path exactly.
+ */
+export interface PreparedEvent {
+  event: TimelineEvent;
+  index: number;
+  startMs: number;
+  /** End epoch for duration events; undefined for point events */
+  endMs?: number;
+  isDuration: boolean;
+}
+
+/**
+ * Events parsed and partitioned once, ready for repeated viewport queries.
+ * Point events are sorted by start so a visible window is a binary-searchable
+ * slice. Duration events are kept apart and scanned: one can start far to the
+ * left and still overlap, so a start-sorted binary search cannot bound them.
+ */
+export interface PreparedEvents {
+  /** Point events, ascending by startMs */
+  points: PreparedEvent[];
+  /** Duration events, original order */
+  durations: PreparedEvent[];
+}
+
+/**
+ * Parse and partition events once. This is the work that used to happen on
+ * every pan frame inside filterVisibleEvents; hoisting it behind a memo keyed
+ * on the events array is what makes the per-frame cost independent of dataset
+ * size for point events (#36).
+ */
+export function prepareEvents(events: TimelineEvent[]): PreparedEvents {
+  const points: PreparedEvent[] = [];
+  const durations: PreparedEvent[] = [];
+
+  events.forEach((event, index) => {
+    let startMs: number;
+    try {
+      startMs = parseDate(event.start).getTime();
+      if (Number.isNaN(startMs)) return;
+    } catch {
+      return; // skip invalid dates, as filterVisibleEvents did
+    }
+
+    if (isDurationEvent(event) && event.end) {
+      let endMs: number;
+      try {
+        endMs = parseDate(event.end).getTime();
+        if (Number.isNaN(endMs)) return;
+      } catch {
+        return;
+      }
+      durations.push({ event, index, startMs, endMs, isDuration: true });
+    } else {
+      points.push({ event, index, startMs, isDuration: isDurationEvent(event) });
+    }
+  });
+
+  points.sort((a, b) => a.startMs - b.startMs);
+  return { points, durations };
+}
+
+/**
+ * Index of the first point whose startMs is >= target (lower bound).
+ */
+function lowerBound(points: PreparedEvent[], target: number): number {
+  let lo = 0;
+  let hi = points.length;
+  while (lo < hi) {
+    const mid = (lo + hi) >>> 1;
+    if (points[mid].startMs < target) lo = mid + 1;
+    else hi = mid;
+  }
+  return lo;
+}
+
+/**
+ * Filter prepared events to the visible window. Point events resolve to a
+ * binary-searched slice (O(log n + visible)); duration events are scanned for
+ * overlap. The result is ordered by original index to match filterVisibleEvents.
+ */
+export function filterVisiblePrepared(
+  prepared: PreparedEvents,
+  visibleRange: { start: Date; end: Date },
+  bufferMs: number = 24 * 60 * 60 * 1000
+): PreparedEvent[] {
+  const rangeStart = visibleRange.start.getTime() - bufferMs;
+  const rangeEnd = visibleRange.end.getTime() + bufferMs;
+
+  const { points, durations } = prepared;
+  const result: PreparedEvent[] = [];
+
+  // Point events: [rangeStart, rangeEnd] is a contiguous slice of the sorted
+  // array. Walk from the lower bound until startMs passes rangeEnd.
+  for (let i = lowerBound(points, rangeStart); i < points.length; i++) {
+    if (points[i].startMs > rangeEnd) break;
+    result.push(points[i]);
+  }
+
+  // Duration events: overlap test, scanned.
+  for (const d of durations) {
+    if (d.startMs <= rangeEnd && (d.endMs ?? d.startMs) >= rangeStart) {
+      result.push(d);
+    }
+  }
+
+  // Restore original order so track assignment is identical to the old path.
+  result.sort((a, b) => a.index - b.index);
+  return result;
 }
 
 /**
@@ -196,27 +310,52 @@ export function calculateLayout(
   showLabels: boolean = true,
   maxTracks: number = 0
 ): LayoutEvent[] {
+  // Compatibility path: parse on every call. Components use the prepared path
+  // (prepareEvents + calculateLayoutPrepared) so the per-frame cost does not
+  // scale with dataset size; direct callers of this function keep the old
+  // behaviour.
+  return calculateLayoutPrepared(
+    prepareEvents(events),
+    visibleRange,
+    pixelsPerMs,
+    centerDate,
+    viewportWidth,
+    showLabels,
+    maxTracks
+  );
+}
+
+/**
+ * Layout from pre-parsed events. Identical output to calculateLayout, without
+ * re-parsing dates: positions are computed straight from the cached epoch
+ * milliseconds. This is the per-frame hot path (#36).
+ */
+export function calculateLayoutPrepared(
+  prepared: PreparedEvents,
+  visibleRange: { start: Date; end: Date },
+  pixelsPerMs: number,
+  centerDate: Date,
+  viewportWidth: number,
+  showLabels: boolean = true,
+  maxTracks: number = 0
+): LayoutEvent[] {
   // Calculate viewport left edge in time
   const viewportLeftMs = centerDate.getTime() - (viewportWidth / 2) / pixelsPerMs;
-  const viewportLeftDate = new Date(viewportLeftMs);
 
-  // Filter to visible events
-  const visibleEvents = filterVisibleEvents(events, visibleRange);
+  // Filter to visible events (binary search for points, scan for durations)
+  const visible = filterVisiblePrepared(prepared, visibleRange);
 
-  // Calculate positions
-  const positioned: LayoutEvent[] = visibleEvents.map(event => {
-    const eventDate = parseDate(event.start);
-    const x = dateToPixel(eventDate, viewportLeftDate, pixelsPerMs);
-    const isDuration = isDurationEvent(event);
+  // Calculate positions from cached epoch milliseconds
+  const positioned: LayoutEvent[] = visible.map(({ event, startMs, endMs, isDuration }) => {
+    const x = (startMs - viewportLeftMs) * pixelsPerMs;
 
     let width: number;
     let endX: number | undefined;
     let durationWidth: number | undefined;
 
-    if (isDuration && event.end) {
+    if (isDuration && endMs !== undefined) {
       // For duration events, calculate the tape width
-      const endDate = parseDate(event.end);
-      endX = dateToPixel(endDate, viewportLeftDate, pixelsPerMs);
+      endX = (endMs - viewportLeftMs) * pixelsPerMs;
       durationWidth = Math.max(endX - x, MIN_DURATION_WIDTH);
       // Width for track assignment includes the tape plus label
       width = durationWidth + (showLabels ? LABEL_PADDING + (event.title.length * CHAR_WIDTH) : 0);

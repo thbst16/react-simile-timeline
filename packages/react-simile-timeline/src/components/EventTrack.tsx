@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import type { TimelineEvent } from '../types';
-import { calculateLayout, getTrackCount } from '../utils/layoutEngine';
+import { calculateLayoutPrepared, getTrackCount, prepareEvents } from '../utils/layoutEngine';
 import { EventMarker } from './EventMarker';
 
 export interface EventTrackProps {
@@ -38,10 +38,15 @@ export function EventTrack({
   showLabels = true,
   maxTracks = 0,
 }: EventTrackProps) {
-  // Calculate layout for all visible events
+  // Parse and sort events once per data change, not per frame. Pan and zoom
+  // change the viewport props below but not this, so dates are parsed once
+  // rather than on every layout pass (#36).
+  const prepared = useMemo(() => prepareEvents(events), [events]);
+
+  // Calculate layout for all visible events from the pre-parsed set.
   const layoutEvents = useMemo(
-    () => calculateLayout(
-      events,
+    () => calculateLayoutPrepared(
+      prepared,
       visibleRange,
       pixelsPerMs,
       centerDate,
@@ -49,7 +54,7 @@ export function EventTrack({
       showLabels,
       maxTracks
     ),
-    [events, visibleRange, pixelsPerMs, centerDate, viewportWidth, showLabels, maxTracks]
+    [prepared, visibleRange, pixelsPerMs, centerDate, viewportWidth, showLabels, maxTracks]
   );
 
   // Calculate total height needed

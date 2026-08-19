@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 import type { TimelineEvent } from '../types';
-import { parseDate, dateToPixel } from '../utils/dateUtils';
-import { filterVisibleEvents } from '../utils/layoutEngine';
+import { filterVisiblePrepared, prepareEvents } from '../utils/layoutEngine';
 
 export interface OverviewMarkersProps {
   /** All timeline events */
@@ -29,26 +28,27 @@ export function OverviewMarkers({
   viewportWidth,
   centerDate,
 }: OverviewMarkersProps) {
-  // Calculate marker positions
+  // Parse and sort events once per data change, not per frame (#36).
+  const prepared = useMemo(() => prepareEvents(events), [events]);
+
+  // Calculate marker positions from the pre-parsed set.
   const markers = useMemo(() => {
     // Calculate viewport left edge in time
     const viewportLeftMs = centerDate.getTime() - (viewportWidth / 2) / pixelsPerMs;
-    const viewportLeftDate = new Date(viewportLeftMs);
 
     // Filter to visible events with larger buffer for overview
     const bufferMs = 7 * 24 * 60 * 60 * 1000; // 1 week buffer
-    const visibleEvents = filterVisibleEvents(events, visibleRange, bufferMs);
+    const visibleEvents = filterVisiblePrepared(prepared, visibleRange, bufferMs);
 
-    return visibleEvents.map(event => {
-      const eventDate = parseDate(event.start);
-      const x = dateToPixel(eventDate, viewportLeftDate, pixelsPerMs);
+    return visibleEvents.map(({ event, startMs }) => {
+      const x = (startMs - viewportLeftMs) * pixelsPerMs;
       return {
         event,
         x,
         color: event.color || DEFAULT_COLOR,
       };
     });
-  }, [events, visibleRange, pixelsPerMs, viewportWidth, centerDate]);
+  }, [prepared, visibleRange, pixelsPerMs, viewportWidth, centerDate]);
 
   return (
     <div
