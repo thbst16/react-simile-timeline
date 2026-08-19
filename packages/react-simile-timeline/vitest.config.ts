@@ -25,14 +25,15 @@ export default defineConfig({
         'src/**/*.d.ts',
         'src/types/**', // type declarations, no runtime
       ],
-      // Thresholds set just under the measured baseline (statements 56.68,
-      // branches 37.04, functions 67.4, lines 57.12 as of #22). They ratchet:
-      // a regression fails CI, and #23 raises them as component tests land.
+      // Thresholds sit just under the measured baseline so they ratchet: a
+      // regression fails CI, and they are raised as coverage grows. Raised by
+      // #23, which added TimelineProvider, usePan, EventMarker and EventPopup
+      // tests (statements 76.55, branches 63.13, functions 83.7, lines 77.51).
       thresholds: {
-        statements: 55,
-        branches: 35,
-        functions: 65,
-        lines: 55,
+        statements: 75,
+        branches: 60,
+        functions: 80,
+        lines: 75,
       },
       // Thresholds set from the measured baseline (see #22). They ratchet: a
       // drop fails CI, and they are raised as #23 adds component tests.
