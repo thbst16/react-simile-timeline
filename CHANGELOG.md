@@ -5,6 +5,49 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Planned
+
+- Zone magnification effect
+- Full WCAG 2.1 AA compliance ([#25](https://github.com/thbst16/react-simile-timeline/issues/25))
+  — audit and remediation. Until that lands, the project describes what is
+  implemented rather than asserting a conformance level.
+- Visual regression testing
+
+## [1.1.0] - 2026-08-19
+
+### Changed
+
+- **Minimum Node version is now 20.19.** `engines.node` moved from `>=18.0.0`
+  to `>=20.19.0`. The build toolchain (Vite 8) requires it, and Node 18 reached
+  end of life in April 2025. The library itself is browser-targeted and its
+  built output is unaffected — this narrows a claim that could no longer be
+  tested rather than removing working support. Node 18 was also dropped from
+  the CI matrix, which now covers 20, 22 and 24.
+- Build toolchain modernized: Vite 5 → 8, `@vitejs/plugin-react` 4 → 6,
+  `vite-plugin-dts` 3 → 5, Vitest 1 → 4, jsdom 24 → 26. The published bundle is
+  smaller (ESM 11.7 KB → 10.8 KB gzipped) and the emitted type declarations are
+  byte-identical to `1.0.3`.
+- **Layout is no longer re-parsed on every pan frame.** Event dates were parsed
+  from strings on each layout pass, so the cost of panning and zooming scaled
+  with the total number of events even though only the events inside the
+  viewport are rendered. Dates are now parsed once when the data changes and the
+  visible window is found by binary search over a sorted index, making the
+  per-frame cost independent of dataset size for point events. Measured on a
+  1200px viewport: a 50,000-event timeline dropped from ~19.5 ms per layout pass
+  to ~0.002 ms, so the 60 FPS target now holds at scale rather than only for
+  small datasets. Rendered output is unchanged — the two paths are verified
+  identical.
+- **React 19 support is now tested, not just asserted.** The library's own test
+  suite runs against React 19 by default, and a dedicated CI job exercises the
+  React 18 floor, so the `react: ^18 || ^19` peer promise is verified on both
+  ends for the first time. Adopted `@types/react`/`@types/react-dom` 19,
+  `@testing-library/react` 16, and TypeScript 6. The published type
+  declarations now resolve the `JSX` namespace through `react` (React 19's
+  location) rather than `react/jsx-runtime`; this is compatible with
+  `@types/react` 18.3 and later. Lint moved to ESLint 9 flat config.
+
 ## [1.0.3] - 2026-08-17
 
 ### Fixed
@@ -133,44 +176,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   the rendered node count is bounded by the viewport rather than by the size of
   the dataset
 - Optimized re-renders with React hooks
-
-## [Unreleased]
-
-### Changed
-
-- **Minimum Node version is now 20.19.** `engines.node` moved from `>=18.0.0`
-  to `>=20.19.0`. The build toolchain (Vite 8) requires it, and Node 18 reached
-  end of life in April 2025. The library itself is browser-targeted and its
-  built output is unaffected — this narrows a claim that could no longer be
-  tested rather than removing working support. Node 18 was also dropped from
-  the CI matrix, which now covers 20, 22 and 24.
-- Build toolchain modernized: Vite 5 → 8, `@vitejs/plugin-react` 4 → 6,
-  `vite-plugin-dts` 3 → 5, Vitest 1 → 4, jsdom 24 → 26. The published bundle is
-  smaller (ESM 11.7 KB → 10.8 KB gzipped) and the emitted type declarations are
-  byte-identical to `1.0.3`.
-- **Layout is no longer re-parsed on every pan frame.** Event dates were parsed
-  from strings on each layout pass, so the cost of panning and zooming scaled
-  with the total number of events even though only the events inside the
-  viewport are rendered. Dates are now parsed once when the data changes and the
-  visible window is found by binary search over a sorted index, making the
-  per-frame cost independent of dataset size for point events. Measured on a
-  1200px viewport: a 50,000-event timeline dropped from ~19.5 ms per layout pass
-  to ~0.002 ms, so the 60 FPS target now holds at scale rather than only for
-  small datasets. Rendered output is unchanged — the two paths are verified
-  identical.
-- **React 19 support is now tested, not just asserted.** The library's own test
-  suite runs against React 19 by default, and a dedicated CI job exercises the
-  React 18 floor, so the `react: ^18 || ^19` peer promise is verified on both
-  ends for the first time. Adopted `@types/react`/`@types/react-dom` 19,
-  `@testing-library/react` 16, and TypeScript 6. The published type
-  declarations now resolve the `JSX` namespace through `react` (React 19's
-  location) rather than `react/jsx-runtime`; this is compatible with
-  `@types/react` 18.3 and later. Lint moved to ESLint 9 flat config.
-
-### Planned
-
-- Zone magnification effect
-- Full WCAG 2.1 AA compliance ([#25](https://github.com/thbst16/react-simile-timeline/issues/25))
-  — audit and remediation. Until that lands, the project describes what is
-  implemented rather than asserting a conformance level.
-- Visual regression testing
