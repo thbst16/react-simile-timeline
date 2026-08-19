@@ -167,6 +167,32 @@ jobs:
           path: packages/react-simile-timeline/coverage/
           retention-days: 7
 
+  # The root README.md is the source of truth; the package copy that ships to
+  # npm is generated from it by `pnpm sync:readme`. This fails the build if the
+  # two drift, so a README edit that touches only one file cannot merge - the
+  # trap that put a dead demo link (#15) and a stale badge (#16) in front of npm
+  # consumers while GitHub looked fine.
+  readme-sync:
+    name: readme-sync
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Check README is in sync
+        run: pnpm sync:readme:check
+
   e2e:
     name: e2e
     runs-on: ubuntu-latest

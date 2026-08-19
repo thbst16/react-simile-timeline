@@ -83,6 +83,22 @@ pnpm build:lib
 - Add JSDoc comments for public APIs
 - Avoid `any` types without justification
 
+## Editing the README
+
+The repository root `README.md` is the **single source of truth**. The package
+copy at `packages/react-simile-timeline/README.md` is generated from it — it is
+what ships in the npm tarball and renders on npmjs.com, so it cannot be a
+symlink (`pnpm pack` drops symlinked files).
+
+After editing the root README, regenerate the package copy and commit both:
+
+```bash
+pnpm sync:readme
+```
+
+CI runs `pnpm sync:readme:check` and fails the build if the two files drift, so
+edit the root file, never the package copy directly.
+
 ## Commit Messages
 
 We use conventional commits. Format:

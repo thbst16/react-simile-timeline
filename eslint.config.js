@@ -77,6 +77,14 @@ export default tseslint.config(
     },
   },
 
+  // Node CLI scripts print to stdout by design.
+  {
+    files: ['scripts/**/*.js', 'scripts/**/*.mjs'],
+    rules: {
+      'no-console': 'off',
+    },
+  },
+
   // Must be last: turns off every stylistic rule Prettier owns.
   prettier
 );
