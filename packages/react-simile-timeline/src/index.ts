@@ -61,6 +61,9 @@ export {
   addInterval,
   generateTicks,
   calculateLayout,
+  calculateLayoutPrepared,
+  prepareEvents,
+  filterVisiblePrepared,
   assignTracks,
   filterVisibleEvents,
   estimateLabelWidth,
@@ -72,6 +75,8 @@ export type {
   ScaleConfig,
   ScaleTick,
   LayoutEvent,
+  PreparedEvent,
+  PreparedEvents,
 } from './utils';
 
 // Styles (consumers can import this directly if needed)
