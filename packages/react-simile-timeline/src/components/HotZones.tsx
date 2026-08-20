@@ -89,6 +89,12 @@ export function HotZones({
         <div
           key={`hotzone-${index}-${hz.zone.start}`}
           className="timeline-hot-zone"
+          // An annotated zone conveys information (a named period), so expose it
+          // as a note carrying that text. An un-annotated zone is a purely
+          // decorative background highlight and is hidden from the tree.
+          {...(hz.annotation
+            ? { role: 'note', 'aria-label': `${hz.annotation} period` }
+            : { 'aria-hidden': true })}
           style={{
             position: 'absolute',
             left: hz.x,
@@ -104,6 +110,9 @@ export function HotZones({
           {hz.annotation && (
             <div
               className="timeline-hot-zone__annotation"
+              // The parent note's aria-label already carries this text; hide the
+              // visual copy so it is not announced twice.
+              aria-hidden="true"
               style={{
                 position: 'absolute',
                 bottom: 28, // Above the 24px time scale

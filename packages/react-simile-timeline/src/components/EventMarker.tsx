@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import type { TimelineEvent } from '../types';
 import { useTimelineContext } from './TimelineProvider';
+import { formatDate, parseDate } from '../utils/dateUtils';
 
 export interface EventMarkerProps {
   /** The event to render */
@@ -70,10 +71,23 @@ export function EventMarker({
   const color = event.color || (isDuration ? DEFAULT_TAPE_COLOR : DEFAULT_COLOR);
   const textColor = event.textColor || 'var(--event-text-color, #333)';
 
-  // Construct accessible label
-  const ariaLabel = event.description
-    ? `${event.title}: ${event.description.substring(0, 100)}${event.description.length > 100 ? '...' : ''}`
-    : event.title;
+  // Construct the accessible name: title, then the date (or range) so a screen
+  // reader announces *when* the event is, then a trimmed description. The date
+  // is what a sighted user reads from the marker's horizontal position, so it
+  // belongs in the name for a non-visual reader.
+  let dateLabel = event.start;
+  try {
+    dateLabel = formatDate(parseDate(event.start), 'MMM d, yyyy');
+    if (event.end) {
+      dateLabel += ` to ${formatDate(parseDate(event.end), 'MMM d, yyyy')}`;
+    }
+  } catch {
+    // Fall back to the raw start string for unparseable dates.
+  }
+  const descriptionPart = event.description
+    ? `: ${event.description.substring(0, 100)}${event.description.length > 100 ? '...' : ''}`
+    : '';
+  const ariaLabel = `${event.title}, ${dateLabel}${descriptionPart}`;
 
   // Render duration event as a tape/bar
   if (isDuration && durationWidth) {
