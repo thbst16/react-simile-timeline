@@ -83,18 +83,74 @@ export function EventPopup(_props: EventPopupProps) {
     };
   }, [selectedEvent, actions]);
 
-  // Close on Escape key
+  // Modal focus management: the popup is a `role="dialog" aria-modal="true"`,
+  // so keyboard focus must move into it on open, stay trapped inside while it is
+  // open (Tab/Shift+Tab wrap at the ends), and return to the element that opened
+  // it on close. Without this a keyboard user tabs into the page behind the
+  // dialog and the arrow/+/- timeline shortcuts keep firing under the modal.
   useEffect(() => {
     if (!selectedEvent) return;
+
+    // Remember what had focus (the triggering marker) so it can be restored.
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+
+    // All tabbable elements currently inside the popup, in DOM order.
+    const getFocusable = (): HTMLElement[] => {
+      const root = popupRef.current;
+      if (!root) return [];
+      return Array.from(
+        root.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"]), input:not([disabled]), select:not([disabled]), textarea:not([disabled])'
+        )
+      );
+    };
+
+    // Move focus into the dialog once it has rendered. Prefer the first
+    // interactive control (the close button); fall back to the dialog itself.
+    const focusTimer = setTimeout(() => {
+      const focusable = getFocusable();
+      (focusable[0] ?? popupRef.current)?.focus();
+    }, 0);
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         actions.setSelectedEvent(null);
+        return;
+      }
+      if (e.key !== 'Tab') return;
+
+      // Trap Tab inside the dialog.
+      const focusable = getFocusable();
+      if (focusable.length === 0) {
+        // Nothing tabbable but the dialog — keep focus on it.
+        e.preventDefault();
+        popupRef.current?.focus();
+        return;
+      }
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = document.activeElement;
+
+      if (e.shiftKey) {
+        if (active === first || !popupRef.current?.contains(active)) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else if (active === last || !popupRef.current?.contains(active)) {
+        e.preventDefault();
+        first.focus();
       }
     };
 
     document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
+    return () => {
+      clearTimeout(focusTimer);
+      document.removeEventListener('keydown', handleKeyDown);
+      // Restore focus to the opener, if it is still in the document.
+      if (previouslyFocused && document.contains(previouslyFocused)) {
+        previouslyFocused.focus();
+      }
+    };
   }, [selectedEvent, actions]);
 
   // Calculate popup position after render
@@ -178,6 +234,7 @@ export function EventPopup(_props: EventPopupProps) {
       style={popupStyle}
       role="dialog"
       aria-modal="true"
+      tabIndex={-1}
       aria-labelledby="popup-title"
       aria-describedby={selectedEvent.description ? "popup-description" : undefined}
     >

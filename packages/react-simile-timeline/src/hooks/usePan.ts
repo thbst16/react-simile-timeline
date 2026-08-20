@@ -11,6 +11,13 @@ export interface UsePanOptions {
   onPanEnd?: () => void;
   /** Enable keyboard navigation */
   enableKeyboard?: boolean;
+  /**
+   * When set, keyboard panning only fires while focus is inside this element.
+   * Without it the arrow-key handler is global (legacy behavior). Scoping it to
+   * the focused timeline keeps an embedded timeline from hijacking the page's
+   * arrow keys, and stops arrows panning the band behind an open modal popup.
+   */
+  scopeRef?: React.RefObject<HTMLElement | null>;
   /** Milliseconds to pan per keyboard press */
   keyboardPanAmount?: number;
   /** Friction coefficient for momentum (0-1, lower = more friction) */
@@ -39,6 +46,7 @@ export function usePan({
   onPanStart,
   onPanEnd,
   enableKeyboard = true,
+  scopeRef,
   keyboardPanAmount = 24 * 60 * 60 * 1000, // 1 day default
   friction = 0.95,
   velocityThreshold = 0.01,
@@ -59,6 +67,7 @@ export function usePan({
   const pixelsPerMsRef = useRef(pixelsPerMs);
   const frictionRef = useRef(friction);
   const velocityThresholdRef = useRef(velocityThreshold);
+  const scopeRefRef = useRef(scopeRef);
 
   // Update refs when props change
   useEffect(() => {
@@ -68,7 +77,8 @@ export function usePan({
     pixelsPerMsRef.current = pixelsPerMs;
     frictionRef.current = friction;
     velocityThresholdRef.current = velocityThreshold;
-  }, [onPan, onPanStart, onPanEnd, pixelsPerMs, friction, velocityThreshold]);
+    scopeRefRef.current = scopeRef;
+  }, [onPan, onPanStart, onPanEnd, pixelsPerMs, friction, velocityThreshold, scopeRef]);
 
   // Cancel any ongoing momentum animation
   const cancelMomentum = useCallback(() => {
@@ -154,6 +164,11 @@ export function usePan({
       return;
     }
 
+    // Move keyboard focus to the band so the scoped arrow/zoom keys take effect
+    // after a pointer interaction. `preventDefault()` below would otherwise
+    // suppress the implicit focus; a no-op on bands that are not focusable.
+    (e.currentTarget as HTMLElement).focus({ preventScroll: true });
+
     // Cancel any ongoing momentum
     cancelMomentum();
 
@@ -189,6 +204,12 @@ export function usePan({
     const handleKeyDown = (e: KeyboardEvent) => {
       // Don't handle if focus is on an input
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) {
+        return;
+      }
+
+      // When scoped, only pan while focus is inside the timeline band.
+      const scopeEl = scopeRefRef.current?.current;
+      if (scopeEl && !scopeEl.contains(document.activeElement)) {
         return;
       }
 

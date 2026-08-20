@@ -142,6 +142,39 @@ describe('usePan — keyboard', () => {
     pressKey('ArrowRight');
     expect(onPan).not.toHaveBeenCalled();
   });
+
+  it('with scopeRef, ignores arrows while focus is outside the scope', () => {
+    const onPan = vi.fn();
+    const scopeEl = document.createElement('div');
+    document.body.appendChild(scopeEl);
+    try {
+      renderHook(() =>
+        usePan({ onPan, pixelsPerMs: 1, keyboardPanAmount: 1000, scopeRef: { current: scopeEl } })
+      );
+      // Focus is on <body>, outside the scope element.
+      pressKey('ArrowRight');
+      expect(onPan).not.toHaveBeenCalled();
+    } finally {
+      document.body.removeChild(scopeEl);
+    }
+  });
+
+  it('with scopeRef, pans while focus is inside the scope', () => {
+    const onPan = vi.fn();
+    const scopeEl = document.createElement('div');
+    scopeEl.tabIndex = 0;
+    document.body.appendChild(scopeEl);
+    scopeEl.focus();
+    try {
+      renderHook(() =>
+        usePan({ onPan, pixelsPerMs: 1, keyboardPanAmount: 1000, scopeRef: { current: scopeEl } })
+      );
+      pressKey('ArrowRight');
+      expect(onPan).toHaveBeenCalledWith(1000);
+    } finally {
+      document.body.removeChild(scopeEl);
+    }
+  });
 });
 
 describe('usePan — cleanup', () => {
