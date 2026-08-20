@@ -1,3 +1,16 @@
 packages:
   - 'packages/*'
   - 'demo'
+
+# Security overrides (moved from package.json pnpm.overrides; pnpm 10+ reads them here).
+# Pins vulnerable transitive deps to patched versions, per major so older
+# consumers keep a compatible API (see #20, #61, #67).
+overrides:
+  'flatted': '>=3.4.2'
+  'minimatch@<3.1.4': '>=3.1.4'
+  'minimatch@>=9 <9.0.7': '>=9.0.7'
+  'picomatch@<2.3.2': '>=2.3.2'
+  'picomatch@>=4 <4.0.4': '>=4.0.4'
+  'js-yaml@>=4 <4.3.1': '>=4.3.1'
+  'brace-expansion@1': '^1.1.16'
+  'brace-expansion@2': '^2.1.2'

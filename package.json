@@ -31,20 +31,8 @@
     "typescript": "~6.0.3",
     "typescript-eslint": "^8.67.0"
   },
-  "packageManager": "pnpm@9.0.0",
+  "packageManager": "pnpm@10.34.5",
   "engines": {
     "node": ">=20.19.0"
-  },
-  "pnpm": {
-    "overrides": {
-      "flatted": ">=3.4.2",
-      "minimatch@<3.1.4": ">=3.1.4",
-      "minimatch@>=9 <9.0.7": ">=9.0.7",
-      "picomatch@<2.3.2": ">=2.3.2",
-      "picomatch@>=4 <4.0.4": ">=4.0.4",
-      "js-yaml@>=4 <4.3.1": ">=4.3.1",
-      "brace-expansion@1": "^1.1.16",
-      "brace-expansion@2": "^2.1.2"
-    }
   }
 }
