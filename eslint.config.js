@@ -73,6 +73,16 @@ export default tseslint.config(
       '@eslint-react/web-api-no-leaked-fetch': 'off',
       '@eslint-react/use-state': 'off',
 
+      // These two suggest React 19-only forms - rendering `<Context>` directly
+      // as a provider, and the `use` hook in place of `useContext`. Neither
+      // exists in React 18, and the library's peer range is `^18 || ^19`, so the
+      // current `<Context.Provider>` / `useContext` usage is required, not a
+      // style choice. They are disabled so lint stays deterministic: @eslint-react
+      // only fires them when it detects React 19, and that detection varies with
+      // install hoisting, which made CI lint intermittently red.
+      '@eslint-react/no-context-provider': 'off',
+      '@eslint-react/no-use-context': 'off',
+
       // React Hooks
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'warn',
