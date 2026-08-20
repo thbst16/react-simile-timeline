@@ -104,12 +104,19 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
 
+      # NOTE: `registry-url` is deliberately NOT set here. When it is,
+      # actions/setup-node writes an .npmrc with `always-auth=true` and
+      # `//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}`. With no token
+      # (there is none under OIDC), npm sends an empty credential and the
+      # registry returns `404 Not Found - PUT` instead of falling through to the
+      # OIDC exchange. Omitting registry-url leaves no auth line, so npm's own
+      # trusted-publishing flow runs. Publishing still targets the default
+      # registry (registry.npmjs.org).
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'pnpm'
-          registry-url: 'https://registry.npmjs.org'
 
       # The runner's Node 20 ships npm 10.8.2; OIDC trusted publishing needs
       # >= 11.5.1. Pinned to 11.x for reproducibility rather than @latest.
