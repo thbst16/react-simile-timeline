@@ -46,6 +46,10 @@ export function TimeScale({
   return (
     <div
       className="timeline-scale"
+      // The time axis is a visual orientation aid; every event marker already
+      // announces its own date, so reading each tick label would be noise.
+      // Hidden from the accessibility tree as decoration.
+      aria-hidden="true"
       style={{
         position: 'relative',
         width: '100%',

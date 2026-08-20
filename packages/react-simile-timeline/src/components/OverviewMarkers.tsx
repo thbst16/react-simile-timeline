@@ -53,6 +53,10 @@ export function OverviewMarkers({
   return (
     <div
       className="timeline-overview-markers"
+      // The overview band is a visual mini-map of the same events shown in the
+      // detail band. Exposing these duplicate markers would announce every
+      // event twice, so the overview is hidden from the accessibility tree.
+      aria-hidden="true"
       style={{
         position: 'relative',
         width: '100%',
