@@ -241,6 +241,20 @@ When a popup opens, focus moves into the dialog and is trapped there until it
 closes; closing it (via `Escape` or the close button) restores focus to the
 marker that opened it.
 
+### Focus indicator
+
+Focusable elements show a visible focus ring when reached by keyboard. Its
+colour is the themeable `--focus-ring-color` CSS variable (classic `#1a73e8`,
+dark `#8ab4f8`); override it in a custom theme to keep the ring at least 3:1
+against your background.
+
+### Reduced motion
+
+The library honours `prefers-reduced-motion`. When a visitor has reduced motion
+enabled at the OS level, the event and popup fade-ins and the theme-change
+transitions are removed, and a pan stops immediately on release instead of
+gliding with momentum.
+
 ---
 
 ## Simile JSON Compatibility

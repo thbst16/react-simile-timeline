@@ -177,6 +177,37 @@ describe('usePan — keyboard', () => {
   });
 });
 
+describe('usePan — reduced motion', () => {
+  it('skips release momentum when the user prefers reduced motion', () => {
+    // jsdom has no matchMedia; install one that reports the reduce preference.
+    const mql = {
+      matches: true,
+      media: '(prefers-reduced-motion: reduce)',
+      addEventListener: () => {},
+      removeEventListener: () => {},
+    };
+    (window as unknown as { matchMedia: unknown }).matchMedia = vi
+      .fn()
+      .mockReturnValue(mql);
+    // Keep momentum from actually recursing across frames in the test.
+    const rafSpy = vi
+      .spyOn(window, 'requestAnimationFrame')
+      .mockImplementation(() => 0);
+    try {
+      const { result } = renderHook(() => usePan({ onPan: vi.fn(), pixelsPerMs: 1 }));
+      act(() => result.current.panProps.onPointerDown(pointerDownArg({ clientX: 100 })));
+      dispatchPointer('pointermove', 140); // build velocity
+      rafSpy.mockClear();
+      dispatchPointer('pointerup', 140);
+      // No momentum animation scheduled on release.
+      expect(rafSpy).not.toHaveBeenCalled();
+    } finally {
+      rafSpy.mockRestore();
+      delete (window as unknown as { matchMedia?: unknown }).matchMedia;
+    }
+  });
+});
+
 describe('usePan — cleanup', () => {
   let addSpy: ReturnType<typeof vi.spyOn>;
   let removeSpy: ReturnType<typeof vi.spyOn>;

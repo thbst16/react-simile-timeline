@@ -236,3 +236,19 @@
   pointer-events: none;
 }
 
+/*
+ * Respect the user's reduced-motion preference (WCAG 2.3.3). Removes the
+ * event/popup fade-ins and the theme-change transitions. The popup is portaled
+ * to <body>, outside .timeline-root, so it is targeted explicitly. Pan momentum
+ * is JavaScript-driven and disabled separately in usePan.
+ */
+@media (prefers-reduced-motion: reduce) {
+  .timeline-root,
+  .timeline-root *,
+  .timeline-popup,
+  .timeline-popup * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
