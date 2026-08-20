@@ -18,6 +18,7 @@
     "react-simile-timeline": "workspace:*"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
     "@playwright/test": "^1.42.0",
     "@types/react": "^19",
     "@types/react-dom": "^19",

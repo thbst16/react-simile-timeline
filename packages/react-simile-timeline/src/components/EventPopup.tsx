@@ -210,7 +210,12 @@ export function EventPopup(_props: EventPopupProps) {
           margin: '0 0 8px 0',
           fontSize: 16,
           fontWeight: 600,
-          color: selectedEvent.color || 'var(--event-default-color, #4a90d9)',
+          // A readable dark title (AA), with the event colour kept as a left
+          // accent rather than the text colour - arbitrary event colours
+          // cannot guarantee contrast as text.
+          color: 'var(--popup-title-color, #1a1a1a)',
+          borderLeft: `3px solid ${selectedEvent.color || 'var(--event-default-color, #4a90d9)'}`,
+          paddingLeft: 8,
           paddingRight: 24, // Space for close button
         }}
       >
@@ -222,7 +227,7 @@ export function EventPopup(_props: EventPopupProps) {
         className="timeline-popup__date"
         style={{
           fontSize: 13,
-          color: 'var(--popup-date-color, #888)',
+          color: 'var(--popup-date-color, #595959)',
           marginBottom: 12,
         }}
       >

@@ -117,7 +117,6 @@ export function HotZones({
                 textOverflow: 'ellipsis',
                 fontWeight: 500,
                 fontStyle: 'italic',
-                opacity: 0.8,
               }}
             >
               {hz.annotation}

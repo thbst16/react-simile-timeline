@@ -38,12 +38,13 @@
   --popup-border: #cccccc;
   --popup-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
   --popup-text-color: #333333;
-  --popup-date-color: #888888;
+  --popup-title-color: #1a1a1a;
+  --popup-date-color: #595959;
   --popup-link-color: #0066cc;
   --popup-close-color: #666666;
 
   /* Hot zones */
-  --hot-zone-text-color: #888888;
+  --hot-zone-text-color: #4a4a4a;
   --hot-zone-border-color: rgba(0, 0, 0, 0.1);
 
   /* Sticky labels and event selection */
@@ -83,10 +84,11 @@
   --popup-bg: #2a2a2a;
   --popup-border: #444;
   --popup-text-color: #eee;
-  --popup-date-color: #999;
+  --popup-title-color: #f5f5f5;
+  --popup-date-color: #b8b8b8;
   --popup-link-color: #66b3ff;
   --popup-close-color: #aaa;
-  --hot-zone-text-color: #aaa;
+  --hot-zone-text-color: #cfcfcf;
   --hot-zone-border-color: rgba(255, 255, 255, 0.1);
   --sticky-label-bg: rgba(42, 42, 42, 0.95);
   --sticky-label-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
@@ -209,3 +211,4 @@
 .timeline-band[style*="grabbing"] .timeline-event {
   pointer-events: none;
 }
+
