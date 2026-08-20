@@ -106,6 +106,7 @@ export function Footer() {
               href="https://github.com/thbst16/react-simile-timeline"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="View react-simile-timeline on GitHub"
               className="text-gray-400 hover:text-white transition-colors"
             >
               <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">

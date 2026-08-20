@@ -34,7 +34,7 @@ export function CodeBlock({ code, language = 'tsx', title }: CodeBlockProps) {
           {title || 'View Source Code'}
         </button>
         <div className="flex items-center gap-2">
-          <span className="text-xs text-gray-500 bg-gray-200 px-2 py-1 rounded">{language}</span>
+          <span className="text-xs text-gray-700 bg-gray-200 px-2 py-1 rounded">{language}</span>
           <button
             onClick={handleCopy}
             className="text-xs text-gray-500 hover:text-gray-700 transition-colors flex items-center gap-1"
