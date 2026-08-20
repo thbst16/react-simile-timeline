@@ -34,16 +34,34 @@ describe('EventMarker — accessibility', () => {
     expect(marker).toHaveAttribute('tabindex', '0');
   });
 
-  it('folds the description into the accessible label', () => {
+  it('folds the date and description into the accessible label', () => {
     renderMarker();
     expect(
-      screen.getByRole('button', { name: 'Launch: Ship it' })
+      screen.getByRole('button', { name: 'Launch, Jan 15, 2023: Ship it' })
     ).toBeInTheDocument();
   });
 
   it('renders the title text', () => {
     renderMarker();
     expect(screen.getByText('Launch')).toBeInTheDocument();
+  });
+
+  it('announces a date range for duration events', () => {
+    const durationEvent: TimelineEvent = {
+      start: '2023-01-15',
+      end: '2023-03-20',
+      title: 'Phase',
+    };
+    const wrapper = ({ children }: { children: ReactNode }) => (
+      <TimelineProvider events={[durationEvent]}>{children}</TimelineProvider>
+    );
+    render(
+      <EventMarker event={durationEvent} x={10} y={20} isDuration durationWidth={80} />,
+      { wrapper }
+    );
+    expect(
+      screen.getByRole('button', { name: 'Phase, Jan 15, 2023 to Mar 20, 2023' })
+    ).toBeInTheDocument();
   });
 });
 

@@ -64,6 +64,11 @@ export function EventTrack({
   return (
     <div
       className="timeline-event-track"
+      // Name the collection of event markers so a screen reader announces the
+      // grouping (and, via the live count, how many are in view) before the
+      // reader steps through the individual event buttons.
+      role="group"
+      aria-label={`Timeline events, ${layoutEvents.length} in view`}
       style={{
         position: 'relative',
         width: '100%',
