@@ -122,8 +122,10 @@ export function EventPopup(_props: EventPopupProps) {
 
   if (!selectedEvent) return null;
 
-  // Format dates
-  let dateDisplay = '';
+  // Format dates. Declared without an initial value — both the try and the
+  // catch assign it, so an initializer would be a dead assignment (ESLint 10's
+  // no-useless-assignment).
+  let dateDisplay: string;
   try {
     const startDate = parseDate(selectedEvent.start);
     dateDisplay = formatDate(startDate, 'MMM d, yyyy');
@@ -237,7 +239,10 @@ export function EventPopup(_props: EventPopupProps) {
             color: 'var(--popup-text-color, #333)',
             lineHeight: 1.5,
           }}
-          // Allow HTML in description for Simile compatibility
+          // Allow HTML in description for Simile compatibility. Deliberate and
+          // documented; callers are responsible for sanitizing untrusted
+          // description content.
+          // eslint-disable-next-line @eslint-react/dom-no-dangerously-set-innerhtml
           dangerouslySetInnerHTML={{ __html: selectedEvent.description }}
         />
       )}

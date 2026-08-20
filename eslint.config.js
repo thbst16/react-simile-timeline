@@ -1,9 +1,9 @@
-// ESLint flat config (ESLint 9). Replaces .eslintrc.cjs, which the eslintrc
-// format ESLint 9+ no longer reads. The rule set is a faithful port of the
-// previous config; every intentional change is called out in a comment.
+// ESLint flat config (ESLint 10). React linting is provided by
+// @eslint-react/eslint-plugin (the maintained successor to eslint-plugin-react,
+// which crashes on ESLint 10 - it calls a context API ESLint 10 removed).
 import js from '@eslint/js';
 import tseslint from 'typescript-eslint';
-import react from 'eslint-plugin-react';
+import eslintReact from '@eslint-react/eslint-plugin';
 import reactHooks from 'eslint-plugin-react-hooks';
 import prettier from 'eslint-config-prettier';
 import globals from 'globals';
@@ -21,9 +21,12 @@ export default tseslint.config(
   // @typescript-eslint/recommended
   ...tseslint.configs.recommended,
 
-  // plugin:react/recommended + plugin:react/jsx-runtime
-  react.configs.flat.recommended,
-  react.configs.flat['jsx-runtime'],
+  // @eslint-react recommended for TypeScript. Replaces eslint-plugin-react's
+  // flat/recommended + jsx-runtime. The new-JSX-transform assumption (no
+  // `import React` needed) is built in, and there is no prop-types rule to
+  // disable since the plugin is TypeScript-first - so the two `react/*` off
+  // switches the old config carried are no longer needed.
+  eslintReact.configs['recommended-typescript'],
 
   // Language options previously expressed as `env` and `parserOptions`.
   {
@@ -37,9 +40,6 @@ export default tseslint.config(
       parserOptions: {
         ecmaFeatures: { jsx: true },
       },
-    },
-    settings: {
-      react: { version: 'detect' },
     },
   },
 
@@ -62,9 +62,16 @@ export default tseslint.config(
       '@typescript-eslint/explicit-function-return-type': 'off',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
 
-      // React
-      'react/prop-types': 'off',
-      'react/react-in-jsx-scope': 'off',
+      // @eslint-react's recommended-typescript is stricter than the
+      // eslint-plugin-react recommended it replaced. These rules flag existing,
+      // working patterns the previous config never enforced; they are disabled
+      // to keep the ESLint 10 migration behaviour-preserving. Adopting them -
+      // starting with the genuinely real web-api-no-leaked-fetch finding - is a
+      // separate quality pass tracked in #72.
+      '@eslint-react/no-array-index-key': 'off',
+      '@eslint-react/set-state-in-effect': 'off',
+      '@eslint-react/web-api-no-leaked-fetch': 'off',
+      '@eslint-react/use-state': 'off',
 
       // React Hooks
       'react-hooks/rules-of-hooks': 'error',
