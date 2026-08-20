@@ -37,6 +37,18 @@ export interface UsePanResult {
 }
 
 /**
+ * Whether the user has asked for reduced motion. Guarded for non-browser and
+ * jsdom environments where matchMedia may be absent.
+ */
+function prefersReducedMotion(): boolean {
+  return (
+    typeof window !== 'undefined' &&
+    typeof window.matchMedia === 'function' &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  );
+}
+
+/**
  * Hook for handling pan/drag interactions with momentum
  * Uses refs to avoid stale closure issues with event listeners
  */
@@ -144,8 +156,11 @@ export function usePan({
       }
     }
 
-    // Start momentum animation
-    animateMomentum();
+    // Start momentum animation — unless the user prefers reduced motion, in
+    // which case the pan stops dead on release with no inertial glide.
+    if (!prefersReducedMotion()) {
+      animateMomentum();
+    }
 
     // Remove listeners - these are the SAME function references that were added
     document.removeEventListener('pointermove', handlePointerMove);
