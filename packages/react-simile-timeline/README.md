@@ -29,7 +29,7 @@ A modern React implementation of the [MIT SIMILE Timeline](https://www.simile-wi
 | **Modern Stack** | Built with React 18/19, TypeScript, and hooks |
 | **Multi-Band** | Two-band, three-band, or custom configurations |
 | **Fully Themeable** | Classic, dark, and custom themes via CSS variables |
-| **Accessible** | Keyboard navigation, focus management, ARIA labels on events and popups |
+| **WCAG 2.1 AA** | Conformant — keyboard-operable, screen-reader semantics, AA contrast, reduced-motion aware. See [ACCESSIBILITY.md](https://github.com/thbst16/react-simile-timeline/blob/main/ACCESSIBILITY.md) |
 | **Lightweight** | ~12KB gzipped in your bundle, zero runtime dependencies |
 
 ---
@@ -254,6 +254,14 @@ The library honours `prefers-reduced-motion`. When a visitor has reduced motion
 enabled at the OS level, the event and popup fade-ins and the theme-change
 transitions are removed, and a pan stops immediately on release instead of
 gliding with momentum.
+
+### Conformance
+
+The component conforms to **WCAG 2.1 Level AA**. The
+[accessibility conformance statement](https://github.com/thbst16/react-simile-timeline/blob/main/ACCESSIBILITY.md) documents the criteria
+met, how each was verified (an `axe-core` gate in CI, keyboard and
+accessibility-tree end-to-end tests, and a contrast audit), and the consumer's
+responsibilities for custom themes and event-description HTML.
 
 ---
 

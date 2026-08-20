@@ -7,12 +7,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **WCAG 2.1 AA conformance, audited and remediated
+  ([#25](https://github.com/thbst16/react-simile-timeline/issues/25)).** The
+  component now conforms to WCAG 2.1 Level AA, and a published
+  [conformance statement](ACCESSIBILITY.md) records the criteria met and how
+  each was verified. The work:
+  - An **`@axe-core/playwright` gate** runs in CI against the default page, the
+    dark theme, and an open popup, failing the build on any WCAG 2 A/AA
+    violation.
+  - **Keyboard operability.** The timeline band takes a single tab stop and pans
+    with the arrow keys and zooms with `+`/`-`; markers are reached by `Tab` and
+    open the popup with `Enter`/`Space`. Pan and zoom are now scoped to the
+    focused timeline, so an embedded timeline no longer hijacks the page's keys.
+  - **The popup is a real modal** — focus moves in on open, is trapped, and is
+    restored to the opening marker on close.
+  - **Screen-reader semantics.** Markers announce their title and date; the
+    event layer is a named group; the decorative overview mini-map and time axis
+    are hidden so events are announced once, not once per band.
+  - **Visible focus indicators** on every focusable element, via the themeable
+    `--focus-ring-color` variable, with AA-contrast verified in both themes.
+  - **`prefers-reduced-motion` is honoured** — fade-ins, theme transitions, and
+    pan momentum are removed when the visitor asks for reduced motion.
+
 ### Planned
 
 - Zone magnification effect
-- Full WCAG 2.1 AA compliance ([#25](https://github.com/thbst16/react-simile-timeline/issues/25))
-  — audit and remediation. Until that lands, the project describes what is
-  implemented rather than asserting a conformance level.
 - Visual regression testing
 
 ## [1.1.1] - 2026-08-19
