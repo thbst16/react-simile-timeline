@@ -4,45 +4,19 @@ on:
   push:
     tags:
       - 'v*'
-  # Manual OIDC-readiness preflight. Selects the preflight job only; it can
-  # never publish. See the job guards below.
+  # Manual dry check of the NPM_TOKEN secret. Selects the verify-token job
+  # only - it can never publish. See the job guards below.
   workflow_dispatch:
 
-# ------------------------------------------------------------------------------
-# Publishing to npm via OIDC trusted publishing.
-#
-# There is no long-lived NPM_TOKEN in this workflow. On a pushed tag, npm mints
-# a short-lived credential by exchanging the job's OIDC token (`id-token: write`)
-# with the registry, provided a trusted publisher for this package is registered
-# on npmjs.com. Provenance is generated automatically as part of that exchange.
-#
-# BEFORE this workflow can publish, the maintainer must register the trusted
-# publisher on npmjs.com (owner-applied, one time):
-#   npmjs.com -> react-simile-timeline -> Settings -> Trusted Publishing
-#   Provider:  GitHub Actions
-#   Owner/repo: thbst16/react-simile-timeline
-#   Workflow:   release.yml
-#   Environment: (leave blank)
-#
-# Two facts this workflow depends on, both verified before it was written:
-#   1. Trusted publishing needs npm >= 11.5.1. The runner's Node 20 ships npm
-#      10.8.2, so npm is upgraded explicitly below.
-#   2. `npm pack` run from the package directory DROPS the root LICENSE, because
-#      the LICENSE lives at the workspace root, not in the package. `pnpm pack`
-#      pulls it in. So the tarball is built with pnpm and published with npm:
-#      pnpm for correct contents, npm for the OIDC exchange. Publishing straight
-#      through `pnpm publish` is avoided — its recursive path rebuilds the npm
-#      invocation and has already been observed to silently drop publish flags
-#      (see the 1.0.3 provenance finding, #17).
-# ------------------------------------------------------------------------------
-
 jobs:
-  # OIDC-readiness preflight. Unlike the old NPM_TOKEN whoami, there is no
-  # credential to test ahead of time — the OIDC exchange only happens during a
-  # real publish. This job confirms the one thing that IS checkable without
-  # burning a version: that the runner's npm is new enough, and prints the
-  # manual checklist the maintainer must confirm on npmjs.com.
-  preflight:
+  # There is no way to confirm the publish credential short of using it, and
+  # using it for real is the irreversible step. This job answers "is the token
+  # still good?" with a whoami and nothing else: no build, no pack, no publish.
+  #
+  # Run it from the Actions tab before pushing a release tag. A dead token
+  # discovered here costs nothing; discovered after tagging it costs a version
+  # number, because the tag is consumed whether or not the publish succeeds.
+  verify-token:
     if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     permissions:
@@ -53,42 +27,38 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
 
-      - name: Confirm npm supports OIDC trusted publishing
+      - name: Check NPM_TOKEN against the registry
         run: |
           set -euo pipefail
-          npm install -g npm@^11.5.1
-          ver="$(npm --version)"
-          major="${ver%%.*}"
-          minor="$(echo "$ver" | cut -d. -f2)"
-          echo "npm version after upgrade: ${ver}"
-          if [ "$major" -lt 11 ] || { [ "$major" -eq 11 ] && [ "$minor" -lt 5 ]; }; then
-            echo "::error::npm ${ver} is too old for OIDC trusted publishing (need >= 11.5.1)."
+          if ! who=$(npm whoami 2>&1); then
+            echo "::error::NPM_TOKEN is not accepted by the registry. Do not push a release tag until it is replaced."
+            echo "$who"
             exit 1
           fi
-          echo "npm is OIDC-capable."
-          echo "::notice::Confirm on npmjs.com that a trusted publisher is registered for react-simile-timeline (GitHub Actions, thbst16/react-simile-timeline, release.yml). OIDC readiness cannot be verified from CI without a real publish."
+          echo "NPM_TOKEN authenticates as: ${who}"
+          echo "Publish rights are a separate question - confirm this account can publish react-simile-timeline."
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   publish:
-    # Runs for a pushed v* tag and nothing else, so a manual dispatch cannot
-    # reach the publish step however the triggers change.
+    # Belt and braces: this job runs for a pushed tag and nothing else, so a
+    # manual dispatch cannot reach the publish step however the triggers change.
     if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      # The OIDC token this mints is the entire credential — there is no
-      # NPM_TOKEN. npm exchanges it with the registry for a short-lived
-      # publish token and attaches provenance.
       id-token: write
 
     steps:
       - uses: actions/checkout@v4
 
-      # The tag is the only trigger, and publishing is irreversible — npm's
-      # unpublish window is narrow and using it permanently burns the version
-      # number. That is how 1.0.0 was lost. A tag that disagrees with
-      # package.json is one way to repeat it, so it fails here, in seconds,
-      # before anything is built or pushed anywhere.
+      # The tag is the only trigger for this workflow, and publishing is
+      # irreversible - npm's unpublish window is narrow and using it permanently
+      # burns the version number. That is how 1.0.0 was lost on this package.
+      # A tag that disagrees with package.json is one way to repeat it, so it
+      # fails here, in seconds, before anything is built or pushed anywhere.
       - name: Verify tag matches package version
         run: |
           set -euo pipefail
@@ -104,27 +74,12 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
 
-      # NOTE: `registry-url` is deliberately NOT set here. When it is,
-      # actions/setup-node writes an .npmrc with `always-auth=true` and
-      # `//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}`. With no token
-      # (there is none under OIDC), npm sends an empty credential and the
-      # registry returns `404 Not Found - PUT` instead of falling through to the
-      # OIDC exchange. Omitting registry-url leaves no auth line, so npm's own
-      # trusted-publishing flow runs. Publishing still targets the default
-      # registry (registry.npmjs.org).
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'pnpm'
-
-      # The runner's Node 20 ships npm 10.8.2; OIDC trusted publishing needs
-      # >= 11.5.1. Pinned to 11.x for reproducibility rather than @latest.
-      - name: Upgrade npm for OIDC support
-        run: |
-          set -euo pipefail
-          npm install -g npm@^11.5.1
-          echo "npm version: $(npm --version)"
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -132,17 +87,20 @@ jobs:
       - name: Build library
         run: pnpm build:lib
 
-      # Pack with pnpm (includes the root LICENSE, which npm pack from the
-      # package directory would drop), then publish the tarball with npm so the
-      # OIDC exchange is npm's own, not filtered through pnpm's publish path.
-      - name: Pack tarball
-        run: pnpm --filter react-simile-timeline pack --pack-destination "$RUNNER_TEMP/pack"
-
-      - name: Publish to npm via OIDC
-        run: |
-          set -euo pipefail
-          tgz="$(ls "$RUNNER_TEMP"/pack/react-simile-timeline-*.tgz)"
-          echo "Publishing ${tgz}"
-          # No NODE_AUTH_TOKEN: npm authenticates via the OIDC token minted by
-          # `id-token: write`. Provenance is automatic under trusted publishing.
-          npm publish "$tgz" --access public
+      # Provenance is switched on through `publishConfig.provenance` in the
+      # package's package.json, NOT through a `--provenance` flag here.
+      #
+      # `pnpm --filter <pkg> publish` takes pnpm's recursive publish path, and
+      # on the pinned pnpm (9.0.0) that path discards the invoking argv and
+      # rebuilds the npm command from scratch: it forwards only --access,
+      # --dry-run and --otp. A `--provenance` flag on this line would be
+      # accepted by the CLI, silently dropped, and produce an unattested
+      # release that looks like it worked. `publishConfig` travels inside the
+      # packed tarball's manifest instead, so npm reads it whichever path pnpm
+      # takes. Verified: the field is present in the packed package.json.
+      #
+      # `id-token: write` above is what lets npm mint the attestation.
+      - name: Publish to NPM
+        run: pnpm --filter react-simile-timeline publish --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
