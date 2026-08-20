@@ -25,8 +25,16 @@ export default defineConfig({
       use: { ...devices['Desktop Chrome'] },
     },
   ],
+  // With E2E_PREVIEW=1, run the tests against the PRODUCTION build served by
+  // `vite preview` instead of the dev server. The dev server dedupes React on
+  // its own, so a production-only bundling fault (e.g. two React copies) renders
+  // blank in production while every dev-mode test passes. CI sets this flag so
+  // the suite exercises the bundle Vercel actually ships. Requires the demo to
+  // be built first (the CI job builds it before this step).
   webServer: {
-    command: 'pnpm dev',
+    command: process.env.E2E_PREVIEW
+      ? 'pnpm preview --port 3000 --strictPort'
+      : 'pnpm dev',
     url: 'http://localhost:3000',
     reuseExistingServer: !process.env.CI,
     timeout: 120000,
