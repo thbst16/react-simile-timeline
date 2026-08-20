@@ -46,12 +46,26 @@ export function EventMarker({
 
   const isSelected = state.selectedEvent === event;
 
+  const openPopup = useCallback((position: { x: number; y: number }) => {
+    actions.setSelectedEvent(isSelected ? null : event, position);
+  }, [actions, event, isSelected]);
+
   const handleClick = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
     // Capture click position for popup positioning
-    const clickPosition = { x: e.clientX, y: e.clientY };
-    actions.setSelectedEvent(isSelected ? null : event, clickPosition);
-  }, [actions, event, isSelected]);
+    openPopup({ x: e.clientX, y: e.clientY });
+  }, [openPopup]);
+
+  // Keyboard activation (Enter/Space). A key press carries no pointer
+  // coordinates, so anchor the popup to the marker's on-screen box instead of
+  // the (undefined -> NaN) pointer position a synthetic mouse event would give.
+  const handleKeyActivate = useCallback((e: React.KeyboardEvent) => {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    e.preventDefault();
+    e.stopPropagation();
+    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+    openPopup({ x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 });
+  }, [openPopup]);
 
   const color = event.color || (isDuration ? DEFAULT_TAPE_COLOR : DEFAULT_COLOR);
   const textColor = event.textColor || 'var(--event-text-color, #333)';
@@ -87,7 +101,7 @@ export function EventMarker({
         tabIndex={0}
         aria-label={ariaLabel}
         aria-pressed={isSelected}
-        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleClick(e as unknown as React.MouseEvent); } }}
+        onKeyDown={handleKeyActivate}
       >
         {/* Duration tape */}
         <div

@@ -53,6 +53,9 @@
   --event-text-shadow: 0 0 2px white, 0 0 2px white;
   --event-selected-ring-color: white;
 
+  /* Keyboard focus indicator (WCAG 2.4.7) */
+  --focus-ring-color: #1a73e8;
+
   /* Apply base styles */
   font-family: var(--timeline-font-family);
   background-color: var(--timeline-bg);
@@ -94,6 +97,8 @@
   --sticky-label-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
   --event-text-shadow: 0 0 2px #1a1a1a, 0 0 2px #1a1a1a;
   --event-selected-ring-color: #444;
+  /* Lighter ring for contrast against the dark surfaces */
+  --focus-ring-color: #8ab4f8;
 }
 
 /* Loading state */
@@ -128,6 +133,25 @@
 .timeline-band--detail {
   background-color: var(--band-bg);
   transition: background-color 0.3s ease;
+}
+
+/*
+ * Keyboard focus indicators (WCAG 2.4.7). Only shown for keyboard focus via
+ * :focus-visible, so a pointer press on the band does not draw a ring. The
+ * popup is portaled outside .timeline-root, so its ring uses a literal colour
+ * rather than the themed variable.
+ */
+.timeline-band:focus-visible,
+.timeline-event:focus-visible {
+  outline: 2px solid var(--focus-ring-color, #1a73e8);
+  outline-offset: 2px;
+}
+
+.timeline-popup:focus-visible,
+.timeline-popup a:focus-visible,
+.timeline-popup button:focus-visible {
+  outline: 2px solid #1a73e8;
+  outline-offset: 2px;
 }
 
 /* Event markers */

@@ -221,12 +221,25 @@ interface Theme {
 
 ### Keyboard Navigation
 
-| Key | Action |
-|-----|--------|
-| `←` / `→` | Pan left/right |
-| `+` / `=` | Zoom in |
-| `-` | Zoom out |
-| `Escape` | Close popup |
+The timeline is fully operable by keyboard. `Tab` moves through the interactive
+elements in reading order: the timeline band first (a single tab stop for
+pan/zoom), then each event marker. The pan and zoom shortcuts only act while the
+timeline band or one of its markers holds focus, so an embedded timeline never
+hijacks the page's arrow keys.
+
+| Key | Focus | Action |
+|-----|-------|--------|
+| `Tab` / `Shift`+`Tab` | anywhere | Move to the next / previous element (timeline band, then markers) |
+| `←` / `→` | timeline focused | Pan left / right |
+| `+` / `=` | timeline focused | Zoom in |
+| `-` | timeline focused | Zoom out |
+| `Enter` / `Space` | marker focused | Open the event popup |
+| `Tab` | popup open | Cycle focus within the popup (focus is trapped) |
+| `Escape` | popup open | Close the popup and return focus to the marker |
+
+When a popup opens, focus moves into the dialog and is trapped there until it
+closes; closing it (via `Escape` or the close button) restores focus to the
+marker that opened it.
 
 ---
 

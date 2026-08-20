@@ -64,6 +64,7 @@ export function Band({ config, isPrimary = false }: BandProps) {
     onPanStart: () => actions.setIsPanning(true),
     onPanEnd: () => actions.setIsPanning(false),
     enableKeyboard: isPrimary, // Only primary band handles keyboard
+    scopeRef: containerRef, // Scope arrow-key panning to the focused band
     keyboardPanAmount,
   });
 
@@ -113,6 +114,13 @@ export function Band({ config, isPrimary = false }: BandProps) {
         return;
       }
 
+      // Only zoom while focus is inside this band, so an embedded timeline does
+      // not hijack the page's +/- keys and the popup modal keeps its keys.
+      const container = containerRef.current;
+      if (!container || !container.contains(document.activeElement)) {
+        return;
+      }
+
       switch (e.key) {
         case '+':
         case '=':
@@ -150,6 +158,18 @@ export function Band({ config, isPrimary = false }: BandProps) {
       }}
       onPointerDown={panProps.onPointerDown}
       data-band-id={config.id}
+      // The primary band is the keyboard entry point: it takes a tab stop and
+      // exposes its pan/zoom shortcuts. Secondary bands stay non-focusable and
+      // are driven through the primary band's synchronized state.
+      {...(isPrimary
+        ? {
+            tabIndex: 0,
+            role: 'group',
+            'aria-label':
+              'Timeline. Use the left and right arrow keys to pan, and the plus and minus keys to zoom.',
+            'aria-keyshortcuts': 'ArrowLeft ArrowRight + -',
+          }
+        : {})}
     >
       {/* Hot zones layer - renders behind events */}
       {hotZones.length > 0 && (

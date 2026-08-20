@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import type { ReactNode } from 'react';
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import { EventPopup } from './EventPopup';
@@ -101,5 +101,98 @@ describe('EventPopup — dismissal', () => {
       fireEvent.keyDown(document, { key: 'a' });
     });
     expect(screen.getByRole('dialog')).toBeInTheDocument();
+  });
+});
+
+describe('EventPopup — focus management', () => {
+  // Render the popup with a focusable opener, focus it, then open the popup.
+  // Focus-in happens on a setTimeout(0), so callers advance fake timers.
+  function openFromFocusedTrigger(evt: TimelineEvent = event): HTMLElement {
+    function Opener() {
+      const { actions } = useTimelineContext();
+      return (
+        <button onClick={() => actions.setSelectedEvent(evt, { x: 50, y: 50 })}>
+          open
+        </button>
+      );
+    }
+    const wrapper = ({ children }: { children: ReactNode }) => (
+      <TimelineProvider events={[evt]}>{children}</TimelineProvider>
+    );
+    render(
+      <>
+        <Opener />
+        <EventPopup />
+      </>,
+      { wrapper }
+    );
+    const opener = screen.getByText('open');
+    opener.focus();
+    fireEvent.click(opener);
+    return opener;
+  }
+
+  it('moves focus into the dialog when it opens', () => {
+    vi.useFakeTimers();
+    try {
+      openFromFocusedTrigger();
+      act(() => {
+        vi.runAllTimers();
+      });
+      const dialog = screen.getByRole('dialog');
+      expect(dialog.contains(document.activeElement)).toBe(true);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it('restores focus to the opener when it closes', () => {
+    vi.useFakeTimers();
+    try {
+      const opener = openFromFocusedTrigger();
+      act(() => {
+        vi.runAllTimers();
+      });
+      act(() => {
+        fireEvent.keyDown(document, { key: 'Escape' });
+      });
+      expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+      expect(document.activeElement).toBe(opener);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it('wraps Tab and Shift+Tab within the dialog', () => {
+    vi.useFakeTimers();
+    try {
+      openFromFocusedTrigger();
+      act(() => {
+        vi.runAllTimers();
+      });
+      const dialog = screen.getByRole('dialog');
+      const focusable = dialog.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled])'
+      );
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      expect(focusable.length).toBeGreaterThan(1);
+
+      // Tab from the last element wraps to the first.
+      last.focus();
+      act(() => {
+        fireEvent.keyDown(document, { key: 'Tab' });
+      });
+      expect(document.activeElement).toBe(first);
+
+      // Shift+Tab from the first element wraps to the last.
+      first.focus();
+      act(() => {
+        fireEvent.keyDown(document, { key: 'Tab', shiftKey: true });
+      });
+      expect(document.activeElement).toBe(last);
+    } finally {
+      vi.useRealTimers();
+    }
   });
 });
