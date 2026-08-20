@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Planned
+
+- Zone magnification effect
+- Visual regression testing
+
+## [1.2.0] - 2026-08-20
+
 ### Added
 
 - **WCAG 2.1 AA conformance, audited and remediated
@@ -31,10 +38,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **`prefers-reduced-motion` is honoured** — fade-ins, theme transitions, and
     pan momentum are removed when the visitor asks for reduced motion.
 
-### Planned
+### Changed
 
-- Zone magnification effect
-- Visual regression testing
+- **Build toolchain: pnpm 9 → 10 and ESLint 9 → 10.** ESLint moved to 10 with
+  `@eslint-react/eslint-plugin` replacing the unmaintained-on-ESLint-10
+  `eslint-plugin-react` ([#54](https://github.com/thbst16/react-simile-timeline/issues/54)),
+  which also dissolved the `brace-expansion`/`minimatch` override hazard
+  ([#61](https://github.com/thbst16/react-simile-timeline/issues/61)). Dev-only
+  and build-internal — no runtime API, props, or exports changed.
+
+### Security
+
+- **All dependency advisories cleared.** The last remaining advisory —
+  `esbuild@0.21.5`, a dev-only Vite optional peer that was unmovable under
+  pnpm 9 — is resolved by the pnpm 10 upgrade
+  ([#52](https://github.com/thbst16/react-simile-timeline/issues/52)).
+  `pnpm audit` now reports no known vulnerabilities.
 
 ## [1.1.1] - 2026-08-19
 
