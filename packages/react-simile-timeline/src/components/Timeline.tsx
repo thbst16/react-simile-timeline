@@ -311,7 +311,11 @@ export function Timeline({
         onEventHover={onEventHover}
       >
         <TimelineBands />
-        <EventPopup containerRef={containerRef} />
+        <EventPopup
+          containerRef={containerRef}
+          themeAttr={themeAttr}
+          themeStyles={themeStyles as React.CSSProperties}
+        />
       </TimelineProvider>
       {brandingConfig && <TimelineBranding config={brandingConfig} />}
     </div>
