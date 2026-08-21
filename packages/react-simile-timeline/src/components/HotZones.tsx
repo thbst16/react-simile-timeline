@@ -85,9 +85,9 @@ export function HotZones({
         overflow: 'hidden',
       }}
     >
-      {visibleHotZones.map((hz, index) => (
+      {visibleHotZones.map((hz) => (
         <div
-          key={`hotzone-${index}-${hz.zone.start}`}
+          key={`hotzone-${hz.zone.start}-${hz.zone.end}`}
           className="timeline-hot-zone"
           // An annotated zone conveys information (a named period), so expose it
           // as a note carrying that text. An un-annotated zone is a purely

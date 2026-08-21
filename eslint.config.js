@@ -63,15 +63,30 @@ export default tseslint.config(
       '@typescript-eslint/explicit-module-boundary-types': 'off',
 
       // @eslint-react's recommended-typescript is stricter than the
-      // eslint-plugin-react recommended it replaced. These rules flag existing,
-      // working patterns the previous config never enforced; they are disabled
-      // to keep the ESLint 10 migration behaviour-preserving. Adopting them -
-      // starting with the genuinely real web-api-no-leaked-fetch finding - is a
-      // separate quality pass tracked in #72.
-      '@eslint-react/no-array-index-key': 'off',
-      '@eslint-react/set-state-in-effect': 'off',
-      '@eslint-react/web-api-no-leaked-fetch': 'off',
+      // eslint-plugin-react recommended it replaced. #72 assessed each rule
+      // parked during the ESLint 10 migration.
+      //
+      // Adopted (real findings, now fixed):
+      //   web-api-no-leaked-fetch - the URL fetches use an AbortController.
+      //   no-array-index-key      - list keys derive from the data, not the index.
+      '@eslint-react/web-api-no-leaked-fetch': 'error',
+      '@eslint-react/no-array-index-key': 'error',
+      //
+      // Kept off - the rule fights a legitimate pattern in this codebase:
+      //   use-state: demands the setter be named `set<State>`, but the raw
+      //     useState setters are deliberately `...State`-suffixed
+      //     (setSelectedEventState, setHoveredEventState, setCenterDateState) so
+      //     they don't collide with the public actions setSelectedEvent /
+      //     setHoveredEvent / setCenterDate, which do more than set state.
+      //     Renaming would shadow those actions.
+      //   set-state-in-effect: fires on the async data-loading effects
+      //     (setLoading / setError / setTimelineData) and the centerDate
+      //     prop-sync - an idiomatic pattern whose only clean fix is a data-layer
+      //     refactor, not a bug fix. It is a React-Compiler-style optimisation
+      //     hint and belongs with that rule set's adoption, deferred separately
+      //     (see the react-hooks note above).
       '@eslint-react/use-state': 'off',
+      '@eslint-react/set-state-in-effect': 'off',
 
       // These two suggest React 19-only forms - rendering `<Context>` directly
       // as a provider, and the `use` hook in place of `useContext`. Neither

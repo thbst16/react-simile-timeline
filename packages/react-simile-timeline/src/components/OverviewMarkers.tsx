@@ -66,9 +66,9 @@ export function OverviewMarkers({
         paddingBottom: 4,
       }}
     >
-      {markers.map((marker, index) => (
+      {markers.map((marker) => (
         <div
-          key={`${marker.event.title}-${marker.event.start}-${index}`}
+          key={`${marker.event.title}-${marker.event.start}-${marker.event.end ?? ''}`}
           className="timeline-overview-marker"
           style={{
             position: 'absolute',
