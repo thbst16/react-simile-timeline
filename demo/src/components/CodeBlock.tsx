@@ -17,11 +17,11 @@ export function CodeBlock({ code, language = 'tsx', title }: CodeBlockProps) {
   };
 
   return (
-    <div className="mt-4 border border-gray-200 rounded-lg overflow-hidden">
-      <div className="flex items-center justify-between px-4 py-2 bg-gray-50 border-b border-gray-200">
+    <div className="mt-4 border border-base-300 rounded-lg overflow-hidden">
+      <div className="flex items-center justify-between px-4 py-2 bg-base-200 border-b border-base-300">
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
+          className="flex items-center gap-2 text-sm font-medium text-base-content/80 hover:text-base-content transition-colors"
         >
           <svg
             className={`w-4 h-4 transition-transform ${isExpanded ? 'rotate-90' : ''}`}
@@ -34,10 +34,10 @@ export function CodeBlock({ code, language = 'tsx', title }: CodeBlockProps) {
           {title || 'View Source Code'}
         </button>
         <div className="flex items-center gap-2">
-          <span className="text-xs text-gray-700 bg-gray-200 px-2 py-1 rounded">{language}</span>
+          <span className="text-xs text-base-content/80 bg-base-300 px-2 py-1 rounded">{language}</span>
           <button
             onClick={handleCopy}
-            className="text-xs text-gray-500 hover:text-gray-700 transition-colors flex items-center gap-1"
+            className="text-xs text-base-content/80 hover:text-base-content transition-colors flex items-center gap-1"
           >
             {copied ? (
               <>
@@ -58,7 +58,7 @@ export function CodeBlock({ code, language = 'tsx', title }: CodeBlockProps) {
         </div>
       </div>
       {isExpanded && (
-        <pre className="p-4 bg-gray-900 text-gray-100 text-sm overflow-x-auto">
+        <pre className="p-4 bg-neutral text-neutral-content text-sm overflow-x-auto">
           <code>{code}</code>
         </pre>
       )}

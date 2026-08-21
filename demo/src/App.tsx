@@ -181,7 +181,7 @@ function App() {
   const [theme, setTheme] = useState<'classic' | 'dark' | Theme>('classic');
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-base-200">
       <Header />
       <Hero />
 
@@ -189,8 +189,8 @@ function App() {
       <section id="demos" className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">Interactive Demos</h2>
-            <p className="mt-4 text-xl text-gray-600 max-w-2xl mx-auto">
+            <h2 className="text-3xl sm:text-4xl font-bold text-base-content">Interactive Demos</h2>
+            <p className="mt-4 text-xl text-base-content/80 max-w-2xl mx-auto">
               Explore the Timeline component with these live examples. Drag to pan, scroll to zoom, and click events for details.
             </p>
           </div>
@@ -215,7 +215,7 @@ function App() {
                 <button
                   onClick={() => setTheme('classic')}
                   className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                    theme === 'classic' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700 border border-gray-300'
+                    theme === 'classic' ? 'bg-primary text-primary-content' : 'bg-base-100 text-base-content border border-base-300'
                   }`}
                 >
                   Classic
@@ -223,7 +223,7 @@ function App() {
                 <button
                   onClick={() => setTheme('dark')}
                   className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                    theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-white text-gray-700 border border-gray-300'
+                    theme === 'dark' ? 'bg-neutral text-neutral-content' : 'bg-base-100 text-base-content border border-base-300'
                   }`}
                 >
                   Dark
@@ -231,7 +231,7 @@ function App() {
                 <button
                   onClick={() => setTheme(customTheme)}
                   className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                    typeof theme === 'object' ? 'bg-sky-600 text-white' : 'bg-white text-gray-700 border border-gray-300'
+                    typeof theme === 'object' ? 'bg-accent text-accent-content' : 'bg-base-100 text-base-content border border-base-300'
                   }`}
                 >
                   Ocean (Custom)
@@ -267,22 +267,22 @@ function App() {
       </section>
 
       {/* Installation Section */}
-      <section id="installation" className="py-20 bg-white">
+      <section id="installation" className="py-20 bg-base-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">Get Started</h2>
-            <p className="mt-4 text-xl text-gray-600 max-w-2xl mx-auto">
+            <h2 className="text-3xl sm:text-4xl font-bold text-base-content">Get Started</h2>
+            <p className="mt-4 text-xl text-base-content/80 max-w-2xl mx-auto">
               Install the package and start building beautiful timelines in minutes.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">1. Install the package</h3>
+              <h3 className="text-lg font-semibold text-base-content mb-4">1. Install the package</h3>
               <CodeBlock code={installationCode} language="bash" title="Installation Commands" />
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">2. Import and use</h3>
+              <h3 className="text-lg font-semibold text-base-content mb-4">2. Import and use</h3>
               <CodeBlock code={quickStartCode} language="tsx" title="Quick Start Example" />
             </div>
           </div>
@@ -293,77 +293,77 @@ function App() {
       <section id="api" className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">API Reference</h2>
-            <p className="mt-4 text-xl text-gray-600 max-w-2xl mx-auto">
+            <h2 className="text-3xl sm:text-4xl font-bold text-base-content">API Reference</h2>
+            <p className="mt-4 text-xl text-base-content/80 max-w-2xl mx-auto">
               Full TypeScript support with comprehensive prop types.
             </p>
           </div>
 
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden max-w-4xl mx-auto">
+          <div className="bg-base-100 rounded-2xl shadow-sm border border-base-300 overflow-hidden max-w-4xl mx-auto">
             <div className="overflow-x-auto">
               <table className="w-full text-left">
-                <thead className="bg-gray-50 border-b border-gray-200">
+                <thead className="bg-base-200 border-b border-base-300">
                   <tr>
-                    <th className="px-6 py-4 text-sm font-semibold text-gray-900">Prop</th>
-                    <th className="px-6 py-4 text-sm font-semibold text-gray-900">Type</th>
-                    <th className="px-6 py-4 text-sm font-semibold text-gray-900">Description</th>
+                    <th className="px-6 py-4 text-sm font-semibold text-base-content">Prop</th>
+                    <th className="px-6 py-4 text-sm font-semibold text-base-content">Type</th>
+                    <th className="px-6 py-4 text-sm font-semibold text-base-content">Description</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200">
+                <tbody className="divide-y divide-base-300">
                   <tr>
-                    <td className="px-6 py-4 font-mono text-sm text-blue-600">data</td>
-                    <td className="px-6 py-4 font-mono text-sm text-gray-600">TimelineData</td>
-                    <td className="px-6 py-4 text-sm text-gray-600">Inline timeline data object</td>
+                    <td className="px-6 py-4 font-mono text-sm text-base-content">data</td>
+                    <td className="px-6 py-4 font-mono text-sm text-base-content/80">TimelineData</td>
+                    <td className="px-6 py-4 text-sm text-base-content/80">Inline timeline data object</td>
                   </tr>
                   <tr>
-                    <td className="px-6 py-4 font-mono text-sm text-blue-600">dataUrl</td>
-                    <td className="px-6 py-4 font-mono text-sm text-gray-600">string</td>
-                    <td className="px-6 py-4 text-sm text-gray-600">URL to fetch timeline JSON data</td>
+                    <td className="px-6 py-4 font-mono text-sm text-base-content">dataUrl</td>
+                    <td className="px-6 py-4 font-mono text-sm text-base-content/80">string</td>
+                    <td className="px-6 py-4 text-sm text-base-content/80">URL to fetch timeline JSON data</td>
                   </tr>
                   <tr>
-                    <td className="px-6 py-4 font-mono text-sm text-blue-600">height</td>
-                    <td className="px-6 py-4 font-mono text-sm text-gray-600">number</td>
-                    <td className="px-6 py-4 text-sm text-gray-600">Timeline height in pixels</td>
+                    <td className="px-6 py-4 font-mono text-sm text-base-content">height</td>
+                    <td className="px-6 py-4 font-mono text-sm text-base-content/80">number</td>
+                    <td className="px-6 py-4 text-sm text-base-content/80">Timeline height in pixels</td>
                   </tr>
                   <tr>
-                    <td className="px-6 py-4 font-mono text-sm text-blue-600">bands</td>
-                    <td className="px-6 py-4 font-mono text-sm text-gray-600">BandConfig[]</td>
-                    <td className="px-6 py-4 text-sm text-gray-600">Custom band configuration</td>
+                    <td className="px-6 py-4 font-mono text-sm text-base-content">bands</td>
+                    <td className="px-6 py-4 font-mono text-sm text-base-content/80">BandConfig[]</td>
+                    <td className="px-6 py-4 text-sm text-base-content/80">Custom band configuration</td>
                   </tr>
                   <tr>
-                    <td className="px-6 py-4 font-mono text-sm text-blue-600">theme</td>
-                    <td className="px-6 py-4 font-mono text-sm text-gray-600">{`'classic' | 'dark' | Theme`}</td>
-                    <td className="px-6 py-4 text-sm text-gray-600">Built-in or custom theme</td>
+                    <td className="px-6 py-4 font-mono text-sm text-base-content">theme</td>
+                    <td className="px-6 py-4 font-mono text-sm text-base-content/80">{`'classic' | 'dark' | Theme`}</td>
+                    <td className="px-6 py-4 text-sm text-base-content/80">Built-in or custom theme</td>
                   </tr>
                   <tr>
-                    <td className="px-6 py-4 font-mono text-sm text-blue-600">hotZones</td>
-                    <td className="px-6 py-4 font-mono text-sm text-gray-600">HotZone[]</td>
-                    <td className="px-6 py-4 text-sm text-gray-600">Highlighted time periods</td>
+                    <td className="px-6 py-4 font-mono text-sm text-base-content">hotZones</td>
+                    <td className="px-6 py-4 font-mono text-sm text-base-content/80">HotZone[]</td>
+                    <td className="px-6 py-4 text-sm text-base-content/80">Highlighted time periods</td>
                   </tr>
                   <tr>
-                    <td className="px-6 py-4 font-mono text-sm text-blue-600">centerDate</td>
-                    <td className="px-6 py-4 font-mono text-sm text-gray-600">string</td>
-                    <td className="px-6 py-4 text-sm text-gray-600">Date to center the view on</td>
+                    <td className="px-6 py-4 font-mono text-sm text-base-content">centerDate</td>
+                    <td className="px-6 py-4 font-mono text-sm text-base-content/80">string</td>
+                    <td className="px-6 py-4 text-sm text-base-content/80">Date to center the view on</td>
                   </tr>
                   <tr>
-                    <td className="px-6 py-4 font-mono text-sm text-blue-600">onEventClick</td>
-                    <td className="px-6 py-4 font-mono text-sm text-gray-600">(event) =&gt; void</td>
-                    <td className="px-6 py-4 text-sm text-gray-600">Event click callback</td>
+                    <td className="px-6 py-4 font-mono text-sm text-base-content">onEventClick</td>
+                    <td className="px-6 py-4 font-mono text-sm text-base-content/80">(event) =&gt; void</td>
+                    <td className="px-6 py-4 text-sm text-base-content/80">Event click callback</td>
                   </tr>
                   <tr>
-                    <td className="px-6 py-4 font-mono text-sm text-blue-600">branding</td>
-                    <td className="px-6 py-4 font-mono text-sm text-gray-600">boolean | BrandingConfig</td>
-                    <td className="px-6 py-4 text-sm text-gray-600">Show branding watermark</td>
+                    <td className="px-6 py-4 font-mono text-sm text-base-content">branding</td>
+                    <td className="px-6 py-4 font-mono text-sm text-base-content/80">boolean | BrandingConfig</td>
+                    <td className="px-6 py-4 text-sm text-base-content/80">Show branding watermark</td>
                   </tr>
                 </tbody>
               </table>
             </div>
-            <div className="p-6 bg-gray-50 border-t border-gray-200">
+            <div className="p-6 bg-base-200 border-t border-base-300">
               <a
                 href="https://github.com/thbst16/react-simile-timeline#api-reference"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-600 hover:text-blue-700 font-medium flex items-center gap-2"
+                className="link link-hover text-base-content font-medium flex items-center gap-2"
               >
                 View full API documentation on GitHub
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -376,12 +376,12 @@ function App() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 to-indigo-600">
+      <section className="py-20 bg-gradient-to-r from-primary to-secondary">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
+          <h2 className="text-3xl sm:text-4xl font-bold text-primary-content mb-6">
             Ready to build amazing timelines?
           </h2>
-          <p className="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
+          <p className="text-xl text-primary-content/80 mb-10 max-w-2xl mx-auto">
             Get started with React Simile Timeline today. It&apos;s free, open source, and ready for production.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -389,7 +389,7 @@ function App() {
               href="https://github.com/thbst16/react-simile-timeline"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto px-8 py-4 bg-white text-blue-600 rounded-xl hover:bg-blue-50 transition-colors font-semibold text-lg flex items-center justify-center gap-2"
+              className="w-full sm:w-auto px-8 py-4 bg-base-100 text-base-content rounded-xl hover:bg-base-200 transition-colors font-semibold text-lg flex items-center justify-center gap-2"
             >
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                 <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
@@ -400,7 +400,7 @@ function App() {
               href="https://www.npmjs.com/package/react-simile-timeline"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto px-8 py-4 bg-blue-700 text-white rounded-xl hover:bg-blue-800 transition-colors font-semibold text-lg border border-blue-500"
+              className="w-full sm:w-auto px-8 py-4 bg-base-100/15 text-primary-content rounded-xl hover:bg-base-100/25 transition-colors font-semibold text-lg border border-primary-content/30"
             >
               npm install react-simile-timeline
             </a>

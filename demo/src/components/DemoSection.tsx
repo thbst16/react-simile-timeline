@@ -10,12 +10,12 @@ interface DemoSectionProps {
 
 export function DemoSection({ title, description, children, code }: DemoSectionProps) {
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
-      <div className="p-6 border-b border-gray-100">
-        <h3 className="text-xl font-semibold text-gray-900">{title}</h3>
-        <p className="mt-2 text-gray-600">{description}</p>
+    <div className="bg-base-100 rounded-2xl shadow-sm border border-base-300 overflow-hidden">
+      <div className="p-6 border-b border-base-200">
+        <h3 className="text-xl font-semibold text-base-content">{title}</h3>
+        <p className="mt-2 text-base-content/80">{description}</p>
       </div>
-      <div className="p-6 bg-gray-50">
+      <div className="p-6 bg-base-200">
         {children}
       </div>
       <div className="px-6 pb-6">
