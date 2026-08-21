@@ -76,13 +76,13 @@ export function EventTrack({
         minHeight: totalHeight,
       }}
     >
-      {layoutEvents.map((layoutEvent, index) => {
+      {layoutEvents.map((layoutEvent) => {
         // Calculate y position based on track
         const y = layoutEvent.track * (trackHeight + trackGap) + trackGap;
 
         return (
           <EventMarker
-            key={`${layoutEvent.event.title}-${layoutEvent.event.start}-${index}`}
+            key={`${layoutEvent.event.title}-${layoutEvent.event.start}-${layoutEvent.event.end ?? ''}`}
             event={layoutEvent.event}
             x={layoutEvent.x}
             y={y}

@@ -70,8 +70,8 @@ export function TimeScale({
         }}
       />
       {/* Tick marks and labels */}
-      {ticks.map((tick, index) => (
-        <TickMark key={`${tick.date.getTime()}-${index}`} tick={tick} />
+      {ticks.map((tick) => (
+        <TickMark key={tick.date.getTime()} tick={tick} />
       ))}
     </div>
   );

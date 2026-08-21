@@ -23,7 +23,7 @@ function TimelineBands() {
     >
       {bands.map((bandConfig, index) => (
         <Band
-          key={bandConfig.id || `band-${index}`}
+          key={bandConfig.id ?? `band-${bandConfig.timeUnit ?? 'auto'}-${bandConfig.overview ? 'ov' : 'main'}-${bandConfig.height ?? ''}`}
           config={bandConfig}
           isPrimary={index === 0 || !bandConfig.syncWith}
         />
@@ -136,61 +136,71 @@ export function Timeline({
 
   // Fetch data from single URL if provided
   useEffect(() => {
-    if (dataUrl) {
-      setLoading(true);
-      setError(null);
+    if (!dataUrl) return;
 
-      fetch(dataUrl)
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`Failed to fetch timeline data: ${response.statusText}`);
-          }
-          return response.json();
-        })
-        .then((json: TimelineData) => {
-          setTimelineData(json);
-          setLoading(false);
-        })
-        .catch((err) => {
-          setError(err.message);
-          setLoading(false);
-        });
-    }
+    // Abort the request if the URL changes or the component unmounts, so a
+    // late response can't set state on a stale/torn-down component.
+    const controller = new AbortController();
+    setLoading(true);
+    setError(null);
+
+    fetch(dataUrl, { signal: controller.signal })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Failed to fetch timeline data: ${response.statusText}`);
+        }
+        return response.json();
+      })
+      .then((json: TimelineData) => {
+        setTimelineData(json);
+        setLoading(false);
+      })
+      .catch((err) => {
+        if (err.name === 'AbortError') return;
+        setError(err.message);
+        setLoading(false);
+      });
+
+    return () => controller.abort();
   }, [dataUrl]);
 
   // Fetch and merge data from multiple URLs if provided
   useEffect(() => {
-    if (dataUrls && dataUrls.length > 0) {
-      setLoading(true);
-      setError(null);
+    if (!dataUrls || dataUrls.length === 0) return;
 
-      Promise.all(
-        dataUrls.map(url =>
-          fetch(url)
-            .then(response => {
-              if (!response.ok) {
-                throw new Error(`Failed to fetch from ${url}: ${response.statusText}`);
-              }
-              return response.json() as Promise<TimelineData>;
-            })
-        )
+    const controller = new AbortController();
+    setLoading(true);
+    setError(null);
+
+    Promise.all(
+      dataUrls.map(url =>
+        fetch(url, { signal: controller.signal })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error(`Failed to fetch from ${url}: ${response.statusText}`);
+            }
+            return response.json() as Promise<TimelineData>;
+          })
       )
-        .then((results) => {
-          // Merge all events from multiple sources
-          const mergedEvents = results.flatMap(result => result.events || []);
-          // Use the first result's metadata as base
-          const mergedData: TimelineData = {
-            ...results[0],
-            events: mergedEvents,
-          };
-          setTimelineData(mergedData);
-          setLoading(false);
-        })
-        .catch((err) => {
-          setError(err.message);
-          setLoading(false);
-        });
-    }
+    )
+      .then((results) => {
+        // Merge all events from multiple sources
+        const mergedEvents = results.flatMap(result => result.events || []);
+        // Use the first result's metadata as base
+        const mergedData: TimelineData = {
+          ...results[0],
+          events: mergedEvents,
+        };
+        setTimelineData(mergedData);
+        setLoading(false);
+      })
+      .catch((err) => {
+        if (err.name === 'AbortError') return;
+        setError(err.message);
+        setLoading(false);
+      });
+
+    return () => controller.abort();
   }, [dataUrls]);
 
   // Update data when prop changes
