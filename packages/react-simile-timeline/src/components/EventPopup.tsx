@@ -6,6 +6,10 @@ import { formatDate, parseDate } from '../utils/dateUtils';
 export interface EventPopupProps {
   /** Container element for positioning reference */
   containerRef?: React.RefObject<HTMLElement | null>;
+  /** The timeline's resolved `data-theme` value (e.g. 'classic', 'dark', or a custom theme name) */
+  themeAttr?: string;
+  /** Inline CSS-variable overrides for a custom (object) theme */
+  themeStyles?: React.CSSProperties;
 }
 
 /**
@@ -51,7 +55,7 @@ function calculatePopupPosition(
  * Event details popup component
  * Renders as a portal for proper z-index handling
  */
-export function EventPopup(_props: EventPopupProps) {
+export function EventPopup({ themeAttr, themeStyles }: EventPopupProps) {
   const { state, actions } = useTimelineContext();
   const popupRef = useRef<HTMLDivElement>(null);
   const { selectedEvent, clickPosition } = state;
@@ -350,6 +354,21 @@ export function EventPopup(_props: EventPopupProps) {
     </div>
   );
 
-  // Render as portal to body for proper z-index
-  return createPortal(popupContent, document.body);
+  // Render as portal to body for proper z-index. The portal escapes the themed
+  // `.timeline-root`, so the popup's CSS custom properties (--popup-bg, etc.)
+  // would otherwise fall back to their light inline defaults even under the dark
+  // or a custom theme (#74). Wrap the content in a boxless (`display: contents`)
+  // `.timeline-root` carrying the same `data-theme` and custom-theme variables,
+  // so those properties resolve and cascade into the popup without the wrapper
+  // painting a box of its own.
+  return createPortal(
+    <div
+      className="timeline-root"
+      data-theme={themeAttr}
+      style={{ display: 'contents', ...themeStyles }}
+    >
+      {popupContent}
+    </div>,
+    document.body
+  );
 }

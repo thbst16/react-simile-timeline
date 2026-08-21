@@ -78,6 +78,37 @@ describe('EventPopup — rendering', () => {
     renderPopup({ start: 'garbage-date', title: 'Odd' });
     expect(screen.getByText('garbage-date')).toBeInTheDocument();
   });
+
+  it('wraps the portal in a themed root so a theme resolves outside .timeline-root (#74)', () => {
+    // The popup portals to document.body, escaping the timeline root. Without a
+    // themed wrapper its CSS variables would fall back to the light defaults
+    // even under the dark theme.
+    function Opener() {
+      const { actions } = useTimelineContext();
+      return (
+        <button onClick={() => actions.setSelectedEvent(event, { x: 50, y: 50 })}>
+          open
+        </button>
+      );
+    }
+    const wrapper = ({ children }: { children: ReactNode }) => (
+      <TimelineProvider events={[event]}>{children}</TimelineProvider>
+    );
+    render(
+      <>
+        <Opener />
+        <EventPopup themeAttr="dark" themeStyles={{ ['--popup-bg' as string]: '#123456' }} />
+      </>,
+      { wrapper }
+    );
+    fireEvent.click(screen.getByText('open'));
+
+    const themedRoot = screen.getByRole('dialog').closest('.timeline-root');
+    expect(themedRoot).not.toBeNull();
+    expect(themedRoot).toHaveAttribute('data-theme', 'dark');
+    // Custom-theme variables ride along on the same wrapper.
+    expect((themedRoot as HTMLElement).style.getPropertyValue('--popup-bg')).toBe('#123456');
+  });
 });
 
 describe('EventPopup — dismissal', () => {
