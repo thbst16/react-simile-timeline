@@ -12,6 +12,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Zone magnification effect
 - Visual regression testing
 
+## [1.3.1] - 2026-08-21
+
+### Changed
+
+- **Releases now publish through npm OIDC trusted publishing instead of a
+  long-lived `NPM_TOKEN`
+  ([#42](https://github.com/thbst16/react-simile-timeline/issues/42)).** On a
+  pushed tag the release workflow mints a short-lived credential from the job's
+  GitHub OIDC token and npm attaches provenance automatically; no publish secret
+  is stored in the repository. The published package is otherwise identical to
+  `1.3.0` — this release carries no code changes, only the supply-chain change in
+  how it is published.
+
 ## [1.3.0] - 2026-08-20
 
 ### Fixed
