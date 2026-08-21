@@ -12,6 +12,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Zone magnification effect
 - Visual regression testing
 
+## [1.3.0] - 2026-08-20
+
+### Fixed
+
+- **The event popup now renders in the timeline's theme
+  ([#74](https://github.com/thbst16/react-simile-timeline/issues/74)).** The
+  popup portals to `document.body`, escaping the themed `.timeline-root`, so its
+  CSS custom properties never resolved and it fell back to the light inline
+  defaults — dark title text on a light box even when the timeline was themed
+  dark. The portal content is now wrapped in a boxless (`display: contents`)
+  `.timeline-root` carrying the timeline's `data-theme` and any custom-theme
+  variables, so the popup resolves the dark and custom palettes correctly.
+- **URL data sources no longer leak a fetch on unmount.** The `dataUrl` and
+  `dataUrls` effects use an `AbortController` and abort on unmount or when the
+  source changes, so a late response can't set state on a torn-down component
+  (part of [#72](https://github.com/thbst16/react-simile-timeline/issues/72)).
+
+### Changed
+
+- **Event, hot-zone, tick, and band list keys derive from their data** rather
+  than the array index, so rows keep their identity across pans and zooms
+  ([#72](https://github.com/thbst16/react-simile-timeline/issues/72)). Two of the
+  four `@eslint-react` rules parked during the ESLint 10 migration were adopted
+  (`web-api-no-leaked-fetch`, `no-array-index-key`); the other two were declined
+  with the rationale recorded in `eslint.config.js`. Dev-only lint change plus
+  the runtime key/fetch fixes above — no public API change.
+
 ## [1.2.0] - 2026-08-20
 
 ### Added
