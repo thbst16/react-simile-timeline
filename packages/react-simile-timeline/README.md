@@ -6,6 +6,12 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/github/package-json/dependency-version/thbst16/react-simile-timeline/dev/typescript?label=TypeScript&color=blue)](https://www.typescriptlang.org/)
 
+<p align="center">
+  <a href="https://react-simile-timeline-demo.vercel.app/">
+    <img src="https://raw.githubusercontent.com/thbst16/react-simile-timeline/main/docs/screenshot.png" alt="React Simile Timeline — an interactive multi-band timeline with event markers, hot zones, and a details popup" width="820">
+  </a>
+</p>
+
 A modern React implementation of the [MIT SIMILE Timeline](https://www.simile-widgets.org/timeline/) visualization component. Build beautiful, interactive timelines with ease.
 
 <p align="center">
